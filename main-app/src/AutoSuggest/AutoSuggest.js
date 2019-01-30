@@ -4,83 +4,70 @@ import './AutoSuggest.scss';
 
 const languages = [
     {
-      title: '1970s',
+      title: 'Hospitals',
       languages: [
         {
-          name: 'C',
-          year: 1972
+          name: 'Jewish General Hospital',
+
         }
       ]
     },
     {
-      title: '1980s',
+      title: 'Clinics',
       languages: [
         {
-          name: 'C++',
-          year: 1983
+          name: 'Clinic',
         },
         {
-          name: 'Perl',
-          year: 1987
+          name: 'Mental Health Clinic',
+        }
+      ] 
+    },
+    {
+      title: 'Physiotherapist',
+      languages: [
+        {
+          name: 'Sinamedic',
+        },
+        {
+          name: 'McGill Sports Clinic',
+        },
+        {
+          name: 'Super Clinics',
+        },
+        {
+          name: 'Special Phyio',
+        },
+        {
+          name: 'Jack the Physiotherapist',
+        },
+        {
+          name: 'Carries Therapy',
         }
       ]
     },
     {
-      title: '1990s',
+      title: 'Pyschologists',
       languages: [
         {
-          name: 'Haskell',
-          year: 1990
+          name: 'McGill Psychology',
         },
         {
-          name: 'Python',
-          year: 1991
+          name: 'Douglas Medical',
         },
         {
-          name: 'Java',
-          year: 1995
+          name: 'Super Psychologist',
         },
         {
-          name: 'Javascript',
-          year: 1995
-        },
-        {
-          name: 'PHP',
-          year: 1995
-        },
-        {
-          name: 'Ruby',
-          year: 1995
+          name: 'Bob the Psychologist',
         }
       ]
     },
     {
-      title: '2000s',
+      title: 'Gyms',
       languages: [
         {
-          name: 'C#',
-          year: 2000
-        },
-        {
-          name: 'Scala',
-          year: 2003
-        },
-        {
-          name: 'Clojure',
-          year: 2007
-        },
-        {
-          name: 'Go',
-          year: 2009
-        }
-      ]
-    },
-    {
-      title: '2010s',
-      languages: [
-        {
-          name: 'Elm',
-          year: 2012
+          name: 'McGill Ahtletic Center',
         }
       ]
     }

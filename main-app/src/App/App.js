@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
-import MapboxComponent from './Mapbox';
-import HamburgerComponent from './LeftBurgerMenu';
+import MapboxComponent from '../Mapbox/Mapbox';
+import HamburgerComponent from '../LeftBurgerMenu/LeftBurgerMenu';
 
 class App extends Component {
   render() {
