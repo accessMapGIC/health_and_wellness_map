@@ -10,14 +10,37 @@ const MenuItem = styled.h3`
   outline: none;
 `;
 
+handleStateChange = (state) => {
+  this.setState({menuOpen: state.isOpen})  
+}
+
+
+closeMenu = () => {
+  this.setState({menuOpen: false})
+}
+
+toggleMenu = () => {
+  this.setState({menuOpen: !this.state.menuOpen})
+}
+
+submitMenu = () => {
+
+}
+
 export default props => {
   return (
-    <div className="LeftBurgerMenu">
-      <Menu>
-        <MenuItem>Search</MenuItem>
-        <AutoSuggestComponent/>
-
-      </Menu>
+    <div className="BurgerMenus">
+      <div className="LeftBurgerMenu">
+        <Menu>
+          <MenuItem>Search</MenuItem>
+          <AutoSuggestComponent/>
+        </Menu>
+      </div>
+      <div className="RightBurgerMenu">
+        <Menu right>
+          <MenuItem>Search</MenuItem>
+        </Menu>
+      </div>
     </div>
   );
 }
