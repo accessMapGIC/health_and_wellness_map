@@ -53,8 +53,6 @@ class SidebarsComponent extends React.Component {
     }
   
     // This can be used to toggle the menu, e.g. when using a custom icon
-    // Tip: You probably want to hide either/both default icons if using a custom icon
-    // See https://github.com/negomi/react-burger-menu#custom-icons
     toggleMenu (menu) {
       return () => {
         if (menu === 0) {
@@ -64,6 +62,11 @@ class SidebarsComponent extends React.Component {
         }
       }
     }
+    // This will be used to switch menu's after pressing submit
+    submitMenu () {
+      closeMenuFactory(0)
+
+    }
 
     render () {
         return (
@@ -72,6 +75,7 @@ class SidebarsComponent extends React.Component {
               <Menu 
               isOpen={this.state.leftMenuOpen}
               onStateChange={(state) => this.handleStateChange(state)}
+              customBurgerIcon={false}
               >
                 <MenuItem>Search</MenuItem>
                 <AutoSuggestContainer>
