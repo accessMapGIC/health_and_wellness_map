@@ -30,32 +30,58 @@ class SidebarsComponent extends React.Component {
     constructor (props) {
       super(props)
       this.state = {
-        leftMenuOpen: false,
-        rightMenuOpen: false,
-        leftHamButton: null,
-        rightHamButton: false,
+        leftMenu: {
+          leftMenuOpen: false,
+          leftHamButton: null,
+        },
+        rightMenu: {
+          rightMenuOpen: false,
+          rightHamButton: false,
+        }
       }
     }
   
     // This keeps your state in sync with the opening/closing of the menu
     // via the default means, e.g. clicking the X, pressing the ESC key etc.
-    handleStateChange (state) {
-      this.setState({leftMenuOpen: state.leftMenuOpen})  
+    handleStateChange (state, menu) {
+      return () => {
+        if (menu === 0) {
+            this.setState({
+                leftMenu: {
+                    leftMenuOpen: state.leftMenuOpen,
+                }
+            })
+        } else {
+          this.setState({
+              rightMenu: {
+                  rightMenuOpen: state.rightMenuOpen,
+              }
+          })
+        }
+      } 
     }
     
     // This can be used to close the left menu, e.g. when a user clicks a menu item
     closeMenuFactory(menu) { 
       return () => {
         if (menu === 0) {
-            this.setState({leftMenuOpen: false})
+            this.setState({
+                leftMenu: {
+                    leftMenuOpen: false,
+                }
+            })
         } else {
-            this.setState({rightMenuOpen: false})
+          this.setState({
+              rightMenu: {
+                  rightMenuOpen: false,
+              }
+          })
         }
       }
     }
-  
+
     // This can be used to toggle the menu, e.g. when using a custom icon
-    toggleMenu (menu) {
+    toggleMenuFactory (menu) {
       return () => {
         if (menu === 0) {
             this.setState({leftMenuOpen: !this.state.leftMenuOpen})
@@ -65,9 +91,17 @@ class SidebarsComponent extends React.Component {
       }
     }
     // This will be used to switch menu's after pressing submit
-    submitMenu () {
-      this.closeMenuFactory(0)
-
+    submitMenu (state) {
+      this.setState({
+        leftMenu: {
+          leftMenuOpen: false,
+          leftHamButton: false,
+        },
+        rightMenu: {
+          rightMenuOpen: !state.rightMenuOpen,
+          rightHamButton: null,
+        }
+      })
     }
 
     render () {
@@ -75,16 +109,16 @@ class SidebarsComponent extends React.Component {
           <div className='menu-sidebars'>
             <div className='menu-left'>
               <Menu 
-              isOpen={this.state.leftMenuOpen}
-              onStateChange={(state) => this.handleStateChange(state)}
-              customBurgerIcon={this.state.leftHamButton}
+              isOpen={this.state.leftMenu.leftMenuOpen}
+              onStateChange={(state) => this.handleStateChange(state, 0)}
+              customBurgerIcon={this.state.leftMenu.leftHamButton}
               >
                 <MenuItem>Search</MenuItem>
                 <AutoSuggestContainer>
                   <AutoSuggestComponent/>
                 </AutoSuggestContainer>
                 <Container>
-                  <Button href="" prefetch onClick={this.closeMenuFactory(0)}>
+                  <Button href="" prefetch onClick={(state) => this.submitMenu(state)}>
                     Submit
                   </Button>
                 </Container>
@@ -93,7 +127,9 @@ class SidebarsComponent extends React.Component {
             <div className='menu-right'>
               <Menu 
               right
-              customBurgerIcon={this.state.rightHamButton}
+              isOpen={this.state.rightMenu.rightMenuOpen}
+              onStateChange={(state) => this.handleStateChange(state, 1)}
+              customBurgerIcon={this.state.rightMenu.rightHamButton}
               >
                 <MenuItem>Search</MenuItem>
                 <AutoSuggestComponent/>
