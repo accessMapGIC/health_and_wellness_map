@@ -32,6 +32,8 @@ class SidebarsComponent extends React.Component {
       this.state = {
         leftMenuOpen: false,
         rightMenuOpen: false,
+        leftHamButton: null,
+        rightHamButton: false,
       }
     }
   
@@ -64,7 +66,7 @@ class SidebarsComponent extends React.Component {
     }
     // This will be used to switch menu's after pressing submit
     submitMenu () {
-      closeMenuFactory(0)
+      this.closeMenuFactory(0)
 
     }
 
@@ -75,7 +77,7 @@ class SidebarsComponent extends React.Component {
               <Menu 
               isOpen={this.state.leftMenuOpen}
               onStateChange={(state) => this.handleStateChange(state)}
-              customBurgerIcon={false}
+              customBurgerIcon={this.state.leftHamButton}
               >
                 <MenuItem>Search</MenuItem>
                 <AutoSuggestContainer>
@@ -89,7 +91,10 @@ class SidebarsComponent extends React.Component {
               </Menu>
             </div>
             <div className='menu-right'>
-              <Menu right>
+              <Menu 
+              right
+              customBurgerIcon={this.state.rightHamButton}
+              >
                 <MenuItem>Search</MenuItem>
                 <AutoSuggestComponent/>
               </Menu>
