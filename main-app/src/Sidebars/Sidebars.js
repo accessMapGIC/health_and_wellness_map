@@ -2,6 +2,8 @@ import React from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import styled from 'styled-components';
 import AutoSuggestComponent from '../AutoSuggest/AutoSuggest';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 import './Sidebars.scss';
 
 const MenuItem = styled.h3`
@@ -10,13 +12,11 @@ const MenuItem = styled.h3`
   outline: none;
 `;
 
-const Button = styled.button`
-  background: transparent;
-  border-radius: 3px;
-  border: 2px solid #4ec3c7;
-  color: #4ec3c7;
-  padding: 0.25em 1em;
-`;
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+  }
+});
 
 const Container = styled.div`
   text-align: left;
@@ -90,8 +90,9 @@ class SidebarsComponent extends React.Component {
         }
       }
     }
-    // This will be used to switch menu's after pressing submit
-    submitMenu (state) {
+
+    // This will be used to submit a search query via the menus
+    submitButton (state) {
       this.setState({
         leftMenu: {
           leftMenuOpen: false,
@@ -100,6 +101,19 @@ class SidebarsComponent extends React.Component {
         rightMenu: {
           rightMenuOpen: !state.rightMenuOpen,
           rightHamButton: null,
+        }
+      })
+    }
+
+    newSearchButton (state) {
+      this.setState({
+        leftMenu: {
+          leftMenuOpen: !state.leftMenuOpen,
+          leftHamButton: null,
+        },
+        rightMenu: {
+          rightMenuOpen: false,
+          rightHamButton: false,
         }
       })
     }
@@ -118,7 +132,7 @@ class SidebarsComponent extends React.Component {
                   <AutoSuggestComponent/>
                 </AutoSuggestContainer>
                 <Container>
-                  <Button href="" prefetch onClick={(state) => this.submitMenu(state)}>
+                  <Button variant="contained" className="{classes.button}" href="" prefetch onClick={(state) => this.submitButton(state)}>
                     Submit
                   </Button>
                 </Container>
@@ -132,7 +146,11 @@ class SidebarsComponent extends React.Component {
               customBurgerIcon={this.state.rightMenu.rightHamButton}
               >
                 <MenuItem>Search</MenuItem>
-                <AutoSuggestComponent/>
+                <Container>
+                  <Button variant="contained" className="{classes.button}" href="" prefetch onClick={(state) => this.newSearchButton(state)}>
+                    new Search Query
+                  </Button>
+                </Container>
               </Menu>
             </div>
          </div>
@@ -141,4 +159,4 @@ class SidebarsComponent extends React.Component {
 }
 
 
-export default SidebarsComponent;
+export default (withStyles)(styles)(SidebarsComponent);
