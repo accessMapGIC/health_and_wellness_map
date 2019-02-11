@@ -2,6 +2,7 @@ import React from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import styled from 'styled-components';
 import AutoSuggestComponent from '../AutoSuggest/AutoSuggest';
+import TabComponent from '../Tabs/Tabs'
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import './Sidebars.scss';
@@ -15,6 +16,7 @@ const MenuItem = styled.h3`
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
+    'background-color': '#4b9ad4',
   }
 });
 
@@ -128,6 +130,7 @@ class SidebarsComponent extends React.Component {
               customBurgerIcon={this.state.leftMenu.leftHamButton}
               >
                 <MenuItem>Search</MenuItem>
+                <TabComponent/>
                 <AutoSuggestContainer>
                   <AutoSuggestComponent/>
                 </AutoSuggestContainer>
