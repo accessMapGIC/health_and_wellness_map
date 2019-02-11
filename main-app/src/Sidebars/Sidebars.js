@@ -1,7 +1,6 @@
 import React from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import styled from 'styled-components';
-import AutoSuggestComponent from '../AutoSuggest/AutoSuggest';
 import TabComponent from '../Tabs/Tabs'
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
@@ -22,10 +21,6 @@ const styles = theme => ({
 
 const Container = styled.div`
   text-align: left;
-`;
-
-const AutoSuggestContainer = styled.div`
-  height: 150px;
 `;
 
 class SidebarsComponent extends React.Component {
@@ -131,9 +126,6 @@ class SidebarsComponent extends React.Component {
               >
                 <MenuItem>Search</MenuItem>
                 <TabComponent/>
-                <AutoSuggestContainer>
-                  <AutoSuggestComponent/>
-                </AutoSuggestContainer>
                 <Container>
                   <Button variant="contained" className="{classes.button}" href="" prefetch onClick={(state) => this.submitButton(state)}>
                     Submit

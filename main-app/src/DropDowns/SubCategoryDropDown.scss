@@ -1,10 +1,10 @@
 @import '../variables.scss';
 
-.react-autosuggest__container {
+.subcategory_container .react-autosuggest__container {
     position: relative;
   }
   
-  .react-autosuggest__input {
+  .subcategory_container .react-autosuggest__input {
     width: 9.25vw;
     height: 30px;
     padding: 10px 20px;
@@ -14,20 +14,20 @@
     border-radius: 4px;
   }
   
-  .react-autosuggest__input--focused {
+  .subcategory_container .react-autosuggest__input--focused {
     outline: none;
   }
   
-  .react-autosuggest__input--open {
+  .subcategory_container .react-autosuggest__input--open {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
   
-  .react-autosuggest__suggestions-container {
+  .subcategory_container .react-autosuggest__suggestions-container {
     display: none;
   }
   
-  .react-autosuggest__suggestions-container--open {
+  .subcategory_container .react-autosuggest__suggestions-container--open {
     display: block;
     position: absolute;
     top: 51px;
@@ -43,30 +43,30 @@
     z-index: 2;
   }
   
-  .react-autosuggest__suggestions-list {
+  .subcategory_container .react-autosuggest__suggestions-list {
     margin: 0;
     padding: 0;
     list-style-type: none;
   }
   
-  .react-autosuggest__suggestion {
+  .subcategory_container .react-autosuggest__suggestion {
     cursor: pointer;
     padding: 10px 20px;
   }
   
-  .react-autosuggest__suggestion--highlighted {
+  .subcategory_container .react-autosuggest__suggestion--highlighted {
     background-color: #ddd;
   }
   
-  .react-autosuggest__section-container {
+  .subcategory_container .react-autosuggest__section-container {
     border-top: 1px dashed #ccc;
   }
   
-  .react-autosuggest__section-container--first {
+  .subcategory_container .react-autosuggest__section-container--first {
     border-top: 0;
   }
   
-  .react-autosuggest__section-title {
+  .subcategory_container .react-autosuggest__section-title {
     padding: 10px 0 0 10px;
     font-size: 12px;
     color: #777;
