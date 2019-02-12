@@ -1,6 +1,6 @@
 @import '../variables.scss';
 
-.react-autosuggest__container {
+  .react-autosuggest__container {
     position: relative;
   }
   
@@ -12,6 +12,7 @@
     font-size: 16px;
     border: 1px solid #aaa;
     border-radius: 4px;
+    color: $rossy-blue;
   }
   
   .react-autosuggest__input--focused {
@@ -29,7 +30,7 @@
   
   .react-autosuggest__suggestions-container--open {
     display: block;
-    position: absolute;
+    padding-bottom: 4px;
     top: 51px;
     width: 11.4vw;
     border: 1px solid #aaa;
@@ -40,7 +41,7 @@
     border-bottom-right-radius: 4px;
     max-height: 100px;
     overflow-y: auto;
-    z-index: 2;
+    z-index: 1;
   }
   
   .react-autosuggest__suggestions-list {

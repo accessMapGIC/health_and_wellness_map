@@ -1,75 +1,63 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
-import './AutoSuggest.scss';
+import './DropDown.scss';
 
 const languages = [
     {
-      title: 'Hospitals',
-      languages: [
-        {
-          name: 'Jewish General Hospital',
-
-        }
-      ]
+      name: 'C',
+      year: 1972
     },
     {
-      title: 'Clinics',
-      languages: [
-        {
-          name: 'Clinic',
-        },
-        {
-          name: 'Mental Health Clinic',
-        }
-      ] 
+      name: 'C#',
+      year: 2000
     },
     {
-      title: 'Physiotherapist',
-      languages: [
-        {
-          name: 'Sinamedic',
-        },
-        {
-          name: 'McGill Sports Clinic',
-        },
-        {
-          name: 'Super Clinics',
-        },
-        {
-          name: 'Special Phyio',
-        },
-        {
-          name: 'Jack the Physiotherapist',
-        },
-        {
-          name: 'Carries Therapy',
-        }
-      ]
+      name: 'C++',
+      year: 1983
     },
     {
-      title: 'Pyschologists',
-      languages: [
-        {
-          name: 'McGill Psychology',
-        },
-        {
-          name: 'Douglas Medical',
-        },
-        {
-          name: 'Super Psychologist',
-        },
-        {
-          name: 'Bob the Psychologist',
-        }
-      ]
+      name: 'Clojure',
+      year: 2007
     },
     {
-      title: 'Gyms',
-      languages: [
-        {
-          name: 'McGill Ahtletic Center',
-        }
-      ]
+      name: 'Elm',
+      year: 2012
+    },
+    {
+      name: 'Go',
+      year: 2009
+    },
+    {
+      name: 'Haskell',
+      year: 1990
+    },
+    {
+      name: 'Java',
+      year: 1995
+    },
+    {
+      name: 'Javascript',
+      year: 1995
+    },
+    {
+      name: 'Perl',
+      year: 1987
+    },
+    {
+      name: 'PHP',
+      year: 1995
+    },
+    {
+      name: 'Python',
+      year: 1991
+    },
+    {
+      name: 'Ruby',
+      year: 1995
+    },
+    {
+      name: 'Scala',
+      year: 2003
     }
 ];
 
@@ -87,14 +75,7 @@ function getSuggestions(value) {
 
     const regex = new RegExp('^' + escapedValue, 'i');
 
-    return languages
-        .map(section => {
-        return {
-            title: section.title,
-            languages: section.languages.filter(language => regex.test(language.name))
-        };
-        })
-        .filter(section => section.languages.length > 0);
+    return languages.filter(language => regex.test(language.name));
 }
 
 function getSuggestionValue(suggestion) {
@@ -107,17 +88,7 @@ function renderSuggestion(suggestion) {
     );
 }
 
-function renderSectionTitle(section) {
-    return (
-        <strong>{section.title}</strong>
-    );
-}
-
-function getSectionSuggestions(section) {
-    return section.languages;
-}
-
-class AutoSuggestComponent extends React.Component {
+class Category__DropDownComponent extends React.Component {
     constructor() {
         super();
 
@@ -155,19 +126,15 @@ class AutoSuggestComponent extends React.Component {
 
         return (
         <Autosuggest 
-            multiSection={true}
+            id="category"
             suggestions={suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
             onSuggestionsClearRequested={this.onSuggestionsClearRequested}
             getSuggestionValue={getSuggestionValue}
             renderSuggestion={renderSuggestion}
-            renderSectionTitle={renderSectionTitle}
-            getSectionSuggestions={getSectionSuggestions}
             inputProps={inputProps} />
         );
     }
 }
 
-export default AutoSuggestComponent;
-
-  
+export default Category__DropDownComponent;

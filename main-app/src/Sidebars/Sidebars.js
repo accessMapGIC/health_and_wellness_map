@@ -1,11 +1,12 @@
 import React from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import styled from 'styled-components';
-import AutoSuggestComponent from '../AutoSuggest/AutoSuggest';
-import TabComponent from '../Tabs/Tabs'
+import TabComponent from '../Tabs/Tabs';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import InsuranceDropDownComponent from '../DropDowns/InsuranceDropDown';
 import './Sidebars.scss';
+
 
 const MenuItem = styled.h3`
   text-decoration: underline;
@@ -22,10 +23,6 @@ const styles = theme => ({
 
 const Container = styled.div`
   text-align: left;
-`;
-
-const AutoSuggestContainer = styled.div`
-  height: 150px;
 `;
 
 class SidebarsComponent extends React.Component {
@@ -131,9 +128,6 @@ class SidebarsComponent extends React.Component {
               >
                 <MenuItem>Search</MenuItem>
                 <TabComponent/>
-                <AutoSuggestContainer>
-                  <AutoSuggestComponent/>
-                </AutoSuggestContainer>
                 <Container>
                   <Button variant="contained" className="{classes.button}" href="" prefetch onClick={(state) => this.submitButton(state)}>
                     Submit
@@ -150,6 +144,7 @@ class SidebarsComponent extends React.Component {
               >
                 <MenuItem>Search</MenuItem>
                 <Container>
+                  <InsuranceDropDownComponent/>
                   <Button variant="contained" className="{classes.button}" href="" prefetch onClick={(state) => this.newSearchButton(state)}>
                     new Search Query
                   </Button>
