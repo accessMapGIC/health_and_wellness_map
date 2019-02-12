@@ -21,7 +21,6 @@ const FlexContainer = styled.div`
 
 const KeywordFlexContainer = styled.div`
     display: flex;
-    width: 250px;
     flex-direction: column;
     flex-wrap: wrap;
     margin: 5px;
