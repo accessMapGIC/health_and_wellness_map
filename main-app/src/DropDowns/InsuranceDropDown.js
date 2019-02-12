@@ -2,66 +2,24 @@ import React from 'react';
 import Autosuggest from 'react-autosuggest';
 import './DropDown.scss';
 
-const languages = [
+const insurances = [
     {
-      name: 'C',
-      year: 1972
+        name: 'SSMU',
     },
     {
-      name: 'C#',
-      year: 2000
+        name: 'PGSS',
     },
     {
-      name: 'C++',
-      year: 1983
+        name: 'International Health Insurance (IHI)',
     },
     {
-      name: 'Clojure',
-      year: 2007
+        name: 'RAMQ',
     },
     {
-      name: 'Elm',
-      year: 2012
+        name: 'Out of Province',
     },
-    {
-      name: 'Go',
-      year: 2009
-    },
-    {
-      name: 'Haskell',
-      year: 1990
-    },
-    {
-      name: 'Java',
-      year: 1995
-    },
-    {
-      name: 'Javascript',
-      year: 1995
-    },
-    {
-      name: 'Perl',
-      year: 1987
-    },
-    {
-      name: 'PHP',
-      year: 1995
-    },
-    {
-      name: 'Python',
-      year: 1991
-    },
-    {
-      name: 'Ruby',
-      year: 1995
-    },
-    {
-      name: 'Scala',
-      year: 2003
-    }
 ];
 
-// https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
 function escapeRegexCharacters(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -75,7 +33,7 @@ function getSuggestions(value) {
 
     const regex = new RegExp('^' + escapedValue, 'i');
 
-    return languages.filter(language => regex.test(language.name));
+    return insurances.filter(insurance => regex.test(insurance.name));
 }
 
 function getSuggestionValue(suggestion) {
@@ -88,7 +46,7 @@ function renderSuggestion(suggestion) {
     );
 }
 
-class Category__DropDownComponent extends React.Component {
+class InsuranceDropDownComponent extends React.Component {
     constructor() {
         super();
 
@@ -119,14 +77,14 @@ class Category__DropDownComponent extends React.Component {
     render() {
         const { value, suggestions } = this.state;
         const inputProps = {
-        placeholder: "Type 'c'",
+        placeholder: "Type your Insurance",
         value,
         onChange: this.onChange
         };
 
         return (
-        <Autosuggest
-            id="subcategory"
+        <Autosuggest 
+            id="insurance"
             suggestions={suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
             onSuggestionsClearRequested={this.onSuggestionsClearRequested}
@@ -137,4 +95,4 @@ class Category__DropDownComponent extends React.Component {
     }
 }
 
-export default Category__DropDownComponent;
+export default InsuranceDropDownComponent;

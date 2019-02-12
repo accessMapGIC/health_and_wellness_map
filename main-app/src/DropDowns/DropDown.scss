@@ -1,11 +1,10 @@
 @import '../variables.scss';
 
-.subcategory_container .react-autosuggest__container {
+  .react-autosuggest__container {
     position: relative;
-    z-index: 1;
   }
   
-  .subcategory_container .react-autosuggest__input {
+  .react-autosuggest__input {
     width: 9.25vw;
     height: 30px;
     padding: 10px 20px;
@@ -13,24 +12,25 @@
     font-size: 16px;
     border: 1px solid #aaa;
     border-radius: 4px;
+    color: $rossy-blue;
   }
   
-  .subcategory_container .react-autosuggest__input--focused {
+  .react-autosuggest__input--focused {
     outline: none;
   }
   
-  .subcategory_container .react-autosuggest__input--open {
+  .react-autosuggest__input--open {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
   
-  .subcategory_container .react-autosuggest__suggestions-container {
+  .react-autosuggest__suggestions-container {
     display: none;
   }
   
-  .subcategory_container .react-autosuggest__suggestions-container--open {
+  .react-autosuggest__suggestions-container--open {
     display: block;
-    // position: absolute;
+    padding-bottom: 4px;
     top: 51px;
     width: 11.4vw;
     border: 1px solid #aaa;
@@ -44,30 +44,30 @@
     z-index: 1;
   }
   
-  .subcategory_container .react-autosuggest__suggestions-list {
+  .react-autosuggest__suggestions-list {
     margin: 0;
     padding: 0;
     list-style-type: none;
   }
   
-  .subcategory_container .react-autosuggest__suggestion {
+  .react-autosuggest__suggestion {
     cursor: pointer;
     padding: 10px 20px;
   }
   
-  .subcategory_container .react-autosuggest__suggestion--highlighted {
+  .react-autosuggest__suggestion--highlighted {
     background-color: #ddd;
   }
   
-  .subcategory_container .react-autosuggest__section-container {
+  .react-autosuggest__section-container {
     border-top: 1px dashed #ccc;
   }
   
-  .subcategory_container .react-autosuggest__section-container--first {
+  .react-autosuggest__section-container--first {
     border-top: 0;
   }
   
-  .subcategory_container .react-autosuggest__section-title {
+  .react-autosuggest__section-title {
     padding: 10px 0 0 10px;
     font-size: 12px;
     color: #777;

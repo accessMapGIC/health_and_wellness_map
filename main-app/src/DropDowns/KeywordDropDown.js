@@ -61,7 +61,6 @@ const languages = [
     }
 ];
 
-// https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
 function escapeRegexCharacters(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -88,7 +87,7 @@ function renderSuggestion(suggestion) {
     );
 }
 
-class Category__DropDownComponent extends React.Component {
+class KeywordDropDownComponent extends React.Component {
     constructor() {
         super();
 
@@ -125,8 +124,8 @@ class Category__DropDownComponent extends React.Component {
         };
 
         return (
-        <Autosuggest
-            id="subcategory"
+        <Autosuggest 
+            id="keyword"
             suggestions={suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
             onSuggestionsClearRequested={this.onSuggestionsClearRequested}
@@ -137,4 +136,4 @@ class Category__DropDownComponent extends React.Component {
     }
 }
 
-export default Category__DropDownComponent;
+export default KeywordDropDownComponent;

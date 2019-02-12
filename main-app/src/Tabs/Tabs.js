@@ -2,6 +2,7 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import CategoryDropDownComponent from '../DropDowns/CategoryDropDown';
 import SubCategoryDropDown from '../DropDowns/SubCategoryDropDown';
+import KeywordDropDown from '../DropDowns/KeywordDropDown';
 import styled from 'styled-components';
 import "./Tabs.scss";
 
@@ -18,6 +19,15 @@ const FlexContainer = styled.div`
     height: 90%;
 `;
 
+const KeywordFlexContainer = styled.div`
+    display: flex;
+    width: 250px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 5px;
+    height: 90%;
+`;
+
 export default () => (
   <Tabs>
     <TabList>
@@ -26,19 +36,25 @@ export default () => (
     </TabList>
 
     <TabPanel>
-    <DropDownContainer>
-        <FlexContainer>
-            <div className='category_container'>
-                <CategoryDropDownComponent/>
-            </div>
-            <div className='subcategory_container'>
-                <SubCategoryDropDown/>
-            </div>
-        </FlexContainer>
-    </DropDownContainer>
+      <DropDownContainer>
+          <FlexContainer>
+              <div className='category_container'>
+                  <CategoryDropDownComponent/>
+              </div>
+              <div className='subcategory_container'>
+                  <SubCategoryDropDown/>
+              </div>
+          </FlexContainer>
+      </DropDownContainer>
     </TabPanel>
     <TabPanel>
-      <h2>Any content 2</h2>
+      <DropDownContainer>
+        <KeywordFlexContainer>
+          <div className='keyword_container'>
+              <KeywordDropDown/>
+          </div>
+        </KeywordFlexContainer>
+      </DropDownContainer>
     </TabPanel>
   </Tabs>
 );

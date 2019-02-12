@@ -1,6 +1,6 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
-import './CategoryDropDown.scss';
+import './DropDown.scss';
 
 const languages = [
     {

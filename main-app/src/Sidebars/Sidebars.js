@@ -1,10 +1,12 @@
 import React from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import styled from 'styled-components';
-import TabComponent from '../Tabs/Tabs'
+import TabComponent from '../Tabs/Tabs';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import InsuranceDropDownComponent from '../DropDowns/InsuranceDropDown';
 import './Sidebars.scss';
+
 
 const MenuItem = styled.h3`
   text-decoration: underline;
@@ -142,6 +144,7 @@ class SidebarsComponent extends React.Component {
               >
                 <MenuItem>Search</MenuItem>
                 <Container>
+                  <InsuranceDropDownComponent/>
                   <Button variant="contained" className="{classes.button}" href="" prefetch onClick={(state) => this.newSearchButton(state)}>
                     new Search Query
                   </Button>
