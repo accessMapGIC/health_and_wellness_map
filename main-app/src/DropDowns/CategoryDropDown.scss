@@ -1,7 +1,7 @@
 @import '../variables.scss';
 
 .category_container .react-autosuggest__container {
-    position: absolute;
+    position: relative;
   }
   
   .category_container .react-autosuggest__input {
@@ -13,6 +13,7 @@
     border: 1px solid #aaa;
     border-radius: 4px;
     color: $rossy-blue;
+    z-index: 1;
   }
   
   .category_container .react-autosuggest__input--focused {
@@ -30,7 +31,7 @@
   
   .category_container .react-autosuggest__suggestions-container--open {
     display: block;
-    position: relative;
+    // position: absolute;
     padding-bottom: 4px;
     top: 51px;
     width: 11.4vw;
@@ -42,7 +43,7 @@
     border-bottom-right-radius: 4px;
     max-height: 100px;
     overflow-y: auto;
-    z-index: 2;
+    z-index: 1;
   }
   
   .category_container .react-autosuggest__suggestions-list {

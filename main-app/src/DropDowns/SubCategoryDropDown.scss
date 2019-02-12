@@ -2,6 +2,7 @@
 
 .subcategory_container .react-autosuggest__container {
     position: relative;
+    z-index: 1;
   }
   
   .subcategory_container .react-autosuggest__input {
@@ -29,7 +30,7 @@
   
   .subcategory_container .react-autosuggest__suggestions-container--open {
     display: block;
-    position: absolute;
+    // position: absolute;
     top: 51px;
     width: 11.4vw;
     border: 1px solid #aaa;
@@ -40,7 +41,7 @@
     border-bottom-right-radius: 4px;
     max-height: 100px;
     overflow-y: auto;
-    z-index: 2;
+    z-index: 1;
   }
   
   .subcategory_container .react-autosuggest__suggestions-list {

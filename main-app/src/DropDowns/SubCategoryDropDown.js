@@ -125,7 +125,8 @@ class Category__DropDownComponent extends React.Component {
         };
 
         return (
-        <Autosuggest 
+        <Autosuggest
+            id="subcategory"
             suggestions={suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
             onSuggestionsClearRequested={this.onSuggestionsClearRequested}

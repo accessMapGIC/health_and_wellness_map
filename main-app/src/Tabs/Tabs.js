@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import "./Tabs.scss";
 
 const DropDownContainer = styled.div`
-    border: 2px dotted rgb(96, 139, 168);
+    padding: 5px;
     width: 250px;
 `;
 
@@ -14,14 +14,15 @@ const FlexContainer = styled.div`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    margin: 10px;
+    margin: 5px;
+    height: 90%;
 `;
 
 export default () => (
   <Tabs>
     <TabList>
-      <Tab>By Keyword</Tab>
       <Tab>By Category</Tab>
+      <Tab>By Keyword</Tab>
     </TabList>
 
     <TabPanel>
