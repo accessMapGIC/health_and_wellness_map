@@ -6,7 +6,14 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import InsuranceDropDownComponent from '../DropDowns/InsuranceDropDown';
 import './Sidebars.scss';
+import LanguageDropDownComponent from '../DropDowns/LanguagesDropDown';
 
+
+
+const DropdownHeader = styled.h5`
+  margin-bottom: 10px;
+  text-decoration: underline;
+`;
 
 const MenuItem = styled.h3`
   text-decoration: underline;
@@ -129,6 +136,16 @@ class SidebarsComponent extends React.Component {
                 <MenuItem>Search</MenuItem>
                 <TabComponent/>
                 <Container>
+                  <div className="DropDown_Container">
+                    <div className="Flex_Container">
+                      <div className="InsuranceDropDown_Container">
+                        <DropdownHeader>Insurance</DropdownHeader>
+                        <InsuranceDropDownComponent/>
+                        <DropdownHeader>Language</DropdownHeader>
+                        <LanguageDropDownComponent/>
+                      </div>
+                    </div>
+                  </div>
                   <Button variant="contained" className="{classes.button}" href="" prefetch onClick={(state) => this.submitButton(state)}>
                     Submit
                   </Button>
@@ -144,7 +161,6 @@ class SidebarsComponent extends React.Component {
               >
                 <MenuItem>Search</MenuItem>
                 <Container>
-                  <InsuranceDropDownComponent/>
                   <Button variant="contained" className="{classes.button}" href="" prefetch onClick={(state) => this.newSearchButton(state)}>
                     new Search Query
                   </Button>
