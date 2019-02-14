@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import InsuranceDropDownComponent from '../DropDowns/InsuranceDropDown';
 import './Sidebars.scss';
+import LanguageDropDownComponent from '../DropDowns/LanguagesDropDown';
+import CheckBoxComponent from '../CheckBox/CheckBoxComponent';
 
 
 const DropdownHeader = styled.h5`
@@ -139,6 +141,9 @@ class SidebarsComponent extends React.Component {
                       <div className="InsuranceDropDown_Container">
                         <DropdownHeader>Insurance</DropdownHeader>
                         <InsuranceDropDownComponent/>
+                        <DropdownHeader>Language</DropdownHeader>
+                        <LanguageDropDownComponent/>
+                        <CheckBoxComponent/>
                       </div>
                     </div>
                   </div>
