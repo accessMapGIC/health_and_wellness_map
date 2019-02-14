@@ -1,140 +1,75 @@
 import React from 'react';
-import Autosuggest from 'react-autosuggest';
-import './DropDown.scss';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
-const languages = [
-    {
-      name: 'C',
-      year: 1972
-    },
-    {
-      name: 'C#',
-      year: 2000
-    },
-    {
-      name: 'C++',
-      year: 1983
-    },
-    {
-      name: 'Clojure',
-      year: 2007
-    },
-    {
-      name: 'Elm',
-      year: 2012
-    },
-    {
-      name: 'Go',
-      year: 2009
-    },
-    {
-      name: 'Haskell',
-      year: 1990
-    },
-    {
-      name: 'Java',
-      year: 1995
-    },
-    {
-      name: 'Javascript',
-      year: 1995
-    },
-    {
-      name: 'Perl',
-      year: 1987
-    },
-    {
-      name: 'PHP',
-      year: 1995
-    },
-    {
-      name: 'Python',
-      year: 1991
-    },
-    {
-      name: 'Ruby',
-      year: 1995
-    },
-    {
-      name: 'Scala',
-      year: 2003
-    }
-];
 
-// https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
-function escapeRegexCharacters(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const styles = theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 130,
+    maxWidth: 214,
+  },
+});
+
+const selectStyle = {
+  'background-color': '#fff',
+  'border-radius': '4px',
 }
 
-function getSuggestions(value) {
-    const escapedValue = escapeRegexCharacters(value.trim());
+class SimpleSelect extends React.Component {
+  state = {
+    category: '',
+  };
 
-    if (escapedValue === '') {
-        return [];
-    }
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
-    const regex = new RegExp('^' + escapedValue, 'i');
+  render() {
+    const { classes } = this.props;
 
-    return languages.filter(language => regex.test(language.name));
-}
-
-function getSuggestionValue(suggestion) {
-    return suggestion.name;
-}
-
-function renderSuggestion(suggestion) {
     return (
-        <span>{suggestion.name}</span>
+      <form className={classes.root} autoComplete="off">
+        <FormControl variant="outlined" className={classes.formControl} fullWidth='true'>
+          <Select
+            value={this.state.category}
+            onChange={this.handleChange}
+            input={
+              <OutlinedInput
+                name="category"
+                id="outlined-age-simple"
+              />
+            }
+            displayEmpty
+            style={selectStyle}
+          >
+            <MenuItem value="">
+              Choose a Category
+            </MenuItem>
+            <MenuItem value={2}>Counseling & Mental Health</MenuItem>
+            <MenuItem value={1}>Mediccal Care</MenuItem>
+            <MenuItem value={3}>Peer Support</MenuItem>
+            <MenuItem value={4}>Relaxation & Recreation</MenuItem>
+            <MenuItem value={5}>Wellness Resources</MenuItem>
+          </Select>
+          <FormHelperText>Some important helper text</FormHelperText>
+        </FormControl>
+      </form>
     );
+  }
 }
 
-class Category__DropDownComponent extends React.Component {
-    constructor() {
-        super();
+SimpleSelect.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
-        this.state = {
-        value: '',
-        suggestions: []
-        };    
-    }
-
-    onChange = (event, { newValue, method }) => {
-        this.setState({
-        value: newValue
-        });
-    };
-
-    onSuggestionsFetchRequested = ({ value }) => {
-        this.setState({
-        suggestions: getSuggestions(value)
-        });
-    };
-
-    onSuggestionsClearRequested = () => {
-        this.setState({
-        suggestions: []
-        });
-    };
-
-    render() {
-        const { value, suggestions } = this.state;
-        const inputProps = {
-        placeholder: "Type 'c'",
-        value,
-        onChange: this.onChange
-        };
-
-        return (
-        <Autosuggest 
-            id="category"
-            suggestions={suggestions}
-            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-            getSuggestionValue={getSuggestionValue}
-            renderSuggestion={renderSuggestion}
-            inputProps={inputProps} />
-        );
-    }
-}
-
-export default Category__DropDownComponent;
+export default withStyles(styles)(SimpleSelect);
