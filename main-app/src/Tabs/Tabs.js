@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import CategoryDropDownComponent from '../DropDowns/CategoryDropDown';
-import SubCategoryDropDown from '../DropDowns/SubCategoryDropDown';
+import SubcategoryDropDownComponent from '../DropDowns/SubCategoryDropDown';
 import KeywordDropDown from '../DropDowns/KeywordDropDown';
 import styled from 'styled-components';
 import "./Tabs.scss";
@@ -42,7 +42,7 @@ export default () => (
                   <CategoryDropDownComponent/>
               </div>
               <div className='subcategory_container'>
-                  <SubCategoryDropDown/>
+                  <SubcategoryDropDownComponent/>
               </div>
           </FlexContainer>
       </DropDownContainer>

@@ -25,7 +25,7 @@ const selectStyle = {
   'border-radius': '4px',
 }
 
-class SimpleSelect extends React.Component {
+class CategoryDropDownComponent extends React.Component {
   state = {
     category: '',
   };
@@ -61,15 +61,15 @@ class SimpleSelect extends React.Component {
             <MenuItem value={4}>Relaxation & Recreation</MenuItem>
             <MenuItem value={5}>Wellness Resources</MenuItem>
           </Select>
-          <FormHelperText>Some important helper text</FormHelperText>
+          <FormHelperText>Here is help text</FormHelperText>
         </FormControl>
       </form>
     );
   }
 }
 
-SimpleSelect.propTypes = {
+CategoryDropDownComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SimpleSelect);
+export default withStyles(styles)(CategoryDropDownComponent);

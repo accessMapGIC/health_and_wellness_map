@@ -1,98 +1,75 @@
 import React from 'react';
-import Autosuggest from 'react-autosuggest';
-import './DropDown.scss';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
-const insurances = [
-    {
-        name: 'SSMU',
-    },
-    {
-        name: 'PGSS',
-    },
-    {
-        name: 'International Health Insurance (IHI)',
-    },
-    {
-        name: 'RAMQ',
-    },
-    {
-        name: 'Out of Province',
-    },
-];
 
-function escapeRegexCharacters(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
+const styles = theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 130,
+    maxWidth: 214,
+  },
+});
 
-function getSuggestions(value) {
-    const escapedValue = escapeRegexCharacters(value.trim());
-
-    if (escapedValue === '') {
-        return [];
-    }
-
-    const regex = new RegExp('^' + escapedValue, 'i');
-
-    return insurances.filter(insurance => regex.test(insurance.name));
-}
-
-function getSuggestionValue(suggestion) {
-    return suggestion.name;
-}
-
-function renderSuggestion(suggestion) {
-    return (
-        <span>{suggestion.name}</span>
-    );
+const selectStyle = {
+  'background-color': '#fff',
+  'border-radius': '4px',
 }
 
 class InsuranceDropDownComponent extends React.Component {
-    constructor() {
-        super();
+  state = {
+    insurance: '',
+  };
 
-        this.state = {
-        value: '',
-        suggestions: []
-        };    
-    }
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
-    onChange = (event, { newValue, method }) => {
-        this.setState({
-        value: newValue
-        });
-    };
+  render() {
+    const { classes } = this.props;
 
-    onSuggestionsFetchRequested = ({ value }) => {
-        this.setState({
-        suggestions: getSuggestions(value)
-        });
-    };
-
-    onSuggestionsClearRequested = () => {
-        this.setState({
-        suggestions: []
-        });
-    };
-
-    render() {
-        const { value, suggestions } = this.state;
-        const inputProps = {
-        placeholder: "Type your Insurance",
-        value,
-        onChange: this.onChange
-        };
-
-        return (
-        <Autosuggest 
-            id="insurance"
-            suggestions={suggestions}
-            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-            getSuggestionValue={getSuggestionValue}
-            renderSuggestion={renderSuggestion}
-            inputProps={inputProps} />
-        );
-    }
+    return (
+      <form className={classes.root} autoComplete="off">
+        <FormControl variant="outlined" className={classes.formControl} fullWidth='true'>
+          <Select
+            value={this.state.insurance}
+            onChange={this.handleChange}
+            input={
+              <OutlinedInput
+                name="insurance"
+                id="outlined-age-simple"
+              />
+            }
+            displayEmpty
+            style={selectStyle}
+          >
+            <MenuItem value="">
+              Choose an insurance
+            </MenuItem>
+            <MenuItem value={1}>International Health Insurance</MenuItem>
+            <MenuItem value={2}>Out of Province</MenuItem>
+            <MenuItem value={3}>PGSS</MenuItem>
+            <MenuItem value={4}>RAMQ</MenuItem>
+            <MenuItem value={5}>SSMU</MenuItem>
+          </Select>
+          <FormHelperText>Here is help text</FormHelperText>
+        </FormControl>
+      </form>
+    );
+  }
 }
 
-export default InsuranceDropDownComponent;
+InsuranceDropDownComponent.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(InsuranceDropDownComponent);
