@@ -7,14 +7,14 @@ import styled from 'styled-components';
 import "./Tabs.scss";
 
 const DropDownContainer = styled.div`
-    padding: 5px;
     width: 100%;
     height: 100%;
+    padding: 1.5px;
 `;
 
 const KeywordFlexContainer = styled.div`
     display: flex;
-    width: 250px;
+    width: 210px;
     flex-direction: column;
     flex-wrap: wrap;
     margin: 5px;
