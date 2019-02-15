@@ -2,33 +2,37 @@
 
 .react-tabs {
     -webkit-tap-highlight-color: transparent;
+    background-color: $rossy-light;
+    border-radius: 4px;
   
     &__tab-list {
-        border-bottom: 1px solid #aaa;
+        // border-bottom: 2px solid #aaa;
         margin: 0 0 10px;
         padding: 0;
+        background-color: $rossy-blue;
     }
   
     &__tab {
         display: inline-block;
-        border: 1px solid transparent;
+        // border: 2px solid transparent;
         border-bottom: none;
-        bottom: -1px;
+        bottom: 0px;
         position: relative;
         list-style: none;
-        padding: 4px 8px;
+        padding: 3px 9.1px;
+        border-radius: 5px 5px 0 0;
         cursor: pointer;
 
     
         &--selected {
-            background: #fff;
+            background-color: $rossy-light;
             border-color: #aaa;
             color: black;
             border-radius: 5px 5px 0 0;
         }
     
         &--disabled {
-            color: #aaa;
+            color: $rossy-blue;
             cursor: default;
         }
     }
@@ -45,17 +49,14 @@
 .category_container{
     padding-bottom: 30px;
     position: relative;
-    vertical-align: middle;
 }
 
 .subcategory_container{
     padding-bottom: 30px;
     position: relative;
-    vertical-align: middle;
 }
 
 .keyword_container{
     padding-bottom: 30px;
     position: relative;
-    vertical-align: middle;
 }
