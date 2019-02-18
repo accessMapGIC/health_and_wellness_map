@@ -24,7 +24,11 @@ const MenuItem = styled.h3`
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
-    'background-color': '#4b9ad4',
+    color: theme.palette.getContrastText('#4ec3c7'),
+    backgroundColor: '#4ec3c7',
+    '&:hover': {
+      backgroundColor: '#4ec3c7',
+    },
   }
 });
 
@@ -149,7 +153,7 @@ class SidebarsComponent extends React.Component {
                       <CheckBoxComponent/>
                     </div>
                   </div>
-                  <Button variant="contained" className="{classes.button}" href="" prefetch onClick={(state) => this.submitButton(state)}>
+                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch onClick={(state) => this.submitButton(state)}>
                     Submit
                   </Button>
                 </Container>
@@ -164,7 +168,7 @@ class SidebarsComponent extends React.Component {
               >
                 <MenuItem>Search</MenuItem>
                 <Container>
-                  <Button variant="contained" className="{classes.button}" href="" prefetch onClick={(state) => this.newSearchButton(state)}>
+                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch onClick={(state) => this.newSearchButton(state)}>
                     new Search Query
                   </Button>
                 </Container>

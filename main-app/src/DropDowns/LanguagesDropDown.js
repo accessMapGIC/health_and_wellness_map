@@ -55,11 +55,8 @@ class LanguageDropDownComponent extends React.Component {
             <MenuItem value="">
               Choose a language
             </MenuItem>
-            <MenuItem value={1}>Sub 1</MenuItem>
-            <MenuItem value={2}>Sub 2</MenuItem>
-            <MenuItem value={3}>Sub 3</MenuItem>
-            <MenuItem value={4}>Sub 4</MenuItem>
-            <MenuItem value={5}>Sub 5</MenuItem>
+            <MenuItem value={1}>French</MenuItem>
+            <MenuItem value={2}>English</MenuItem>
           </Select>
           <FormHelperText>Here is help text</FormHelperText>
         </FormControl>

@@ -191,7 +191,7 @@ class KeywordDropDownComponent extends React.Component {
           {...autosuggestProps}
           inputProps={{
             classes,
-            placeholder: 'Search a country (start with a)',
+            placeholder: 'Type the letter "a"',
             value: this.state.single,
             onChange: this.handleChange('single'),
           }}
