@@ -25,9 +25,9 @@ const selectStyle = {
   'border-radius': '4px',
 }
 
-class SimpleSelect extends React.Component {
+class LanguageDropDownComponent extends React.Component {
   state = {
-    category: '',
+    language: '',
   };
 
   handleChange = event => {
@@ -41,11 +41,11 @@ class SimpleSelect extends React.Component {
       <form className={classes.root} autoComplete="off">
         <FormControl variant="outlined" className={classes.formControl} fullWidth='true'>
           <Select
-            value={this.state.category}
+            value={this.state.language}
             onChange={this.handleChange}
             input={
               <OutlinedInput
-                name="category"
+                name="language"
                 id="outlined-age-simple"
               />
             }
@@ -53,23 +53,20 @@ class SimpleSelect extends React.Component {
             style={selectStyle}
           >
             <MenuItem value="">
-              Choose a Category
+              Choose a language
             </MenuItem>
-            <MenuItem value={2}>Counseling & Mental Health</MenuItem>
-            <MenuItem value={1}>Mediccal Care</MenuItem>
-            <MenuItem value={3}>Peer Support</MenuItem>
-            <MenuItem value={4}>Relaxation & Recreation</MenuItem>
-            <MenuItem value={5}>Wellness Resources</MenuItem>
+            <MenuItem value={1}>French</MenuItem>
+            <MenuItem value={2}>English</MenuItem>
           </Select>
-          <FormHelperText>Some important helper text</FormHelperText>
+          <FormHelperText>Here is help text</FormHelperText>
         </FormControl>
       </form>
     );
   }
 }
 
-SimpleSelect.propTypes = {
+LanguageDropDownComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SimpleSelect);
+export default withStyles(styles)(LanguageDropDownComponent);
