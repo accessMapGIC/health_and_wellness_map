@@ -7,7 +7,8 @@ import { withStyles } from '@material-ui/core/styles';
 import InsuranceDropDownComponent from '../DropDowns/InsuranceDropDown';
 import './Sidebars.scss';
 import LanguageDropDownComponent from '../DropDowns/LanguagesDropDown';
-import CheckBoxComponent from '../CheckBox/CheckBox'
+import CheckBoxComponent from '../CheckBox/CheckBox';
+import { connect } from 'react-redux';
 
 
 const DropdownHeader = styled.h5`
@@ -180,4 +181,5 @@ class SidebarsComponent extends React.Component {
 }
 
 
-export default (withStyles)(styles)(SidebarsComponent);
+
+export default connect()(withStyles)(styles)(SidebarsComponent);
