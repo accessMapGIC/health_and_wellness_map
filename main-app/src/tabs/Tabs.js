@@ -1,8 +1,8 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import CategoryDropDownComponent from '../DropDowns/CategoryDropDown';
-import SubcategoryDropDownComponent from '../DropDowns/SubCategoryDropDown';
-import KeywordDropDown from '../DropDowns/KeywordDropDown';
+import CategoryDropDownComponent from '../Dropdowns/CategoryDropDown';
+import SubcategoryDropDownComponent from '../Dropdowns/SubCategoryDropDown';
+import KeywordDropDown from '../Dropdowns/KeywordDropDown';
 import styled from 'styled-components';
 import "./Tabs.scss";
 

@@ -1,14 +1,15 @@
 import React from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import styled from 'styled-components';
-import TabComponent from '../Tabs/Tabs';
+import TabComponent from '../tabs/Tabs';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import InsuranceDropDownComponent from '../DropDowns/InsuranceDropDown';
+import InsuranceDropDownComponent from '../Dropdowns/InsuranceDropDown';
 import './Sidebars.scss';
-import LanguageDropDownComponent from '../DropDowns/LanguagesDropDown';
-import CheckBoxComponent from '../CheckBox/CheckBox';
+import LanguageDropDownComponent from '../Dropdowns/LanguagesDropDown';
+import CheckBoxComponent from '../Checkbox/CheckBox';
 import { connect } from 'react-redux';
+// import { decorator as reduxBurgerMenu } from 'redux-burger-menu'
 
 
 const DropdownHeader = styled.h5`
@@ -134,9 +135,9 @@ class SidebarsComponent extends React.Component {
           <div className='menu-sidebars'>
             <div className='menu-left'>
               <Menu 
-              isOpen={this.state.leftMenu.leftMenuOpen}
-              onStateChange={(state) => this.handleStateChange(state, 0)}
-              customBurgerIcon={this.state.leftMenu.leftHamButton}
+              isOpen={this.props.leftMenu.leftMenuOpen}
+              onStateChange={this.props.onMenuChange(0)} 
+              customBurgerIcon={this.props.leftMenu.leftHamButton}
               >
                 <MenuItem>Search</MenuItem>
                 <TabComponent/>
@@ -154,7 +155,7 @@ class SidebarsComponent extends React.Component {
                       <CheckBoxComponent/>
                     </div>
                   </div>
-                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch onClick={(state) => this.submitButton(state)}>
+                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch onClick={this.props.onSubmit}>
                     Submit
                   </Button>
                 </Container>
@@ -163,13 +164,13 @@ class SidebarsComponent extends React.Component {
             <div className='menu-right'>
               <Menu 
               right
-              isOpen={this.state.rightMenu.rightMenuOpen}
-              onStateChange={(state) => this.handleStateChange(state, 1)}
-              customBurgerIcon={this.state.rightMenu.rightHamButton}
+              isOpen={this.props.rightMenu.rightMenuOpen}
+              onStateChange={this.props.onMenuChange(1)}
+              customBurgerIcon={this.props.rightMenu.rightHamButton}
               >
                 <MenuItem>Search</MenuItem>
                 <Container>
-                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch onClick={(state) => this.newSearchButton(state)}>
+                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch onClick={this.props.onNewSearch}>
                     new Search Query
                   </Button>
                 </Container>
@@ -180,6 +181,21 @@ class SidebarsComponent extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+  return {
+    leftMenuOpen: state.leftMenu.leftMenuOpen,
+    leftHamButton: state.leftMenu.leftHamButton,
+    rightMenuOpen: state.rightMenu.rightMenuOpen,
+    rightHamButton: state.rightMenu.rightHamButton,
+  };
+}
 
+const mapDispatchToProps = dispatch => {
+  return {
+    onMenuChange: (menu_val) => dispatch({type: 'MENU_CHANGE', menu: menu_val}),
+    onSubmit: () => dispatch({type: 'SUBMIT'}),
+    onNewSearch: () => dispatch({type: 'NEW_SUBMIT'}),
+  };
+}
 
-export default connect()(withStyles)(styles)(SidebarsComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles)(styles)(SidebarsComponent);
