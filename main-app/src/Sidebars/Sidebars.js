@@ -8,8 +8,6 @@ import InsuranceDropDownComponent from '../Dropdowns/InsuranceDropDown';
 import './Sidebars.scss';
 import LanguageDropDownComponent from '../Dropdowns/LanguagesDropDown';
 import CheckBoxComponent from '../Checkbox/CheckBox';
-import { connect } from 'react-redux';
-// import { decorator as reduxBurgerMenu } from 'redux-burger-menu'
 
 
 const DropdownHeader = styled.h5`
@@ -135,9 +133,9 @@ class SidebarsComponent extends React.Component {
           <div className='menu-sidebars'>
             <div className='menu-left'>
               <Menu 
-              isOpen={this.props.leftMenu.leftMenuOpen}
-              onStateChange={this.props.onMenuChange(0)} 
-              customBurgerIcon={this.props.leftMenu.leftHamButton}
+              isOpen={this.state.leftMenu.leftMenuOpen}
+              onStateChange={(state) => this.handleStateChange(state, 0)}
+              customBurgerIcon={this.state.leftMenu.leftHamButton}
               >
                 <MenuItem>Search</MenuItem>
                 <TabComponent/>
@@ -155,7 +153,7 @@ class SidebarsComponent extends React.Component {
                       <CheckBoxComponent/>
                     </div>
                   </div>
-                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch onClick={this.props.onSubmit}>
+                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch onClick={(state) => this.submitButton(state)}>
                     Submit
                   </Button>
                 </Container>
@@ -164,13 +162,13 @@ class SidebarsComponent extends React.Component {
             <div className='menu-right'>
               <Menu 
               right
-              isOpen={this.props.rightMenu.rightMenuOpen}
-              onStateChange={this.props.onMenuChange(1)}
-              customBurgerIcon={this.props.rightMenu.rightHamButton}
+              isOpen={this.state.rightMenu.rightMenuOpen}
+              onStateChange={(state) => this.handleStateChange(state, 1)}
+              customBurgerIcon={this.state.rightMenu.rightHamButton}
               >
                 <MenuItem>Search</MenuItem>
                 <Container>
-                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch onClick={this.props.onNewSearch}>
+                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch onClick={(state) => this.newSearchButton(state)}>
                     new Search Query
                   </Button>
                 </Container>
@@ -181,21 +179,6 @@ class SidebarsComponent extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
-  return {
-    leftMenuOpen: state.leftMenu.leftMenuOpen,
-    leftHamButton: state.leftMenu.leftHamButton,
-    rightMenuOpen: state.rightMenu.rightMenuOpen,
-    rightHamButton: state.rightMenu.rightHamButton,
-  };
-}
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onMenuChange: (menu_val) => dispatch({type: 'MENU_CHANGE', menu: menu_val}),
-    onSubmit: () => dispatch({type: 'SUBMIT'}),
-    onNewSearch: () => dispatch({type: 'NEW_SUBMIT'}),
-  };
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles)(styles)(SidebarsComponent);
+export default (withStyles)(styles)(SidebarsComponent);
