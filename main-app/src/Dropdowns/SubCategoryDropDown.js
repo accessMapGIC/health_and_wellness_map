@@ -6,7 +6,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import * as actionTypes from '../store/actions';
 
 const styles = theme => ({
   root: {
@@ -21,8 +23,8 @@ const styles = theme => ({
 });
 
 const selectStyle = {
-  'background-color': '#fff',
-  'border-radius': '4px',
+  backgroundColor: '#fff',
+  bordeRadius: '4px',
 }
 
 class SubcategoryDropDownComponent extends React.Component {
@@ -72,4 +74,19 @@ SubcategoryDropDownComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SubcategoryDropDownComponent);
+const mapStateToProps = state => {
+  return {
+    subcategory: state.lfS.subCatDrop,
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onChange: (event) => dispatch({type: actionTypes.CATEGORY_CHANGE, cat: (event.target.value)})
+  }
+}
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps),
+)(SubcategoryDropDownComponent);

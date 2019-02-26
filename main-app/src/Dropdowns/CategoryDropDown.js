@@ -6,6 +6,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import * as actionTypes from '../store/actions';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 
 const styles = theme => ({
@@ -21,28 +24,28 @@ const styles = theme => ({
 });
 
 const selectStyle = {
-  'background-color': '#fff',
-  'border-radius': '4px',
+  backgroundColor: '#fff',
+  borderRadius: '4px',
 }
 
 class CategoryDropDownComponent extends React.Component {
-  state = {
-    category: '',
-  };
+  // state = {
+  //   category: '',
+  // };
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+  // handleChange = event => {
+  //   this.setState({ [event.target.name]: event.target.value });
+  // };
 
   render() {
     const { classes } = this.props;
 
     return (
       <form className={classes.root} autoComplete="off">
-        <FormControl variant="outlined" className={classes.formControl} fullWidth='true'>
+        <FormControl variant="outlined" className={classes.formControl} fullWidth={true}>
           <Select
-            value={this.state.category}
-            onChange={this.handleChange}
+            value={this.props.category}
+            onChange={this.props.onChange}
             input={
               <OutlinedInput
                 name="category"
@@ -56,7 +59,7 @@ class CategoryDropDownComponent extends React.Component {
               Choose a Category
             </MenuItem>
             <MenuItem value={2}>Counseling & Mental Health</MenuItem>
-            <MenuItem value={1}>Mediccal Care</MenuItem>
+            <MenuItem value={1}>Medical Care</MenuItem>
             <MenuItem value={3}>Peer Support</MenuItem>
             <MenuItem value={4}>Relaxation & Recreation</MenuItem>
             <MenuItem value={5}>Wellness Resources</MenuItem>
@@ -72,4 +75,19 @@ CategoryDropDownComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CategoryDropDownComponent);
+const mapStateToProps = state => {
+  return {
+    category: state.lfS.catDrop,
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onChange: (event) => dispatch({type: actionTypes.CATEGORY_CHANGE, cat: (event.target.value)})
+  }
+}
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps),
+)(CategoryDropDownComponent);

@@ -153,7 +153,7 @@ class SidebarsComponent extends React.Component {
                       <CheckBoxComponent/>
                     </div>
                   </div>
-                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch onClick={(state) => this.submitButton(state)}>
+                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch="true" onClick={(state) => this.submitButton(state)}>
                     Submit
                   </Button>
                 </Container>
@@ -168,7 +168,7 @@ class SidebarsComponent extends React.Component {
               >
                 <MenuItem>Search</MenuItem>
                 <Container>
-                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch onClick={(state) => this.newSearchButton(state)}>
+                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch="true" onClick={(state) => this.newSearchButton(state)}>
                     new Search Query
                   </Button>
                 </Container>

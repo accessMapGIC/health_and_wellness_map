@@ -21,8 +21,8 @@ const styles = theme => ({
 });
 
 const selectStyle = {
-  'background-color': '#fff',
-  'border-radius': '4px',
+  backgroundColor: '#fff',
+  borderRadius: '4px',
 }
 
 class LanguageDropDownComponent extends React.Component {
