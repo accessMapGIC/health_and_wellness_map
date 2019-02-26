@@ -50,6 +50,7 @@ class CategoryDropDownComponent extends React.Component {
               <OutlinedInput
                 name="category"
                 id="outlined-age-simple"
+                labelWidth={0}
               />
             }
             displayEmpty
@@ -77,7 +78,7 @@ CategoryDropDownComponent.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    category: state.lfS.catDrop,
+    category: state.lfS.leftMenu.catDrop,
   }
 };
 

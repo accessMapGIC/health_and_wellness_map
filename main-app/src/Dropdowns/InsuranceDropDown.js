@@ -39,7 +39,7 @@ class InsuranceDropDownComponent extends React.Component {
 
     return (
       <form className={classes.root} autoComplete="off">
-        <FormControl variant="outlined" className={classes.formControl} fullWidth='true'>
+        <FormControl variant="outlined" className={classes.formControl} fullWidth={true}>
           <Select
             value={this.state.insurance}
             onChange={this.handleChange}
@@ -47,6 +47,7 @@ class InsuranceDropDownComponent extends React.Component {
               <OutlinedInput
                 name="insurance"
                 id="outlined-age-simple"
+                labelWidth={0}
               />
             }
             displayEmpty

@@ -1,1 +1,0 @@
-health_and_wellness_map

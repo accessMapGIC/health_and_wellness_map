@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactMapboxGl from 'react-mapbox-gl';
+// import '../node_modules/mapbox-gl/dist/mapbox-gl.css'
+// import '../../node_modules/mapbox-gl/dist/'
 // import ReactMapboxLanguage from '@mapbox/mapbox-gl-language';
 
 const Mapbox = ReactMapboxGl({
@@ -20,10 +22,12 @@ const MapboxComponent = () => (
     center={center}
     zoom={zoom}
     bearing={bearing}
+    localIdeographFontFamily={'dinreg'}
     containerStyle={{
       height: '100vh',
       width: '100vw',
     }}>
+    
       </Mapbox>
 );
 

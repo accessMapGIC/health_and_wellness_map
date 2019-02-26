@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.2",
+    "autosuggest-highlight": "^3.1.1",
     "install": "^0.12.2",
     "mapbox-gl": "^0.52.0",
     "node-sass": "^4.11.0",
@@ -36,5 +37,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "css-loader": "^2.1.0"
+  }
 }

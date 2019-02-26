@@ -41,7 +41,7 @@ class SubcategoryDropDownComponent extends React.Component {
 
     return (
       <form className={classes.root} autoComplete="off">
-        <FormControl variant="outlined" className={classes.formControl} fullWidth='true'>
+        <FormControl variant="outlined" className={classes.formControl} fullWidth={true}>
           <Select
             value={this.state.subcategory}
             onChange={this.handleChange}
@@ -49,6 +49,7 @@ class SubcategoryDropDownComponent extends React.Component {
               <OutlinedInput
                 name="subcategory"
                 id="outlined-age-simple"
+                labelWidth={0}
               />
             }
             displayEmpty
