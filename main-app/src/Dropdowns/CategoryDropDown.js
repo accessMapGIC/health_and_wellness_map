@@ -59,11 +59,11 @@ class CategoryDropDownComponent extends React.Component {
             <MenuItem value="">
               Choose a Category
             </MenuItem>
-            <MenuItem value={2}>Counseling & Mental Health</MenuItem>
-            <MenuItem value={1}>Medical Care</MenuItem>
-            <MenuItem value={3}>Peer Support</MenuItem>
-            <MenuItem value={4}>Relaxation & Recreation</MenuItem>
-            <MenuItem value={5}>Wellness Resources</MenuItem>
+            <MenuItem value={'Counseling & Mental Health'}>Counseling & Mental Health</MenuItem>
+            <MenuItem value={'Medical Care'}>Medical Care</MenuItem>
+            <MenuItem value={'Peer Support'}>Peer Support</MenuItem>
+            <MenuItem value={'Relaxation & Recreation'}>Relaxation & Recreation</MenuItem>
+            <MenuItem value={'Wellness Resources'}>Wellness Resources</MenuItem>
           </Select>
           <FormHelperText>Here is help text</FormHelperText>
         </FormControl>
@@ -84,7 +84,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onChange: (event) => dispatch({type: actionTypes.CATEGORY_CHANGE, cat: (event.target.value)})
+    onChange: (event) => dispatch({type: actionTypes.CATEGORY_CHANGE, payload: (event.target.value)})
   }
 }
 

@@ -2,7 +2,7 @@ import * as actionTypes from '../actions'
 
 const initialState = {
     leftMenu: {
-        catDrop: 'Choose a Category',
+        catDrop: '',
         insDrop: '',
         langDrop: '',
         keyDrop: '',
@@ -14,28 +14,45 @@ const leftSidebarReducer = (state = initialState, action ) => {
     switch ( action.type ){
         case actionTypes.CATEGORY_CHANGE:
             const newState = Object.assign({}, state);
-            newState.catDrop = action.cat;
+            newState.leftMenu.catDrop = action.payload;
             console.log(newState);
             return newState;
-        // case actionTypes.SUBCATEGORY_CHANGE:
-        //     const newState = Object.assign({}, state);
-        //     newState.catDrop = action.subCat;
-        //     return newState;
-        // case actionTypes.INSURANCE_CHANGE:
-        //     const newState = Object.assign({}, state);
-        //     newState.catDrop = action.ins;
-        //     return newState;
-        // case actionTypes.KEYWORD_CHANGE:
-        //     const newState = Object.assign({}, state);
-        //     newState.catDrop = action.key;
-        //     return newState;
-        // case actionTypes.LANGUAGE_CHANGE:
-        //     const newState = Object.assign({}, state);
-        //     newState.catDrop = action.lang;
-        //     return newState;
+        case actionTypes.SUBCATEGORY_CHANGE:
+            return {
+                ...state,
+                leftMenu: {
+                    ...state.leftMenu,
+                    subCatDrop: action.payload
+                },
+            }
+        case actionTypes.INSURANCE_CHANGE:
+            return {
+                ...state,
+                leftMenu: {
+                    ...state.leftMenu,
+                    insDrop: action.payload
+                },
+            }
+        case actionTypes.KEYWORD_CHANGE:
+            return {
+                ...state,
+                leftMenu: {
+                    ...state.leftMenu,
+                    keyDrop: action.payload
+                },
+            }
+        case actionTypes.LANGUAGE_CHANGE:
+            return {
+                ...state,
+                leftMenu: {
+                    ...state.leftMenu,
+                    langDrop: action.payload
+                },
+            }
         default:
             return state;
     }
+    
 }
 
 export default leftSidebarReducer;
