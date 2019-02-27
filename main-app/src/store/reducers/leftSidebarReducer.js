@@ -7,6 +7,7 @@ const initialState = {
         langDrop: '',
         keyDrop: '',
         subCatDrop: '',
+        openNow: false,
     }
 }
 
@@ -48,6 +49,14 @@ const leftSidebarReducer = (state = initialState, action ) => {
                     ...state.leftMenu,
                     langDrop: action.payload
                 },
+            }
+        case actionTypes.ON_IS_OPEN_CHANGE:
+            return {
+                ...state,
+                leftMenu: {
+                    ...state.leftMenu,
+                    openNow: !state.leftMenu.openNow
+                }
             }
         default:
             return state;

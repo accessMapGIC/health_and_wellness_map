@@ -4,6 +4,10 @@ import { withStyles } from '@material-ui/core/styles';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import * as actionTypes from '../store/actions';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+
 
 const styles = {
   root: {
@@ -20,13 +24,13 @@ const styles = {
 };
 
 class CheckboxComponent extends React.Component {
-  state = {
-    checkedA: true,
-  };
+  // state = {
+  //   checkedA: true,
+  // };
 
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.checked });
-  };
+  // handleChange = name => event => {
+  //   this.setState({ [name]: event.target.checked });
+  // };
 
   render() {
     const { classes } = this.props;
@@ -36,8 +40,8 @@ class CheckboxComponent extends React.Component {
         <FormControlLabel
           control={
             <Checkbox
-              checked={this.state.checkedA}
-              onChange={this.handleChange('checkedA')}
+              checked={this.props.checkedA}
+              onChange={this.props.onChange('checkedA')}
               value="checkedA"
               classes={{
                   root: classes.root,
@@ -59,4 +63,19 @@ CheckboxComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CheckboxComponent);
+const mapStateToProps = state => {
+  return {
+    checkedA: state.lfS.leftMenu.openNow,
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onChange: (name) => (event) => dispatch({type: actionTypes.ON_IS_OPEN_CHANGE, payload: (event.target.checked)})
+  }
+}
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps),
+)(CheckboxComponent);
