@@ -171,6 +171,7 @@ class KeywordDropDownComponent extends React.Component {
   };
 
   handleChange = name => (event, { newValue }) => {
+    console.log(newValue);
     this.setState({
       [name]: newValue,
     });
@@ -195,8 +196,8 @@ class KeywordDropDownComponent extends React.Component {
           inputProps={{
             classes,
             placeholder: 'Type the letter "a"',
-            value: this.state.single,
-            onChange: this.handleChange('single'),
+            value: this.props.keyword,///this.state.single,
+            onChange: this.props.onChange('single')//this.handleChange('single'),
           }}
           theme={{
             container: classes.container,
@@ -220,4 +221,19 @@ KeywordDropDownComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(KeywordDropDownComponent);
+const mapStateToProps = state => {
+  return {
+    keyword: state.lfS.leftMenu.keyDrop,
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onChange: (name) => (event, {newValue}) => dispatch({type: actionTypes.KEYWORD_CHANGE, payload: newValue})
+  }
+}
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps),
+)(KeywordDropDownComponent);
