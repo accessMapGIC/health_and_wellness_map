@@ -55,7 +55,7 @@ const styles = theme => ({
   }
 });
 
-class RecipeReviewCard extends React.Component {
+class CardTemplateComponent extends React.Component {
   state = { expanded: false };
 
   handleExpandClick = () => {
@@ -93,7 +93,7 @@ class RecipeReviewCard extends React.Component {
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>
-              <LocationOnIcon className={classes.materialIcons} /> - Address of Service
+              <LocationOnIcon className={classes.materialIcons} /> - this
             </Typography>
             <Typography paragraph>
               <PhoneIcon className={classes.materialIcons} /> - Phone Number of Service
@@ -118,4 +118,19 @@ RecipeReviewCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(RecipeReviewCard);
+const mapStateToProps = state => {
+  return {
+    category: state.lfS.leftMenu,
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onChange: (event) => dispatch({type: actionTypes.CATEGORY_CHANGE, payload: (event.target.value)})
+  }
+}
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps),
+)(CardTemplateComponent);
