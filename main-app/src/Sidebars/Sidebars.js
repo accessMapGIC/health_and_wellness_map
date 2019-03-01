@@ -9,6 +9,7 @@ import './Sidebars.scss';
 import LanguageDropDownComponent from '../Dropdowns/LanguagesDropDown';
 import CheckBoxComponent from '../Checkbox/CheckBox';
 import CardTemplateComponent from '../Cards/CardTemplate';
+import CardContainer from '../Cards/CardContainer';
 
 
 const DropdownHeader = styled.h5`
