@@ -6,7 +6,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
+import * as actionTypes from '../store/actions';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 const styles = theme => ({
   root: {
@@ -21,32 +23,33 @@ const styles = theme => ({
 });
 
 const selectStyle = {
-  'background-color': '#fff',
-  'border-radius': '4px',
+  backgroundColor: '#fff',
+  borderRadius: '4px',
 }
 
 class InsuranceDropDownComponent extends React.Component {
-  state = {
-    insurance: '',
-  };
+  // state = {
+  //   insurance: '',
+  // };
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+  // handleChange = event => {
+  //   this.setState({ [event.target.name]: event.target.value });
+  // };
 
   render() {
     const { classes } = this.props;
 
     return (
       <form className={classes.root} autoComplete="off">
-        <FormControl variant="outlined" className={classes.formControl} fullWidth='true'>
+        <FormControl variant="outlined" className={classes.formControl} fullWidth={true}>
           <Select
-            value={this.state.insurance}
-            onChange={this.handleChange}
+            value={this.props.insurance}
+            onChange={this.props.onChange}
             input={
               <OutlinedInput
                 name="insurance"
                 id="outlined-age-simple"
+                labelWidth={0}
               />
             }
             displayEmpty
@@ -55,11 +58,11 @@ class InsuranceDropDownComponent extends React.Component {
             <MenuItem value="">
               Choose an insurance
             </MenuItem>
-            <MenuItem value={1}>International Health Insurance</MenuItem>
-            <MenuItem value={2}>Out of Province</MenuItem>
-            <MenuItem value={3}>PGSS</MenuItem>
-            <MenuItem value={4}>RAMQ</MenuItem>
-            <MenuItem value={5}>SSMU</MenuItem>
+            <MenuItem value={'International Health Insurance'}>International Health Insurance</MenuItem>
+            <MenuItem value={'Out of Province'}>Out of Province</MenuItem>
+            <MenuItem value={'PGSS'}>PGSS</MenuItem>
+            <MenuItem value={'RAMQ'}>RAMQ</MenuItem>
+            <MenuItem value={'SSMU'}>SSMU</MenuItem>
           </Select>
           <FormHelperText>Here is help text</FormHelperText>
         </FormControl>
@@ -72,4 +75,19 @@ InsuranceDropDownComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(InsuranceDropDownComponent);
+const mapStateToProps = state => {
+  return {
+    insurance: state.lfS.leftMenu.insDrop,
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onChange: (event) => dispatch({type: actionTypes.INSURANCE_CHANGE, payload: (event.target.value)})
+  }
+}
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps),
+)(InsuranceDropDownComponent);

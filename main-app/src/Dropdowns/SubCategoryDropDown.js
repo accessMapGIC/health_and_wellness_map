@@ -6,7 +6,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import * as actionTypes from '../store/actions';
 
 const styles = theme => ({
   root: {
@@ -21,32 +23,33 @@ const styles = theme => ({
 });
 
 const selectStyle = {
-  'background-color': '#fff',
-  'border-radius': '4px',
+  backgroundColor: '#fff',
+  bordeRadius: '4px',
 }
 
 class SubcategoryDropDownComponent extends React.Component {
-  state = {
-    subcategory: '',
-  };
+  // state = {
+  //   subcategory: '',
+  // };
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+  // handleChange = event => {
+  //   this.setState({ [event.target.name]: event.target.value });
+  // };
 
   render() {
     const { classes } = this.props;
 
     return (
       <form className={classes.root} autoComplete="off">
-        <FormControl variant="outlined" className={classes.formControl} fullWidth='true'>
+        <FormControl variant="outlined" className={classes.formControl} fullWidth={true}>
           <Select
-            value={this.state.subcategory}
-            onChange={this.handleChange}
+            value={this.props.subcategory}
+            onChange={this.props.onChange}
             input={
               <OutlinedInput
                 name="subcategory"
                 id="outlined-age-simple"
+                labelWidth={0}
               />
             }
             displayEmpty
@@ -55,11 +58,11 @@ class SubcategoryDropDownComponent extends React.Component {
             <MenuItem value="">
               Choose a Subcategory
             </MenuItem>
-            <MenuItem value={1}>Sub 1</MenuItem>
-            <MenuItem value={2}>Sub 2</MenuItem>
-            <MenuItem value={3}>Sub 3</MenuItem>
-            <MenuItem value={4}>Sub 4</MenuItem>
-            <MenuItem value={5}>Sub 5</MenuItem>
+            <MenuItem value={'Sub 1'}>Sub 1</MenuItem>
+            <MenuItem value={'Sub 2'}>Sub 2</MenuItem>
+            <MenuItem value={'Sub 3'}>Sub 3</MenuItem>
+            <MenuItem value={'Sub 4'}>Sub 4</MenuItem>
+            <MenuItem value={'Sub 5'}>Sub 5</MenuItem>
           </Select>
           <FormHelperText>Here is help text</FormHelperText>
         </FormControl>
@@ -72,4 +75,19 @@ SubcategoryDropDownComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SubcategoryDropDownComponent);
+const mapStateToProps = state => {
+  return {
+    subcategory: state.lfS.leftMenu.subCatDrop,
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onChange: (event) => dispatch({type: actionTypes.SUBCATEGORY_CHANGE, payload: (event.target.value)})
+  }
+}
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps),
+)(SubcategoryDropDownComponent);

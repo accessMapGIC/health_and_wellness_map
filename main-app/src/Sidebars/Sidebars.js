@@ -1,13 +1,14 @@
 import React from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import styled from 'styled-components';
-import TabComponent from '../Tabs/Tabs';
+import TabComponent from '../tabs/Tabs';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import InsuranceDropDownComponent from '../DropDowns/InsuranceDropDown';
+import InsuranceDropDownComponent from '../Dropdowns/InsuranceDropDown';
 import './Sidebars.scss';
-import LanguageDropDownComponent from '../DropDowns/LanguagesDropDown';
-import CheckBoxComponent from '../CheckBox/CheckBox'
+import LanguageDropDownComponent from '../Dropdowns/LanguagesDropDown';
+import CheckBoxComponent from '../Checkbox/CheckBox';
+import CardTemplateComponent from '../Cards/CardTemplate';
 
 
 const DropdownHeader = styled.h5`
@@ -153,7 +154,7 @@ class SidebarsComponent extends React.Component {
                       <CheckBoxComponent/>
                     </div>
                   </div>
-                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch onClick={(state) => this.submitButton(state)}>
+                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch="true" onClick={(state) => this.submitButton(state)}>
                     Submit
                   </Button>
                 </Container>
@@ -167,8 +168,9 @@ class SidebarsComponent extends React.Component {
               customBurgerIcon={this.state.rightMenu.rightHamButton}
               >
                 <MenuItem>Search</MenuItem>
+                <CardTemplateComponent/>
                 <Container>
-                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch onClick={(state) => this.newSearchButton(state)}>
+                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch="true" onClick={(state) => this.newSearchButton(state)}>
                     new Search Query
                   </Button>
                 </Container>
@@ -178,6 +180,7 @@ class SidebarsComponent extends React.Component {
         )
     }
 }
+
 
 
 export default (withStyles)(styles)(SidebarsComponent);

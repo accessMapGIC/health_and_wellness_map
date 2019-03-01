@@ -6,7 +6,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
+import * as actionTypes from '../store/actions';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 const styles = theme => ({
   root: {
@@ -21,32 +23,33 @@ const styles = theme => ({
 });
 
 const selectStyle = {
-  'background-color': '#fff',
-  'border-radius': '4px',
+  backgroundColor: '#fff',
+  borderRadius: '4px',
 }
 
 class LanguageDropDownComponent extends React.Component {
-  state = {
-    language: '',
-  };
+  // state = {
+  //   language: '',
+  // };
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+  // handleChange = event => {
+  //   this.setState({ [event.target.name]: event.target.value });
+  // };
 
   render() {
     const { classes } = this.props;
 
     return (
       <form className={classes.root} autoComplete="off">
-        <FormControl variant="outlined" className={classes.formControl} fullWidth='true'>
+        <FormControl variant="outlined" className={classes.formControl} fullWidth={true}>
           <Select
-            value={this.state.language}
-            onChange={this.handleChange}
+            value={this.props.language}
+            onChange={this.props.onChange}
             input={
               <OutlinedInput
                 name="language"
                 id="outlined-age-simple"
+                labelWidth={0}
               />
             }
             displayEmpty
@@ -55,8 +58,8 @@ class LanguageDropDownComponent extends React.Component {
             <MenuItem value="">
               Choose a language
             </MenuItem>
-            <MenuItem value={1}>French</MenuItem>
-            <MenuItem value={2}>English</MenuItem>
+            <MenuItem value={'French'}>French</MenuItem>
+            <MenuItem value={'English'}>English</MenuItem>
           </Select>
           <FormHelperText>Here is help text</FormHelperText>
         </FormControl>
@@ -69,4 +72,19 @@ LanguageDropDownComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(LanguageDropDownComponent);
+const mapStateToProps = state => {
+  return {
+    language: state.lfS.leftMenu.langDrop,
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onChange: (event) => dispatch({type: actionTypes.LANGUAGE_CHANGE, payload: (event.target.value)})
+  }
+}
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps),
+)(LanguageDropDownComponent);

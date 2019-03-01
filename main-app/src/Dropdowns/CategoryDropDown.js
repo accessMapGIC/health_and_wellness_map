@@ -6,6 +6,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import * as actionTypes from '../store/actions';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 
 const styles = theme => ({
@@ -21,32 +24,33 @@ const styles = theme => ({
 });
 
 const selectStyle = {
-  'background-color': '#fff',
-  'border-radius': '4px',
+  backgroundColor: '#fff',
+  borderRadius: '4px',
 }
 
 class CategoryDropDownComponent extends React.Component {
-  state = {
-    category: '',
-  };
+  // state = {
+  //   category: '',
+  // };
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+  // handleChange = event => {
+  //   this.setState({ [event.target.name]: event.target.value });
+  // };
 
   render() {
     const { classes } = this.props;
 
     return (
       <form className={classes.root} autoComplete="off">
-        <FormControl variant="outlined" className={classes.formControl} fullWidth='true'>
+        <FormControl variant="outlined" className={classes.formControl} fullWidth={true}>
           <Select
-            value={this.state.category}
-            onChange={this.handleChange}
+            value={this.props.category}
+            onChange={this.props.onChange}
             input={
               <OutlinedInput
                 name="category"
                 id="outlined-age-simple"
+                labelWidth={0}
               />
             }
             displayEmpty
@@ -55,11 +59,11 @@ class CategoryDropDownComponent extends React.Component {
             <MenuItem value="">
               Choose a Category
             </MenuItem>
-            <MenuItem value={2}>Counseling & Mental Health</MenuItem>
-            <MenuItem value={1}>Mediccal Care</MenuItem>
-            <MenuItem value={3}>Peer Support</MenuItem>
-            <MenuItem value={4}>Relaxation & Recreation</MenuItem>
-            <MenuItem value={5}>Wellness Resources</MenuItem>
+            <MenuItem value={'Counseling & Mental Health'}>Counseling & Mental Health</MenuItem>
+            <MenuItem value={'Medical Care'}>Medical Care</MenuItem>
+            <MenuItem value={'Peer Support'}>Peer Support</MenuItem>
+            <MenuItem value={'Relaxation & Recreation'}>Relaxation & Recreation</MenuItem>
+            <MenuItem value={'Wellness Resources'}>Wellness Resources</MenuItem>
           </Select>
           <FormHelperText>Here is help text</FormHelperText>
         </FormControl>
@@ -72,4 +76,19 @@ CategoryDropDownComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CategoryDropDownComponent);
+const mapStateToProps = state => {
+  return {
+    category: state.lfS.leftMenu.catDrop,
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onChange: (event) => dispatch({type: actionTypes.CATEGORY_CHANGE, payload: (event.target.value)})
+  }
+}
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps),
+)(CategoryDropDownComponent);
