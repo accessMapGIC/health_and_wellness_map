@@ -21,45 +21,84 @@ import DescriptionIcon from '@material-ui/icons/Description'
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 const styles = theme => ({
   card: {
     maxWidth: 400,
-    backgroundColor: 'red',
+    backgroundColor: "#d0ecf4"
   },
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: "56.25%" // 16:9
   },
   actions: {
-    display: 'flex',
+    display: "flex"
   },
   expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest
+    })
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
+    transform: "rotate(180deg)"
+  },
+  hoursExpand: {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest
+    }),
+    padding: "0px"
+  },
+  hoursExpandOpen: {
+    transform: "rotate(180deg)",
+    padding: "0px"
   },
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: red[500]
   },
   materialIcons: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    verticalAlign: '-35%',
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    verticalAlign: "-35%"
+  },
+  hourContent: {
+    display: 'block',
+    paddingLeft: "31px",
+    paddingBottom: "1px",
+    marginBottom: '0px',
+  },
+  active: {
+    fontWeight: "bold"
+  },
+  activeColumn: {
+    fontWeight: "bold",
+    paddingLeft: '10px'
+  },
+  dayRow: {
+    display: 'block',
+    paddingTop: "3px",
+    paddingBottom: "3px"
+  },
+  hoursColumn: {
+    paddingLeft: '15px',
   }
 });
 
 class CardTemplateComponent extends React.Component {
-  state = { expanded: false };
+  state = { expanded: false, hoursExpanded: false };
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
+  };
+
+  handleHourExpandClick = () => {
+    this.setState(state => ({ hoursExpanded: !state.hoursExpanded }));
   };
 
   render() {
@@ -81,7 +120,7 @@ class CardTemplateComponent extends React.Component {
           </IconButton>
           <IconButton
             className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded,
+              [classes.expandOpen]: this.state.expanded
             })}
             onClick={this.handleExpandClick}
             aria-expanded={this.state.expanded}
@@ -93,19 +132,73 @@ class CardTemplateComponent extends React.Component {
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>
-              <LocationOnIcon className={classes.materialIcons} /> - this
+              <LocationOnIcon className={classes.materialIcons} /> - Address of
+              Service
             </Typography>
             <Typography paragraph>
-              <PhoneIcon className={classes.materialIcons} /> - Phone Number of Service
+              <PhoneIcon className={classes.materialIcons} /> - Phone Number of
+              Service
             </Typography>
             <Typography paragraph>
-              <AccessTimeIcon className={classes.materialIcons} /> - Hours of Operation
+              <AccessTimeIcon className={classes.materialIcons} /> - Open Now:
+              XXa.m.- XXa.m.
+              <IconButton
+                className={classnames(classes.hoursExpand, {
+                  [classes.hoursExpandOpen]: this.state.hoursExpanded
+                })}
+                onClick={this.handleHourExpandClick}
+                aria-expanded={this.state.hoursExpanded}
+                aria-label="Show more"
+              >
+                <ExpandMoreIcon />
+              </IconButton>
+              <Collapse
+                in={this.state.hoursExpanded}
+                timeout="auto"
+                unmountOnExit
+              >
+                <CardContent className={classes.hourContent}>
+                  <Typography paragraph>
+                    <table>
+                      <tr className={classes.dayRow}>
+                        <td className={classes.active}>Sunday</td>
+                        <td className={classes.activeColumn}>XXa.m.-XXa.m.</td>
+                      </tr>
+                      <tr className={classes.dayRow}>
+                        <td>Sunday</td>
+                        <td className={classes.hoursColumn}>XXa.m.-XXa.m.</td>
+                      </tr>
+                      <tr className={classes.dayRow}>
+                        <td>Sunday</td>
+                        <td className={classes.hoursColumn}>XXa.m.-XXa.m.</td>
+                      </tr>
+                      <tr className={classes.dayRow}>
+                        <td>Sunday</td>
+                        <td className={classes.hoursColumn}>XXa.m.-XXa.m.</td>
+                      </tr>
+                      <tr className={classes.dayRow}>
+                        <td>Sunday</td>
+                        <td className={classes.hoursColumn}>XXa.m.-XXa.m.</td>
+                      </tr>
+                      <tr className={classes.dayRow}>
+                        <td>Sunday</td>
+                        <td className={classes.hoursColumn}>XXa.m.-XXa.m.</td>
+                      </tr>
+                      <tr className={classes.dayRow}>
+                        <td>Sunday</td>
+                        <td className={classes.hoursColumn}>XXa.m.-XXa.m.</td>
+                      </tr>
+                    </table>
+                  </Typography>
+                </CardContent>
+              </Collapse>
             </Typography>
             <Typography paragraph>
               <WebIcon className={classes.materialIcons} /> - Website URL
             </Typography>
             <Typography>
-              <DescriptionIcon className={classes.materialIcons} /> - Conditional Description
+              <DescriptionIcon className={classes.materialIcons} /> -
+              Conditional Description
             </Typography>
           </CardContent>
         </Collapse>
@@ -114,19 +207,19 @@ class CardTemplateComponent extends React.Component {
   }
 }
 
-RecipeReviewCard.propTypes = {
+CardTemplateComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => {
   return {
-    category: state.lfS.leftMenu,
+    // category: state.lfS.leftMenu,
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onChange: (event) => dispatch({type: actionTypes.CATEGORY_CHANGE, payload: (event.target.value)})
+    // onChange: (event) => dispatch({type: actionTypes.CATEGORY_CHANGE, payload: (event.target.value)})
   }
 }
 

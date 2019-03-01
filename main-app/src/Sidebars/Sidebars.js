@@ -8,6 +8,7 @@ import InsuranceDropDownComponent from '../Dropdowns/InsuranceDropDown';
 import './Sidebars.scss';
 import LanguageDropDownComponent from '../Dropdowns/LanguagesDropDown';
 import CheckBoxComponent from '../Checkbox/CheckBox';
+import CardTemplateComponent from '../Cards/CardTemplate';
 
 
 const DropdownHeader = styled.h5`
@@ -167,6 +168,7 @@ class SidebarsComponent extends React.Component {
               customBurgerIcon={this.state.rightMenu.rightHamButton}
               >
                 <MenuItem>Search</MenuItem>
+                <CardTemplateComponent/>
                 <Container>
                   <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch="true" onClick={(state) => this.newSearchButton(state)}>
                     new Search Query

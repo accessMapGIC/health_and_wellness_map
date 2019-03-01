@@ -6,4 +6,3 @@ export const LANGUAGE_CHANGE = 'LANGUAGE_CHANGE';
 export const ON_IS_OPEN_CHANGE = 'ON_IS_OPEN_CHANGE';
 export const ON_SUBMIT = 'ON_SUBMIT';
 export const ON_NEW_QUERY = 'ON_NEW_QUERY';
-export const 
