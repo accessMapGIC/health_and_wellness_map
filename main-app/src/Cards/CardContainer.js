@@ -1,5 +1,7 @@
 import React from 'react';
 import CardTemplate from './CardTemplate';
+import * as actionTypes from '../store/actions';
+import { connect } from 'react-redux';
 
 class CardContainer extends React.Component{
 
@@ -46,7 +48,4 @@ const mapStateToProps = state => {
     }
   }
   
-  export default compose(
-    withStyles(styles),
-    connect(mapStateToProps, mapDispatchToProps),
-  )(CardContainer);
+  export default connect(mapStateToProps, mapDispatchToProps)(CardContainer);

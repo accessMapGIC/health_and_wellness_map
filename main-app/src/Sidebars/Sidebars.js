@@ -158,6 +158,7 @@ class SidebarsComponent extends React.Component {
                   <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch="true" onClick={(state) => this.submitButton(state)}>
                     Submit
                   </Button>
+                  <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
                 </Container>
               </Menu>
             </div>

@@ -12,22 +12,40 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+// import FavoriteIcon from '@material-ui/icons/Favorite';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/Phone';
 import WebIcon from '@material-ui/icons/Web';
 import DescriptionIcon from '@material-ui/icons/Description'
-import ShareIcon from '@material-ui/icons/Share';
+// import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+// import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import * as moment from 'moment';
+
+const s = ['11:00','15:00'];
+const m = ['09:00','17:00'];
+const t = ['09:00','17:00'];
+const w = ['09:00','17:00'];
+const th = ['09:00','17:00'];
+const f = ['09:00','17:00'];
+const sa = ['09:00','15:00'];
 
 const styles = theme => ({
   card: {
     maxWidth: 400,
     backgroundColor: "#d0ecf4"
+  },
+  cardHeader: {
+    paddingBottom: '0px !important',
+  },
+  openNow: {
+    color: '#00ff00',
+  },
+  closed: {
+    color: '#ff0000',
   },
   media: {
     height: 0,
@@ -70,28 +88,39 @@ const styles = theme => ({
   hourContent: {
     display: 'block',
     paddingLeft: "31px",
-    paddingBottom: "1px",
+    paddingBottom: "1px !important",
     marginBottom: '0px',
   },
   active: {
-    fontWeight: "bold"
+    display: 'inline-block',
+    fontWeight: "bold",
+    width: '77px',
   },
   activeColumn: {
+    display: 'inline-block',
     fontWeight: "bold",
     paddingLeft: '10px'
   },
   dayRow: {
-    display: 'block',
+    display: 'inline-block',
     paddingTop: "3px",
-    paddingBottom: "3px"
+    paddingBottom: "3px",
   },
   hoursColumn: {
-    paddingLeft: '15px',
+    display: 'inline-block',
+    paddingLeft: '10px',
+  },
+  dayColumn: {
+    display: 'inline-block',
+    width: '77px',
   }
 });
 
 class CardTemplateComponent extends React.Component {
-  state = { expanded: false, hoursExpanded: false };
+  state = { 
+    expanded: false, 
+    hoursExpanded: false,
+  };
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
@@ -101,33 +130,85 @@ class CardTemplateComponent extends React.Component {
     this.setState(state => ({ hoursExpanded: !state.hoursExpanded }));
   };
 
+  handleCurrentDay = (s, m, t, w, th, f, sa) => {
+    const { classes } = this.props;
+    const CurrentDay = this.props.tag;
+    const format = 'hh:mm';
+    const time = moment();
+    switch (time.day()) {
+      case 0:
+        if(time.isBetween(moment(s[0], format), moment(s[1], format))){
+          return <CurrentDay className={classes.openNow}>Open Now : {s[0]} - {s[1]}</CurrentDay>;
+        }else{
+          return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
+        }
+      case 1:
+        if(time.isBetween(moment(m[0], format), moment(m[1], format))){
+          return <CurrentDay className={classes.openNow}>Open Now : {m[0]} - {m[1]}</CurrentDay>;
+        }else{
+          return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
+        }
+      case 2:
+        if(time.isBetween(moment(t[0], format), moment(t[1], format))){
+          return <CurrentDay className={classes.openNow}>Open Now : {t[0]} - {t[1]}</CurrentDay>;
+        }else{
+          return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
+        }
+      case 3:
+        if(time.isBetween(moment(w[0], format), moment(w[1], format))){
+          return <CurrentDay className={classes.openNow}>Open Now : {w[0]} - {w[1]}</CurrentDay>;
+        }else{
+          return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
+        }
+      case 4:
+        if(time.isBetween(moment(th[0], format), moment(th[1], format))){
+          return <CurrentDay className={classes.openNow}>Open Now : {th[0]} - {th[1]}</CurrentDay>;
+        }else{
+          return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
+        }
+      case 5:
+        if(time.isBetween(moment(f[0], format), moment(f[1], format))){
+          return <CurrentDay className={classes.openNow}>Open Now : {f[0]} - {f[1]}</CurrentDay>;
+        }else{
+          return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
+        }
+      case 6:
+        if(time.isBetween(moment(sa[0], format), moment(sa[1], format))){
+          return <CurrentDay className={classes.openNow}>Open Now : {sa[0]} - {sa[1]}</CurrentDay>;
+        }else{
+          return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
+        }
+      default:
+        return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
+    };
+  };
+
   render() {
     const { classes } = this.props;
 
     return (
       <Card className={classes.card}>
-        <CardHeader
+        <CardHeader 
+          className={classes.cardHeader}
           action={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title="Shrimp and Chorizo Paella"
-        />
-        <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label="Share">
-            <ShareIcon />
-          </IconButton>
-          <IconButton
+            <IconButton
             className={classnames(classes.expand, {
               [classes.expandOpen]: this.state.expanded
             })}
             onClick={this.handleExpandClick}
             aria-expanded={this.state.expanded}
             aria-label="Show more"
-          >
+          > 
             <ExpandMoreIcon />
           </IconButton>
+          }
+          
+          title="Example Service"
+        />
+        <CardActions className={classes.actions} disableActionSpacing>
+          {/* <IconButton aria-label="Share">
+            <ShareIcon />
+    </IconButton> */}
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
@@ -140,8 +221,8 @@ class CardTemplateComponent extends React.Component {
               Service
             </Typography>
             <Typography paragraph>
-              <AccessTimeIcon className={classes.materialIcons} /> - Open Now:
-              XXa.m.- XXa.m.
+              <AccessTimeIcon className={classes.materialIcons} /> - {() => this.handleCurrentDay(s, m, t, w, th, f, sa)}
+              9:00-17:00
               <IconButton
                 className={classnames(classes.hoursExpand, {
                   [classes.hoursExpandOpen]: this.state.hoursExpanded
@@ -162,31 +243,31 @@ class CardTemplateComponent extends React.Component {
                     <table>
                       <tr className={classes.dayRow}>
                         <td className={classes.active}>Sunday</td>
-                        <td className={classes.activeColumn}>XXa.m.-XXa.m.</td>
+                        <td className={classes.activeColumn}>11:00-15:00</td>
                       </tr>
                       <tr className={classes.dayRow}>
-                        <td>Sunday</td>
-                        <td className={classes.hoursColumn}>XXa.m.-XXa.m.</td>
+                        <td className={classes.dayColumn}>Monday</td>
+                        <td className={classes.hoursColumn}>09:00-17:00</td>
                       </tr>
                       <tr className={classes.dayRow}>
-                        <td>Sunday</td>
-                        <td className={classes.hoursColumn}>XXa.m.-XXa.m.</td>
+                        <td className={classes.dayColumn}>Tuesday</td>
+                        <td className={classes.hoursColumn}>09:00-17:00</td>
                       </tr>
                       <tr className={classes.dayRow}>
-                        <td>Sunday</td>
-                        <td className={classes.hoursColumn}>XXa.m.-XXa.m.</td>
+                        <td className={classes.dayColumn}>Wednesday</td>
+                        <td className={classes.hoursColumn}>09:00-17:00</td>
                       </tr>
                       <tr className={classes.dayRow}>
-                        <td>Sunday</td>
-                        <td className={classes.hoursColumn}>XXa.m.-XXa.m.</td>
+                        <td className={classes.dayColumn}>Thursday</td>
+                        <td className={classes.hoursColumn}>09:00-17:00</td>
                       </tr>
                       <tr className={classes.dayRow}>
-                        <td>Sunday</td>
-                        <td className={classes.hoursColumn}>XXa.m.-XXa.m.</td>
+                        <td className={classes.dayColumn}>Friday</td>
+                        <td className={classes.hoursColumn}>09:00-17:00</td>
                       </tr>
                       <tr className={classes.dayRow}>
-                        <td>Sunday</td>
-                        <td className={classes.hoursColumn}>XXa.m.-XXa.m.</td>
+                        <td className={classes.dayColumn}>Saturday</td>
+                        <td className={classes.hoursColumn}>11:00-15:00</td>
                       </tr>
                     </table>
                   </Typography>

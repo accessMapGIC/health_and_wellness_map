@@ -59,6 +59,7 @@ class InsuranceDropDownComponent extends React.Component {
               Choose an insurance
             </MenuItem>
             <MenuItem value={'International Health Insurance'}>International Health Insurance</MenuItem>
+            <MenuItem value={'MCSS'}>MCSS</MenuItem>
             <MenuItem value={'Out of Province'}>Out of Province</MenuItem>
             <MenuItem value={'PGSS'}>PGSS</MenuItem>
             <MenuItem value={'RAMQ'}>RAMQ</MenuItem>
