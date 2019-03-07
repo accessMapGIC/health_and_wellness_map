@@ -19,6 +19,7 @@ const styles = theme => ({
     margin: theme.spacing.unit,
     minWidth: 130,
     maxWidth: 214,
+    maxHeight: '230px !important',
   },
 });
 
@@ -58,11 +59,22 @@ class SubcategoryDropDownComponent extends React.Component {
             <MenuItem value="">
               Choose a Subcategory
             </MenuItem>
-            <MenuItem value={'Sub 1'}>Sub 1</MenuItem>
-            <MenuItem value={'Sub 2'}>Sub 2</MenuItem>
-            <MenuItem value={'Sub 3'}>Sub 3</MenuItem>
-            <MenuItem value={'Sub 4'}>Sub 4</MenuItem>
-            <MenuItem value={'Sub 5'}>Sub 5</MenuItem>
+            <MenuItem value={'Academic'}>Academic</MenuItem>
+            <MenuItem value={'Career'}>Career</MenuItem>
+            <MenuItem value={'Clinic'}>Clinic</MenuItem>
+            <MenuItem value={'CLSC'}>CLSC</MenuItem>
+            <MenuItem value={'Counselor'}>Counselor</MenuItem>
+            <MenuItem value={'Cultural'}>Cultural</MenuItem>
+            <MenuItem value={'Emotional'}>Emotional</MenuItem>
+            <MenuItem value={'Financial'}>Financial</MenuItem>
+            <MenuItem value={'Hospital'}>Hospital</MenuItem>
+            <MenuItem value={'Pharmacy'}>Pharmacy</MenuItem>
+            <MenuItem value={'Physical'}>Physical</MenuItem>
+            <MenuItem value={'Physiotherapy'}>Physiotherapy</MenuItem>
+            <MenuItem value={'Psychologist'}>Pyschologist</MenuItem>
+            <MenuItem value={'Spiritual'}>Spiritual</MenuItem>
+            <MenuItem value={'Social'}>Social</MenuItem>
+            <MenuItem value={'Super-Clinic'}>Super-Clinic</MenuItem>
           </Select>
           <FormHelperText>Here is help text</FormHelperText>
         </FormControl>

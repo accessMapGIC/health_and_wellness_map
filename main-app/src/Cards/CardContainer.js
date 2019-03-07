@@ -5,16 +5,25 @@ import { connect } from 'react-redux';
 
 class CardContainer extends React.Component{
 
-    renderCard(color, title, location, phone, url, description, cardId){
-        return <CardTemplate 
-                    cardColor = {color} 
-                    cardTitle = {title}
-                    cardLocatiom = {location}
-                    cardPhone = {phone}
-                    cardURL = {url}
-                    cardDescription = {description}
-                    cardId = {cardId}
-                />
+    renderCard(){
+        return <CardTemplate/>
+        // return <CardTemplate  
+        //             cardTitle = {card.title}
+        //             cardLocatiom = {card.location}
+        //             cardPhone = {card.phone}
+        //             cardHours = {card.hours}
+        //             cardURL = {card.url}
+        //             cardDescription = {card.description}
+        //             key = {card.service_id}
+        //         />
+    }
+    // renderCards(cards){
+    //   return cards.map(this.renderCard,)
+    // }
+    renderCards(num){
+      for(var i=0; i<num; i++){
+        return this.renderCard;
+      }
     }
 
 
@@ -22,14 +31,7 @@ class CardContainer extends React.Component{
     render() {
         return (
             <div className='Card_Container'>
-                {this.renderCard(
-                    'redCard',
-                    'Test Title',
-                    'Test Location',
-                    '123-456-7890',
-                    'https://www.test.com',
-                    'test description'
-                )}
+                {this.renderCards(10)}
             </div>
         )
     }

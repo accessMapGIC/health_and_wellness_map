@@ -4,34 +4,31 @@ import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-// import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
-// import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
-// import FavoriteIcon from '@material-ui/icons/Favorite';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/Phone';
 import WebIcon from '@material-ui/icons/Web';
 import DescriptionIcon from '@material-ui/icons/Description'
-// import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as moment from 'moment';
 
-const s = ['11:00','15:00'];
-const m = ['09:00','17:00'];
-const t = ['09:00','17:00'];
-const w = ['09:00','17:00'];
-const th = ['09:00','17:00'];
-const f = ['09:00','17:00'];
-const sa = ['09:00','15:00'];
+const hrs = [
+  ['11:00','15:00'],
+  ['09:00','17:00'], 
+  ['09:00','17:00'],
+  ['09:00','17:00'],
+  ['09:00','17:00'],
+  ['09:00','17:00'],
+  ['09:00','15:00']
+]
 
 const styles = theme => ({
   card: {
@@ -130,54 +127,54 @@ class CardTemplateComponent extends React.Component {
     this.setState(state => ({ hoursExpanded: !state.hoursExpanded }));
   };
 
-  handleCurrentDay = (s, m, t, w, th, f, sa) => {
+  handleCurrentDay = (hrs) => {
     const { classes } = this.props;
     const CurrentDay = this.props.tag;
     const format = 'hh:mm';
     const time = moment();
     switch (time.day()) {
       case 0:
-        if(time.isBetween(moment(s[0], format), moment(s[1], format))){
-          return <CurrentDay className={classes.openNow}>Open Now : {s[0]} - {s[1]}</CurrentDay>;
+        if(time.isBetween(moment(hrs[0][0], format), moment(hrs[0][1], format))){
+          return <CurrentDay className={classes.openNow}>Open Now : {hrs[0][0]} - {hrs[0][1]}</CurrentDay>;
         }else{
           return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
         }
-      case 1:
-        if(time.isBetween(moment(m[0], format), moment(m[1], format))){
-          return <CurrentDay className={classes.openNow}>Open Now : {m[0]} - {m[1]}</CurrentDay>;
-        }else{
-          return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
-        }
-      case 2:
-        if(time.isBetween(moment(t[0], format), moment(t[1], format))){
-          return <CurrentDay className={classes.openNow}>Open Now : {t[0]} - {t[1]}</CurrentDay>;
-        }else{
-          return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
-        }
-      case 3:
-        if(time.isBetween(moment(w[0], format), moment(w[1], format))){
-          return <CurrentDay className={classes.openNow}>Open Now : {w[0]} - {w[1]}</CurrentDay>;
-        }else{
-          return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
-        }
-      case 4:
-        if(time.isBetween(moment(th[0], format), moment(th[1], format))){
-          return <CurrentDay className={classes.openNow}>Open Now : {th[0]} - {th[1]}</CurrentDay>;
-        }else{
-          return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
-        }
-      case 5:
-        if(time.isBetween(moment(f[0], format), moment(f[1], format))){
-          return <CurrentDay className={classes.openNow}>Open Now : {f[0]} - {f[1]}</CurrentDay>;
-        }else{
-          return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
-        }
-      case 6:
-        if(time.isBetween(moment(sa[0], format), moment(sa[1], format))){
-          return <CurrentDay className={classes.openNow}>Open Now : {sa[0]} - {sa[1]}</CurrentDay>;
-        }else{
-          return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
-        }
+      // case 1:
+      //   if(time.isBetween(moment(m[0], format), moment(m[1], format))){
+      //     return <CurrentDay className={classes.openNow}>Open Now : {m[0]} - {m[1]}</CurrentDay>;
+      //   }else{
+      //     return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
+      //   }
+      // case 2:
+      //   if(time.isBetween(moment(t[0], format), moment(t[1], format))){
+      //     return <CurrentDay className={classes.openNow}>Open Now : {t[0]} - {t[1]}</CurrentDay>;
+      //   }else{
+      //     return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
+      //   }
+      // case 3:
+      //   if(time.isBetween(moment(w[0], format), moment(w[1], format))){
+      //     return <CurrentDay className={classes.openNow}>Open Now : {w[0]} - {w[1]}</CurrentDay>;
+      //   }else{
+      //     return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
+      //   }
+      // case 4:
+      //   if(time.isBetween(moment(th[0], format), moment(th[1], format))){
+      //     return <CurrentDay className={classes.openNow}>Open Now : {th[0]} - {th[1]}</CurrentDay>;
+      //   }else{
+      //     return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
+      //   }
+      // case 5:
+      //   if(time.isBetween(moment(f[0], format), moment(f[1], format))){
+      //     return <CurrentDay className={classes.openNow}>Open Now : {f[0]} - {f[1]}</CurrentDay>;
+      //   }else{
+      //     return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
+      //   }
+      // case 6:
+      //   if(time.isBetween(moment(sa[0], format), moment(sa[1], format))){
+      //     return <CurrentDay className={classes.openNow}>Open Now : {sa[0]} - {sa[1]}</CurrentDay>;
+      //   }else{
+      //     return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
+      //   }
       default:
         return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
     };
@@ -221,8 +218,7 @@ class CardTemplateComponent extends React.Component {
               Service
             </Typography>
             <Typography paragraph>
-              <AccessTimeIcon className={classes.materialIcons} /> - {() => this.handleCurrentDay(s, m, t, w, th, f, sa)}
-              9:00-17:00
+              <AccessTimeIcon className={classes.materialIcons} /> - Hours of Service
               <IconButton
                 className={classnames(classes.hoursExpand, {
                   [classes.hoursExpandOpen]: this.state.hoursExpanded
@@ -242,8 +238,8 @@ class CardTemplateComponent extends React.Component {
                   <Typography paragraph>
                     <table>
                       <tr className={classes.dayRow}>
-                        <td className={classes.active}>Sunday</td>
-                        <td className={classes.activeColumn}>11:00-15:00</td>
+                        <td className={classes.dayColumn}>Sunday</td>
+                        <td className={classes.hoursColumn}>11:00-15:00</td>
                       </tr>
                       <tr className={classes.dayRow}>
                         <td className={classes.dayColumn}>Monday</td>

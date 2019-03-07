@@ -170,7 +170,8 @@ class SidebarsComponent extends React.Component {
               customBurgerIcon={this.state.rightMenu.rightHamButton}
               >
                 <MenuItem>Search</MenuItem>
-                <CardTemplateComponent/>
+                {/* <CardTemplateComponent/> */}
+                <CardContainer/>
                 <Container>
                   <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch="true" onClick={(state) => this.newSearchButton(state)}>
                     new Search Query
