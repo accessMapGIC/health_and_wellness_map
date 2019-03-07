@@ -19,6 +19,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as moment from 'moment';
+import data from '../store/newOutput.json';
 
 const hrs = [
   ['11:00','15:00'],
@@ -182,7 +183,8 @@ class CardTemplateComponent extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    const hours = this.props.hours;
+    console.log(data);
     return (
       <Card className={classes.card}>
         <CardHeader 
@@ -200,7 +202,7 @@ class CardTemplateComponent extends React.Component {
           </IconButton>
           }
           
-          title="Example Service"
+          title={this.props.title}
         />
         <CardActions className={classes.actions} disableActionSpacing>
           {/* <IconButton aria-label="Share">
@@ -210,12 +212,10 @@ class CardTemplateComponent extends React.Component {
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>
-              <LocationOnIcon className={classes.materialIcons} /> - Address of
-              Service
+              <LocationOnIcon className={classes.materialIcons} /> - {this.props.address}
             </Typography>
             <Typography paragraph>
-              <PhoneIcon className={classes.materialIcons} /> - Phone Number of
-              Service
+              <PhoneIcon className={classes.materialIcons} /> - {this.props.phone}
             </Typography>
             <Typography paragraph>
               <AccessTimeIcon className={classes.materialIcons} /> - Hours of Service
@@ -273,10 +273,10 @@ class CardTemplateComponent extends React.Component {
             <Typography paragraph>
               <WebIcon className={classes.materialIcons} /> - Website URL
             </Typography>
-            <Typography>
+            {/* <Typography>
               <DescriptionIcon className={classes.materialIcons} /> -
               Conditional Description
-            </Typography>
+            </Typography> */}
           </CardContent>
         </Collapse>
       </Card>

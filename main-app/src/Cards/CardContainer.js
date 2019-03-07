@@ -1,29 +1,24 @@
 import React from 'react';
 import CardTemplate from './CardTemplate';
-import * as actionTypes from '../store/actions';
-import { connect } from 'react-redux';
+import data from "../store/newOutput.json";
 
 class CardContainer extends React.Component{
-
-    renderCard(){
-        return <CardTemplate/>
-        // return <CardTemplate  
-        //             cardTitle = {card.title}
-        //             cardLocatiom = {card.location}
-        //             cardPhone = {card.phone}
-        //             cardHours = {card.hours}
-        //             cardURL = {card.url}
-        //             cardDescription = {card.description}
-        //             key = {card.service_id}
-        //         />
+    renderCard(item){
+        return <CardTemplate
+          title={item.name}
+          address={item.address}
+          phone={item.phone}
+          hours={item.hours}
+          key={item.service_id}
+          />
     }
-    // renderCards(cards){
-    //   return cards.map(this.renderCard,)
-    // }
-    renderCards(num){
-      for(var i=0; i<num; i++){
-        return this.renderCard;
-      }
+
+    renderCards(cardData){
+      // for(var i=0; i<10; i++){
+      //   console.log(i);
+      //   return this.renderCard(cardData[i]);
+      // }
+      return cardData.map(this.renderCard);
     }
 
 
@@ -31,23 +26,38 @@ class CardContainer extends React.Component{
     render() {
         return (
             <div className='Card_Container'>
-                {this.renderCards(10)}
+                {this.renderCards(data)}
             </div>
         )
     }
 
 }
 
-const mapStateToProps = state => {
-    return {
-      category: state.lfS.leftMenu.catDrop,
-    }
-  };
+// const mapStateToProps = state => {
+//     return {
+//       category: state.lfS.leftMenu.catDrop,
+//     }
+//   };
   
-  const mapDispatchToProps = dispatch => {
-    return {
-      onChange: (event) => dispatch({type: actionTypes.CATEGORY_CHANGE, payload: (event.target.value)})
-    }
-  }
+//   const mapDispatchToProps = dispatch => {
+//     return {
+//       onChange: (event) => dispatch({type: actionTypes.CATEGORY_CHANGE, payload: (event.target.value)})
+//     }
+//   }
   
-  export default connect(mapStateToProps, mapDispatchToProps)(CardContainer);
+  export default (CardContainer);
+
+
+  //connect(mapStateToProps, mapDispatchToProps)
+  // return <CardTemplate  
+//             cardTitle = {card.title}
+//             cardLocatiom = {card.location}
+//             cardPhone = {card.phone}
+//             cardHours = {card.hours}
+//             cardURL = {card.url}
+//             cardDescription = {card.description}
+//             key = {card.service_id}
+//         />
+// renderCards(cards){
+//   return cards.map(this.renderCard,)
+// }
