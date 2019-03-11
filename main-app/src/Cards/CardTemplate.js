@@ -21,20 +21,16 @@ import { connect } from 'react-redux';
 import * as moment from 'moment';
 import data from '../store/newOutput.json';
 
-const hrs = [
-  ['11:00','15:00'],
-  ['09:00','17:00'], 
-  ['09:00','17:00'],
-  ['09:00','17:00'],
-  ['09:00','17:00'],
-  ['09:00','17:00'],
-  ['09:00','15:00']
-]
+
 
 const styles = theme => ({
   card: {
     maxWidth: 400,
-    backgroundColor: "#d0ecf4"
+    backgroundColor: "#d0ecf4",
+    marginLeft: '2px',
+    marginRight: '2px',
+    marginBottom: '10px',
+    marginTop: '10px',
   },
   cardHeader: {
     paddingBottom: '0px !important',
@@ -133,58 +129,55 @@ class CardTemplateComponent extends React.Component {
     const CurrentDay = this.props.tag;
     const format = 'hh:mm';
     const time = moment();
-    switch (time.day()) {
-      case 0:
-        if(time.isBetween(moment(hrs[0][0], format), moment(hrs[0][1], format))){
-          return <CurrentDay className={classes.openNow}>Open Now : {hrs[0][0]} - {hrs[0][1]}</CurrentDay>;
-        }else{
-          return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
-        }
-      // case 1:
-      //   if(time.isBetween(moment(m[0], format), moment(m[1], format))){
-      //     return <CurrentDay className={classes.openNow}>Open Now : {m[0]} - {m[1]}</CurrentDay>;
-      //   }else{
-      //     return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
-      //   }
-      // case 2:
-      //   if(time.isBetween(moment(t[0], format), moment(t[1], format))){
-      //     return <CurrentDay className={classes.openNow}>Open Now : {t[0]} - {t[1]}</CurrentDay>;
-      //   }else{
-      //     return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
-      //   }
-      // case 3:
-      //   if(time.isBetween(moment(w[0], format), moment(w[1], format))){
-      //     return <CurrentDay className={classes.openNow}>Open Now : {w[0]} - {w[1]}</CurrentDay>;
-      //   }else{
-      //     return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
-      //   }
-      // case 4:
-      //   if(time.isBetween(moment(th[0], format), moment(th[1], format))){
-      //     return <CurrentDay className={classes.openNow}>Open Now : {th[0]} - {th[1]}</CurrentDay>;
-      //   }else{
-      //     return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
-      //   }
-      // case 5:
-      //   if(time.isBetween(moment(f[0], format), moment(f[1], format))){
-      //     return <CurrentDay className={classes.openNow}>Open Now : {f[0]} - {f[1]}</CurrentDay>;
-      //   }else{
-      //     return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
-      //   }
-      // case 6:
-      //   if(time.isBetween(moment(sa[0], format), moment(sa[1], format))){
-      //     return <CurrentDay className={classes.openNow}>Open Now : {sa[0]} - {sa[1]}</CurrentDay>;
-      //   }else{
-      //     return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
-      //   }
-      default:
-        return <CurrentDay className={classes.closed}>Closed</CurrentDay>;
-    };
+    const curDay = new Array(0);
+    if(hrs[time.day()][0]==='NA'){
+      curDay[0] = 'Closed';
+    }else if(time.isBetween(moment(hrs[time.day()][0], format), moment(hrs[time.day()][1], format))){
+      curDay[0] = 'Open Now : ' + hrs[time.day()][0] + '-' + hrs[time.day()][1];
+    }else{
+      curDay[0] = 'Closed';
+    }
+    return curDay;
   };
+
+  getDayOrder(){
+    const time = moment();
+    switch(time.day()){
+      case 0:
+        return [[0,'Sunday'],[1,'Monday'],[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday']];
+      case 1:
+      return [[1,'Monday'],[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday'],[0,'Sunday']];
+      case 2:
+      return [[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday'],[0,'Sunday'],[1,'Monday']];
+      case 3:
+      return [[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday'],[0,'Sunday'],[1,'Monday'],[2,'Tuesday']];
+      case 4:
+      return [[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday'],[0,'Sunday'],[1,'Monday'],[2,'Tuesday'],[3,'Wednesday']];
+      case 5:
+      return [[5, 'Friday'],[6, 'Saturday'],[0,'Sunday'],[1,'Monday'],[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday']];
+      case 6:
+      return [[6, 'Saturday'],[0,'Sunday'],[1,'Monday'],[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday']];
+    }
+  }
+
+  reOrderHours(hours){
+    const curOrder = this.getDayOrder();
+    const newArr = new Array(7);
+    for(var i = 0; i<curOrder.length; i++){
+      if(hours[curOrder[i][0]][0]=='NA'){
+        newArr[i]=[curOrder[i][1], 'Closed'];
+      }else{
+        newArr[i]=[curOrder[i][1], hours[curOrder[i][0]][0] + '-' + hours[curOrder[i][0]][1]];
+      }
+    }
+    return newArr;
+  }
 
   render() {
     const { classes } = this.props;
-    const hours = this.props.hours;
-    console.log(data);
+    const orderedHours = this.reOrderHours(this.props.hours);
+    const curDay = this.handleCurrentDay(this.props.hours);
+    console.log(orderedHours);
     return (
       <Card className={classes.card}>
         <CardHeader 
@@ -218,7 +211,7 @@ class CardTemplateComponent extends React.Component {
               <PhoneIcon className={classes.materialIcons} /> - {this.props.phone}
             </Typography>
             <Typography paragraph>
-              <AccessTimeIcon className={classes.materialIcons} /> - Hours of Service
+              <AccessTimeIcon className={classes.materialIcons} /> - {curDay[0]}
               <IconButton
                 className={classnames(classes.hoursExpand, {
                   [classes.hoursExpandOpen]: this.state.hoursExpanded
@@ -238,32 +231,32 @@ class CardTemplateComponent extends React.Component {
                   <Typography paragraph>
                     <table>
                       <tr className={classes.dayRow}>
-                        <td className={classes.dayColumn}>Sunday</td>
-                        <td className={classes.hoursColumn}>11:00-15:00</td>
+                        <td className={classes.dayColumn}>{orderedHours[0][0]}</td>
+                        <td className={classes.hoursColumn}>{orderedHours[0][1]}</td>
                       </tr>
                       <tr className={classes.dayRow}>
-                        <td className={classes.dayColumn}>Monday</td>
-                        <td className={classes.hoursColumn}>09:00-17:00</td>
+                        <td className={classes.dayColumn}>{orderedHours[1][0]}</td>
+                        <td className={classes.hoursColumn}>{orderedHours[1][1]}</td>
                       </tr>
                       <tr className={classes.dayRow}>
-                        <td className={classes.dayColumn}>Tuesday</td>
-                        <td className={classes.hoursColumn}>09:00-17:00</td>
+                        <td className={classes.dayColumn}>{orderedHours[2][0]}</td>
+                        <td className={classes.hoursColumn}>{orderedHours[2][1]}</td>
                       </tr>
                       <tr className={classes.dayRow}>
-                        <td className={classes.dayColumn}>Wednesday</td>
-                        <td className={classes.hoursColumn}>09:00-17:00</td>
+                        <td className={classes.dayColumn}>{orderedHours[3][0]}</td>
+                        <td className={classes.hoursColumn}>{orderedHours[3][1]}</td>
                       </tr>
                       <tr className={classes.dayRow}>
-                        <td className={classes.dayColumn}>Thursday</td>
-                        <td className={classes.hoursColumn}>09:00-17:00</td>
+                        <td className={classes.dayColumn}>{orderedHours[4][0]}</td>
+                        <td className={classes.hoursColumn}>{orderedHours[4][1]}</td>
                       </tr>
                       <tr className={classes.dayRow}>
-                        <td className={classes.dayColumn}>Friday</td>
-                        <td className={classes.hoursColumn}>09:00-17:00</td>
+                      <td className={classes.dayColumn}>{orderedHours[5][0]}</td>
+                        <td className={classes.hoursColumn}>{orderedHours[5][1]}</td>
                       </tr>
                       <tr className={classes.dayRow}>
-                        <td className={classes.dayColumn}>Saturday</td>
-                        <td className={classes.hoursColumn}>11:00-15:00</td>
+                      <td className={classes.dayColumn}>{orderedHours[6][0]}</td>
+                        <td className={classes.hoursColumn}>{orderedHours[6][1]}</td>
                       </tr>
                     </table>
                   </Typography>

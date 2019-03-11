@@ -68,9 +68,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 /* Styling of overlay */
-.menu-left .bm-overlay {
-    background: rgba(0, 0, 0, 0.3);
-}
+// .menu-left .bm-overlay {
+//     background: rgba(0, 0, 0, 0.3);
+// }
 
 /* END-MENU-LEFT */
 
@@ -118,7 +118,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* General sidebar styles */
 .menu-right .bm-menu {
-    background: #373a47;
+    background: $rossy-blue;
     padding: .1em 1.5em 0;
     font-size: 1.15em;
     overflow-y: hidden !important;
@@ -143,9 +143,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 /* Styling of overlay */
-.menu-right .bm-overlay {
-    background: rgba(0, 0, 0, 0.3);
-}
+// .menu-right .bm-overlay {
+//     background: rgba(0, 0, 0, 0.3);
+// }
 
 /* END-MENU-RIGHT */
 
@@ -169,7 +169,10 @@ Note: Beware of modifying this element as it can break the animations - you shou
     margin: 5px;
     height: 90%;
 }
-
+.Card_Container{
+  max-height: 800px;
+  overflow-y: scroll;
+}
 /* CSS LOADER */
 
   .lds-spinner div {
