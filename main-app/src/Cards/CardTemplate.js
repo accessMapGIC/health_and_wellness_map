@@ -19,7 +19,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as moment from 'moment';
-import data from '../store/newOutput.json';
+
 
 
 
@@ -125,8 +125,6 @@ class CardTemplateComponent extends React.Component {
   };
 
   handleCurrentDay = (hrs) => {
-    const { classes } = this.props;
-    const CurrentDay = this.props.tag;
     const format = 'hh:mm';
     const time = moment();
     const curDay = new Array(0);
@@ -146,17 +144,19 @@ class CardTemplateComponent extends React.Component {
       case 0:
         return [[0,'Sunday'],[1,'Monday'],[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday']];
       case 1:
-      return [[1,'Monday'],[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday'],[0,'Sunday']];
+        return [[1,'Monday'],[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday'],[0,'Sunday']];
       case 2:
-      return [[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday'],[0,'Sunday'],[1,'Monday']];
+       return [[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday'],[0,'Sunday'],[1,'Monday']];
       case 3:
-      return [[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday'],[0,'Sunday'],[1,'Monday'],[2,'Tuesday']];
+        return [[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday'],[0,'Sunday'],[1,'Monday'],[2,'Tuesday']];
       case 4:
-      return [[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday'],[0,'Sunday'],[1,'Monday'],[2,'Tuesday'],[3,'Wednesday']];
+        return [[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday'],[0,'Sunday'],[1,'Monday'],[2,'Tuesday'],[3,'Wednesday']];
       case 5:
-      return [[5, 'Friday'],[6, 'Saturday'],[0,'Sunday'],[1,'Monday'],[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday']];
+        return [[5, 'Friday'],[6, 'Saturday'],[0,'Sunday'],[1,'Monday'],[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday']];
       case 6:
-      return [[6, 'Saturday'],[0,'Sunday'],[1,'Monday'],[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday']];
+        return [[6, 'Saturday'],[0,'Sunday'],[1,'Monday'],[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday']];
+      default:
+        return ['There was a Problem'];
     }
   }
 
@@ -164,7 +164,7 @@ class CardTemplateComponent extends React.Component {
     const curOrder = this.getDayOrder();
     const newArr = new Array(7);
     for(var i = 0; i<curOrder.length; i++){
-      if(hours[curOrder[i][0]][0]=='NA'){
+      if(hours[curOrder[i][0]][0]==='NA'){
         newArr[i]=[curOrder[i][1], 'Closed'];
       }else{
         newArr[i]=[curOrder[i][1], hours[curOrder[i][0]][0] + '-' + hours[curOrder[i][0]][1]];
@@ -177,7 +177,6 @@ class CardTemplateComponent extends React.Component {
     const { classes } = this.props;
     const orderedHours = this.reOrderHours(this.props.hours);
     const curDay = this.handleCurrentDay(this.props.hours);
-    console.log(orderedHours);
     return (
       <Card className={classes.card}>
         <CardHeader 
