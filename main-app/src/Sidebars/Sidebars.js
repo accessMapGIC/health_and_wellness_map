@@ -9,6 +9,7 @@ import './Sidebars.scss';
 import LanguageDropDownComponent from '../Dropdowns/LanguagesDropDown';
 import CheckBoxComponent from '../Checkbox/CheckBox';
 import CardTemplateComponent from '../Cards/CardTemplate';
+import CardContainer from '../Cards/CardContainer';
 
 
 const DropdownHeader = styled.h5`
@@ -157,6 +158,7 @@ class SidebarsComponent extends React.Component {
                   <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch="true" onClick={(state) => this.submitButton(state)}>
                     Submit
                   </Button>
+                  <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
                 </Container>
               </Menu>
             </div>
@@ -168,7 +170,8 @@ class SidebarsComponent extends React.Component {
               customBurgerIcon={this.state.rightMenu.rightHamButton}
               >
                 <MenuItem>Search</MenuItem>
-                <CardTemplateComponent/>
+                {/* <CardTemplateComponent/> */}
+                <CardContainer/>
                 <Container>
                   <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch="true" onClick={(state) => this.newSearchButton(state)}>
                     new Search Query
