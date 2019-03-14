@@ -14,11 +14,13 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/Phone';
 import WebIcon from '@material-ui/icons/Web';
-import DescriptionIcon from '@material-ui/icons/Description'
+// import DescriptionIcon from '@material-ui/icons/Description'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as moment from 'moment';
+
 
 
 
@@ -115,6 +117,11 @@ class CardTemplateComponent extends React.Component {
     expanded: false, 
     hoursExpanded: false,
   };
+
+  componentDidMount() {
+    console.log(this.props.title, this.props.address, this.props.service_id);
+    this.props.addCard(this.props.title, this.props.address, this.props.service_id);
+  }
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
@@ -288,7 +295,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // onChange: (event) => dispatch({type: actionTypes.CATEGORY_CHANGE, payload: (event.target.value)})
+    addCard: (title, address, service_id, key) => dispatch({type: actionTypes.ADD_CARD, payload: title, address, service_id, key})
   }
 }
 

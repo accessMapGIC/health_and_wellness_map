@@ -2,15 +2,21 @@ import * as actionTypes from '../actions';
 
 const initialState = {
     rightMenu: {
-        numCards: 0,
-        Cards: []
+        card: [],
     }
 }
 
 const rightSidebarReducer = (state = initialState, action ) => {
     switch ( action.type ){
-        case( actionTypes.ON_NEW_QUERY ):
-            return initialState;
+        case actionTypes.ADD_CARD:
+            const newState = Object.assign({}, state);
+            // console.log(newState);
+            newState.rightMenu.card[action.payload.key] = {
+                title: action.payload.title,
+                address: action.payload.address
+            };
+            // console.log(newState);
+            return newState;
 
         default: 
             return state;
