@@ -270,7 +270,7 @@ class CardTemplateComponent extends React.Component {
               </Collapse>
             </Typography>
             <Typography paragraph>
-              <WebIcon className={classes.materialIcons} /> - Website URL
+              <WebIcon className={classes.materialIcons} /> - <a href={this.props.url} target="_blank" rel="noopener noreferrer" >Link to their website</a>
             </Typography>
             {/* <Typography>
               <DescriptionIcon className={classes.materialIcons} /> -

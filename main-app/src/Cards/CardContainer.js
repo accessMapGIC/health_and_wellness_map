@@ -14,6 +14,9 @@ class CardContainer extends React.Component{
           address={item.address}
           phone={item.phone}
           hours={item.hours}
+          url={item.url}
+          x={item.x}
+          y={item.y}
           service_id={item.service_id}
           key={item.service_id}
           />
