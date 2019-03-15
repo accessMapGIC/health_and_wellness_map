@@ -23,6 +23,7 @@
         border-radius: 5px 5px 0 0;
         cursor: pointer;
 
+
     
         &--selected {
             background-color: $rossy-light;
@@ -45,6 +46,342 @@
         }
     }
 }
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+  
+    .react-tabs {
+        -webkit-tap-highlight-color: transparent;
+        background-color: $rossy-light;
+        border-radius: 4px;
+      
+        &__tab-list {
+            // border-bottom: 2px solid #aaa;
+            margin: 0 0 10px;
+            padding: 0;
+            background-color: $rossy-blue;
+        }
+      
+        &__tab {
+            display: inline-block;
+            // border: 2px solid transparent;
+            border-bottom: none;
+            bottom: 0px;
+            position: relative;
+            list-style: none;
+            padding: 3px 7.7px;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+    
+    
+        
+            &--selected {
+                background-color: $rossy-light;
+                border-color: #aaa;
+                color: black;
+                border-radius: 5px 5px 0 0;
+            }
+        
+            &--disabled {
+                color: $rossy-blue;
+                cursor: default;
+            }
+        }
+      
+        &__tab-panel {
+            display: none;
+        
+            &--selected {
+                display: block;
+            }
+        }
+    }    
+    
+}
+  
+  /* 
+    ##Device = Laptops, Desktops
+    ##Screen = B/w 1025px to 1280px
+  */
+  
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    
+    .react-tabs {
+        -webkit-tap-highlight-color: transparent;
+        background-color: $rossy-light;
+        border-radius: 4px;
+      
+        &__tab-list {
+            // border-bottom: 2px solid #aaa;
+            margin: 0 0 10px;
+            padding: 0;
+            background-color: $rossy-blue;
+        }
+      
+        &__tab {
+            display: inline-block;
+            // border: 2px solid transparent;
+            border-bottom: none;
+            bottom: 0px;
+            position: relative;
+            list-style: none;
+            padding: 3px 7.7px;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+    
+    
+        
+            &--selected {
+                background-color: $rossy-light;
+                border-color: #aaa;
+                color: black;
+                border-radius: 5px 5px 0 0;
+            }
+        
+            &--disabled {
+                color: $rossy-blue;
+                cursor: default;
+            }
+        }
+      
+        &__tab-panel {
+            display: none;
+        
+            &--selected {
+                display: block;
+            }
+        }
+    }
+    
+  }
+  
+  /* 
+    ##Device = Tablets, Ipads (portrait)
+    ##Screen = B/w 768px to 1024px
+  */
+  
+  @media (min-width: 768px) and (max-width: 1024px) {
+    
+    .react-tabs {
+        -webkit-tap-highlight-color: transparent;
+        background-color: $rossy-light;
+        border-radius: 4px;
+      
+        &__tab-list {
+            // border-bottom: 2px solid #aaa;
+            margin: 0 0 10px;
+            padding: 0;
+            background-color: $rossy-blue;
+        }
+      
+        &__tab {
+            display: inline-block;
+            // border: 2px solid transparent;
+            border-bottom: none;
+            bottom: 0px;
+            position: relative;
+            list-style: none;
+            padding: 3px 8.7px;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+    
+    
+        
+            &--selected {
+                background-color: $rossy-light;
+                border-color: #aaa;
+                color: black;
+                border-radius: 5px 5px 0 0;
+            }
+        
+            &--disabled {
+                color: $rossy-blue;
+                cursor: default;
+            }
+        }
+      
+        &__tab-panel {
+            display: none;
+        
+            &--selected {
+                display: block;
+            }
+        }
+    }
+    
+  }
+  
+  /* 
+    ##Device = Tablets, Ipads (landscape)
+    ##Screen = B/w 768px to 1024px
+  */
+  
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    
+    .react-tabs {
+        -webkit-tap-highlight-color: transparent;
+        background-color: $rossy-light;
+        border-radius: 4px;
+      
+        &__tab-list {
+            // border-bottom: 2px solid #aaa;
+            margin: 0 0 10px;
+            padding: 0;
+            background-color: $rossy-blue;
+        }
+      
+        &__tab {
+            display: inline-block;
+            // border: 2px solid transparent;
+            border-bottom: none;
+            bottom: 0px;
+            position: relative;
+            list-style: none;
+            padding: 3px 8.7px;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+    
+    
+        
+            &--selected {
+                background-color: $rossy-light;
+                border-color: #aaa;
+                color: black;
+                border-radius: 5px 5px 0 0;
+            }
+        
+            &--disabled {
+                color: $rossy-blue;
+                cursor: default;
+            }
+        }
+      
+        &__tab-panel {
+            display: none;
+        
+            &--selected {
+                display: block;
+            }
+        }
+    }
+    
+  }
+  
+  /* 
+    ##Device = Low Resolution Tablets, Mobiles (Landscape)
+    ##Screen = B/w 481px to 767px
+  */
+  
+  @media (min-width: 481px) and (max-width: 767px) {
+    
+    .react-tabs {
+        -webkit-tap-highlight-color: transparent;
+        background-color: $rossy-light;
+        border-radius: 4px;
+      
+        &__tab-list {
+            // border-bottom: 2px solid #aaa;
+            margin: 0 0 10px;
+            padding: 0;
+            background-color: $rossy-blue;
+        }
+      
+        &__tab {
+            display: inline-block;
+            // border: 2px solid transparent;
+            border-bottom: none;
+            bottom: 0px;
+            position: relative;
+            list-style: none;
+            padding: 3px 7.7px;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+    
+    
+        
+            &--selected {
+                background-color: $rossy-light;
+                border-color: #aaa;
+                color: black;
+                border-radius: 5px 5px 0 0;
+            }
+        
+            &--disabled {
+                color: $rossy-blue;
+                cursor: default;
+            }
+        }
+      
+        &__tab-panel {
+            display: none;
+        
+            &--selected {
+                display: block;
+            }
+        }
+    }
+    
+  }
+  
+  /* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+  */
+  
+  @media (min-width: 320px) and (max-width: 480px) {
+    
+    .react-tabs {
+        -webkit-tap-highlight-color: transparent;
+        background-color: $rossy-light;
+        border-radius: 4px;
+      
+        &__tab-list {
+            // border-bottom: 2px solid #aaa;
+            margin: 0 0 10px;
+            padding: 0;
+            background-color: $rossy-blue;
+        }
+      
+        &__tab {
+            display: inline-block;
+            // border: 2px solid transparent;
+            border-bottom: none;
+            bottom: 0px;
+            position: relative;
+            list-style: none;
+            padding: 3px 8.45px;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+    
+    
+        
+            &--selected {
+                background-color: $rossy-light;
+                border-color: #aaa;
+                color: black;
+                border-radius: 5px 5px 0 0;
+            }
+        
+            &--disabled {
+                color: $rossy-blue;
+                cursor: default;
+            }
+        }
+      
+        &__tab-panel {
+            display: none;
+        
+            &--selected {
+                display: block;
+            }
+        }
+    }
+    
+  }
 
 .category_container{
     padding-bottom: 30px;

@@ -1,184 +1,196 @@
 @import '../variables.scss';
 
-/* BEGIN-MENU-LEFT */
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
 
-/* Position and sizing of burger button */
-.menu-left .bm-burger-button{
+@media (min-width: 1281px) {
+
+  /* BEGIN-MENU-LEFT */
+
+  /* Position and sizing of burger button */
+  .menu-left .bm-burger-button {
     position: fixed;
     width: 36px;
     height: 30px;
     left: 36px;
     top: 36px;
-}
+  }
 
-/* Color/shape of burger icon bars */
-.menu-left .bm-burger-bars {
+  /* Color/shape of burger icon bars */
+  .menu-left .bm-burger-bars {
     background: #373a47;
-}
+  }
 
-/* Color/shape of burger icon bars on hover*/
-.menu-left .bm-burger-bars-hover {
+  /* Color/shape of burger icon bars on hover*/
+  .menu-left .bm-burger-bars-hover {
     background: $rossy-blue;
-}
+  }
 
-/* Position and sizing of clickable cross button */
-.menu-left .bm-cross-button {
+  /* Position and sizing of clickable cross button */
+  .menu-left .bm-cross-button {
     height: 24px;
     width: 24px;
-}
+  }
 
-/* Color/shape of close button cross */
-.menu-left .bm-cross {
+  /* Color/shape of close button cross */
+  .menu-left .bm-cross {
     background: #000;
-}
+  }
 
-/*
+  /*
 Sidebar wrapper styles
 Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
 */
-.menu-left .bm-menu-wrap {
+  .menu-left .bm-menu-wrap {
     position: fixed;
     height: 100%;
-}
+  }
 
-/* General sidebar styles */
-.menu-left .bm-menu {
+  /* General sidebar styles */
+  .menu-left .bm-menu {
     background: $rossy-blue;
     padding: .1em 1.5em 0;
     font-size: 1.15em;
     overflow-y: hidden !important;
-}
+  }
 
-/* Morph shape necessary with bubble or elastic */
-.menu-left .bm-morph-shape {
+  /* Morph shape necessary with bubble or elastic */
+  .menu-left .bm-morph-shape {
     fill: #373a47;
-}
+  }
 
-/* Wrapper for item list */
-.menu-left .bm-item-list {
+  /* Wrapper for item list */
+  .menu-left .bm-item-list {
     // color: $rossy-light;
     padding: 0.3em;
-}
+  }
 
-/* Individual item */
-.menu-left .bm-item {
+  /* Individual item */
+  .menu-left .bm-item {
     display: inline-block;
     margin-bottom: 8px;
     margin-top: 10px;
-}
+  }
 
-/* Styling of overlay */
-// .menu-left .bm-overlay {
-//     background: rgba(0, 0, 0, 0.3);
-// }
+  /* Styling of overlay */
+  // .menu-left .bm-overlay {
+  //     background: rgba(0, 0, 0, 0.3);
+  // }
 
-/* END-MENU-LEFT */
+  /* END-MENU-LEFT */
 
-/* BEGIN-MENU-RIGHT */
+  /* BEGIN-MENU-RIGHT */
 
-/* Position and sizing of burger button */
-.menu-right .bm-burger-button {
+  /* Position and sizing of burger button */
+  .menu-right .bm-burger-button {
     position: fixed;
     width: 36px;
     height: 30px;
     right: 36px;
     top: 36px;
-}
+  }
 
-/* Color/shape of burger icon bars */
-.menu-right .bm-burger-bars {
+  /* Color/shape of burger icon bars */
+  .menu-right .bm-burger-bars {
     background: #373a47;
-}
+  }
 
-/* Color/shape of burger icon bars on hover*/
-.menu-right .bm-burger-bars-hover {
+  /* Color/shape of burger icon bars on hover*/
+  .menu-right .bm-burger-bars-hover {
     background: #a90000;
-}
+  }
 
-/* Position and sizing of clickable cross button */
-.menu-right .bm-cross-button {
+  /* Position and sizing of clickable cross button */
+  .menu-right .bm-cross-button {
     height: 24px;
     width: 24px;
-}
+  }
 
-/* Color/shape of close button cross */
-.menu-right .bm-cross {
+  /* Color/shape of close button cross */
+  .menu-right .bm-cross {
     background: #bdc3c7;
-}
+  }
 
-/*
+  /*
 Sidebar wrapper styles
 Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
 */
-.menu-right .bm-menu-wrap {
+  .menu-right .bm-menu-wrap {
     position: fixed;
     height: 100%;
     width: 400px !important;
-}
+  }
 
-/* General sidebar styles */
-.menu-right .bm-menu {
+  /* General sidebar styles */
+  .menu-right .bm-menu {
     background: $rossy-blue;
     padding: .1em 1.5em 0;
     font-size: 1.15em;
     overflow-y: hidden !important;
-}
+  }
 
-/* Morph shape necessary with bubble or elastic */
-.menu-right .bm-morph-shape {
+  /* Morph shape necessary with bubble or elastic */
+  .menu-right .bm-morph-shape {
     fill: #373a47;
-}
+  }
 
-/* Wrapper for item list */
-.menu-right .bm-item-list {
+  /* Wrapper for item list */
+  .menu-right .bm-item-list {
     color: #b8b7ad;
     padding: 0.3em;
-}
+  }
 
-/* Individual item */
-.menu-right .bm-item {
+  /* Individual item */
+  .menu-right .bm-item {
     display: inline-block;
     margin-bottom: 8px;
     margin-top: 10px;
-}
+  }
 
-/* Styling of overlay */
-// .menu-right .bm-overlay {
-//     background: rgba(0, 0, 0, 0.3);
-// }
+  /* Styling of overlay */
+  // .menu-right .bm-overlay {
+  //     background: rgba(0, 0, 0, 0.3);
+  // }
 
-/* END-MENU-RIGHT */
+  /* END-MENU-RIGHT */
 
-.InsuranceDropDown_Container{
+  .InsuranceDropDown_Container {
     position: relative;
     align-content: center;
-}
+  }
 
-.LanguageDropDown_Container{
+  .LanguageDropDown_Container {
     position: relative;
     vertical-align: middle;
     padding-bottom: 5px;
-}
-.DropDown_Container{
+  }
+
+  .DropDown_Container {
     width: 100%;
-}
-.Flex_Container{
+  }
+
+  .Flex_Container {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     margin: 5px;
     height: 90%;
-}
-.Card_Container{
-  max-height: 800px;
-  overflow-y: scroll;
-}
-/* CSS LOADER */
+  }
+
+  .Card_Container {
+    max-height: 650px;
+    overflow-y: scroll;
+  }
+
+  /* CSS LOADER */
 
   .lds-spinner div {
     transform-origin: 32px 32px;
     animation: lds-spinner 1.2s linear infinite;
   }
+
   .lds-spinner div:after {
     content: " ";
     display: block;
@@ -190,60 +202,1452 @@ Note: Beware of modifying this element as it can break the animations - you shou
     border-radius: 20%;
     background: #cef;
   }
+
   .lds-spinner div:nth-child(1) {
     transform: rotate(0deg);
     animation-delay: -1.1s;
   }
+
   .lds-spinner div:nth-child(2) {
     transform: rotate(30deg);
     animation-delay: -1s;
   }
+
   .lds-spinner div:nth-child(3) {
     transform: rotate(60deg);
     animation-delay: -0.9s;
   }
+
   .lds-spinner div:nth-child(4) {
     transform: rotate(90deg);
     animation-delay: -0.8s;
   }
+
   .lds-spinner div:nth-child(5) {
     transform: rotate(120deg);
     animation-delay: -0.7s;
   }
+
   .lds-spinner div:nth-child(6) {
     transform: rotate(150deg);
     animation-delay: -0.6s;
   }
+
   .lds-spinner div:nth-child(7) {
     transform: rotate(180deg);
     animation-delay: -0.5s;
   }
+
   .lds-spinner div:nth-child(8) {
     transform: rotate(210deg);
     animation-delay: -0.4s;
   }
+
   .lds-spinner div:nth-child(9) {
     transform: rotate(240deg);
     animation-delay: -0.3s;
   }
+
   .lds-spinner div:nth-child(10) {
     transform: rotate(270deg);
     animation-delay: -0.2s;
   }
+
   .lds-spinner div:nth-child(11) {
     transform: rotate(300deg);
     animation-delay: -0.1s;
   }
+
   .lds-spinner div:nth-child(12) {
     transform: rotate(330deg);
     animation-delay: 0s;
   }
+
   @keyframes lds-spinner {
     0% {
       opacity: 1;
     }
+
     100% {
       opacity: 0;
     }
   }
+
+}
+
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+
   
+  /* BEGIN-MENU-LEFT */
+
+  /* Position and sizing of burger button */
+  .menu-left .bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    left: 36px;
+    top: 36px;
+  }
+
+  /* Color/shape of burger icon bars */
+  .menu-left .bm-burger-bars {
+    background: #373a47;
+  }
+
+  /* Color/shape of burger icon bars on hover*/
+  .menu-left .bm-burger-bars-hover {
+    background: $rossy-blue;
+  }
+
+  /* Position and sizing of clickable cross button */
+  .menu-left .bm-cross-button {
+    height: 24px;
+    width: 24px;
+  }
+
+  /* Color/shape of close button cross */
+  .menu-left .bm-cross {
+    background: #000;
+  }
+
+  /*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+  .menu-left .bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+  }
+
+  /* General sidebar styles */
+  .menu-left .bm-menu {
+    background: $rossy-blue;
+    padding: .1em 1.5em 0;
+    font-size: 1.15em;
+    overflow-y: scroll !important;
+  }
+
+  /* Morph shape necessary with bubble or elastic */
+  .menu-left .bm-morph-shape {
+    fill: #373a47;
+  }
+
+  /* Wrapper for item list */
+  .menu-left .bm-item-list {
+    // color: $rossy-light;
+    padding: 0.3em;
+  }
+
+  /* Individual item */
+  .menu-left .bm-item {
+    display: inline-block;
+    margin-bottom: 8px;
+    margin-top: 10px;
+  }
+
+  /* Styling of overlay */
+  // .menu-left .bm-overlay {
+  //     background: rgba(0, 0, 0, 0.3);
+  // }
+
+  /* END-MENU-LEFT */
+
+  /* BEGIN-MENU-RIGHT */
+
+  /* Position and sizing of burger button */
+  .menu-right .bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    right: 36px;
+    top: 36px;
+  }
+
+  /* Color/shape of burger icon bars */
+  .menu-right .bm-burger-bars {
+    background: #373a47;
+  }
+
+  /* Color/shape of burger icon bars on hover*/
+  .menu-right .bm-burger-bars-hover {
+    background: #a90000;
+  }
+
+  /* Position and sizing of clickable cross button */
+  .menu-right .bm-cross-button {
+    height: 24px;
+    width: 24px;
+  }
+
+  /* Color/shape of close button cross */
+  .menu-right .bm-cross {
+    background: #bdc3c7;
+  }
+
+  /*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+  .menu-right .bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+    width: 300px !important;
+  }
+
+  /* General sidebar styles */
+  .menu-right .bm-menu {
+    background: $rossy-blue;
+    padding: .1em 1em 0;
+    font-size: 1.15em;
+    overflow-y: scroll !important;
+  }
+
+  /* Morph shape necessary with bubble or elastic */
+  .menu-right .bm-morph-shape {
+    fill: #373a47;
+  }
+
+  /* Wrapper for item list */
+  .menu-right .bm-item-list {
+    color: #b8b7ad;
+    padding: 0.3em;
+  }
+
+  /* Individual item */
+  .menu-right .bm-item {
+    display: inline-block;
+    margin-bottom: 8px;
+    margin-top: 10px;
+  }
+
+  /* Styling of overlay */
+  // .menu-right .bm-overlay {
+  //     background: rgba(0, 0, 0, 0.3);
+  // }
+
+  /* END-MENU-RIGHT */
+
+  .InsuranceDropDown_Container {
+    position: relative;
+    align-content: center;
+  }
+
+  .LanguageDropDown_Container {
+    position: relative;
+    vertical-align: middle;
+    padding-bottom: 5px;
+  }
+
+  .DropDown_Container {
+    width: 100%;
+  }
+
+  .Flex_Container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 5px;
+    height: 90%;
+  }
+
+  // .Card_Container {
+  //   max-height: 800px;
+  //   overflow-y: scroll;
+  // }
+
+  /* CSS LOADER */
+
+  .lds-spinner div {
+    transform-origin: 32px 32px;
+    animation: lds-spinner 1.2s linear infinite;
+  }
+
+  .lds-spinner div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 29px;
+    width: 5px;
+    height: 14px;
+    border-radius: 20%;
+    background: #cef;
+  }
+
+  .lds-spinner div:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: -1.1s;
+  }
+
+  .lds-spinner div:nth-child(2) {
+    transform: rotate(30deg);
+    animation-delay: -1s;
+  }
+
+  .lds-spinner div:nth-child(3) {
+    transform: rotate(60deg);
+    animation-delay: -0.9s;
+  }
+
+  .lds-spinner div:nth-child(4) {
+    transform: rotate(90deg);
+    animation-delay: -0.8s;
+  }
+
+  .lds-spinner div:nth-child(5) {
+    transform: rotate(120deg);
+    animation-delay: -0.7s;
+  }
+
+  .lds-spinner div:nth-child(6) {
+    transform: rotate(150deg);
+    animation-delay: -0.6s;
+  }
+
+  .lds-spinner div:nth-child(7) {
+    transform: rotate(180deg);
+    animation-delay: -0.5s;
+  }
+
+  .lds-spinner div:nth-child(8) {
+    transform: rotate(210deg);
+    animation-delay: -0.4s;
+  }
+
+  .lds-spinner div:nth-child(9) {
+    transform: rotate(240deg);
+    animation-delay: -0.3s;
+  }
+
+  .lds-spinner div:nth-child(10) {
+    transform: rotate(270deg);
+    animation-delay: -0.2s;
+  }
+
+  .lds-spinner div:nth-child(11) {
+    transform: rotate(300deg);
+    animation-delay: -0.1s;
+  }
+
+  .lds-spinner div:nth-child(12) {
+    transform: rotate(330deg);
+    animation-delay: 0s;
+  }
+
+  @keyframes lds-spinner {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  
+  /* BEGIN-MENU-LEFT */
+
+  /* Position and sizing of burger button */
+  .menu-left .bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    left: 36px;
+    top: 36px;
+  }
+
+  /* Color/shape of burger icon bars */
+  .menu-left .bm-burger-bars {
+    background: #373a47;
+  }
+
+  /* Color/shape of burger icon bars on hover*/
+  .menu-left .bm-burger-bars-hover {
+    background: $rossy-blue;
+  }
+
+  /* Position and sizing of clickable cross button */
+  .menu-left .bm-cross-button {
+    height: 24px;
+    width: 24px;
+  }
+
+  /* Color/shape of close button cross */
+  .menu-left .bm-cross {
+    background: #000;
+  }
+
+  /*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+  .menu-left .bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+  }
+
+  /* General sidebar styles */
+  .menu-left .bm-menu {
+    background: $rossy-blue;
+    padding: .1em 1.5em 0;
+    font-size: 1.15em;
+    overflow-y: scroll !important;
+  }
+
+  /* Morph shape necessary with bubble or elastic */
+  .menu-left .bm-morph-shape {
+    fill: #373a47;
+  }
+
+  /* Wrapper for item list */
+  .menu-left .bm-item-list {
+    // color: $rossy-light;
+    padding: 0.3em;
+  }
+
+  /* Individual item */
+  .menu-left .bm-item {
+    display: inline-block;
+    margin-bottom: 8px;
+    margin-top: 10px;
+  }
+
+  /* Styling of overlay */
+  // .menu-left .bm-overlay {
+  //     background: rgba(0, 0, 0, 0.3);
+  // }
+
+  /* END-MENU-LEFT */
+
+  /* BEGIN-MENU-RIGHT */
+
+  /* Position and sizing of burger button */
+  .menu-right .bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    right: 36px;
+    top: 36px;
+  }
+
+  /* Color/shape of burger icon bars */
+  .menu-right .bm-burger-bars {
+    background: #373a47;
+  }
+
+  /* Color/shape of burger icon bars on hover*/
+  .menu-right .bm-burger-bars-hover {
+    background: #a90000;
+  }
+
+  /* Position and sizing of clickable cross button */
+  .menu-right .bm-cross-button {
+    height: 24px;
+    width: 24px;
+  }
+
+  /* Color/shape of close button cross */
+  .menu-right .bm-cross {
+    background: #bdc3c7;
+  }
+
+  /*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+  .menu-right .bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+    width: 300px !important;
+  }
+
+  /* General sidebar styles */
+  .menu-right .bm-menu {
+    background: $rossy-blue;
+    padding: .1em 1em 0;
+    font-size: 1.15em;
+    overflow-y: scroll !important;
+  }
+
+  /* Morph shape necessary with bubble or elastic */
+  .menu-right .bm-morph-shape {
+    fill: #373a47;
+  }
+
+  /* Wrapper for item list */
+  .menu-right .bm-item-list {
+    color: #b8b7ad;
+    padding: 0.3em;
+  }
+
+  /* Individual item */
+  .menu-right .bm-item {
+    display: inline-block;
+    margin-bottom: 8px;
+    margin-top: 10px;
+  }
+
+  /* Styling of overlay */
+  // .menu-right .bm-overlay {
+  //     background: rgba(0, 0, 0, 0.3);
+  // }
+
+  /* END-MENU-RIGHT */
+
+  .InsuranceDropDown_Container {
+    position: relative;
+    align-content: center;
+  }
+
+  .LanguageDropDown_Container {
+    position: relative;
+    vertical-align: middle;
+    padding-bottom: 5px;
+  }
+
+  .DropDown_Container {
+    width: 100%;
+  }
+
+  .Flex_Container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 5px;
+    height: 90%;
+  }
+
+  // .Card_Container {
+  //   max-height: 400px;
+  //   overflow-y: scroll;
+  // }
+
+  /* CSS LOADER */
+
+  .lds-spinner div {
+    transform-origin: 32px 32px;
+    animation: lds-spinner 1.2s linear infinite;
+  }
+
+  .lds-spinner div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 29px;
+    width: 5px;
+    height: 14px;
+    border-radius: 20%;
+    background: #cef;
+  }
+
+  .lds-spinner div:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: -1.1s;
+  }
+
+  .lds-spinner div:nth-child(2) {
+    transform: rotate(30deg);
+    animation-delay: -1s;
+  }
+
+  .lds-spinner div:nth-child(3) {
+    transform: rotate(60deg);
+    animation-delay: -0.9s;
+  }
+
+  .lds-spinner div:nth-child(4) {
+    transform: rotate(90deg);
+    animation-delay: -0.8s;
+  }
+
+  .lds-spinner div:nth-child(5) {
+    transform: rotate(120deg);
+    animation-delay: -0.7s;
+  }
+
+  .lds-spinner div:nth-child(6) {
+    transform: rotate(150deg);
+    animation-delay: -0.6s;
+  }
+
+  .lds-spinner div:nth-child(7) {
+    transform: rotate(180deg);
+    animation-delay: -0.5s;
+  }
+
+  .lds-spinner div:nth-child(8) {
+    transform: rotate(210deg);
+    animation-delay: -0.4s;
+  }
+
+  .lds-spinner div:nth-child(9) {
+    transform: rotate(240deg);
+    animation-delay: -0.3s;
+  }
+
+  .lds-spinner div:nth-child(10) {
+    transform: rotate(270deg);
+    animation-delay: -0.2s;
+  }
+
+  .lds-spinner div:nth-child(11) {
+    transform: rotate(300deg);
+    animation-delay: -0.1s;
+  }
+
+  .lds-spinner div:nth-child(12) {
+    transform: rotate(330deg);
+    animation-delay: 0s;
+  }
+
+  @keyframes lds-spinner {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+
+  /* BEGIN-MENU-LEFT */
+
+  /* Position and sizing of burger button */
+  .menu-left .bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    left: 36px;
+    top: 36px;
+  }
+
+  /* Color/shape of burger icon bars */
+  .menu-left .bm-burger-bars {
+    background: #373a47;
+  }
+
+  /* Color/shape of burger icon bars on hover*/
+  .menu-left .bm-burger-bars-hover {
+    background: $rossy-blue;
+  }
+
+  /* Position and sizing of clickable cross button */
+  .menu-left .bm-cross-button {
+    height: 24px;
+    width: 24px;
+  }
+
+  /* Color/shape of close button cross */
+  .menu-left .bm-cross {
+    background: #000;
+  }
+
+  /*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+  .menu-left .bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+  }
+
+  /* General sidebar styles */
+  .menu-left .bm-menu {
+    background: $rossy-blue;
+    padding: .1em 1.5em 0;
+    font-size: 1.15em;
+    overflow-y: hidden !important;
+  }
+
+  /* Morph shape necessary with bubble or elastic */
+  .menu-left .bm-morph-shape {
+    fill: #373a47;
+  }
+
+  /* Wrapper for item list */
+  .menu-left .bm-item-list {
+    // color: $rossy-light;
+    padding: 0.3em;
+  }
+
+  /* Individual item */
+  .menu-left .bm-item {
+    display: inline-block;
+    margin-bottom: 8px;
+    margin-top: 10px;
+  }
+
+  /* Styling of overlay */
+  // .menu-left .bm-overlay {
+  //     background: rgba(0, 0, 0, 0.3);
+  // }
+
+  /* END-MENU-LEFT */
+
+  /* BEGIN-MENU-RIGHT */
+
+  /* Position and sizing of burger button */
+  .menu-right .bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    right: 36px;
+    top: 36px;
+  }
+
+  /* Color/shape of burger icon bars */
+  .menu-right .bm-burger-bars {
+    background: #373a47;
+  }
+
+  /* Color/shape of burger icon bars on hover*/
+  .menu-right .bm-burger-bars-hover {
+    background: #a90000;
+  }
+
+  /* Position and sizing of clickable cross button */
+  .menu-right .bm-cross-button {
+    height: 24px;
+    width: 24px;
+  }
+
+  /* Color/shape of close button cross */
+  .menu-right .bm-cross {
+    background: #bdc3c7;
+  }
+
+  /*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+  .menu-right .bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+    width: 300px !important;
+  }
+
+  /* General sidebar styles */
+  .menu-right .bm-menu {
+    background: $rossy-blue;
+    padding: .1em 1em 0;
+    font-size: 1.15em;
+    overflow-y: scroll !important;
+  }
+
+  /* Morph shape necessary with bubble or elastic */
+  .menu-right .bm-morph-shape {
+    fill: #373a47;
+  }
+
+  /* Wrapper for item list */
+  .menu-right .bm-item-list {
+    color: #b8b7ad;
+    padding: 0.3em;
+  }
+
+  /* Individual item */
+  .menu-right .bm-item {
+    display: inline-block;
+    margin-bottom: 8px;
+    margin-top: 10px;
+  }
+
+  /* Styling of overlay */
+  // .menu-right .bm-overlay {
+  //     background: rgba(0, 0, 0, 0.3);
+  // }
+
+  /* END-MENU-RIGHT */
+
+  .InsuranceDropDown_Container {
+    position: relative;
+    align-content: center;
+  }
+
+  .LanguageDropDown_Container {
+    position: relative;
+    vertical-align: middle;
+    padding-bottom: 5px;
+  }
+
+  .DropDown_Container {
+    width: 100%;
+  }
+
+  .Flex_Container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 5px;
+    height: 90%;
+  }
+
+  // .Card_Container {
+  //   max-height: 800px;
+  //   overflow-y: scroll;
+  // }
+
+  /* CSS LOADER */
+
+  .lds-spinner div {
+    transform-origin: 32px 32px;
+    animation: lds-spinner 1.2s linear infinite;
+  }
+
+  .lds-spinner div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 29px;
+    width: 5px;
+    height: 14px;
+    border-radius: 20%;
+    background: #cef;
+  }
+
+  .lds-spinner div:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: -1.1s;
+  }
+
+  .lds-spinner div:nth-child(2) {
+    transform: rotate(30deg);
+    animation-delay: -1s;
+  }
+
+  .lds-spinner div:nth-child(3) {
+    transform: rotate(60deg);
+    animation-delay: -0.9s;
+  }
+
+  .lds-spinner div:nth-child(4) {
+    transform: rotate(90deg);
+    animation-delay: -0.8s;
+  }
+
+  .lds-spinner div:nth-child(5) {
+    transform: rotate(120deg);
+    animation-delay: -0.7s;
+  }
+
+  .lds-spinner div:nth-child(6) {
+    transform: rotate(150deg);
+    animation-delay: -0.6s;
+  }
+
+  .lds-spinner div:nth-child(7) {
+    transform: rotate(180deg);
+    animation-delay: -0.5s;
+  }
+
+  .lds-spinner div:nth-child(8) {
+    transform: rotate(210deg);
+    animation-delay: -0.4s;
+  }
+
+  .lds-spinner div:nth-child(9) {
+    transform: rotate(240deg);
+    animation-delay: -0.3s;
+  }
+
+  .lds-spinner div:nth-child(10) {
+    transform: rotate(270deg);
+    animation-delay: -0.2s;
+  }
+
+  .lds-spinner div:nth-child(11) {
+    transform: rotate(300deg);
+    animation-delay: -0.1s;
+  }
+
+  .lds-spinner div:nth-child(12) {
+    transform: rotate(330deg);
+    animation-delay: 0s;
+  }
+
+  @keyframes lds-spinner {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+  /* BEGIN-MENU-LEFT */
+
+  /* Position and sizing of burger button */
+  .menu-left .bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    left: 36px;
+    top: 36px;
+  }
+
+  /* Color/shape of burger icon bars */
+  .menu-left .bm-burger-bars {
+    background: #373a47;
+  }
+
+  /* Color/shape of burger icon bars on hover*/
+  .menu-left .bm-burger-bars-hover {
+    background: $rossy-blue;
+  }
+
+  /* Position and sizing of clickable cross button */
+  .menu-left .bm-cross-button {
+    height: 24px;
+    width: 24px;
+  }
+
+  /* Color/shape of close button cross */
+  .menu-left .bm-cross {
+    background: #000;
+  }
+
+  /*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+  .menu-left .bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+  }
+
+  /* General sidebar styles */
+  .menu-left .bm-menu {
+    background: $rossy-blue;
+    padding: .1em 1.5em 0;
+    font-size: 1.15em;
+    overflow-y: scroll !important;
+  }
+
+  /* Morph shape necessary with bubble or elastic */
+  .menu-left .bm-morph-shape {
+    fill: #373a47;
+  }
+
+  /* Wrapper for item list */
+  .menu-left .bm-item-list {
+    // color: $rossy-light;
+    padding: 0.3em;
+  }
+
+  /* Individual item */
+  .menu-left .bm-item {
+    display: inline-block;
+    margin-bottom: 8px;
+    margin-top: 10px;
+  }
+
+  /* Styling of overlay */
+  // .menu-left .bm-overlay {
+  //     background: rgba(0, 0, 0, 0.3);
+  // }
+
+  /* END-MENU-LEFT */
+
+  /* BEGIN-MENU-RIGHT */
+
+  /* Position and sizing of burger button */
+  .menu-right .bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    right: 36px;
+    top: 36px;
+  }
+
+  /* Color/shape of burger icon bars */
+  .menu-right .bm-burger-bars {
+    background: #373a47;
+  }
+
+  /* Color/shape of burger icon bars on hover*/
+  .menu-right .bm-burger-bars-hover {
+    background: #a90000;
+  }
+
+  /* Position and sizing of clickable cross button */
+  .menu-right .bm-cross-button {
+    height: 24px;
+    width: 24px;
+  }
+
+  /* Color/shape of close button cross */
+  .menu-right .bm-cross {
+    background: #bdc3c7;
+  }
+
+  /*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+  .menu-right .bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+    width: 300px !important;
+  }
+
+  /* General sidebar styles */
+  .menu-right .bm-menu {
+    background: $rossy-blue;
+    padding: .1em 1em 0;
+    font-size: 1.15em;
+    overflow-y: scroll !important;
+  }
+
+  /* Morph shape necessary with bubble or elastic */
+  .menu-right .bm-morph-shape {
+    fill: #373a47;
+  }
+
+  /* Wrapper for item list */
+  .menu-right .bm-item-list {
+    color: #b8b7ad;
+    padding: 0.3em;
+  }
+
+  /* Individual item */
+  .menu-right .bm-item {
+    display: inline-block;
+    margin-bottom: 8px;
+    margin-top: 10px;
+  }
+
+  /* Styling of overlay */
+  // .menu-right .bm-overlay {
+  //     background: rgba(0, 0, 0, 0.3);
+  // }
+
+  /* END-MENU-RIGHT */
+
+  .InsuranceDropDown_Container {
+    position: relative;
+    align-content: center;
+  }
+
+  .LanguageDropDown_Container {
+    position: relative;
+    vertical-align: middle;
+    padding-bottom: 5px;
+  }
+
+  .DropDown_Container {
+    width: 100%;
+  }
+
+  .Flex_Container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 5px;
+    height: 90%;
+  }
+
+  // .Card_Container {
+  //   max-height: 800px;
+  //   overflow-y: scroll;
+  // }
+
+  /* CSS LOADER */
+
+  .lds-spinner div {
+    transform-origin: 32px 32px;
+    animation: lds-spinner 1.2s linear infinite;
+  }
+
+  .lds-spinner div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 29px;
+    width: 5px;
+    height: 14px;
+    border-radius: 20%;
+    background: #cef;
+  }
+
+  .lds-spinner div:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: -1.1s;
+  }
+
+  .lds-spinner div:nth-child(2) {
+    transform: rotate(30deg);
+    animation-delay: -1s;
+  }
+
+  .lds-spinner div:nth-child(3) {
+    transform: rotate(60deg);
+    animation-delay: -0.9s;
+  }
+
+  .lds-spinner div:nth-child(4) {
+    transform: rotate(90deg);
+    animation-delay: -0.8s;
+  }
+
+  .lds-spinner div:nth-child(5) {
+    transform: rotate(120deg);
+    animation-delay: -0.7s;
+  }
+
+  .lds-spinner div:nth-child(6) {
+    transform: rotate(150deg);
+    animation-delay: -0.6s;
+  }
+
+  .lds-spinner div:nth-child(7) {
+    transform: rotate(180deg);
+    animation-delay: -0.5s;
+  }
+
+  .lds-spinner div:nth-child(8) {
+    transform: rotate(210deg);
+    animation-delay: -0.4s;
+  }
+
+  .lds-spinner div:nth-child(9) {
+    transform: rotate(240deg);
+    animation-delay: -0.3s;
+  }
+
+  .lds-spinner div:nth-child(10) {
+    transform: rotate(270deg);
+    animation-delay: -0.2s;
+  }
+
+  .lds-spinner div:nth-child(11) {
+    transform: rotate(300deg);
+    animation-delay: -0.1s;
+  }
+
+  .lds-spinner div:nth-child(12) {
+    transform: rotate(330deg);
+    animation-delay: 0s;
+  }
+
+  @keyframes lds-spinner {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+  /* BEGIN-MENU-LEFT */
+
+  /* Position and sizing of burger button */
+  .menu-left .bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    left: 36px;
+    top: 36px;
+  }
+
+  /* Color/shape of burger icon bars */
+  .menu-left .bm-burger-bars {
+    background: #373a47;
+  }
+
+  /* Color/shape of burger icon bars on hover*/
+  .menu-left .bm-burger-bars-hover {
+    background: $rossy-blue;
+  }
+
+  /* Position and sizing of clickable cross button */
+  .menu-left .bm-cross-button {
+    height: 24px;
+    width: 24px;
+  }
+
+  /* Color/shape of close button cross */
+  .menu-left .bm-cross {
+    background: #000;
+  }
+
+  /*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+  .menu-left .bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+  }
+
+  /* General sidebar styles */
+  .menu-left .bm-menu {
+    background: $rossy-blue;
+    padding: .1em 1.5em 0;
+    font-size: 1.15em;
+    overflow-y: scroll !important;
+  }
+
+  /* Morph shape necessary with bubble or elastic */
+  .menu-left .bm-morph-shape {
+    fill: #373a47;
+  }
+
+  /* Wrapper for item list */
+  .menu-left .bm-item-list {
+    // color: $rossy-light;
+    padding: 0.3em;
+  }
+
+  /* Individual item */
+  .menu-left .bm-item {
+    display: inline-block;
+    margin-bottom: 8px;
+    margin-top: 10px;
+  }
+
+  /* Styling of overlay */
+  // .menu-left .bm-overlay {
+  //     background: rgba(0, 0, 0, 0.3);
+  // }
+
+  /* END-MENU-LEFT */
+
+  /* BEGIN-MENU-RIGHT */
+
+  /* Position and sizing of burger button */
+  .menu-right .bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    right: 36px;
+    top: 36px;
+  }
+
+  /* Color/shape of burger icon bars */
+  .menu-right .bm-burger-bars {
+    background: #373a47;
+  }
+
+  /* Color/shape of burger icon bars on hover*/
+  .menu-right .bm-burger-bars-hover {
+    background: #a90000;
+  }
+
+  /* Position and sizing of clickable cross button */
+  .menu-right .bm-cross-button {
+    height: 24px;
+    width: 24px;
+  }
+
+  /* Color/shape of close button cross */
+  .menu-right .bm-cross {
+    background: #bdc3c7;
+  }
+
+  /*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+  .menu-right .bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+    width: 300px !important;
+  }
+
+  /* General sidebar styles */
+  .menu-right .bm-menu {
+    background: $rossy-blue;
+    padding: .1em 1em 0;
+    font-size: 1.15em;
+    overflow-y: scroll !important;
+  }
+
+  /* Morph shape necessary with bubble or elastic */
+  .menu-right .bm-morph-shape {
+    fill: #373a47;
+  }
+
+  /* Wrapper for item list */
+  .menu-right .bm-item-list {
+    color: #b8b7ad;
+    padding: 0.3em;
+  }
+
+  /* Individual item */
+  .menu-right .bm-item {
+    display: inline-block;
+    margin-bottom: 8px;
+    margin-top: 10px;
+  }
+
+  /* Styling of overlay */
+  // .menu-right .bm-overlay {
+  //     background: rgba(0, 0, 0, 0.3);
+  // }
+
+  /* END-MENU-RIGHT */
+
+  .InsuranceDropDown_Container {
+    position: relative;
+    align-content: center;
+  }
+
+  .LanguageDropDown_Container {
+    position: relative;
+    vertical-align: middle;
+    padding-bottom: 5px;
+  }
+
+  .DropDown_Container {
+    width: 100%;
+  }
+
+  .Flex_Container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 5px;
+    height: 90%;
+  }
+
+  // .Card_Container {
+  //   max-height: 800px;
+  //   overflow-y: scroll;
+  // }
+
+  /* CSS LOADER */
+
+  .lds-spinner div {
+    transform-origin: 32px 32px;
+    animation: lds-spinner 1.2s linear infinite;
+  }
+
+  .lds-spinner div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 29px;
+    width: 5px;
+    height: 14px;
+    border-radius: 20%;
+    background: #cef;
+  }
+
+  .lds-spinner div:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: -1.1s;
+  }
+
+  .lds-spinner div:nth-child(2) {
+    transform: rotate(30deg);
+    animation-delay: -1s;
+  }
+
+  .lds-spinner div:nth-child(3) {
+    transform: rotate(60deg);
+    animation-delay: -0.9s;
+  }
+
+  .lds-spinner div:nth-child(4) {
+    transform: rotate(90deg);
+    animation-delay: -0.8s;
+  }
+
+  .lds-spinner div:nth-child(5) {
+    transform: rotate(120deg);
+    animation-delay: -0.7s;
+  }
+
+  .lds-spinner div:nth-child(6) {
+    transform: rotate(150deg);
+    animation-delay: -0.6s;
+  }
+
+  .lds-spinner div:nth-child(7) {
+    transform: rotate(180deg);
+    animation-delay: -0.5s;
+  }
+
+  .lds-spinner div:nth-child(8) {
+    transform: rotate(210deg);
+    animation-delay: -0.4s;
+  }
+
+  .lds-spinner div:nth-child(9) {
+    transform: rotate(240deg);
+    animation-delay: -0.3s;
+  }
+
+  .lds-spinner div:nth-child(10) {
+    transform: rotate(270deg);
+    animation-delay: -0.2s;
+  }
+
+  .lds-spinner div:nth-child(11) {
+    transform: rotate(300deg);
+    animation-delay: -0.1s;
+  }
+
+  .lds-spinner div:nth-child(12) {
+    transform: rotate(330deg);
+    animation-delay: 0s;
+  }
+
+  @keyframes lds-spinner {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+}
