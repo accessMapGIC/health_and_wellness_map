@@ -119,8 +119,7 @@ class CardTemplateComponent extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props.title, this.props.address, this.props.service_id);
-    this.props.addCard(this.props.title, this.props.address, this.props.service_id);
+    this.props.addCard(this.props.title, this.props.address, this.props.service_id, this.props.x, this.props.y);
   }
 
   handleExpandClick = () => {
@@ -295,7 +294,17 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addCard: (title, address, service_id, key) => dispatch({type: actionTypes.ADD_CARD, payload: title, address, service_id, key})
+    addCard: (title, address, service_id, x, y, key) => dispatch({
+      type: actionTypes.ADD_CARD, 
+      payload: {
+        title: title, 
+        address: address, 
+        service_id: service_id, 
+        x: x, 
+        y: y, 
+      },
+      meta: key
+    })
   }
 }
 
