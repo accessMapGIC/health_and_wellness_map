@@ -8,7 +8,6 @@ import InsuranceDropDownComponent from '../Dropdowns/InsuranceDropDown';
 import './Sidebars.scss';
 import LanguageDropDownComponent from '../Dropdowns/LanguagesDropDown';
 import CheckBoxComponent from '../Checkbox/CheckBox';
-import CardTemplateComponent from '../Cards/CardTemplate';
 import CardContainer from '../Cards/CardContainer';
 
 
@@ -138,6 +137,8 @@ class SidebarsComponent extends React.Component {
               isOpen={this.state.leftMenu.leftMenuOpen}
               onStateChange={(state) => this.handleStateChange(state, 0)}
               customBurgerIcon={this.state.leftMenu.leftHamButton}
+              noOverlay
+              disableOverlayClick
               >
                 <MenuItem>Search</MenuItem>
                 <TabComponent/>
@@ -158,7 +159,7 @@ class SidebarsComponent extends React.Component {
                   <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch="true" onClick={(state) => this.submitButton(state)}>
                     Submit
                   </Button>
-                  <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                  {/* <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> */}
                 </Container>
               </Menu>
             </div>
@@ -168,6 +169,8 @@ class SidebarsComponent extends React.Component {
               isOpen={this.state.rightMenu.rightMenuOpen}
               onStateChange={(state) => this.handleStateChange(state, 1)}
               customBurgerIcon={this.state.rightMenu.rightHamButton}
+              noOverlay
+              disableOverlayClick
               >
                 <MenuItem>Search</MenuItem>
                 {/* <CardTemplateComponent/> */}

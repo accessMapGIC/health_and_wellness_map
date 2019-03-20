@@ -1,6 +1,10 @@
 import React from 'react';
 import CardTemplate from './CardTemplate';
 import data from "../store/newOutput.json";
+// import * as actionTypes from "../store/actions";
+// import { compose } from 'redux';
+// import { connect } from 'react-redux';
+
 
 class CardContainer extends React.Component{
     renderCard(item){
@@ -9,6 +13,10 @@ class CardContainer extends React.Component{
           address={item.address}
           phone={item.phone}
           hours={item.hours}
+          url={item.url}
+          x={item.x}
+          y={item.y}
+          service_id={item.service_id}
           key={item.service_id}
           />
     }
@@ -35,13 +43,18 @@ class CardContainer extends React.Component{
 
 // const mapStateToProps = state => {
 //     return {
-//       category: state.lfS.leftMenu.catDrop,
+//       service_id: {
+//         name: state.rtS.rightMenu.cards,
+//         title: state.rtS.rightMenu.cards,
+//         address: state.rtS.rightMenu.cards,
+//         hours: state.rtS.rightMenu.cards,
+//       }
 //     }
 //   };
   
 //   const mapDispatchToProps = dispatch => {
 //     return {
-//       onChange: (event) => dispatch({type: actionTypes.CATEGORY_CHANGE, payload: (event.target.value)})
+//       addCard: (item) => dispatch({type: actionTypes.ADD_CARD, payloadA: item.name, payloadAd: item.address, payloadP: item.phone, payloadH: item.hours, payloadS: item.service_id})
 //     }
 //   }
   
