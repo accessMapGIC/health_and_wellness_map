@@ -134,6 +134,8 @@ class CardTemplateComponent extends React.Component {
     this.props.addCard(this.props.title, this.props.address, this.props.service_id, this.props.x, this.props.y);
   }
 
+  handleClick = () => {this.props.onClick(this.props.service_id)};
+
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
@@ -196,7 +198,7 @@ class CardTemplateComponent extends React.Component {
     const orderedHours = this.reOrderHours(this.props.hours);
     const curDay = this.handleCurrentDay(this.props.hours);
     return (
-      <Card className={classes.card}>
+      <Card className={this.props.isActive ? classes.card : classes.activeCard} onClick={this.handleClick}>
         <CardHeader 
           className={classes.cardHeader}
           action={
@@ -300,7 +302,6 @@ CardTemplateComponent.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    // category: state.lfS.leftMenu,
   }
 };
 

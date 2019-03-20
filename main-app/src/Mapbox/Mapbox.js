@@ -3,7 +3,6 @@ import ReactMapboxGl, { Layer, Feature, ZoomControl } from "react-mapbox-gl";
 // import '../node_modules/mapbox-gl/dist/mapbox-gl.css'
 // import '../../node_modules/mapbox-gl/dist/'
 // import ReactMapboxLanguage from '@mapbox/mapbox-gl-language';
-import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Icon from '../images/logo_2blue.png';
 
