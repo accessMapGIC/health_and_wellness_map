@@ -33,6 +33,18 @@ const styles = theme => ({
     marginRight: '2px',
     marginBottom: '10px',
     marginTop: '10px',
+
+  },
+  activeCard: {
+    maxWidth: 400,
+    backgroundColor: "#d0ecf4",
+    marginLeft: '2px',
+    marginRight: '2px',
+    marginBottom: '10px',
+    marginTop: '10px',
+    borderStyle: 'solid',
+    borderWidth: '5px',
+    borderColor: 'fff',
   },
   cardHeader: {
     paddingBottom: '0px !important',
@@ -294,16 +306,16 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addCard: (title, address, service_id, x, y, key) => dispatch({
+    addCard: (title, address, service_id, x, y) => dispatch({
       type: actionTypes.ADD_CARD, 
       payload: {
         title: title, 
         address: address, 
         service_id: service_id, 
         x: x, 
-        y: y, 
-      },
-      meta: key
+        y: y,
+        active: false, 
+      }
     })
   }
 }

@@ -2,9 +2,7 @@ import * as actionTypes from '../actions';
 
 const initialState = {
     rightMenu: {
-        card: {
-
-        }
+        cards: []
     }
 }
 
@@ -20,22 +18,17 @@ const rightSidebarReducer = (state = initialState, action ) => {
             //     y: action.payload.y,
 
             // };
-            return{
-                ...state,
-                rightMenu: {
-                    ...state.rightMenu,
-                    card: {
-                        ...state.rightMenu.card,
-                        [action.meta.key]: {
-                            title: action.payload.title,
-                            address: action.payload.address,
-                            x: action.payload.x,
-                            y: action.payload.y,
-                            service_id: action.payload.service_id
-                        }
-                    }
-                }
+            const newCard = {
+                title: action.payload.title,
+                address: action.payload.address,
+                x: action.payload.x,
+                y: action.payload.y,
+                service_id: action.payload.service_id,
+                active: action.payload.active
             }
+            const newState = Object.assign({}, state);
+            newState.rightMenu.cards.push(newCard);
+            return newState;
         default: 
             return state;
     }

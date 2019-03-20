@@ -8,7 +8,6 @@ import data from "../store/newOutput.json";
 
 class CardContainer extends React.Component{
     renderCard(item){
-      console.log(item.service_id);
         return <CardTemplate
           title={item.name}
           address={item.address}

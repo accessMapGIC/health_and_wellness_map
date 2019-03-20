@@ -3,6 +3,9 @@ import ReactMapboxGl, { Layer, Feature, ZoomControl } from "react-mapbox-gl";
 // import '../node_modules/mapbox-gl/dist/mapbox-gl.css'
 // import '../../node_modules/mapbox-gl/dist/'
 // import ReactMapboxLanguage from '@mapbox/mapbox-gl-language';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import Icon from '../images/logo_2blue.png';
 
 const Mapbox = ReactMapboxGl({
   minZoom: 11,
@@ -11,13 +14,20 @@ const Mapbox = ReactMapboxGl({
 });
 
 class MapboxComponent extends React.Component {
-  state = {
-    points: [
-    ],
-    zoom: [16],
-    center: [-73.578520, 45.505642],
-    bearing: [-55],
-  };
+  constructor(props){
+    super(props)
+    this.state = {
+      points: [],
+      zoom: [16],
+      center: [-73.578520, 45.505642],
+      bearing: [-55],
+    };
+  }
+
+  componentDidMount() {
+    this.generateMarkers(this.props.cards);
+  }
+
   handleClick = (map, ev) => {
     const { lng, lat } = ev.lngLat;
     var { points } = this.state;
@@ -29,11 +39,29 @@ class MapboxComponent extends React.Component {
       center: map.getCenter()
     });
   };
+
+  addMarker = (card) => {
+    const newPoint = {
+      lng: card.y,
+      lat: card.x,
+      id: card.service_id,
+    }
+    const newPoints = this.state.points;
+    newPoints.push(newPoint);
+    this.setState({
+      points: newPoints
+    });
+  };
+
+  generateMarkers = (cards) => {
+    cards.map(this.addMarker);
+  };
+
   render() {
     const { points, zoom, center, bearing } = this.state;
-    const image = new Image(20, 30);
-    // image.src = Icon;
-    const images = ["myImage", image];
+    const image = new Image(30, 30);
+    image.src = Icon;
+    const images = ["SWH-Icon", image];
     return (
       <Mapbox
         // eslint-disable-next-line
@@ -46,18 +74,28 @@ class MapboxComponent extends React.Component {
           height: '100vh',
           width: '100vw',
       }}>
-        {/* <Layer
+        <Layer
           type="symbol"
           id="points"
-          layout={{ "icon-image": "myImage", "icon-allow-overlap": true }}
+          layout={{ "icon-image": "SWH-Icon", "icon-allow-overlap": true }}
           images={images}
         >
-          {points.map((point, i) => <Feature key={i} coordinates={point} />)}
-        </Layer> */}
+          {points.map((point) => 
+            <Feature 
+              id={point.id} 
+              coordinates={[point.lng,point.lat]}
+            />)}
+        </Layer>
       </Mapbox>
         
     );
   }
 }
 
-export default MapboxComponent;
+const mapStateToProps = state => {
+  return {
+    cards: state.rtS.rightMenu.cards,
+  }
+};
+
+export default connect(mapStateToProps) (MapboxComponent);
