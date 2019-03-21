@@ -2,6 +2,8 @@ import * as actionTypes from '../actions';
 
 const initialState = {
     rightMenu: {
+        rightMenuOpen: false,
+        rightHamButton: false,
         cards: []
     }
 }
@@ -29,6 +31,47 @@ const rightSidebarReducer = (state = initialState, action ) => {
             const newState = Object.assign({}, state);
             newState.rightMenu.cards.push(newCard);
             return newState;
+        case actionTypes.HANDLE_RIGHT:
+            return {
+                ...state,
+                rightMenu: {
+                    ...state.rightMenu,
+                    rightMenuOpen: action.payload
+                },
+            }
+        case actionTypes.TOGGLE_RIGHT:
+            return {
+                ...state,
+                rightMenu: {
+                    rightMenuOpen: !state.rightMenu.rightMenuOpen
+                }
+            }
+        case actionTypes.CREATE_RIGHT:
+            return {
+                ...state,
+                rightMenu: {
+                    ...state.rightMenu,
+                    rightMenuOpen: action.payload,
+                    rightHamButton: null
+                }
+            }
+        case actionTypes.DESTROY_RIGHT:
+            return {
+                ...state,
+                rightMenu: {
+                    ...state.rightMenu,
+                    rightMenuOpen: false,
+                    rightHamButton: false,
+                }
+            }
+        case actionTypes.CLOSE_RIGHT:
+            return {
+                ...state,
+                rightMenu: {
+                    ...state.rightMenu,
+                    rightMenuOpen: false
+                }
+            }
         default: 
             return state;
     }

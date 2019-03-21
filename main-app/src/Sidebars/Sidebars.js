@@ -9,6 +9,9 @@ import './Sidebars.scss';
 import LanguageDropDownComponent from '../Dropdowns/LanguagesDropDown';
 import CheckBoxComponent from '../Checkbox/CheckBox';
 import CardContainer from '../Cards/CardContainer';
+import * as actionTypes from '../store/actions';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 
 const DropdownHeader = styled.h5`
@@ -45,13 +48,21 @@ class SidebarsComponent extends React.Component {
           leftMenuOpen: false,
           leftHamButton: null,
         },
-        rightMenu: {
-          rightMenuOpen: false,
-          rightHamButton: false,
-        }
+        // rightMenu: {
+        //   rightMenuOpen: false,
+        //   rightHamButton: false,
+        // }
       }
     }
-  
+    
+    // componentDidMount(){
+    //   this.setState({
+    //     rightMenu: {
+    //       rightMenuOpen: this.props.rmo,
+    //       rightHamButton: this.props.rhb,
+    //     }
+    //   })
+    // }
     // This keeps your state in sync with the opening/closing of the menu
     // via the default means, e.g. clicking the X, pressing the ESC key etc.
     handleStateChange (state, menu) {
@@ -63,11 +74,12 @@ class SidebarsComponent extends React.Component {
                 }
             })
         } else {
-          this.setState({
-              rightMenu: {
-                  rightMenuOpen: state.rightMenuOpen,
-              }
-          })
+          // this.setState({
+          //     rightMenu: {
+          //         rightMenuOpen: state.rightMenuOpen,
+          //     }
+          // })
+          this.props.handleRight(state);
         }
       } 
     }
@@ -82,11 +94,12 @@ class SidebarsComponent extends React.Component {
                 }
             })
         } else {
-          this.setState({
-              rightMenu: {
-                  rightMenuOpen: false,
-              }
-          })
+          // this.setState({
+          //     rightMenu: {
+          //         rightMenuOpen: false,
+          //     }
+          // })
+          this.props.closeRight();
         }
       }
     }
@@ -97,7 +110,8 @@ class SidebarsComponent extends React.Component {
         if (menu === 0) {
             this.setState({leftMenuOpen: !this.state.leftMenuOpen})
         } else {
-            this.setState({rightMenuOpen: !this.state.rightMenuOpen})
+            // this.setState({rightMenuOpen: !this.state.rightMenuOpen})
+            this.props.toggleRight();
         }
       }
     }
@@ -109,23 +123,25 @@ class SidebarsComponent extends React.Component {
           leftMenuOpen: false,
           leftHamButton: false,
         },
-        rightMenu: {
-          rightMenuOpen: !state.rightMenuOpen,
-          rightHamButton: null,
-        }
+        // rightMenu: {
+        //   rightMenuOpen: !state.rightMenuOpen,
+        //   rightHamButton: null,
+        // }
       })
+      this.props.createRight(state);
     }
 
     newSearchButton (state) {
+      this.props.destroyRight();
       this.setState({
         leftMenu: {
           leftMenuOpen: !state.leftMenuOpen,
           leftHamButton: null,
         },
-        rightMenu: {
-          rightMenuOpen: false,
-          rightHamButton: false,
-        }
+        // rightMenu: {
+        //   rightMenuOpen: false,
+        //   rightHamButton: false,
+        // }
       })
     }
 
@@ -166,9 +182,9 @@ class SidebarsComponent extends React.Component {
             <div className='menu-right'>
               <Menu 
               right
-              isOpen={this.state.rightMenu.rightMenuOpen}
+              isOpen={this.props.rmo}
               onStateChange={(state) => this.handleStateChange(state, 1)}
-              customBurgerIcon={this.state.rightMenu.rightHamButton}
+              customBurgerIcon={this.props.rhb}
               noOverlay
               disableOverlayClick
               >
@@ -187,6 +203,25 @@ class SidebarsComponent extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+  return {
+    rmo: state.rtS.rightMenu.rightMenuOpen,
+    rhb: state.rtS.rightMenu.rightHamButton,
+  }
+};
 
+const mapDispatchToProps = dispatch => {
+  return {
+    handleRight: (state) => dispatch({type: actionTypes.HANDLE_RIGHT, payload: (state.rightMenuOpen)}),
+    toggleRight: () => dispatch({type: actionTypes.TOGGLE_RIGHT}),
+    createRight: (state) => dispatch({type: actionTypes.CREATE_RIGHT, payload: (!state.rightMenuOpen)}),
+    destroyRight: () => dispatch({type: actionTypes.DESTROY_RIGHT}),
+    closeRight: () => dispatch({type: actionTypes.CLOSE_RIGHT})
 
-export default (withStyles)(styles)(SidebarsComponent);
+  }
+}
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps),
+)(SidebarsComponent);
