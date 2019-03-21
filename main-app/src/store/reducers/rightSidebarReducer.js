@@ -72,6 +72,14 @@ const rightSidebarReducer = (state = initialState, action ) => {
                     rightMenuOpen: false
                 }
             }
+        case actionTypes.OPEN_RIGHT:
+            return {
+                ...state,
+                rightMenu: {
+                    ...state.rightMenu,
+                    rightMenuOpen: true
+                }
+            }
         default: 
             return state;
     }

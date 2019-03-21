@@ -11,4 +11,5 @@ export const CLOSE_RIGHT = 'CLOSE_RIGHT';
 export const TOGGLE_RIGHT = 'TOGGLE_RIGHT';
 export const HANDLE_RIGHT = 'HANDLE_RIGHT';
 export const CREATE_RIGHT = 'CREATE_RIGHT';
-export const DESTROY_RIGHT = 'DESTROY_RIGHT'
+export const DESTROY_RIGHT = 'DESTROY_RIGHT';
+export const OPEN_RIGHT = 'OPEN_RIGHT';

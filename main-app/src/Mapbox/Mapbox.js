@@ -4,7 +4,8 @@ import ReactMapboxGl, { Layer, Feature, ZoomControl } from "react-mapbox-gl";
 // import '../../node_modules/mapbox-gl/dist/'
 // import ReactMapboxLanguage from '@mapbox/mapbox-gl-language';
 import { connect } from 'react-redux';
-import Icon from '../images/logo_2blue.png';
+import * as actionTypes from '../store/actions';
+import Icon from '../images/favicon-32x32.png';
 
 const Mapbox = ReactMapboxGl({
   minZoom: 11,
@@ -16,7 +17,9 @@ class MapboxComponent extends React.Component {
   constructor(props){
     super(props)
     this.state = {
+      onlyPtCoords: [],
       points: [],
+      point: {},
       zoom: [16],
       center: [-73.578520, 45.505642],
       bearing: [-55],
@@ -44,11 +47,19 @@ class MapboxComponent extends React.Component {
       lng: card.y,
       lat: card.x,
       id: card.service_id,
+      title: card.title,
     }
+    const newCoord = [
+      card.y,
+      card.x
+    ]
+    const newCoords = this.state.onlyPtCoords;
     const newPoints = this.state.points;
     newPoints.push(newPoint);
+    newCoords.push(newCoord);
     this.setState({
-      points: newPoints
+      points: newPoints,
+      // onlyPtCoords: newCoords,
     });
   };
 
@@ -56,8 +67,16 @@ class MapboxComponent extends React.Component {
     cards.map(this.addMarker);
   };
 
+  markerOnClick = (point, {Feature}) => {
+    this.props.openRight();
+    this.setState({
+      center: Feature.geometry.coordinates,
+      point: point,
+    })
+  }
+
   render() {
-    const { points, zoom, center, bearing } = this.state;
+    const { points, zoom, center, bearing, onlyPtCoords } = this.state;
     const image = new Image(30, 30);
     image.src = Icon;
     const images = ["SWH-Icon", image];
@@ -68,6 +87,7 @@ class MapboxComponent extends React.Component {
         center={center}
         zoom={zoom}
         bearing={bearing}
+        // fitBounds={onlyPtCoords}
         localIdeographFontFamily={'dinreg'}
         containerStyle={{
           height: '100vh',
@@ -81,8 +101,10 @@ class MapboxComponent extends React.Component {
         >
           {points.map((point) => 
             <Feature 
-              id={point.id} 
+              id={point.id}
+              key={point} 
               coordinates={[point.lng,point.lat]}
+              // onClick={this.markerOnClick().bind(this, points[point])}
             />)}
         </Layer>
       </Mapbox>
@@ -97,4 +119,10 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps) (MapboxComponent);
+const mapDispatchToProps = dispatch => {
+  return {
+    openRight: () => dispatch({type: actionTypes.OPEN_RIGHT}) 
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (MapboxComponent);
