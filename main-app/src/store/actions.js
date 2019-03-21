@@ -7,3 +7,5 @@ export const ON_IS_OPEN_CHANGE = 'ON_IS_OPEN_CHANGE';
 export const ON_SUBMIT = 'ON_SUBMIT';
 export const ON_NEW_QUERY = 'ON_NEW_QUERY';
 export const ADD_CARD = 'ADD_CARD';
+export const CLOSE_RIGHT = 'CLOSE_RIGHT';
+export const OPEN_RIGHT = 'OPEN_RIGHT';
