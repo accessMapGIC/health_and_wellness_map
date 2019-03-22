@@ -30,17 +30,17 @@ class MapboxComponent extends React.Component {
     this.generateMarkers(this.props.cards);
   }
 
-  handleClick = (map, ev) => {
-    const { lng, lat } = ev.lngLat;
-    var { points } = this.state;
-    points = [...points, [lng, lat]];
-    const zoom = [map.transform.tileZoom + map.transform.zoomFraction];
-    this.setState({
-      points,
-      zoom,
-      center: map.getCenter()
-    });
-  };
+  // handleClick = (map, ev) => {
+  //   const { lng, lat } = ev.lngLat;
+  //   var { points } = this.state;
+  //   points = [...points, [lng, lat]];
+  //   const zoom = [map.transform.tileZoom + map.transform.zoomFraction];
+  //   this.setState({
+  //     points,
+  //     zoom,
+  //     center: map.getCenter()
+  //   });
+  // };
 
   addMarker = (card) => {
     const newPoint = {
@@ -67,12 +67,13 @@ class MapboxComponent extends React.Component {
     cards.map(this.addMarker);
   };
 
-  markerOnClick = (point, {Feature}) => {
-    this.props.openRight();
+  markerClick = (point, { feature }) => {
+    this.props.closeRight();
     this.setState({
-      center: Feature.geometry.coordinates,
+      center: feature.geometry.coordinates,
       point: point,
     })
+    this.props.openRight();
   }
 
   render() {
@@ -99,16 +100,15 @@ class MapboxComponent extends React.Component {
           layout={{ "icon-image": "SWH-Icon", "icon-allow-overlap": true }}
           images={images}
         >
-          {points.map((point) => 
+          {points.map((point) => (
             <Feature 
               id={point.id}
               key={point} 
               coordinates={[point.lng,point.lat]}
-              // onClick={this.markerOnClick().bind(this, points[point])}
-            />)}
+              onClick={this.markerClick.bind(this, points[point])}
+            />))}
         </Layer>
       </Mapbox>
-        
     );
   }
 }
@@ -121,7 +121,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    openRight: () => dispatch({type: actionTypes.OPEN_RIGHT}) 
+    openRight: () => dispatch({type: actionTypes.OPEN_RIGHT}), 
+    closeRight: () => dispatch({type: actionTypes.CLOSE_RIGHT})
   }
 }
 

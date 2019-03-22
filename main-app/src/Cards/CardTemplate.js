@@ -134,8 +134,6 @@ class CardTemplateComponent extends React.Component {
     this.props.addCard(this.props.title, this.props.address, this.props.service_id, this.props.x, this.props.y);
   }
 
-  handleClick = () => {this.props.onClick(this.props.service_id)};
-
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };

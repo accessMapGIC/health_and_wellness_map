@@ -32,20 +32,21 @@ const rightSidebarReducer = (state = initialState, action ) => {
             newState.rightMenu.cards.push(newCard);
             return newState;
         case actionTypes.HANDLE_RIGHT:
+            console.log(state.rightMenuOpen);
             return {
                 ...state,
                 rightMenu: {
                     ...state.rightMenu,
-                    rightMenuOpen: action.payload
+                    rightMenuOpen: state.rightMenu.rightMenuOpen
                 },
             }
-        case actionTypes.TOGGLE_RIGHT:
-            return {
-                ...state,
-                rightMenu: {
-                    rightMenuOpen: !state.rightMenu.rightMenuOpen
-                }
-            }
+        // case actionTypes.TOGGLE_RIGHT:
+        //     return {
+        //         ...state,
+        //         rightMenu: {
+        //             rightMenuOpen: !state.rightMenu.rightMenuOpen
+        //         }
+        //     }
         case actionTypes.CREATE_RIGHT:
             return {
                 ...state,

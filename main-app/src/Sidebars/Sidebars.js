@@ -73,13 +73,6 @@ class SidebarsComponent extends React.Component {
                     leftMenuOpen: state.leftMenuOpen,
                 }
             })
-        } else {
-          // this.setState({
-          //     rightMenu: {
-          //         rightMenuOpen: state.rightMenuOpen,
-          //     }
-          // })
-          this.props.handleRight(state);
         }
       } 
     }
@@ -106,6 +99,7 @@ class SidebarsComponent extends React.Component {
 
     // This can be used to toggle the menu, e.g. when using a custom icon
     toggleMenuFactory (menu) {
+      console.log('ive been toggled');
       return () => {
         if (menu === 0) {
             this.setState({leftMenuOpen: !this.state.leftMenuOpen})
@@ -183,7 +177,7 @@ class SidebarsComponent extends React.Component {
               <Menu 
               right
               isOpen={this.props.rmo}
-              onStateChange={(state) => this.handleStateChange(state, 1)}
+              onStateChange={this.props.handleRight}
               customBurgerIcon={this.props.rhb}
               noOverlay
               disableOverlayClick
@@ -212,12 +206,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleRight: (state) => dispatch({type: actionTypes.HANDLE_RIGHT, payload: (state.rightMenuOpen)}),
-    toggleRight: () => dispatch({type: actionTypes.TOGGLE_RIGHT}),
+    handleRight: () => dispatch({type: actionTypes.HANDLE_RIGHT}),
     createRight: (state) => dispatch({type: actionTypes.CREATE_RIGHT, payload: (!state.rightMenuOpen)}),
     destroyRight: () => dispatch({type: actionTypes.DESTROY_RIGHT}),
-    closeRight: () => dispatch({type: actionTypes.CLOSE_RIGHT})
-
   }
 }
 
