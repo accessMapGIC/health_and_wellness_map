@@ -4,7 +4,8 @@ const initialState = {
     rightMenu: {
         rightMenuOpen: false,
         rightHamButton: false,
-        cards: []
+        cards: [],
+        activeCard: -1
     }
 }
 
@@ -40,13 +41,6 @@ const rightSidebarReducer = (state = initialState, action ) => {
                     rightMenuOpen: state.rightMenu.rightMenuOpen
                 },
             }
-        // case actionTypes.TOGGLE_RIGHT:
-        //     return {
-        //         ...state,
-        //         rightMenu: {
-        //             rightMenuOpen: !state.rightMenu.rightMenuOpen
-        //         }
-        //     }
         case actionTypes.CREATE_RIGHT:
             return {
                 ...state,
@@ -79,6 +73,26 @@ const rightSidebarReducer = (state = initialState, action ) => {
                 rightMenu: {
                     ...state.rightMenu,
                     rightMenuOpen: true
+                }
+            }
+        case actionTypes.ACTIVATE_CARD:
+            var index = -1;
+            for(var i; i<state.rightMenu.cards; i++){
+                if(state.rightMenu.cards[i].service_id===action.payload){
+                    console.log(index);
+                    index = i;
+                    console.log(i);
+
+                }
+            }
+            return {
+                ...state,
+                rightMenu: {
+                    ...state.rightMenu,
+                    activeCard: action.payload,
+                    ...state.rightMenu.cards[index],
+                    active: true
+
                 }
             }
         default: 

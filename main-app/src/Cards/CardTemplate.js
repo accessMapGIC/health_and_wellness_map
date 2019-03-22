@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import PinDropIcon from '@material-ui/icons/PinDrop';
 import PhoneIcon from '@material-ui/icons/Phone';
 import WebIcon from '@material-ui/icons/Web';
 // import DescriptionIcon from '@material-ui/icons/Description'
@@ -134,6 +135,10 @@ class CardTemplateComponent extends React.Component {
     this.props.addCard(this.props.title, this.props.address, this.props.service_id, this.props.x, this.props.y);
   }
 
+  handleMapRedirect(id){
+    this.props.activateCard(id)
+  }
+
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
@@ -196,9 +201,16 @@ class CardTemplateComponent extends React.Component {
     const orderedHours = this.reOrderHours(this.props.hours);
     const curDay = this.handleCurrentDay(this.props.hours);
     return (
-      <Card className={this.props.isActive ? classes.card : classes.activeCard} onClick={this.handleClick}>
+      <Card className={this.props.activeCard === this.props.service_id ? classes.activeCard : classes.card}>
         <CardHeader 
           className={classes.cardHeader}
+          avatar={
+            <IconButton
+              onClick={this.handleMapRedirect(this.props.service_id)}
+            >
+              <PinDropIcon/>
+            </IconButton>
+          }
           action={
             <IconButton
             className={classnames(classes.expand, {
@@ -300,6 +312,7 @@ CardTemplateComponent.propTypes = {
 
 const mapStateToProps = state => {
   return {
+    activeCard: state.rtS.rightMenu.activeCard,
   }
 };
 
@@ -315,6 +328,10 @@ const mapDispatchToProps = dispatch => {
         y: y,
         active: false, 
       }
+    }),
+    activateCard: (service_id) => dispatch ({
+      type: actionTypes.ACTIVATE_CARD,
+      payload: service_id
     })
   }
 }

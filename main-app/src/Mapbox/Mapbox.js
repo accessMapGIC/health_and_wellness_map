@@ -17,7 +17,6 @@ class MapboxComponent extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      onlyPtCoords: [],
       points: [],
       point: {},
       zoom: [16],
@@ -49,14 +48,8 @@ class MapboxComponent extends React.Component {
       id: card.service_id,
       title: card.title,
     }
-    const newCoord = [
-      card.y,
-      card.x
-    ]
-    const newCoords = this.state.onlyPtCoords;
     const newPoints = this.state.points;
     newPoints.push(newPoint);
-    newCoords.push(newCoord);
     this.setState({
       points: newPoints,
       // onlyPtCoords: newCoords,
@@ -122,7 +115,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     openRight: () => dispatch({type: actionTypes.OPEN_RIGHT}), 
-    closeRight: () => dispatch({type: actionTypes.CLOSE_RIGHT})
+    closeRight: () => dispatch({type: actionTypes.CLOSE_RIGHT}),
+    activateCard: (service_id) => dispatch({
+      type: actionTypes.ACTIVATE_CARD, 
+      payload: service_id
+    })    
   }
 }
 
