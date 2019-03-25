@@ -3,14 +3,18 @@ import CardTemplate from './CardTemplate';
 import data from "../store/newOutput.json";
 // import * as actionTypes from "../store/actions";
 // import { compose } from 'redux';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
+// import * as actionTypes from '../store/actions';
 
 
 class CardContainer extends React.Component{
-      state = {
-        activeCard: null
-      };
-      // this.handleClick = this.handleClick.bind(this)
+      constructor(props) {
+        super(props);
+        this.state = {
+          activeCard: null
+        };
+        // this.handleClick = this.handleClick.bind(this);
+      }
 
     handleClick = (service_id) => this.setState({ activeCard: service_id })
 
@@ -46,8 +50,8 @@ class CardContainer extends React.Component{
       return (
         <div className='Card_Container'>
           {
-            cards.map(function(card) {
-              return <CardTemplate
+            cards.map((card) => 
+              <CardTemplate
                 title={card.name}
                 address={card.address}
                 phone={card.phone}
@@ -57,14 +61,28 @@ class CardContainer extends React.Component{
                 y={card.y}
                 service_id={card.service_id}
                 key={card.service_id}
-                // onClick={ this.handleClick }
-                // isActive={ this.state.activeCard === card.service_id }
+                onClick={this.handleClick}
+                isActive={this.props.activeCard === card.service_id}
               />
-            })
-          }
+            )}
         </div>
       )
     }
 }
-  
-  export default (CardContainer);
+
+const mapStateToProps = state => {
+  return {
+    activeCard: state.rtS.rightMenu.activeCard,
+  }
+}
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     activateCard: (service_id) => dispatch({
+//       type: actionTypes.ACTIVATE_CARD, 
+//       payload: service_id
+//     })    
+//   }
+// }
+
+export default connect(mapStateToProps)(CardContainer);

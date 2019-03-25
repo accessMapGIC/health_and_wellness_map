@@ -44,8 +44,9 @@ const styles = theme => ({
     marginBottom: '10px',
     marginTop: '10px',
     borderStyle: 'solid',
-    borderWidth: '5px',
-    borderColor: 'fff',
+    borderWidth: '3px',
+    borderColor: 'black',
+    fontWeight: 'bold',
   },
   cardHeader: {
     paddingBottom: '0px !important',
@@ -135,9 +136,7 @@ class CardTemplateComponent extends React.Component {
     this.props.addCard(this.props.title, this.props.address, this.props.service_id, this.props.x, this.props.y);
   }
 
-  handleMapRedirect(id){
-    this.props.activateCard(id)
-  }
+  // handleActiveCard = () => this.props.onClick(this.props.service_id);
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
@@ -200,13 +199,14 @@ class CardTemplateComponent extends React.Component {
     const { classes } = this.props;
     const orderedHours = this.reOrderHours(this.props.hours);
     const curDay = this.handleCurrentDay(this.props.hours);
+
     return (
       <Card className={this.props.activeCard === this.props.service_id ? classes.activeCard : classes.card}>
         <CardHeader 
           className={classes.cardHeader}
           avatar={
             <IconButton
-              onClick={this.handleMapRedirect(this.props.service_id)}
+              onClick={state => this.props.activateCard(this.props.service_id)}
             >
               <PinDropIcon/>
             </IconButton>
@@ -220,7 +220,7 @@ class CardTemplateComponent extends React.Component {
             aria-expanded={this.state.expanded}
             aria-label="Show more"
           > 
-            <ExpandMoreIcon />
+            <ExpandMoreIcon className={classes.materialIcons} />
           </IconButton>
           }
           

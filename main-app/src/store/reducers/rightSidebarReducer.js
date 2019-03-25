@@ -33,7 +33,6 @@ const rightSidebarReducer = (state = initialState, action ) => {
             newState.rightMenu.cards.push(newCard);
             return newState;
         case actionTypes.HANDLE_RIGHT:
-            console.log(state.rightMenuOpen);
             return {
                 ...state,
                 rightMenu: {
@@ -76,25 +75,39 @@ const rightSidebarReducer = (state = initialState, action ) => {
                 }
             }
         case actionTypes.ACTIVATE_CARD:
-            var index = -1;
-            for(var i; i<state.rightMenu.cards; i++){
-                if(state.rightMenu.cards[i].service_id===action.payload){
-                    console.log(index);
-                    index = i;
-                    console.log(i);
+            // var index = -1;
+            // for(var i; i<state.rightMenu.cards; i++){
+            //     if(state.rightMenu.cards[i].service_id===action.payload){
+            //         console.log(index);
+            //         index = i;
+            //         console.log(i);
 
+            //     }
+            // }
+            if(action.payload === state.rightMenu.activeCard){
+                return {
+                    ...state,
+                    rightMenu: {
+                        ...state.rightMenu,
+                        activeCard: -1
+                        // ...state.rightMenu.cards[index],
+                        // active: true
+    
+                    }
+                }
+            }else{
+                return {
+                    ...state,
+                    rightMenu: {
+                        ...state.rightMenu,
+                        activeCard: action.payload
+                        // ...state.rightMenu.cards[index],
+                        // active: true
+    
+                    }
                 }
             }
-            return {
-                ...state,
-                rightMenu: {
-                    ...state.rightMenu,
-                    activeCard: action.payload,
-                    ...state.rightMenu.cards[index],
-                    active: true
-
-                }
-            }
+            
         default: 
             return state;
     }
