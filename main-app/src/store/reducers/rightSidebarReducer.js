@@ -27,7 +27,7 @@ const rightSidebarReducer = (state = initialState, action ) => {
                 x: action.payload.x,
                 y: action.payload.y,
                 service_id: action.payload.service_id,
-                active: action.payload.active
+                ref: action.payload.ref
             }
             const newState = Object.assign({}, state);
             newState.rightMenu.cards.push(newCard);

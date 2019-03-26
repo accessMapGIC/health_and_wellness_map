@@ -1,11 +1,12 @@
 import React from 'react';
-import ReactMapboxGl, { Layer, Feature, ZoomControl } from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Feature, ZoomControl, Marker } from "react-mapbox-gl";
 // import '../node_modules/mapbox-gl/dist/mapbox-gl.css'
 // import '../../node_modules/mapbox-gl/dist/'
 // import ReactMapboxLanguage from '@mapbox/mapbox-gl-language';
 import { connect } from 'react-redux';
 import * as actionTypes from '../store/actions';
 import Icon from '../images/favicon-32x32.png';
+import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
 
 const Mapbox = ReactMapboxGl({
   minZoom: 11,
@@ -20,9 +21,14 @@ class MapboxComponent extends React.Component {
       points: [],
       point: {},
       zoom: [16],
-      center: [-73.578520, 45.505642],
+      center: [-73.5731, 45.501],//[-73.578520, 45.505642],
       bearing: [-55],
+      userCoords: [],
     };
+  }
+
+  componentWillMount() {
+    this.getUserLocation();
   }
 
   componentDidMount() {
@@ -47,6 +53,7 @@ class MapboxComponent extends React.Component {
       lat: card.x,
       id: card.service_id,
       title: card.title,
+      ref: card.ref,
     }
     const newPoints = this.state.points;
     newPoints.push(newPoint);
@@ -67,10 +74,23 @@ class MapboxComponent extends React.Component {
       point: point,
     })
     this.props.openRight();
+    this.props.activateCard(feature.properties.id)
+  }
+  getUserLocation = () => {
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.centerOn)
+    }
+  }
+  centerOn = (position) => {
+    console.log([position.coords.longitude, position.coords.latitude]);
+    this.setState({
+      center: [position.coords.longitude, position.coords.latitude],
+      userCoords: [position.coords.longitude, position.coords.latitude]
+    })
   }
 
   render() {
-    const { points, zoom, center, bearing, onlyPtCoords } = this.state;
+    const { points, zoom, center, bearing, userCoords} = this.state;
     const image = new Image(30, 30);
     image.src = Icon;
     const images = ["SWH-Icon", image];
@@ -96,11 +116,17 @@ class MapboxComponent extends React.Component {
           {points.map((point) => (
             <Feature 
               id={point.id}
-              key={point} 
+              key={point}
+              ref={point.ref}
               coordinates={[point.lng,point.lat]}
               onClick={this.markerClick.bind(this, points[point])}
             />))}
         </Layer>
+        <Marker
+          coordinates={userCoords}
+          anchor="bottom">
+          <AccessibilityNewIcon/>
+        </Marker>
       </Mapbox>
     );
   }

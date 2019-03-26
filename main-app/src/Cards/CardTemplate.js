@@ -45,11 +45,13 @@ const styles = theme => ({
     marginTop: '10px',
     borderStyle: 'solid',
     borderWidth: '3px',
-    borderColor: 'black',
-    fontWeight: 'bold',
+    borderColor: '#1d424a',
   },
   cardHeader: {
     paddingBottom: '0px !important',
+  },
+  activeCardHeader: {
+    wontWeight: 'bold',
   },
   openNow: {
     color: '#00ff00',
@@ -127,18 +129,27 @@ const styles = theme => ({
 });
 
 class CardTemplateComponent extends React.Component {
-  state = { 
-    expanded: false, 
-    hoursExpanded: false,
-  };
-
-  componentDidMount() {
-    this.props.addCard(this.props.title, this.props.address, this.props.service_id, this.props.x, this.props.y);
+  constructor(props){
+    super(props)
+    this.state = { 
+      expanded: false, 
+      hoursExpanded: false,
+    };
   }
 
+  componentDidMount() {
+    this.props.addCard(this.props.title, this.props.address, this.props.service_id, this.props.x, this.props.y, this.props.ref);
+  }
+  
+  // componentDidUpdate() {
+  //   if(this.props.activeCard === this.props.service_id){
+      
+  //   }
+  // }
   // handleActiveCard = () => this.props.onClick(this.props.service_id);
 
   handleExpandClick = () => {
+
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
@@ -201,7 +212,7 @@ class CardTemplateComponent extends React.Component {
     const curDay = this.handleCurrentDay(this.props.hours);
 
     return (
-      <Card className={this.props.activeCard === this.props.service_id ? classes.activeCard : classes.card}>
+      <Card className={this.props.activeCard === this.props.service_id ? classes.activeCard : classes.card} ref={this.props.ref}>
         <CardHeader 
           className={classes.cardHeader}
           avatar={
@@ -313,12 +324,13 @@ CardTemplateComponent.propTypes = {
 const mapStateToProps = state => {
   return {
     activeCard: state.rtS.rightMenu.activeCard,
+    cards: state.rtS.rightMenu.cards,
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    addCard: (title, address, service_id, x, y) => dispatch({
+    addCard: (title, address, service_id, x, y, ref) => dispatch({
       type: actionTypes.ADD_CARD, 
       payload: {
         title: title, 
@@ -326,7 +338,7 @@ const mapDispatchToProps = dispatch => {
         service_id: service_id, 
         x: x, 
         y: y,
-        active: false, 
+        ref: ref,
       }
     }),
     activateCard: (service_id) => dispatch ({

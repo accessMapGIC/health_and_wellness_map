@@ -61,8 +61,6 @@ class CardContainer extends React.Component{
                 y={card.y}
                 service_id={card.service_id}
                 key={card.service_id}
-                onClick={this.handleClick}
-                isActive={this.props.activeCard === card.service_id}
               />
             )}
         </div>
