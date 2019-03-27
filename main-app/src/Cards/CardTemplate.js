@@ -21,6 +21,7 @@ import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as moment from 'moment';
+import activatePoint from '../Mapbox/Mapbox';
 
 
 
@@ -140,16 +141,13 @@ class CardTemplateComponent extends React.Component {
   componentDidMount() {
     this.props.addCard(this.props.title, this.props.address, this.props.service_id, this.props.x, this.props.y, this.props.ref);
   }
-  
-  // componentDidUpdate() {
-  //   if(this.props.activeCard === this.props.service_id){
-      
-  //   }
-  // }
-  // handleActiveCard = () => this.props.onClick(this.props.service_id);
+
+  handleActivation = () => {
+    this.props.activateCard(this.props.service_id);
+    this.props.activatePoint(this.props.service_id);
+  }
 
   handleExpandClick = () => {
-
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
@@ -217,7 +215,7 @@ class CardTemplateComponent extends React.Component {
           className={classes.cardHeader}
           avatar={
             <IconButton
-              onClick={state => this.props.activateCard(this.props.service_id)}
+              onClick={this.handleActivation}
             >
               <PinDropIcon/>
             </IconButton>
@@ -330,19 +328,22 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addCard: (title, address, service_id, x, y, ref) => dispatch({
+    addCard: (title, address, service_id, x, y) => dispatch({
       type: actionTypes.ADD_CARD, 
       payload: {
         title: title, 
         address: address, 
         service_id: service_id, 
         x: x, 
-        y: y,
-        ref: ref,
+        y: y
       }
     }),
     activateCard: (service_id) => dispatch ({
       type: actionTypes.ACTIVATE_CARD,
+      payload: service_id
+    }),
+    activatePoint: (service_id) => dispatch ({
+      type: actionTypes.ACTIVATE_POINT,
       payload: service_id
     })
   }

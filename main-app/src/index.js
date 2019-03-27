@@ -7,11 +7,13 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import leftSidebarReducer from './store/reducers/leftSidebarReducer';
 import rightSidebarReducer from './store/reducers/rightSidebarReducer';
+import mapboxReducer from './store/reducers/mapboxReducer';
 import { devToolsEnhancer } from 'redux-devtools-extension';
 
 const rootReducer = combineReducers({
     lfS: leftSidebarReducer,
     rtS: rightSidebarReducer,
+    mpB: mapboxReducer,
 });
 
 const store = createStore(rootReducer, devToolsEnhancer());

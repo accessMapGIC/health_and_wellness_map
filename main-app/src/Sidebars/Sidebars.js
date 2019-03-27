@@ -29,10 +29,7 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
     color: theme.palette.getContrastText('#4ec3c7'),
-    backgroundColor: '#4ec3c7',
-    '&:hover': {
-      backgroundColor: '#4ec3c7',
-    },
+    
   }
 });
 
@@ -140,6 +137,7 @@ class SidebarsComponent extends React.Component {
     }
 
     render () {
+        const { classes } = this.props;
         return (
           <div className='menu-sidebars'>
             <div className='menu-left'>
@@ -166,7 +164,7 @@ class SidebarsComponent extends React.Component {
                       <CheckBoxComponent/>
                     </div>
                   </div>
-                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch="true" onClick={(state) => this.submitButton(state)}>
+                  <Button variant="contained" color={"primary"} className={classes.button} href="" prefetch="true" onClick={(state) => this.submitButton(state)}>
                     Submit
                   </Button>
                   {/* <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> */}
@@ -186,7 +184,7 @@ class SidebarsComponent extends React.Component {
                 {/* <CardTemplateComponent/> */}
                 <CardContainer/>
                 <Container>
-                  <Button variant="contained" color={"primary"} className="{classes.button}" href="" prefetch="true" onClick={(state) => this.newSearchButton(state)}>
+                  <Button variant="contained" color={"primary"} className={classes.button} href="" prefetch="true" onClick={(state) => this.newSearchButton(state)}>
                     new Search Query
                   </Button>
                 </Container>

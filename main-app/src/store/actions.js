@@ -13,3 +13,7 @@ export const HANDLE_RIGHT = 'HANDLE_RIGHT';
 export const CREATE_RIGHT = 'CREATE_RIGHT';
 export const DESTROY_RIGHT = 'DESTROY_RIGHT';
 export const OPEN_RIGHT = 'OPEN_RIGHT';
+export const ADD_POINT = 'ADD_POINT';
+export const CENTER_ON_POINT = 'CENTER_ON_POINT';
+export const ACTIVATE_POINT = 'ACTIVATE_POINT';
+export const CENTER_ON_USER = 'CENTER_ON_USER';

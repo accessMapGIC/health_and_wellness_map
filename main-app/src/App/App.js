@@ -11,6 +11,7 @@ class App extends Component {
         <main id='page-wrap'>
           <MapboxComponent/>
         </main>
+        
       </div>
     );
   }
