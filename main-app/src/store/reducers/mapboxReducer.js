@@ -39,11 +39,15 @@ const mapboxReducer = (state = initialState, action ) => {
                 center: newCenter,
             }
         case actionTypes.CENTER_ON_USER:
-            return {
-                ...state,
-                center: action.payload.center,
-                userCoords: action.payload.center,
-            }
+            // navigator.geolocation.getCurrentPosition((position) => {
+            //     console.log(position);
+            //     const center=[position.coords.longitude, position.coords.latitude];
+            //     return center;
+            // })
+            // return {
+            //     ...state,
+            //     center: center,
+            // }
         case actionTypes.CLOSE_RIGHT:
             return {
                 ...state,

@@ -21,7 +21,6 @@ import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as moment from 'moment';
-import activatePoint from '../Mapbox/Mapbox';
 
 
 

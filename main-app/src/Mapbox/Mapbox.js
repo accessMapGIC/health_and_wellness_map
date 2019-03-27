@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactMapboxGl, { Layer, Feature, ZoomControl, Marker } from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Feature} from "react-mapbox-gl";
 import mapboxgl from 'mapbox-gl';
 // import '../node_modules/mapbox-gl/dist/mapbox-gl.css'
 // import '../../node_modules/mapbox-gl/dist/'
@@ -9,10 +9,9 @@ import * as actionTypes from '../store/actions';
 import Icon from '../images/favicon-32x32.png';
 import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
 import { CardActionArea, withStyles } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 import MyLocationIcon from '@material-ui/icons/MyLocation';
 import { compose } from 'redux';
-import MyLocalButton from './MapboxButton';
 
 const Mapbox = ReactMapboxGl({
   minZoom: 11,
@@ -82,11 +81,11 @@ class MapboxComponent extends React.Component {
 
   // };
 
-  getUserLocation = () => {
-    if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.props.centerOnUser);
-    }
-  }
+  // getUserLocation = () => {
+  //   if(navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(this.props.centerOnUser);
+  //   }
+  // }
 
   generateMarkers = (cards) => {
     cards.map(this.props.addPoint);
@@ -136,7 +135,7 @@ class MapboxComponent extends React.Component {
               onClick={this.markerClick.bind(this, (this.props.points)[point])}
             />))}
         </Layer>
-        <Button variant="fab" className={classes.myLocalButton} title="center on your location" prefetch="true" onClick={this.getUserLocation()}><MyLocationIcon/></Button>
+        <Fab className={classes.myLocalButton} title="center on your location" prefetch="true" onClick={this.props.centerOnUser}><MyLocationIcon/></Fab>
       </Mapbox>
       
     );
@@ -179,12 +178,7 @@ const mapDispatchToProps = dispatch => {
         center: coordinates,
       }
     }),
-    centerOnUser:(position) => dispatch({
-      type: actionTypes.CENTER_ON_USER,
-      payload: {
-        center: [position.coords.longitude, position.coords.latitude],
-      }
-    }) 
+    centerOnUser:() => dispatch({type: actionTypes.CENTER_ON_USER}) 
   }
 }
 
