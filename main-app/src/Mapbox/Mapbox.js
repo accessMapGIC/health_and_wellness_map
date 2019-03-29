@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactMapboxGl, { Layer, Feature} from "react-mapbox-gl";
-import mapboxgl from 'mapbox-gl';
 // import '../node_modules/mapbox-gl/dist/mapbox-gl.css'
 // import '../../node_modules/mapbox-gl/dist/'
 // import ReactMapboxLanguage from '@mapbox/mapbox-gl-language';
 import { connect } from 'react-redux';
 import * as actionTypes from '../store/actions';
 import Icon from '../images/favicon-32x32.png';
-import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
-import { CardActionArea, withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import MyLocationIcon from '@material-ui/icons/MyLocation';
 import { compose } from 'redux';
@@ -91,7 +89,9 @@ class MapboxComponent extends React.Component {
     cards.map(this.props.addPoint);
   };
 
-  markerClick = (point, { feature }) => {
+  markerClick = ({ feature }) => {
+    console.log(this.props.points);
+    console.log(feature);
     this.props.closeRight();
     // this.setState({
     //   center: feature.geometry.coordinates,
@@ -127,12 +127,12 @@ class MapboxComponent extends React.Component {
           layout={{ "icon-image": "SWH-Icon", "icon-allow-overlap": true }}
           images={images}
         >
-          {(this.props.points).map((point) => (
+          {(this.props.points).map(point => (
             <Feature 
               id={point.id}
               key={point}
               coordinates={[point.lng,point.lat]}
-              onClick={this.markerClick.bind(this, (this.props.points)[point])}
+              onClick={this.markerClick.bind(this, point)}
             />))}
         </Layer>
         <Fab className={classes.myLocalButton} title="center on your location" prefetch="true" onClick={this.props.centerOnUser}><MyLocationIcon/></Fab>

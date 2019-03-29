@@ -44,10 +44,10 @@ const mapboxReducer = (state = initialState, action ) => {
             //     const center=[position.coords.longitude, position.coords.latitude];
             //     return center;
             // })
-            // return {
-            //     ...state,
-            //     center: center,
-            // }
+            return {
+                ...state,
+                // center: center,
+            }
         case actionTypes.CLOSE_RIGHT:
             return {
                 ...state,
