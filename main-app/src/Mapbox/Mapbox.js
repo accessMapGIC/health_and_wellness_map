@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactMapboxGl, { Layer, Feature} from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Feature, Popup} from "react-mapbox-gl";
 // import '../node_modules/mapbox-gl/dist/mapbox-gl.css'
 // import '../../node_modules/mapbox-gl/dist/'
 // import ReactMapboxLanguage from '@mapbox/mapbox-gl-language';
@@ -10,6 +10,8 @@ import { withStyles } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import MyLocationIcon from '@material-ui/icons/MyLocation';
 import { compose } from 'redux';
+import styled from 'styled-components';
+
 
 const Mapbox = ReactMapboxGl({
   minZoom: 11,
@@ -30,8 +32,16 @@ const styles = theme => ({
     position: 'absolute',
     right: '50%',
   }
-
 });
+
+const StyledPopup = styled.div`
+  background: white;
+  color: #3f618c;
+  font-weight: 400;
+  padding: 5px;
+  border-radius: 2px;
+  text-align: center;
+`;
 
 class MapboxComponent extends React.Component {
   constructor(props){
@@ -89,17 +99,15 @@ class MapboxComponent extends React.Component {
     cards.map(this.props.addPoint);
   };
 
-  markerClick = ({ feature }) => {
-    console.log(this.props.points);
-    console.log(feature);
+  markerClick = (lng, lat, id, title, address) => {
     this.props.closeRight();
     // this.setState({
     //   center: feature.geometry.coordinates,
     //   point: this.state.points[point],
     // })
-    this.props.centerOnPoint(feature.geometry.coordinates);
+    this.props.centerOnPoint([lng, lat], id, title, address);
     this.props.openRight();
-    this.props.activateCard(feature.properties.id)
+    this.props.activateCard(id)
   }
 
   render() {
@@ -127,14 +135,24 @@ class MapboxComponent extends React.Component {
           layout={{ "icon-image": "SWH-Icon", "icon-allow-overlap": true }}
           images={images}
         >
-          {(this.props.points).map(point => (
+          {(this.props.points).map(({lng, lat, id, title, address}) => (
             <Feature 
-              id={point.id}
-              key={point}
-              coordinates={[point.lng,point.lat]}
-              onClick={this.markerClick.bind(this, point)}
+              id={id}
+              key={id}
+              coordinates={[lng,lat]}
+              onClick={this.markerClick.bind(this, lng, lat, id, title, address)}
             />))}
         </Layer>
+        {this.props.point && (
+          <Popup key={this.props.point.id} coordinates={[this.props.point.lng, this.props.point.lat]}>
+            <StyledPopup>
+              <div>{this.props.point.title}</div>
+              <div>
+                <a href={'https://www.google.ca/maps/?q=' + this.props.point.address} target="_blank" rel="noopener noreferrer">get directions</a>
+              </div>
+            </StyledPopup>
+          </Popup>
+        )}
         <Fab className={classes.myLocalButton} title="center on your location" prefetch="true" onClick={this.props.centerOnUser}><MyLocationIcon/></Fab>
       </Mapbox>
       
@@ -170,12 +188,16 @@ const mapDispatchToProps = dispatch => {
         lat: card.x,
         id: card.service_id,
         title: card.title,
+        address: card.address,
       }
     }),
-    centerOnPoint:(coordinates) => dispatch({
+    centerOnPoint:(coordinates, id, title, address) => dispatch({
       type: actionTypes.CENTER_ON_POINT,
       payload: {
         center: coordinates,
+        id: id, 
+        title: title,
+        address: address,
       }
     }),
     centerOnUser:() => dispatch({type: actionTypes.CENTER_ON_USER}) 
