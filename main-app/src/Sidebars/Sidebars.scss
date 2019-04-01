@@ -181,7 +181,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
   .Card_Container {
     max-height: 400px;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 
   /* CSS LOADER */

@@ -11,6 +11,7 @@ class CardContainer extends React.Component{
       constructor(props) {
         super(props);
         this.state = {
+          
           activeCard: null
         };
         // this.handleClick = this.handleClick.bind(this);

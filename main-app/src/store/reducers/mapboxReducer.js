@@ -18,6 +18,7 @@ const mapboxReducer = (state = initialState, action ) => {
                 id: action.payload.id,
                 title: action.payload.title,
                 address: action.payload.address,
+                ref: action.payload.ref,
             }
             const newState = Object.assign({}, state);
             newState.points.push(newPoint);
@@ -33,6 +34,7 @@ const mapboxReducer = (state = initialState, action ) => {
                     id: action.payload.id,
                     title: action.payload.title,
                     address: action.payload.address,
+                    ref: action.payload.ref,
                 }
             }
         case actionTypes.ACTIVATE_POINT:
@@ -47,6 +49,7 @@ const mapboxReducer = (state = initialState, action ) => {
                         id: state.points[i].id,
                         title: state.points[i].title,
                         address: state.points[i].address,
+                        ref: state.points[i].ref,
                     }
                 }
             }

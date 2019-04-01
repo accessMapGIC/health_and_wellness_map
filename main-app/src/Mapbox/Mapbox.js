@@ -107,7 +107,11 @@ class MapboxComponent extends React.Component {
     // })
     this.props.centerOnPoint([lng, lat], id, title, address);
     this.props.openRight();
-    this.props.activateCard(id)
+    this.props.activateCard(id);
+    var activeCard = document.getElementsByClassName('Connect-CardTemplateComponent--activeCard-167')
+    var topPos = activeCard.offsetTop;
+    document.getElementsByClassName('Card_Container').scrollTop = topPos;
+
   }
 
   render() {

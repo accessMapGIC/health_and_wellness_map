@@ -138,7 +138,7 @@ class CardTemplateComponent extends React.Component {
   }
 
   componentDidMount() {
-    this.props.addCard(this.props.title, this.props.address, this.props.service_id, this.props.x, this.props.y, this.props.ref);
+    this.props.addCard(this.props.title, this.props.address, this.props.service_id, this.props.x, this.props.y);
   }
 
   handleActivation = () => {
@@ -148,6 +148,7 @@ class CardTemplateComponent extends React.Component {
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
+    console.log(this.myRef.current);
   };
 
   handleHourExpandClick = () => {
@@ -209,7 +210,7 @@ class CardTemplateComponent extends React.Component {
     const curDay = this.handleCurrentDay(this.props.hours);
 
     return (
-      <Card className={this.props.activeCard === this.props.service_id ? classes.activeCard : classes.card} ref={this.props.ref}>
+      <Card className={this.props.activeCard === this.props.service_id ? classes.activeCard : classes.card} ref={this.myRef}>
         <CardHeader 
           className={classes.cardHeader}
           avatar={
@@ -327,14 +328,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addCard: (title, address, service_id, x, y) => dispatch({
+    addCard: (title, address, service_id, x, y, ref) => dispatch({
       type: actionTypes.ADD_CARD, 
       payload: {
         title: title, 
         address: address, 
         service_id: service_id, 
         x: x, 
-        y: y
+        y: y,
       }
     }),
     activateCard: (service_id) => dispatch ({
