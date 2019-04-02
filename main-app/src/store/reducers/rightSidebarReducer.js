@@ -75,25 +75,14 @@ const rightSidebarReducer = (state = initialState, action ) => {
                 }
             }
         case actionTypes.ACTIVATE_CARD:
-            // var index = -1;
-            // for(var i; i<state.rightMenu.cards; i++){
-            //     if(state.rightMenu.cards[i].service_id===action.payload){
-            //         console.log(index);
-            //         index = i;
-            //         console.log(i);
-
-            //     }
-            // }
             if(action.payload === state.rightMenu.activeCard){
                 return {
                     ...state,
-                    rightMenu: {
-                        ...state.rightMenu,
-                        activeCard: -1
-                        // ...state.rightMenu.cards[index],
-                        // active: true
+                    // rightMenu: {
+                    //     ...state.rightMenu,
+                    //     activeCard: -1
     
-                    }
+                    // }
                 }
             }else{
                 return {
@@ -101,8 +90,6 @@ const rightSidebarReducer = (state = initialState, action ) => {
                     rightMenu: {
                         ...state.rightMenu,
                         activeCard: action.payload
-                        // ...state.rightMenu.cards[index],
-                        // active: true
     
                     }
                 }
