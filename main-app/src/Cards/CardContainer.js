@@ -5,13 +5,14 @@ import data from "../store/newOutput.json";
 // import { compose } from 'redux';
 import { connect } from 'react-redux';
 // import * as actionTypes from '../store/actions';
+import {Element} from 'react-scroll';
 
 
 class CardContainer extends React.Component{
       constructor(props) {
         super(props);
         this.state = {
-          
+
           activeCard: null
         };
         // this.handleClick = this.handleClick.bind(this);
@@ -49,20 +50,22 @@ class CardContainer extends React.Component{
     render(){
       const cards = data;
       return (
-        <div className='Card_Container'>
+        <div className='Card_Container' id='Card_Container'>
           {
             cards.map((card) => 
-              <CardTemplate
-                title={card.name}
-                address={card.address}
-                phone={card.phone}
-                hours={card.hours}
-                url={card.url}
-                x={card.x}
-                y={card.y}
-                service_id={card.service_id}
-                key={card.service_id}
-              />
+              <Element name={card.service_id} key={card.service_id}>
+                <CardTemplate
+                  title={card.name}
+                  address={card.address}
+                  phone={card.phone}
+                  hours={card.hours}
+                  url={card.url}
+                  x={card.x}
+                  y={card.y}
+                  service_id={card.service_id}
+                  key={card.service_id}
+                />
+              </Element>
             )}
         </div>
       )

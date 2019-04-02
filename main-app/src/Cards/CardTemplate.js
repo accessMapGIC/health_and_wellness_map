@@ -210,7 +210,7 @@ class CardTemplateComponent extends React.Component {
     const curDay = this.handleCurrentDay(this.props.hours);
 
     return (
-      <Card className={this.props.activeCard === this.props.service_id ? classes.activeCard : classes.card} ref={this.myRef}>
+      <Card className={this.props.activeCard === this.props.service_id ? classes.activeCard : classes.card}>
         <CardHeader 
           className={classes.cardHeader}
           avatar={

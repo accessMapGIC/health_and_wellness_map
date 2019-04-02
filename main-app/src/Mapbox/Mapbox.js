@@ -11,6 +11,7 @@ import Fab from '@material-ui/core/Fab';
 import MyLocationIcon from '@material-ui/icons/MyLocation';
 import { compose } from 'redux';
 import styled from 'styled-components';
+import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 
 
 const Mapbox = ReactMapboxGl({
@@ -108,10 +109,13 @@ class MapboxComponent extends React.Component {
     this.props.centerOnPoint([lng, lat], id, title, address);
     this.props.openRight();
     this.props.activateCard(id);
-    var activeCard = document.getElementsByClassName('Connect-CardTemplateComponent--activeCard-167')
-    var topPos = activeCard.offsetTop;
-    document.getElementsByClassName('Card_Container').scrollTop = topPos;
-
+    scroller.scrollTo(id, {
+      duration: 1500,
+      delay: 100,
+      smooth: true,
+      containerId: 'Card_Container',
+      offset: -70, // Scrolls to element + 50 pixels down the page
+    })
   }
 
   render() {
@@ -145,7 +149,9 @@ class MapboxComponent extends React.Component {
               key={id}
               coordinates={[lng,lat]}
               onClick={this.markerClick.bind(this, lng, lat, id, title, address)}
-            />))}
+            >
+            <Link activeClass="active" to={"" + id} spy={true} smooth={true} offset={50} duration={500}/>
+            </Feature>))}
         </Layer>
         {this.props.point && (
           <Popup key={this.props.point.id} coordinates={[this.props.point.lng, this.props.point.lat]}>
