@@ -148,7 +148,6 @@ class CardTemplateComponent extends React.Component {
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
-    console.log(this.myRef.current);
   };
 
   handleHourExpandClick = () => {
