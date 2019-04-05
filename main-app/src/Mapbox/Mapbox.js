@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactMapboxGl, { Layer, Feature, Popup} from "react-mapbox-gl";
+import PropTypes from 'prop-types';
 // import '../node_modules/mapbox-gl/dist/mapbox-gl.css'
 // import '../../node_modules/mapbox-gl/dist/'
 // import ReactMapboxLanguage from '@mapbox/mapbox-gl-language';
+import mapboxgl from 'mapbox-gl';
 import { connect } from 'react-redux';
 import * as actionTypes from '../store/actions';
 import Icon from '../images/favicon-32x32.png';
@@ -12,6 +14,7 @@ import MyLocationIcon from '@material-ui/icons/MyLocation';
 import { compose } from 'redux';
 import styled from 'styled-components';
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+import { checkPropTypes } from 'prop-types';
 
 
 const Mapbox = ReactMapboxGl({
@@ -57,44 +60,20 @@ class MapboxComponent extends React.Component {
     };
   }
 
+
   componentDidMount() {
     this.generateMarkers(this.props.cards);
     // console.log(this.props.activeCard);
+  };
+
+  mapDidLoad = (map) => {
+    map.addControl(new mapboxgl.GeolocateControl({
+      positionOptions: {
+      enableHighAccuracy: true
+      },
+      trackUserLocation: true
+      }),'bottom-right');
   }
-
-  // handleClick = (map, ev) => {
-  //   const { lng, lat } = ev.lngLat;
-  //   var { points } = this.state;
-  //   points = [...points, [lng, lat]];
-  //   const zoom = [map.transform.tileZoom + map.transform.zoomFraction];
-  //   this.setState({
-  //     points,
-  //     zoom,
-  //     center: map.getCenter()
-  //   });
-  // };
-
-  // addMarker = (card) => {
-  //   const newPoint = {
-  //     lng: card.y,
-  //     lat: card.x,
-  //     id: card.service_id,
-  //     title: card.title,
-  //   }
-  //   const newPoints = this.state.points;
-  //   newPoints.push(newPoint);
-  //   this.setState({
-  //     points: newPoints,
-  //     // onlyPtCoords: newCoords,
-  //   });
-
-  // };
-
-  // getUserLocation = () => {
-  //   if(navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(this.props.centerOnUser);
-  //   }
-  // }
 
   generateMarkers = (cards) => {
     cards.map(this.props.addPoint);
@@ -163,12 +142,13 @@ class MapboxComponent extends React.Component {
             </StyledPopup>
           </Popup>
         )}
-        <Fab className={classes.myLocalButton} title="center on your location" prefetch="true" onClick={this.props.centerOnUser}><MyLocationIcon/></Fab>
+        {/* <Fab className={classes.myLocalButton} title="center on your location" prefetch="true"><geo/></Fab><MyLocationIcon/>} */}
       </Mapbox>
       
     );
   }
 }
+// navigator.geolocation.getCurrentPosition(this.geolocationSuccess, this.geoLocationError, {enableHighAccuracy: true, timeout: 5000, maximumAge: 0})
 
 const mapStateToProps = state => {
   return {

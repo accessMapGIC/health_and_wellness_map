@@ -9,6 +9,25 @@ const initialState = {
     userCoords: [],
 }
 
+// function startGeoLocation() {
+//     observerID = navigator.geolocation.watchPosition(onSuccess, onError, {
+//         maximunAge: 60000,
+//         enableHighAccuracy: true,
+//         timeout: 20000
+//     });
+// }
+
+// function stopGeolocation() {
+
+//     if (observerID !== -1) {
+//         navigator.geolocation.clearWatch(observerID);
+//         observerID = -1;
+
+//     }
+// }
+
+
+
 const mapboxReducer = (state = initialState, action ) => {
     switch ( action.type ){
         case actionTypes.ADD_POINT:
@@ -60,15 +79,10 @@ const mapboxReducer = (state = initialState, action ) => {
                 point: point,
             }
         case actionTypes.CENTER_ON_USER:
-            // navigator.geolocation.getCurrentPosition((position) => {
-            //     console.log(position);
-            //     const center=[position.coords.longitude, position.coords.latitude];
-            //     return center;
-            // })
-            return {
-                ...state,
-                // center: center,
-            }
+            // return {
+            //     ...state,
+            //     center: center,
+            // }
         default: 
             return state;
     }

@@ -28,13 +28,6 @@ const selectStyle = {
 }
 
 class InsuranceDropDownComponent extends React.Component {
-  // state = {
-  //   insurance: '',
-  // };
-
-  // handleChange = event => {
-  //   this.setState({ [event.target.name]: event.target.value });
-  // };
 
   render() {
     const { classes } = this.props;

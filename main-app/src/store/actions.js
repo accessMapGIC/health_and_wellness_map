@@ -17,3 +17,4 @@ export const ADD_POINT = 'ADD_POINT';
 export const CENTER_ON_POINT = 'CENTER_ON_POINT';
 export const ACTIVATE_POINT = 'ACTIVATE_POINT';
 export const CENTER_ON_USER = 'CENTER_ON_USER';
+export const QUERY_DATABASE = 'QUERY_DATABASE';

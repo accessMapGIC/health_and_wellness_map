@@ -53,7 +53,7 @@ class CardContainer extends React.Component{
         <div className='Card_Container' id='Card_Container'>
           {
             cards.map((card) => 
-              <Element name={card.service_id} key={card.service_id}>
+              <Element name={"" + card.service_id} key={card.service_id}>
                 <CardTemplate
                   title={card.name}
                   address={card.address}

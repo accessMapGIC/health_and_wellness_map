@@ -132,10 +132,7 @@ class SidebarsComponent extends React.Component {
           leftMenuOpen: !state.leftMenuOpen,
           leftHamButton: null,
         },
-        // rightMenu: {
-        //   rightMenuOpen: false,
-        //   rightHamButton: false,
-        // }
+        
       })
     }
 
