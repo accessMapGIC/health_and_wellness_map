@@ -12,6 +12,8 @@
     "node-sass": "^4.11.0",
     "npm": "^6.7.0",
     "pg": "^7.9.0",
+    "pg-config": "0.0.1",
+    "pg-native": "^3.0.0",
     "pg-promise": "^8.6.4",
     "react": "^16.8.4",
     "react-autosuggest": "^9.4.3",
