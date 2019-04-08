@@ -1,16 +1,22 @@
-import pgp from 'pg-promise';
+import {Pool} from 'pg';
 
 // Preparing the connection details:
-const cn = {
+
+const pool = new Pool({
+    user: 'health_query',
     host: 'http://map.geog.mcgill.ca',
-    port: 49495,
     database: 'map',
-    user: 'web_query',
-    password: '2oVauDE'
-};
+    password: '2oVauDE',
+    port: 49495,
+    max: 20,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 2000,
+});
 
-// Creating a new database instance from the connection details:
-const db = pgp(cn);
-
-// Exporting the database object for shared use:
-export default db;
+// module.exports = {
+//     query: (text, params, callback) => {
+//       return pool.query(text, params, callback)
+//     }
+//   }
+  
+export default pool;

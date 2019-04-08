@@ -112,6 +112,7 @@ class SidebarsComponent extends React.Component {
 
     // This will be used to submit a search query via the menus
     submitButton (state) {
+      this.props.queryDatabase(this.props.cat, this.props.subCat);
       this.setState({
         leftMenu: {
           leftMenuOpen: false,
@@ -181,7 +182,6 @@ class SidebarsComponent extends React.Component {
               disableOverlayClick
               >
                 <MenuItem>Search</MenuItem>
-                {/* <CardTemplateComponent/> */}
                 <CardContainer/>
                 <Container>
                   <Button variant="contained" color={"primary"} className={classes.button} href="" prefetch="true" onClick={(state) => this.newSearchButton(state)}>
@@ -199,6 +199,8 @@ const mapStateToProps = state => {
   return {
     rmo: state.rtS.rightMenu.rightMenuOpen,
     rhb: state.rtS.rightMenu.rightHamButton,
+    cat: state.lfS.leftMenu.catDrop,
+    subCat: state.lfS.leftMenu.subCatDrop,
   }
 };
 
@@ -207,6 +209,11 @@ const mapDispatchToProps = dispatch => {
     handleRight: () => dispatch({type: actionTypes.HANDLE_RIGHT}),
     createRight: (state) => dispatch({type: actionTypes.CREATE_RIGHT, payload: (!state.rightMenuOpen)}),
     destroyRight: () => dispatch({type: actionTypes.DESTROY_RIGHT}),
+    queryDatabase: (cat, subCat) => dispatch({type: actionTypes.QUERY_DATABASE,
+    payload: {
+      cat: cat,
+      subCat: subCat,
+    }}),
   }
 }
 

@@ -9,11 +9,13 @@ import leftSidebarReducer from './store/reducers/leftSidebarReducer';
 import rightSidebarReducer from './store/reducers/rightSidebarReducer';
 import mapboxReducer from './store/reducers/mapboxReducer';
 import { devToolsEnhancer } from 'redux-devtools-extension';
+import dbReducer from './store/reducers/dbReducer';
 
 const rootReducer = combineReducers({
     lfS: leftSidebarReducer,
     rtS: rightSidebarReducer,
     mpB: mapboxReducer,
+    dbQ: dbReducer,
 });
 
 const store = createStore(rootReducer, devToolsEnhancer());

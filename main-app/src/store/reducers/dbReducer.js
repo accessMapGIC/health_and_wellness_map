@@ -1,45 +1,41 @@
 import * as actionTypes from '../actions';
-import db from '../db';
+import pool from '../db';
 
 const initialState = {
-    points: [],
-    point: undefined,
-    zoom: [16],
-    center: [-73.578520, 45.505642],//[-73.5731, 45.501],
-    bearing: [-55],
-    userCoords: [],
+
 }
 
-const mapboxReducer = (state = initialState, action ) => {
+const dbReducer = (state = initialState, action ) => {
     switch ( action.type ){
         case actionTypes.QUERY_DATABASE:
-
-            db.task('my-task', function * (t) {
-                // t.ctx = task context object
-        
-                const user = yield t.one('SELECT id FROM Users WHERE name = $1', 'John');
-                return yield t.any('SELECT * FROM Events WHERE userId = $1', user.id);
-            })
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                // error
-            });
-            const newPoint = {
-                lat: action.payload.lat,
-                lng: action.payload.lng,
-                id: action.payload.id,
-                title: action.payload.title,
-                address: action.payload.address,
-                ref: action.payload.ref,
-            }
             const newState = Object.assign({}, state);
-            newState.points.push(newPoint);
+            // db.oneOrNone(
+            //     'SELECT s.service_id, s.name, s.address, s.phone_num AS phone, s.lat AS x, s.lon AS y, s.website AS URL, h.hours, pc.cat_name as primary_category,sc.subcat_name as subcategory FROM health.services_master s LEFT JOIN health.business_hours h ON s.service_id = h.id LEFT JOIN health.primary_category pc ON s.primary_cat_id = pc.cat_id LEFT JOIN health.subcategory sc ON pc.cat_id = sc.pc_id WHERE pc.cat_name = "$1" AND sc.subcat_name = "$2"', [action.payload.cat, action.payload.subCat])
+            // .then(data => {
+            //     console.log(data);
+            // })
+            // .catch(error => {
+            //     // error
+            // });
+            pool.connect((err, client, release) => {
+                if (err) {
+                  return console.error('Error acquiring client', err.stack)
+                }
+                client.query('SELECT NOW()', (err, result) => {
+                  release()
+                  if (err) {
+                    return console.error('Error executing query', err.stack)
+                  }
+                  console.log(result.rows)
+                })
+              })
+              
+
+            
             return newState;
         default: 
             return state;
     }
 }
 
-export default mapboxReducer;
+export default dbReducer;
