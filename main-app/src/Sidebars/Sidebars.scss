@@ -119,7 +119,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 */
   .menu-right .bm-menu-wrap {
     position: fixed;
-    height: 94% !important;
+    height: 93% !important;
     width: 400px !important;
     
   }
@@ -182,7 +182,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   }
 
   .Card_Container {
-    max-height: 800px;
+    max-height: 750px;
     overflow-y: auto;
     border-radius: 5px;
   }
@@ -398,7 +398,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 */
   .menu-right .bm-menu-wrap {
     position: fixed;
-    height: 100%;
+    height: 93% !important;
     width: 300px !important;
   }
 
@@ -458,10 +458,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
     height: 90%;
   }
 
-  // .Card_Container {
-  //   max-height: 800px;
-  //   overflow-y: scroll;
-  // }
+  .Card_Container {
+    max-height: 90%;
+    overflow-y: auto;
+    border-radius: 5px;
+  }
 
   /* CSS LOADER */
 
@@ -674,7 +675,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 */
   .menu-right .bm-menu-wrap {
     position: fixed;
-    height: 100%;
+    height: 93% !important;
     width: 300px !important;
   }
 
@@ -734,10 +735,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
     height: 90%;
   }
 
-  // .Card_Container {
-  //   max-height: 400px;
-  //   overflow-y: scroll;
-  // }
+  .Card_Container {
+    max-height: 85%;
+    overflow-y: auto;
+    border-radius: 5px;
+  }
 
   /* CSS LOADER */
 
@@ -949,7 +951,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 */
   .menu-right .bm-menu-wrap {
     position: fixed;
-    height: 100%;
+    height: 90% !important;
     width: 300px !important;
   }
 
@@ -1009,10 +1011,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
     height: 90%;
   }
 
-  // .Card_Container {
-  //   max-height: 800px;
-  //   overflow-y: scroll;
-  // }
+  .Card_Container {
+    max-height: 83%;
+    overflow-y: auto;
+    border-radius: 5px;
+  }
 
   /* CSS LOADER */
 
@@ -1224,7 +1227,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 */
   .menu-right .bm-menu-wrap {
     position: fixed;
-    height: 100%;
+    height: 90% !important;
     width: 300px !important;
   }
 
@@ -1284,10 +1287,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
     height: 90%;
   }
 
-  // .Card_Container {
-  //   max-height: 800px;
-  //   overflow-y: scroll;
-  // }
+  .Card_Container {
+    max-height: 80%;
+    overflow-y: auto;
+    border-radius: 5px;
+  }
 
   /* CSS LOADER */
 
@@ -1425,7 +1429,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
 */
   .menu-left .bm-menu-wrap {
     position: fixed;
-    height: 100%;
+    height: 100% !important;
+    width: 100% !important
   }
 
   /* General sidebar styles */
@@ -1445,6 +1450,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   .menu-left .bm-item-list {
     // color: $rossy-light;
     padding: 0.3em;
+    height: 100% !important;
   }
 
   /* Individual item */
@@ -1499,8 +1505,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
 */
   .menu-right .bm-menu-wrap {
     position: fixed;
-    height: 100%;
-    width: 300px !important;
+    height: 87% !important;
+    width: 100% !important;
   }
 
   /* General sidebar styles */
@@ -1559,10 +1565,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
     height: 90%;
   }
 
-  // .Card_Container {
-  //   max-height: 800px;
-  //   overflow-y: scroll;
-  // }
+  .Card_Container {
+    max-height: 69%;
+    overflow-y: auto;
+    border-radius: 5px;
+  }
 
   /* CSS LOADER */
 
