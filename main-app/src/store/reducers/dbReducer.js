@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions';
-import pool from '../db';
+import pgClient from '../db';
 
 const initialState = {
 
@@ -17,20 +17,15 @@ const dbReducer = (state = initialState, action ) => {
             // .catch(error => {
             //     // error
             // });
-            pool.connect((err, client, release) => {
-                if (err) {
-                  return console.error('Error acquiring client', err.stack)
-                }
-                client.query('SELECT NOW()', (err, result) => {
-                  release()
-                  if (err) {
-                    return console.error('Error executing query', err.stack)
-                  }
-                  console.log(result.rows)
-                })
-              })
-              
+            pgClient.connect();
+            var query = pgClient.query("SELECT service_id,name FROM health.service_master where name = 'Hotel Dieu'");
 
+            query.on("row", function(row,result){
+                result.addRow(row);
+                console.log(result);
+            });
+    
+            pgClient.end();
             
             return newState;
         default: 

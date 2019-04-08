@@ -1,22 +1,28 @@
-import {Pool} from 'pg';
+var pg = require('pg');
 
 // Preparing the connection details:
 
-const pool = new Pool({
-    user: 'health_query',
-    host: 'http://map.geog.mcgill.ca',
-    database: 'map',
-    password: '2oVauDE',
-    port: 49495,
-    max: 20,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000,
-});
+var connectionString = "postgres://ryan:ryan_g1C@map.geog.mcgill.ca/ip:49495/map";
 
-// module.exports = {
-//     query: (text, params, callback) => {
-//       return pool.query(text, params, callback)
-//     }
-//   }
+var pgClient = new pg.Client(connectionString);
+
+export default pgClient;
+
+// const pool = new Pool({
+//     user: 'health_query',
+//     host: 'http://map.geog.mcgill.ca',
+//     database: 'map',
+//     password: '2oVauDE',
+//     port: 49495,
+//     max: 20,
+//     idleTimeoutMillis: 30000,
+//     connectionTimeoutMillis: 2000,
+// });
+
+// // module.exports = {
+// //     query: (text, params, callback) => {
+// //       return pool.query(text, params, callback)
+// //     }
+// //   }
   
-export default pool;
+// export default pool;
