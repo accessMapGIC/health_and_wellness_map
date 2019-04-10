@@ -1,0 +1,23 @@
+{
+  "name": "express_wrapper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.4",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "pg": "^7.9.0",
+    "pg-pool": "^2.0.6",
+    "pg-promise": "^8.6.4",
+    "sequelize": "^5.2.15"
+  }
+}
