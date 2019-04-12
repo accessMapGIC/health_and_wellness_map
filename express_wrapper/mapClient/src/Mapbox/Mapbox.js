@@ -1,26 +1,18 @@
 import React from 'react';
 import ReactMapboxGl, { Layer, Feature, Popup} from "react-mapbox-gl";
-import PropTypes from 'prop-types';
-// import '../node_modules/mapbox-gl/dist/mapbox-gl.css'
-// import '../../node_modules/mapbox-gl/dist/'
-// import ReactMapboxLanguage from '@mapbox/mapbox-gl-language';
 import mapboxgl from 'mapbox-gl';
 import { connect } from 'react-redux';
 import * as actionTypes from '../store/actions';
 import Icon from '../images/favicon-32x32.png';
 import { withStyles } from '@material-ui/core';
-import Fab from '@material-ui/core/Fab';
-import MyLocationIcon from '@material-ui/icons/MyLocation';
 import { compose } from 'redux';
 import styled from 'styled-components';
-import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
-import { checkPropTypes } from 'prop-types';
-
+import { Link, scroller } from 'react-scroll';
 
 const Mapbox = ReactMapboxGl({
   minZoom: 11,
   maxZoom: 19,
-  accessToken: 'pk.eyJ1IjoiYWNjZXNzbWFwcyIsImEiOiJjanF3b2NkM3QwMXo3NDJvMmIxcTBjeWMyIn0.crXErUpSUmm5hqXyvJyXBQ',
+  accessToken: process.env.REACT_APP_MAPBOX_ACCESSTOKEN,
 });
 
 const styles = theme => ({
@@ -98,7 +90,6 @@ class MapboxComponent extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
     const image = new Image(30, 30);
     image.src = Icon;
     const images = ["SWH-Icon", image];

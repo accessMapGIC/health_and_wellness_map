@@ -59,7 +59,7 @@ class CategoryDropDownComponent extends React.Component {
             <MenuItem value="">
               Choose a Category
             </MenuItem>
-            <MenuItem value={'Counseling & Mental Health'}>Counseling & Mental Health</MenuItem>
+            <MenuItem value={'Counseling & Mental Health'}>Counselling & Mental Health</MenuItem>
             <MenuItem value={'Medical Care'}>Medical Care</MenuItem>
             <MenuItem value={'Peer Support'}>Peer Support</MenuItem>
             <MenuItem value={'Relaxation & Recreation'}>Relaxation & Recreation</MenuItem>

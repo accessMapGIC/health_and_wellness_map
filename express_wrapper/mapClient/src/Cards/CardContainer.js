@@ -1,6 +1,6 @@
 import React from 'react';
 import CardTemplate from './CardTemplate';
-import data from "../store/newOutput.json";
+// import data from "../store/newOutput.json";
 // import * as actionTypes from "../store/actions";
 // import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -48,7 +48,7 @@ class CardContainer extends React.Component{
     //     )
     // }
     render(){
-      const cards = data;
+      const cards = this.props.data;
       return (
         <div className='Card_Container' id='Card_Container'>
           {
@@ -75,6 +75,7 @@ class CardContainer extends React.Component{
 const mapStateToProps = state => {
   return {
     activeCard: state.rtS.rightMenu.activeCard,
+    data: state.dbQ.data,
   }
 }
 

@@ -112,7 +112,7 @@ class SidebarsComponent extends React.Component {
 
     // This will be used to submit a search query via the menus
     submitButton (state) {
-      this.props.queryDatabase(this.props.cat, this.props.subCat);
+      this.props.queryDatabase(this.props.cat, this.props.subCat, this.props.insCat, this.props.langCat);
       this.setState({
         leftMenu: {
           leftMenuOpen: false,
@@ -124,7 +124,7 @@ class SidebarsComponent extends React.Component {
         // }
       })
       this.props.createRight(state);
-    }
+    } 
 
     newSearchButton (state) {
       this.props.destroyRight();
@@ -201,6 +201,8 @@ const mapStateToProps = state => {
     rhb: state.rtS.rightMenu.rightHamButton,
     cat: state.lfS.leftMenu.catDrop,
     subCat: state.lfS.leftMenu.subCatDrop,
+    insCat: state.lfS.leftMenu.insDrop,
+    langCat: state.lfS.leftMenu.langDrop,
   }
 };
 
@@ -209,10 +211,12 @@ const mapDispatchToProps = dispatch => {
     handleRight: () => dispatch({type: actionTypes.HANDLE_RIGHT}),
     createRight: (state) => dispatch({type: actionTypes.CREATE_RIGHT, payload: (!state.rightMenuOpen)}),
     destroyRight: () => dispatch({type: actionTypes.DESTROY_RIGHT}),
-    queryDatabase: (cat, subCat) => dispatch({type: actionTypes.QUERY_DATABASE,
+    queryDatabase: (cat, subCat, insCat, langCat) => dispatch({type: actionTypes.QUERY_DATABASE,
     payload: {
       cat: cat,
       subCat: subCat,
+      insCat: insCat, 
+      langCat: langCat,
     }}),
   }
 }

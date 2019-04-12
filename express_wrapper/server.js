@@ -2,9 +2,9 @@ const express = require('express');
 const cors = require('cors');
 // const bodyParser = require('body-parser');
 const app = express();
-const dotenv = require('dotenv');
+const dotenv = require('dotenv').config();
 const promise = require('bluebird');
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 // app.use(bodyParser.json())
 // app.use(
 //   bodyParser.urlencoded({
@@ -19,19 +19,13 @@ const initOptions = {
 const pgp = require('pg-promise')(initOptions);
 
 app.use(cors());
-dotenv.load()
 
 const cn = {  
-  // host: process.env.HOST,
-  // port: process.env.PORT,
-  // database: process.env.DATABASE,
-  // user: process.env.USER,
-  // password: process.env.PASSWORD,
-  host: 'map.geog.mcgill.ca',
-  port: 49495,
-  database: 'map',
-  user: 'ryan',
-  password: 'ryan_g1C'
+  host: process.env.PG_HOST,
+  port: process.env.PG_PORT,
+  database: process.env.PG_DATABASE,
+  user: process.env.PG_USER,
+  password: process.env.PG_PASSWORD,
 }
 
 const db = pgp(cn);
@@ -40,20 +34,36 @@ const db = pgp(cn);
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // create a GET route
-app.get('/express_backend', (req, res) => {
+app.get('/test', (req, res) => {
   res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
 });
 
-app.get('/express_test', (req, res) => {
+app.get('/category_query', (req, res) => {
   // res.send({rows: 'WE MAKE IT HERE< BUT NO DB'});
-  db.any('select * from services_master LIMIT 10')
+  db.any(
+  `SELECT
+    s.service_id,
+    s.name,
+    s.address,
+    s.phone_num AS phone,
+    s.lat AS x,
+    s.lon AS y,
+    s.website AS URL,
+    h.hours,
+    pc.cat_name as primary_category,
+    sc.subcat_name as subcategory
+  FROM health.services_master s
+  LEFT JOIN health.business_hours h ON s.service_id = h.id
+  LEFT JOIN health.primary_category pc ON s.primary_cat_id = pc.cat_id
+  LEFT JOIN health.subcategory sc ON pc.cat_id = sc.pc_id
+  JOIN health.insurance ins ON ins.insur_id = s.insur_id 
+  WHERE pc.cat_name = 'Medical Care' AND sc.subcat_name = 'Clinic' AND ins.insur_name = 'SSMU'`)
     .then(data => {
         console.log('DATA:', data); // print data;
-        res.send({rows: 'WE FUCKING GOT SOMETHING TO WORK'});
+        res.send({data});
     })
     .catch(error => {
         console.log('ERROR:', error); // print the error;
-        res.send({rows: 'WE FUCKING GOT SOMETHING TO WORK BUT ITS WRONG'});
+        res.send('there has been an error, please contact Student Services to get this fixed.');
     })
-    .finally(db.$pool.end);
 });
