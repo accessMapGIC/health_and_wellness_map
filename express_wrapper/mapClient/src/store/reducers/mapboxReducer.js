@@ -78,11 +78,6 @@ const mapboxReducer = (state = initialState, action ) => {
                 zoom: [14],
                 point: point,
             }
-        case actionTypes.CENTER_ON_USER:
-            // return {
-            //     ...state,
-            //     center: center,
-            // }
         default: 
             return state;
     }

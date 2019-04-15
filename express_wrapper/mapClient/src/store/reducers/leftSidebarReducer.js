@@ -3,21 +3,77 @@ import * as actionTypes from '../actions'
 
 const initialState = {
     leftMenu: {
+        leftMenuOpen: false,
+        leftHamButton: null,
         catDrop: '',
         insDrop: '',
         langDrop: '',
         keyDrop: '',
         subCatDrop: '',
         openNow: false,
+    },
+    data: [{
+        "hours": [
+            [
+                "NA",
+                "NA"
+            ],
+            [
+                "08:00",
+                "17:00"
+            ],
+            [
+                "08:00",
+                "17:00"
+            ],
+            [
+                "08:00",
+                "20:00"
+            ],
+            [
+                "09:00",
+                "17:00"
+            ],
+            [
+                "09:00",
+                "17:00"
+            ],
+            [
+                "NA",
+                "NA"
+            ]
+        ],
+        "service_id": 2,
+        "name": "Clinique Communautaire de Pointe Sant-Charles",
+        "phone": "514-937-9251",
+        "address": "1955 rue du Centre",
+        "x":45.48238,
+        "y":-73.56348,
+        "url":"https://ccpsc.qc.ca"
+    
     }
+    ],
 }
 
 const leftSidebarReducer = (state = initialState, action ) => {
+    async function categoryQuery(json){
+        await fetch('/category_query', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: json,
+        })
+        .then(function(response){
+            return response.json();
+        })
+        .catch(info => console.log(info));
+    }
+
     switch ( action.type ){
         case actionTypes.CATEGORY_CHANGE:
             const newState = Object.assign({}, state);
             newState.leftMenu.catDrop = action.payload;
-            console.log(newState);
             return newState;
         case actionTypes.SUBCATEGORY_CHANGE:
             return {
@@ -59,19 +115,46 @@ const leftSidebarReducer = (state = initialState, action ) => {
                     openNow: !state.leftMenu.openNow
                 }
             }
-        // case actionTypes.QUERY_DATABASE:
-        //     db.each(
-        //         'SELECT s.service_id, s.name, s.address, s.phone_num AS phone, s.lat AS x, s.lon AS y, s.website AS URL, h.hours, pc.cat_name as primary_category,sc.subcat_name as subcategory FROM health.services_master s LEFT JOIN health.business_hours h ON s.service_id = h.id LEFT JOIN health.primary_category pc ON s.primary_cat_id = pc.cat_id LEFT JOIN health.subcategory sc ON pc.cat_id = sc.pc_id WHERE pc.cat_name = "$1" AND sc.subcat_name = "$2"', [action.payload.cat, action.payload.subcat])
-        //     .then(data => {
-        //         console.log(data);
-        //     })
-        //     .catch(error => {
-        //         // error
-        //     });
+        case actionTypes.HANDLE_LEFT:
+            return {
+                ...state,
+                leftMenu: {
+                    ...state.leftMenu,
+                    leftMenuOpen: state.leftMenu.leftMenuOpen
+                },
+            }
+        case actionTypes.CREATE_LEFT:
+            return {
+                ...state,
+                leftMenu: {
+                    ...state.leftMenu,
+                    leftMenuOpen: action.payload,
+                    leftHamButton: null
+                }
+            }
+        case actionTypes.DESTROY_LEFT:
+            return {
+                ...state,
+                leftMenu: {
+                    ...state.leftMenu,
+                    leftMenuOpen: false,
+                    leftHamButton: false,
+                }
+            }
+        case actionTypes.QUERY_DATABASE:
+            var newdata = [];
             
-        //     return {
-        //         ...state,
-        //     }
+            var testStr = JSON.stringify({
+                cat: state.leftMenu.catDrop,
+                subCat: state.leftMenu.subCatDrop,
+                insCat: state.leftMenu.insDrop,
+                langCat: state.leftMenu.langDrop,
+            });
+            categoryQuery(testStr)
+            return {
+                ...state,
+                data: newdata,
+            }
         default:
             return state;
     }

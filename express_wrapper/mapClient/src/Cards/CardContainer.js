@@ -75,7 +75,7 @@ class CardContainer extends React.Component{
 const mapStateToProps = state => {
   return {
     activeCard: state.rtS.rightMenu.activeCard,
-    data: state.dbQ.data,
+    data: state.lfS.data,
   }
 }
 

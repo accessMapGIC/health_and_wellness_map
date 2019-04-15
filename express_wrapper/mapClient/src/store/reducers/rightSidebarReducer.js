@@ -78,11 +78,6 @@ const rightSidebarReducer = (state = initialState, action ) => {
             if(action.payload === state.rightMenu.activeCard){
                 return {
                     ...state,
-                    // rightMenu: {
-                    //     ...state.rightMenu,
-                    //     activeCard: -1
-    
-                    // }
                 }
             }else{
                 return {

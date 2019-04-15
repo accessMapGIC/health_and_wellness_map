@@ -44,10 +44,6 @@ class SidebarsComponent extends React.Component {
     constructor (props) {
       super(props)
       this.state = {
-        leftMenu: {
-          leftMenuOpen: false,
-          leftHamButton: null,
-        },
         // rightMenu: {
         //   rightMenuOpen: false,
         //   rightHamButton: false,
@@ -55,16 +51,6 @@ class SidebarsComponent extends React.Component {
       }
     }
     
-    // componentDidMount(){
-    //   this.setState({
-    //     rightMenu: {
-    //       rightMenuOpen: this.props.rmo,
-    //       rightHamButton: this.props.rhb,
-    //     }
-    //   })
-    // }
-    // This keeps your state in sync with the opening/closing of the menu
-    // via the default means, e.g. clicking the X, pressing the ESC key etc.
     handleStateChange (state, menu) {
       return () => {
         if (menu === 0) {
@@ -77,64 +63,20 @@ class SidebarsComponent extends React.Component {
       } 
     }
     
-    // This can be used to close the left menu, e.g. when a user clicks a menu item
-    closeMenuFactory(menu) { 
-      return () => {
-        if (menu === 0) {
-            this.setState({
-                leftMenu: {
-                    leftMenuOpen: false,
-                }
-            })
-        } else {
-          // this.setState({
-          //     rightMenu: {
-          //         rightMenuOpen: false,
-          //     }
-          // })
-          this.props.closeRight();
-        }
-      }
-    }
-
-    // This can be used to toggle the menu, e.g. when using a custom icon
-    toggleMenuFactory (menu) {
-      console.log('ive been toggled');
-      return () => {
-        if (menu === 0) {
-            this.setState({leftMenuOpen: !this.state.leftMenuOpen})
-        } else {
-            // this.setState({rightMenuOpen: !this.state.rightMenuOpen})
-            this.props.toggleRight();
-        }
-      }
-    }
-
     // This will be used to submit a search query via the menus
     submitButton (state) {
-      this.props.queryDatabase(this.props.cat, this.props.subCat, this.props.insCat, this.props.langCat);
-      this.setState({
-        leftMenu: {
-          leftMenuOpen: false,
-          leftHamButton: false,
-        },
+      this.props.queryDatabase();
+      this.props.destroyLeft();
         // rightMenu: {
         //   rightMenuOpen: !state.rightMenuOpen,
         //   rightHamButton: null,
         // }
-      })
       this.props.createRight(state);
     } 
 
     newSearchButton (state) {
       this.props.destroyRight();
-      this.setState({
-        leftMenu: {
-          leftMenuOpen: !state.leftMenuOpen,
-          leftHamButton: null,
-        },
-        
-      })
+      this.props.createLeft(state);
     }
 
     render () {
@@ -143,9 +85,9 @@ class SidebarsComponent extends React.Component {
           <div className='menu-sidebars'>
             <div className='menu-left'>
               <Menu 
-              isOpen={this.state.leftMenu.leftMenuOpen}
-              onStateChange={(state) => this.handleStateChange(state, 0)}
-              customBurgerIcon={this.state.leftMenu.leftHamButton}
+              isOpen={this.props.lmo}
+              onStateChange={this.props.handleLeft}
+              customBurgerIcon={this.props.lhb}
               noOverlay
               disableOverlayClick
               >
@@ -199,10 +141,8 @@ const mapStateToProps = state => {
   return {
     rmo: state.rtS.rightMenu.rightMenuOpen,
     rhb: state.rtS.rightMenu.rightHamButton,
-    cat: state.lfS.leftMenu.catDrop,
-    subCat: state.lfS.leftMenu.subCatDrop,
-    insCat: state.lfS.leftMenu.insDrop,
-    langCat: state.lfS.leftMenu.langDrop,
+    lmo: state.lfS.leftMenu.leftMenuOpen,
+    lhb: state.lfS.leftMenu.leftHamButton,
   }
 };
 
@@ -211,15 +151,12 @@ const mapDispatchToProps = dispatch => {
     handleRight: () => dispatch({type: actionTypes.HANDLE_RIGHT}),
     createRight: (state) => dispatch({type: actionTypes.CREATE_RIGHT, payload: (!state.rightMenuOpen)}),
     destroyRight: () => dispatch({type: actionTypes.DESTROY_RIGHT}),
-    queryDatabase: (cat, subCat, insCat, langCat) => dispatch({type: actionTypes.QUERY_DATABASE,
-    payload: {
-      cat: cat,
-      subCat: subCat,
-      insCat: insCat, 
-      langCat: langCat,
-    }}),
+    queryDatabase: () => dispatch({type: actionTypes.QUERY_DATABASE}),
+    handleLeft: () => dispatch({type: actionTypes.HANDLE_LEFT}),
+    createLeft: (state) => dispatch({type: actionTypes.CREATE_LEFT, payload: (!state.leftMenuOpen)}),
+    destroyLeft: () => dispatch({type: actionTypes.DESTROY_LEFT}),
   }
-}
+};
 
 export default compose(
   withStyles(styles),
