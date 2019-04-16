@@ -21,7 +21,7 @@ const styles = {
       color: '#f3eae2',
       'font-weight': '600',
   }
-};
+};//Styling for the checkbox in the leftsidebar
 
 class CheckboxComponent extends React.Component {
   // state = {

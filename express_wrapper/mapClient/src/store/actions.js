@@ -1,3 +1,5 @@
+//the collection of actions for the redux store
+
 export const CATEGORY_CHANGE = 'CATEGORY_CHANGE';
 export const SUBCATEGORY_CHANGE = 'SUBCATEGORY_CHANGE';
 export const INSURANCE_CHANGE = 'INSURANCE_CHANGE';

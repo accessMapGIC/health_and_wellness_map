@@ -1,7 +1,5 @@
 import React from 'react';
 import CardTemplate from './CardTemplate';
-// import data from "../store/newOutput.json";
-// import * as actionTypes from "../store/actions";
 // import { compose } from 'redux';
 import { connect } from 'react-redux';
 // import * as actionTypes from '../store/actions';
@@ -15,42 +13,14 @@ class CardContainer extends React.Component{
 
           activeCard: null
         };
-        // this.handleClick = this.handleClick.bind(this);
       }
 
-    handleClick = (service_id) => this.setState({ activeCard: service_id })
+    handleClick = (service_id) => this.setState({ activeCard: service_id }) //this is how we set the activeCard 
 
-    // renderCard(item){
-    //     return <CardTemplate
-    //       title={item.name}
-    //       address={item.address}
-    //       phone={item.phone}
-    //       hours={item.hours}
-    //       url={item.url}
-    //       x={item.x}
-    //       y={item.y}
-    //       service_id={item.service_id}
-    //       key={item.service_id}
-    //       onClick={ this.handleClick }
-    //       isActive={ this.state.activeCard === item.service_id }
-    //       />
-    // }
-
-    // renderCards(cardData){
-    //   return cardData.map(this.renderCard);
-    // }
-
-    // render() {
-    //     return (
-    //         <div className='Card_Container'>
-    //             {this.renderCards(data)}
-    //         </div>
-    //     )
-    // }
     render(){
-      const cards = this.props.data;
+      const cards = this.props.data; //this is where we subscribe to the redux data that changes when a query is run
       return (
-        <div className='Card_Container' id='Card_Container'>
+        <div className='Card_Container' id='Card_Container'> 
           {
             cards.map((card) => 
               <Element name={"" + card.service_id} key={card.service_id}>

@@ -25,6 +25,7 @@ const initialState = {
 
 //     }
 // }
+//potential functions for the geolocation function for a custom button
 
 
 

@@ -27,7 +27,7 @@ import * as moment from 'moment';
 
 
 const styles = theme => ({
-  card: {
+  card: {//styling for each card
     maxWidth: 400,
     backgroundColor: "#d0ecf4",
     marginLeft: '2px',
@@ -35,7 +35,7 @@ const styles = theme => ({
     marginBottom: '10px',
     marginTop: '10px',
 
-  },
+  },//styling for the active card
   activeCard: {
     maxWidth: 400,
     backgroundColor: "#d0ecf4",
@@ -47,36 +47,36 @@ const styles = theme => ({
     borderWidth: '3px',
     borderColor: '#1d424a',
   },
-  cardHeader: {
+  cardHeader: {//styling for the card headers
     paddingBottom: '0px !important',
   },
-  activeCardHeader: {
+  activeCardHeader: {//styling for the activeCard's Headers
     wontWeight: 'bold',
   },
-  openNow: {
+  openNow: {//styling for openNow
     color: '#00ff00',
   },
-  closed: {
+  closed: {//styling for closed
     color: '#ff0000',
   },
-  media: {
+  media: {//styling for media
     height: 0,
     paddingTop: "56.25%" // 16:9
   },
-  actions: {
+  actions: {//styling for actions
     display: "flex"
   },
-  expand: {
+  expand: {//styling for the expand bottom
     transform: "rotate(0deg)",
     marginLeft: "auto",
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest
     })
   },
-  expandOpen: {
+  expandOpen: {//styling for the expand button once opened
     transform: "rotate(180deg)"
   },
-  hoursExpand: {
+  hoursExpand: {//styling for the hours expand button unopened
     transform: "rotate(0deg)",
     marginLeft: "auto",
     transition: theme.transitions.create("transform", {
@@ -84,45 +84,45 @@ const styles = theme => ({
     }),
     padding: "0px"
   },
-  hoursExpandOpen: {
+  hoursExpandOpen: {//styling for the hours expand button once opened
     transform: "rotate(180deg)",
     padding: "0px"
   },
-  avatar: {
+  avatar: {//stlying for the avatar
     backgroundColor: red[500]
   },
-  materialIcons: {
+  materialIcons: {//styling for any of the material icons
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
     verticalAlign: "-35%"
   },
-  hourContent: {
+  hourContent: {//styling for the block of hours
     display: 'block',
     paddingLeft: "31px",
     paddingBottom: "1px !important",
     marginBottom: '0px',
   },
-  active: {
+  active: {//styling for the active day hours
     display: 'inline-block',
     fontWeight: "bold",
     width: '77px',
   },
-  activeColumn: {
+  activeColumn: {//styling for the active column
     display: 'inline-block',
     fontWeight: "bold",
     paddingLeft: '10px'
   },
-  dayRow: {
+  dayRow: {//stlying for each row 
     display: 'inline-block',
     paddingTop: "3px",
     paddingBottom: "3px",
   },
-  hoursColumn: {
+  hoursColumn: {//styling for the hour column
     display: 'inline-block',
     paddingLeft: '10px',
   },
-  dayColumn: {
+  dayColumn: {//styling for the day column
     display: 'inline-block',
     width: '77px',
   }
@@ -132,27 +132,27 @@ class CardTemplateComponent extends React.Component {
   constructor(props){
     super(props)
     this.state = { 
-      expanded: false, 
-      hoursExpanded: false,
+      expanded: false, //is the regular card expanded
+      hoursExpanded: false, //are the hours expanded
     };
   }
 
-  componentDidMount() {
+  componentDidMount() {//load the information for the card from the card container
     this.props.addCard(this.props.title, this.props.address, this.props.service_id, this.props.x, this.props.y);
   }
 
   handleActivation = () => {
     this.props.activateCard(this.props.service_id);
     this.props.activatePoint(this.props.service_id);
-  }
+  }//this handles activating the appropriate Point and Card for the user
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
-  };
+  };//expand onclick method
 
   handleHourExpandClick = () => {
     this.setState(state => ({ hoursExpanded: !state.hoursExpanded }));
-  };
+  };//hours expand onclick
 
   handleCurrentDay = (hrs) => {
     const format = 'hh:mm';
@@ -166,7 +166,7 @@ class CardTemplateComponent extends React.Component {
       curDay[0] = 'Closed';
     }
     return curDay;
-  };
+  };//calculates if the service is opened or closed
 
   getDayOrder(){
     const time = moment();
@@ -188,7 +188,7 @@ class CardTemplateComponent extends React.Component {
       default:
         return ['There was a Problem'];
     }
-  }
+  }//calculates which day of the week it is 
 
   reOrderHours(hours){
     const curOrder = this.getDayOrder();
@@ -201,7 +201,7 @@ class CardTemplateComponent extends React.Component {
       }
     }
     return newArr;
-  }
+  }//adds the apropriate hours to the day order
 
   render() {
     const { classes } = this.props;

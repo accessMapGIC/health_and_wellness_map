@@ -13,7 +13,7 @@ const Mapbox = ReactMapboxGl({
   minZoom: 11,
   maxZoom: 19,
   accessToken: process.env.REACT_APP_MAPBOX_ACCESSTOKEN,
-});
+});//instantiates the initial mapbox object
 
 const styles = theme => ({
   myLocalButton: {
@@ -28,7 +28,7 @@ const styles = theme => ({
     position: 'absolute',
     right: '50%',
   }
-});
+});//styling if you ever wanna make your own geolocate button
 
 const StyledPopup = styled.div`
   background: white;
@@ -37,7 +37,7 @@ const StyledPopup = styled.div`
   padding: 5px;
   border-radius: 2px;
   text-align: center;
-`;
+`;//styling for the popup
 
 class MapboxComponent extends React.Component {
   constructor(props){
@@ -56,7 +56,7 @@ class MapboxComponent extends React.Component {
   componentDidMount() {
     this.generateMarkers(this.props.cards);
     // console.log(this.props.activeCard);
-  };
+  };//generates the markers once they've been loaded
 
   mapDidLoad = (map) => {
     map.addControl(new mapboxgl.GeolocateControl({
@@ -65,11 +65,11 @@ class MapboxComponent extends React.Component {
       },
       trackUserLocation: true
       }),'bottom-right');
-  }
+  }//adds the geolocate control
 
   generateMarkers = (cards) => {
     cards.map(this.props.addPoint);
-  };
+  };//this adds the points to the map
 
   markerClick = (lng, lat, id, title, address) => {
     this.props.closeRight();
@@ -87,7 +87,7 @@ class MapboxComponent extends React.Component {
       containerId: 'Card_Container',
       offset: -70, // Scrolls to element + 50 pixels down the page
     })
-  }
+  }//the method that occurs when a marker is clicked
 
   render() {
     const image = new Image(30, 30);

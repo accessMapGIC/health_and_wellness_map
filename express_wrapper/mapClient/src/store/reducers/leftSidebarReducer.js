@@ -1,5 +1,4 @@
-import * as actionTypes from '../actions'
-// import db from '../db';
+import * as actionTypes from '../actions' //imports the different redux actions described in the actions.js file
 
 const initialState = {
     leftMenu: {
@@ -12,7 +11,7 @@ const initialState = {
         subCatDrop: '',
         openNow: false,
     },
-    data: [{
+    data: [{ //initial sample data that should be overwritten so we don't get an undefined error
         "hours": [
             [
                 "NA",
@@ -55,8 +54,8 @@ const initialState = {
     ],
 }
 
-const leftSidebarReducer = (state = initialState, action ) => {
-    async function categoryQuery(json){
+const leftSidebarReducer = (state = initialState, action ) => {//the leftSidebarReducer for redux
+    async function categoryQuery(json){//this is an asycronous function for the categoryQuery that gets called below
         await fetch('/category_query', {
             method: 'POST',
             headers: {

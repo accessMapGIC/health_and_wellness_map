@@ -12,7 +12,7 @@ import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
-const suggestions = [
+const suggestions = [ //this array needs to be populated with the different keywords, either statically or dynamically
   { label: 'Afghanistan' },
   { label: 'Aland Islands' },
   { label: 'Albania' },

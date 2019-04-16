@@ -14,16 +14,16 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 
-const DropdownHeader = styled.h5`
+const DropdownHeader = styled.h5` 
   margin-bottom: 10px;
   text-decoration: underline;
-`;
+`;//styling for the dropDown menu in the leftSidebar
 
 const MenuItem = styled.h3`
   text-decoration: underline;
   padding-bottom: .2px;
   outline: none;
-`;
+`;//styling for the MenuItems within each Sidebar
 
 const styles = theme => ({
   button: {
@@ -34,13 +34,13 @@ const styles = theme => ({
       backgroundColor: '#4ec3c7',
     },
   }
-});
+});//styling for the button
 
 const Container = styled.div`
   text-align: left;
-`;
+`;//styling for the container
 
-class SidebarsComponent extends React.Component {
+class SidebarsComponent extends React.Component { //this is the component for both sidebars
     constructor (props) {
       super(props)
       this.state = {
@@ -51,17 +51,17 @@ class SidebarsComponent extends React.Component {
       }
     }
     
-    handleStateChange (state, menu) {
-      return () => {
-        if (menu === 0) {
-            this.setState({
-                leftMenu: {
-                    leftMenuOpen: state.leftMenuOpen,
-                }
-            })
-        }
-      } 
-    }
+    // handleStateChange (state, menu) {
+    //   return () => {
+    //     if (menu === 0) {
+    //         this.setState({
+    //             leftMenu: {
+    //                 leftMenuOpen: state.leftMenuOpen,
+    //             }
+    //         })
+    //     }
+    //   } 
+    // }
     
     // This will be used to submit a search query via the menus
     submitButton (state) {
@@ -137,7 +137,7 @@ class SidebarsComponent extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = state => {//info grabbed from the redux store
   return {
     rmo: state.rtS.rightMenu.rightMenuOpen,
     rhb: state.rtS.rightMenu.rightHamButton,
@@ -146,7 +146,7 @@ const mapStateToProps = state => {
   }
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => {//the different actions called by the sidebar component
   return {
     handleRight: () => dispatch({type: actionTypes.HANDLE_RIGHT}),
     createRight: (state) => dispatch({type: actionTypes.CREATE_RIGHT, payload: (!state.rightMenuOpen)}),
