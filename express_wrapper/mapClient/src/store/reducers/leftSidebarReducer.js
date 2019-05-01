@@ -49,24 +49,25 @@ const initialState = {
         "x":45.48238,
         "y":-73.56348,
         "url":"https://ccpsc.qc.ca"
-    
+
     }
     ],
 }
 
 const leftSidebarReducer = (state = initialState, action ) => {//the leftSidebarReducer for redux
     async function categoryQuery(json){//this is an asycronous function for the categoryQuery that gets called below
-        await fetch('/category_query', {
+        await fetch('/category_query', { //Axios.post instead of fetch if we want.
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
             },
-            body: json,
+            body: json //uses testStr of input values (below)
         })
         .then(function(response){
+            //console.log(response.json()); //returns data array meeting query values.
             return response.json();
         })
-        .catch(info => console.log(info));
+        .catch(err => console.log(err));
     }
 
     switch ( action.type ){
@@ -141,23 +142,24 @@ const leftSidebarReducer = (state = initialState, action ) => {//the leftSidebar
                 }
             }
         case actionTypes.QUERY_DATABASE:
-            var newdata = [];
-            
-            var testStr = JSON.stringify({
+            let newdata = [];
+
+            let testStr = JSON.stringify({
                 cat: state.leftMenu.catDrop,
                 subCat: state.leftMenu.subCatDrop,
                 insCat: state.leftMenu.insDrop,
-                langCat: state.leftMenu.langDrop,
+                //langCat: state.leftMenu.langDrop,
             });
             categoryQuery(testStr)
+            //console.log(categoryQuery(testStr)); resloved, undefined value...
             return {
                 ...state,
-                data: newdata,
+                data: newdata
             }
         default:
             return state;
     }
-    
+
 }
 
 export default leftSidebarReducer;
