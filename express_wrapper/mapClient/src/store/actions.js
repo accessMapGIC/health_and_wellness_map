@@ -22,4 +22,5 @@ export const ADD_POINT = 'ADD_POINT';
 export const CENTER_ON_POINT = 'CENTER_ON_POINT';
 export const ACTIVATE_POINT = 'ACTIVATE_POINT';
 export const CENTER_ON_USER = 'CENTER_ON_USER';
-export const QUERY_DATABASE = 'QUERY_DATABASE';
+export const QUERY_DATABASE = 'QUERY_DATABASE'; //initial Ryan query
+// export const START_QUERY_DATABASE = 'START_QUERY_DATABASE'; //Need Action like this for async action

@@ -9,7 +9,7 @@ const initialState = {
         langDrop: '',
         keyDrop: '',
         subCatDrop: '',
-        openNow: false,
+        openNow: false
     },
     data: [{ //initial sample data that should be overwritten so we don't get an undefined error
         "hours": [
@@ -54,22 +54,23 @@ const initialState = {
     ],
 }
 
-const leftSidebarReducer = (state = initialState, action ) => {//the leftSidebarReducer for redux
-    async function categoryQuery(json){//this is an asycronous function for the categoryQuery that gets called below
-        await fetch('/category_query', { //Axios.post instead of fetch if we want.
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: json //uses testStr of input values (below)
-        })
-        .then(function(response){
-            //console.log(response.json()); //returns data array meeting query values.
-            return response.json();
-        })
-        .catch(err => console.log(err));
-    }
+async function categoryQuery(json){//this is an asycronous function for the categoryQuery that gets called below
+    await fetch('/category_query', { //Axios.post instead of fetch if we want.
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: json //uses testStr of input values (below)
+    })
+    .then(function(response){
+        //console.log(response.json()); //returns data array meeting query values.
+        return response.json();
+    })
+    .catch(err => console.log(err));
+}
 
+const leftSidebarReducer = (state = initialState, action ) => {//the leftSidebarReducer for redux
+//Normally async await func inside reducer
     switch ( action.type ){
         case actionTypes.CATEGORY_CHANGE:
             const newState = Object.assign({}, state);
@@ -141,8 +142,17 @@ const leftSidebarReducer = (state = initialState, action ) => {//the leftSidebar
                     leftHamButton: false,
                 }
             }
+
+        //NEED ASYNC ACTION LIKE THIS: START_***
+        // case actionTypes.START_QUERY_DATABASE:
+        //   const startQueryDatabase = () => {
+        //     return(dispatch) => {
+        //
+        //     }
+        //   }
+
         case actionTypes.QUERY_DATABASE:
-            let newdata = [];
+            let newData = [];
 
             let testStr = JSON.stringify({
                 cat: state.leftMenu.catDrop,
@@ -150,11 +160,11 @@ const leftSidebarReducer = (state = initialState, action ) => {//the leftSidebar
                 insCat: state.leftMenu.insDrop,
                 //langCat: state.leftMenu.langDrop,
             });
-            categoryQuery(testStr)
+            console.log(categoryQuery(testStr));
             //console.log(categoryQuery(testStr)); resloved, undefined value...
             return {
                 ...state,
-                data: newdata
+                data: newData //---Resets data to [], instead of newdata...---
             }
         default:
             return state;

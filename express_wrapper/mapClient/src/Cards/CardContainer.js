@@ -15,14 +15,15 @@ class CardContainer extends React.Component{
         };
       }
 
-    handleClick = (service_id) => this.setState({ activeCard: service_id }) //this is how we set the activeCard 
+    handleClick = (service_id) => this.setState({ activeCard: service_id }) //this is how we set the activeCard
 
     render(){
       const cards = this.props.data; //this is where we subscribe to the redux data that changes when a query is run
+      console.log(`Redux data: ${cards}`);
       return (
-        <div className='Card_Container' id='Card_Container'> 
+        <div className='Card_Container' id='Card_Container'>
           {
-            cards.map((card) => 
+            cards.map((card) =>
               <Element name={"" + card.service_id} key={card.service_id}>
                 <CardTemplate
                   title={card.name}
@@ -52,9 +53,9 @@ const mapStateToProps = state => {
 // const mapDispatchToProps = dispatch => {
 //   return {
 //     activateCard: (service_id) => dispatch({
-//       type: actionTypes.ACTIVATE_CARD, 
+//       type: actionTypes.ACTIVATE_CARD,
 //       payload: service_id
-//     })    
+//     })
 //   }
 // }
 

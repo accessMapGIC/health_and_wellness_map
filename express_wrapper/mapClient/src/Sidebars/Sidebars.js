@@ -14,7 +14,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 
-const DropdownHeader = styled.h5` 
+const DropdownHeader = styled.h5`
   margin-bottom: 10px;
   text-decoration: underline;
 `;//styling for the dropDown menu in the leftSidebar
@@ -50,7 +50,7 @@ class SidebarsComponent extends React.Component { //this is the component for bo
         // }
       }
     }
-    
+
     // handleStateChange (state, menu) {
     //   return () => {
     //     if (menu === 0) {
@@ -60,9 +60,9 @@ class SidebarsComponent extends React.Component { //this is the component for bo
     //             }
     //         })
     //     }
-    //   } 
+    //   }
     // }
-    
+
     // This will be used to submit a search query via the menus
     submitButton (state) {
       this.props.queryDatabase();
@@ -72,7 +72,7 @@ class SidebarsComponent extends React.Component { //this is the component for bo
         //   rightHamButton: null,
         // }
       this.props.createRight(state);
-    } 
+    }
 
     newSearchButton (state) {
       this.props.destroyRight();
@@ -84,7 +84,7 @@ class SidebarsComponent extends React.Component { //this is the component for bo
         return (
           <div className='menu-sidebars'>
             <div className='menu-left'>
-              <Menu 
+              <Menu
               isOpen={this.props.lmo}
               onStateChange={this.props.handleLeft}
               customBurgerIcon={this.props.lhb}
@@ -115,7 +115,7 @@ class SidebarsComponent extends React.Component { //this is the component for bo
               </Menu>
             </div>
             <div className='menu-right'>
-              <Menu 
+              <Menu
               right
               isOpen={this.props.rmo}
               onStateChange={this.props.handleRight}
@@ -151,7 +151,9 @@ const mapDispatchToProps = dispatch => {//the different actions called by the si
     handleRight: () => dispatch({type: actionTypes.HANDLE_RIGHT}),
     createRight: (state) => dispatch({type: actionTypes.CREATE_RIGHT, payload: (!state.rightMenuOpen)}),
     destroyRight: () => dispatch({type: actionTypes.DESTROY_RIGHT}),
-    queryDatabase: () => dispatch({type: actionTypes.QUERY_DATABASE}),
+    queryDatabase: () => dispatch({type: actionTypes.QUERY_DATABASE}), //ORIGINAL RYAN ADDITOIN
+    // QueryDatabaseReq: () => dispatch({type:actionTypes.QUERY_DATABASE_REQ}),
+    // QueryDatabaseSuccess: () => dispatch({type:actionTypes.QUERY_DATABASE_SUCCESS}),
     handleLeft: () => dispatch({type: actionTypes.HANDLE_LEFT}),
     createLeft: (state) => dispatch({type: actionTypes.CREATE_LEFT, payload: (!state.leftMenuOpen)}),
     destroyLeft: () => dispatch({type: actionTypes.DESTROY_LEFT}),
