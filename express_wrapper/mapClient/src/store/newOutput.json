@@ -1,0 +1,382 @@
+[{
+    "hours": [
+        [
+            "NA",
+            "NA"
+        ],
+        [
+            "08:00",
+            "17:00"
+        ],
+        [
+            "08:00",
+            "17:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "09:00",
+            "17:00"
+        ],
+        [
+            "09:00",
+            "17:00"
+        ],
+        [
+            "NA",
+            "NA"
+        ]
+    ],
+    "service_id": 2,
+    "name": "Clinique Communautaire de Pointe Sant-Charles",
+    "phone": "514-937-9251",
+    "address": "1955 rue du Centre",
+    "x":45.48238,
+    "y":-73.56348,
+    "url":"https://ccpsc.qc.ca"
+
+},{
+    "hours": [
+        [
+            "08:00",
+            "16:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "16:00"
+        ]
+    ],
+    "service_id": 3,
+    "name": "CLSC D'Ahuntsic",
+    "phone": "514-384-2000",
+    "address": "1165 Boulevard Henri-Bourassa Est",
+    "x":45.56065,
+    "y":-73.66598,
+    "url":"https://ciusss-nordmtl.gouv.qc.ca/accueil/"
+},{
+    "hours": [
+        [
+            "NA",
+            "NA"
+        ],
+        [
+            "08:00",
+            "18:00"
+        ],
+        [
+            "08:00",
+            "18:00"
+        ],
+        [
+            "08:00",
+            "18:00"
+        ],
+        [
+            "08:00",
+            "18:00"
+        ],
+        [
+            "08:00",
+            "18:00"
+        ],
+        [
+            "NA",
+            "NA"
+        ]
+    ],
+    "service_id": 4,
+    "name": "CLSC de Benny Farm",
+    "phone": "514-484-7878",
+    "address": "6484 Avenue de Monkland",
+    "x":45.46554,
+    "y":-73.63143,
+    "url":"https://cssscavendish.qc.ca/accueil/"
+},{
+    "hours": [
+        [
+            "NA",
+            "NA"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "NA",
+            "NA"
+        ]
+    ],
+    "service_id": 5,
+    "name": "CLSC de Bordeaux-Cartierville",
+    "phone": "514-331-2577",
+    "address": "11822 Avenue du Bois de Boulogne",
+    "x":45.54082,
+    "y":-73.68934,
+    "url":"https://ciusss-nordmtl.gouv.qc.ca/accueil/"
+},{
+    "hours": [
+        [
+            "08:00",
+            "16:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "16:00"
+        ]
+    ],
+    "service_id": 6,
+    "name": "CLSC de Côte des Neiges",
+    "phone": "514-731-8531",
+    "address": "5700 Chemin de la Côte des Neiges",
+    "x":45.49816,
+    "y":-73.62731,
+    "url":"https://csssdelamontagne.qc.ca"
+},{
+    "hours": [
+        [
+            "NA",
+            "NA"
+        ],
+        [
+            "09:00",
+            "17:00"
+        ],
+        [
+            "09:00",
+            "17:00"
+        ],
+        [
+            "09:00",
+            "17:00"
+        ],
+        [
+            "09:00",
+            "17:00"
+        ],
+        [
+            "09:00",
+            "17:00"
+        ],
+        [
+            "NA",
+            "NA"
+        ]
+    ],
+    "service_id": 7,
+    "name": "CLSC de Côte des Neiges (Outremont)",
+    "phone": "514-731-8531",
+    "address": "1271 Avenue Van Horne",
+    "x":45.52187,
+    "y":-73.61402,
+    "url":"https://csssdelamontagne.qc.ca"
+},{
+    "hours": [
+        [
+            "08:00",
+            "16:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "16:00"
+        ]
+    ],
+    "service_id": 8,
+    "name": "CLSC de Dorval-Lachine",
+    "phone": "514-639-0650",
+    "address": "1900 rue Notre Dame",
+    "x":45.4354,
+    "y":-73.68154,
+    "url":"https://ciusss-ouestmtl.gouv.qc.ca/accueil"
+},{
+    "hours": [
+        [
+            "08:00",
+            "16:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "16:00"
+        ]
+    ],
+    "service_id": 9,
+    "name": "CLSC de Hochelaga-Maisonneuve",
+    "phone": "514-253-2181",
+    "address": "4201 rue Ontario Est",
+    "x":45.55149,
+    "y":-73.54131,
+    "url":"https://cssslucilleteasdale.qc.ca/accueil/"
+},{
+    "hours": [
+        [
+            "NA",
+            "NA"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "NA",
+            "NA"
+        ]
+    ],
+    "service_id": 10,
+    "name": "CLSC de la Petite-Patrie",
+    "phone": "514-273-4508",
+    "address": "6520 rue St.Vallier",
+    "x":45.53503,
+    "y":-73.6053,
+    "url":"http://ciusss-nordmtl.gouv.qc.ca/"
+},{
+    "hours": [
+        [
+            "08:00",
+            "16:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "20:00"
+        ],
+        [
+            "08:00",
+            "16:00"
+        ]
+    ],
+    "service_id": 11,
+    "name": "CLSC de LaSalle",
+    "phone": "514-364-2572",
+    "address": "8550 Boulevard Newman",
+    "x":45.43096,
+    "y":-73.63151,
+    "url":"https://www.ciusss-ouestmtl.gouv.qc.ca/"
+}]
