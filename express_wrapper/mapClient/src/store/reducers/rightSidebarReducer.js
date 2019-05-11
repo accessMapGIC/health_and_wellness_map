@@ -21,6 +21,10 @@ const rightSidebarReducer = (state = initialState, action ) => {
             //     y: action.payload.y,
 
             // };
+            if (state.rightMenu.cards.find(c => c.service_id === action.payload.service_id)) {
+                return state;
+            }
+
             const newCard = {
                 title: action.payload.title,
                 address: action.payload.address,

@@ -19,11 +19,11 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const cn = {
-  host:'map.geog.mcgill.ca', //'map.geog.mcgill.ca',
-  port: '49495', //'49495',
-  database: 'map',//'map',
-  user: 'ryan',//'noe',
-  password: 'g1C_ryan'//process.env.PG_PASSWORD
+  host:'map.geog.mcgill.ca',
+  port: '49495',
+  database: 'map',
+  user: 'noe',
+  password: process.env.PG_PASSWORD
 }//login credentials should be hidden in the .env imported as above from the .env file
 
 const db = pgp(cn); //create a db object from the pg-promise object with the above credentials
@@ -49,10 +49,10 @@ app.post('/query', (req, res) => {
 })
 
 app.post('/category_query', (req, res) => { //this is the main category query
-  db.any(
-    `
-  	SELECT
-      	s.service_id,
+
+  let baseQuery = `
+    SELECT
+        s.service_id,
         s.name,
         s.address,
         s.phone_num AS phone,
@@ -62,38 +62,60 @@ app.post('/category_query', (req, res) => { //this is the main category query
         h.hours,
         pc.cat_name as primary_category,
         sc.subcat_name as subcategory
-  	FROM health.services_master s
-  	LEFT JOIN health.business_hours h ON s.service_id = h.id
+    FROM health.services_master s
+    LEFT JOIN health.business_hours h ON s.service_id = h.id
     LEFT JOIN health.primary_category pc ON s.primary_cat_id = pc.cat_id
     LEFT JOIN health.subcategory sc ON pc.cat_id = sc.pc_id
-  	JOIN health.insurance ins ON ins.insur_id = s.insur_id
-    WHERE pc.cat_name = $1 AND sc.subcat_name = $2 AND ins.insur_name = $3
-    `,[req.body.cat, req.body.subCat, req.body.insCat] //Req body filled by user
-  )
-    .then(data => {
-        console.log('DATA:', data); // prints data, use data[i] to print specific entry attributes
-        res.send(data);
-    })
-    .catch(error => {
-        //console.log('ERROR:', error); // print the error;
-        res.send('there has been an error, please contact Student Services to get this fixed.');
-    })
+    JOIN health.insurance ins ON ins.insur_id = s.insur_id`;
+  let params = [];
 
-    /* ----KEYWORD_QUERY----
-    `
-    SELECT
-      s.service_id,
-      s.services,
-      s.name,
-      s.address,
-      s.phone_num AS phone,
-      s.lat AS x,
-      s.lon AS y,
-      s.website AS URL,
-      s.languages_spoken as lang
-    FROM services_master as s
-    unnest(string_to_array(services, ',')) AS k(service)
-    WHERE service LIKE ANY (string_to_array(LOWER('%nurse%'),','))
-    GROUP BY service_id;
-    `*/
+  if (req.body.cat) {
+    params.push({key: "pc.cat_name", value: req.body.cat});
+  }
+
+  if (req.body.subCat) {
+    params.push({key: "sc.subcat_name", value: req.body.suCat});
+  }
+
+  if (req.body.insCat) {
+    params.push({key: "ins.insur_name", value: req.body.insCat});
+  }
+
+  if (params.length) {
+    baseQuery += " WHERE ";
+    for (let i = 0; i < params.length; i++) {
+      if (i > 0) {
+        baseQuery += " AND ";
+      }
+      baseQuery += `${params[i].key} = $${i+1}`;
+    }
+  }
+
+  db.any(baseQuery, params.map(p => p.value))
+  .then(data => {
+      console.log('DATA:', data); // prints data, use data[i] to print specific entry attributes
+      res.send(data);
+  })
+  .catch(error => {
+      //console.log('ERROR:', error); // print the error;
+      res.send('there has been an error, please contact Student Services to get this fixed.');
+  })
+
+  /* ----KEYWORD_QUERY----
+  `
+  SELECT
+    s.service_id,
+    s.services,
+    s.name,
+    s.address,
+    s.phone_num AS phone,
+    s.lat AS x,
+    s.lon AS y,
+    s.website AS URL,
+    s.languages_spoken as lang
+  FROM services_master as s
+  unnest(string_to_array(services, ',')) AS k(service)
+  WHERE service LIKE ANY (string_to_array(LOWER('%nurse%'),','))
+  GROUP BY service_id;
+  `*/
 });

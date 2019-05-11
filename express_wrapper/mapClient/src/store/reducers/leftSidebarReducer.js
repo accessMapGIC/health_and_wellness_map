@@ -11,47 +11,7 @@ const initialState = {
         subCatDrop: '',
         openNow: false
     },
-    data: [{ //initial sample data that should be overwritten so we don't get an undefined error
-        "hours": [
-            [
-                "NA",
-                "NA"
-            ],
-            [
-                "08:00",
-                "17:00"
-            ],
-            [
-                "08:00",
-                "17:00"
-            ],
-            [
-                "08:00",
-                "20:00"
-            ],
-            [
-                "09:00",
-                "17:00"
-            ],
-            [
-                "09:00",
-                "17:00"
-            ],
-            [
-                "NA",
-                "NA"
-            ]
-        ],
-        "service_id": 2,
-        "name": "Clinique Communautaire de Pointe Sant-Charles",
-        "phone": "514-937-9251",
-        "address": "1955 rue du Centre",
-        "x":45.48238,
-        "y":-73.56348,
-        "url":"https://ccpsc.qc.ca"
-
-    }
-    ],
+    data: [],
 }
 
 async function categoryQuery(json){//this is an asycronous function for the categoryQuery that gets called below
@@ -165,6 +125,16 @@ const leftSidebarReducer = (state = initialState, action ) => {//the leftSidebar
             return {
                 ...state,
                 data: newData //---Resets data to [], instead of newdata...---
+            }
+        case actionTypes.FETCH_DATA_SUCCESS:
+            let data = [];
+            if (action.data) {
+                data = action.data
+            }
+
+            return {
+                ...state,
+                data: data
             }
         default:
             return state;

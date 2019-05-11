@@ -32,6 +32,9 @@ const initialState = {
 const mapboxReducer = (state = initialState, action ) => {
     switch ( action.type ){
         case actionTypes.ADD_POINT:
+            if (state.points.find(c => c.service_id === action.payload.id)) {
+                return state;
+            }
             const newPoint = {
                 lat: action.payload.lat,
                 lng: action.payload.lng,

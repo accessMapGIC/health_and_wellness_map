@@ -65,7 +65,16 @@ class SidebarsComponent extends React.Component { //this is the component for bo
 
     // This will be used to submit a search query via the menus
     submitButton (state) {
-      this.props.queryDatabase();
+      const {
+        cat,
+        subCat,
+        insCat
+      } = this.props;
+      this.props.queryDatabase({
+        cat,
+        subCat,
+        insCat
+      });
       this.props.destroyLeft();
         // rightMenu: {
         //   rightMenuOpen: !state.rightMenuOpen,
@@ -143,6 +152,9 @@ const mapStateToProps = state => {//info grabbed from the redux store
     rhb: state.rtS.rightMenu.rightHamButton,
     lmo: state.lfS.leftMenu.leftMenuOpen,
     lhb: state.lfS.leftMenu.leftHamButton,
+    cat: state.lfS.leftMenu.catDrop,
+    subCat: state.lfS.leftMenu.subCatDrop,
+    insCat: state.lfS.leftMenu.insDrop
   }
 };
 
@@ -151,7 +163,7 @@ const mapDispatchToProps = dispatch => {//the different actions called by the si
     handleRight: () => dispatch({type: actionTypes.HANDLE_RIGHT}),
     createRight: (state) => dispatch({type: actionTypes.CREATE_RIGHT, payload: (!state.rightMenuOpen)}),
     destroyRight: () => dispatch({type: actionTypes.DESTROY_RIGHT}),
-    queryDatabase: () => dispatch({type: actionTypes.QUERY_DATABASE}), //ORIGINAL RYAN ADDITOIN
+    queryDatabase: (params) => dispatch(actionTypes.categoryQuery(params)), //ORIGINAL RYAN ADDITOIN
     // QueryDatabaseReq: () => dispatch({type:actionTypes.QUERY_DATABASE_REQ}),
     // QueryDatabaseSuccess: () => dispatch({type:actionTypes.QUERY_DATABASE_SUCCESS}),
     handleLeft: () => dispatch({type: actionTypes.HANDLE_LEFT}),
