@@ -74,7 +74,7 @@ app.post('/category_query', (req, res) => { //this is the main category query
   }
 
   if (req.body.subCat) {
-    params.push({key: "sc.subcat_name", value: req.body.suCat});
+    params.push({key: "sc.subcat_name", value: req.body.subCat});
   }
 
   if (req.body.insCat) {
