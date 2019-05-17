@@ -49,24 +49,25 @@ app.post('/query', (req, res) => {
 })
 
 app.post('/category_query', (req, res) => { //this is the main category query
-
   let baseQuery = `
     SELECT
-        s.service_id,
-        s.name,
-        s.address,
-        s.phone_num AS phone,
-        s.lat AS x,
-        s.lon AS y,
-        s.website AS URL,
-        h.hours,
-        pc.cat_name as primary_category,
-        sc.subcat_name as subcategory
-    FROM health.services_master s
-    LEFT JOIN health.business_hours h ON s.service_id = h.id
-    LEFT JOIN health.primary_category pc ON s.primary_cat_id = pc.cat_id
-    LEFT JOIN health.subcategory sc ON pc.cat_id = sc.pc_id
-    JOIN health.insurance ins ON ins.insur_id = s.insur_id`;
+      s.service_id,
+      pc.cat_name as primary_category,
+      sc.subcat_name as subcategory,
+      s.name,
+      s.address,
+      s.phone_num as phone,
+      s.lat as x,
+      s.lon as y,
+      s.website AS URL,
+      h.hours
+    FROM health.primary_category pc INNER JOIN health.subcategory sc
+    ON pc.cat_id = sc.pc_id
+    INNER JOIN health.services_master as s
+    ON s.sub_cat_id = sc.subcat_id
+    INNER JOIN health.business_hours as h
+    ON h.service_id = s.service_id
+  `;
   let params = [];
 
   if (req.body.cat) {
