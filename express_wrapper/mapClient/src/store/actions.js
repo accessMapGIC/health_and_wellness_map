@@ -24,11 +24,62 @@ export const ACTIVATE_POINT = 'ACTIVATE_POINT';
 export const CENTER_ON_USER = 'CENTER_ON_USER';
 export const QUERY_DATABASE = 'QUERY_DATABASE'; //initial Ryan query
 export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
+export const SET_TAB = 'SET_TAB';
 // export const START_QUERY_DATABASE = 'START_QUERY_DATABASE'; //Need Action like this for async action
+
+export function setTabIndex(index) {
+  return {
+    type: SET_TAB,
+    index
+  };
+}
+
 export function fetchDataSuccess(data) {
   return {
     type: FETCH_DATA_SUCCESS,
     data
+  };
+}
+
+export function keywordsQuery(json) {
+  // redux-thunk middleware
+  return async dispatch => {
+    await fetch('/keywords_query', {
+      method: 'POST',
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: json ? JSON.stringify(json) : "{}"
+    })
+    .then(function(response) { 
+      return response.json();
+    })
+    .then(data => {
+      dispatch(fetchDataSuccess(data));
+      data.forEach(card => {
+        dispatch({
+          type: ADD_CARD, 
+          payload: {
+            title: card.title, 
+            address: card.address, 
+            service_id: card.service_id, 
+            x: card.x, 
+            y: card.y,
+          }
+        });
+        dispatch({
+          type: ADD_POINT,
+          payload: {
+            lng: card.y,
+            lat: card.x,
+            id: card.service_id,
+            title: card.title,
+            address: card.address,
+          }
+        });
+      });
+    })
+    .catch(err => console.log(err));
   };
 }
 

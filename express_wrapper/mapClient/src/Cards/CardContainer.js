@@ -20,7 +20,6 @@ class CardContainer extends React.Component{
 
     render(){
       const cards = this.props.data; //this is where we subscribe to the redux data that changes when a query is run
-      console.log(`Redux data: ${cards}`);
       return (
         <div className='Card_Container' style={{height: "80%"}} id='Card_Container'>
           {

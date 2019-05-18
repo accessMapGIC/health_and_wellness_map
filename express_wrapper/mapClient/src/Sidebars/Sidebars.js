@@ -68,13 +68,25 @@ class SidebarsComponent extends React.Component { //this is the component for bo
       const {
         cat,
         subCat,
-        insCat
+        insCat,
+        keyword,
+        tabIndex,
+        queryDatabase,
+        queryDatabaseKeywords
       } = this.props;
-      this.props.queryDatabase({
-        cat,
-        subCat,
-        insCat
-      });
+
+      if (tabIndex === 0) {
+        queryDatabase({
+          cat,
+          subCat,
+          insCat
+        });
+      } else if (tabIndex === 1) {
+        queryDatabaseKeywords({
+          keyword,
+          insCat
+        });
+      }
       this.props.destroyLeft();
         // rightMenu: {
         //   rightMenuOpen: !state.rightMenuOpen,
@@ -152,9 +164,11 @@ const mapStateToProps = state => {//info grabbed from the redux store
     rhb: state.rtS.rightMenu.rightHamButton,
     lmo: state.lfS.leftMenu.leftMenuOpen,
     lhb: state.lfS.leftMenu.leftHamButton,
+    tabIndex: state.lfS.leftMenu.tabIndex,
     cat: state.lfS.leftMenu.catDrop,
     subCat: state.lfS.leftMenu.subCatDrop,
-    insCat: state.lfS.leftMenu.insDrop
+    insCat: state.lfS.leftMenu.insDrop,
+    keyword: state.lfS.leftMenu.keyDrop
   }
 };
 
@@ -163,7 +177,8 @@ const mapDispatchToProps = dispatch => {//the different actions called by the si
     handleRight: () => dispatch({type: actionTypes.HANDLE_RIGHT}),
     createRight: (state) => dispatch({type: actionTypes.CREATE_RIGHT, payload: (!state.rightMenuOpen)}),
     destroyRight: () => dispatch({type: actionTypes.DESTROY_RIGHT}),
-    queryDatabase: (params) => dispatch(actionTypes.categoryQuery(params)), //ORIGINAL RYAN ADDITOIN
+    queryDatabase: (params) => dispatch(actionTypes.categoryQuery(params)),
+    queryDatabaseKeywords: (params) => dispatch(actionTypes.keywordsQuery(params)),
     // QueryDatabaseReq: () => dispatch({type:actionTypes.QUERY_DATABASE_REQ}),
     // QueryDatabaseSuccess: () => dispatch({type:actionTypes.QUERY_DATABASE_SUCCESS}),
     handleLeft: () => dispatch({type: actionTypes.HANDLE_LEFT}),
