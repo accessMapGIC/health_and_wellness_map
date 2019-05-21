@@ -114,7 +114,7 @@ class MapboxComponent extends React.Component {
           images={images}
         >
           {(this.props.points).map(({lng, lat, id, title, address}) => (
-            <Feature 
+            <Feature
               id={id}
               key={id}
               coordinates={[lng,lat]}
@@ -135,7 +135,7 @@ class MapboxComponent extends React.Component {
         )}
         {/* <Fab className={classes.myLocalButton} title="center on your location" prefetch="true"><geo/></Fab><MyLocationIcon/>} */}
       </Mapbox>
-      
+
     );
   }
 }
@@ -156,10 +156,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    openRight: () => dispatch({type: actionTypes.OPEN_RIGHT}), 
+    openRight: () => dispatch({type: actionTypes.OPEN_RIGHT}),
     closeRight: () => dispatch({type: actionTypes.CLOSE_RIGHT}),
     activateCard: (service_id) => dispatch({
-      type: actionTypes.ACTIVATE_CARD, 
+      type: actionTypes.ACTIVATE_CARD,
       payload: service_id
     }),
     addPoint: (card) => dispatch({
@@ -176,16 +176,16 @@ const mapDispatchToProps = dispatch => {
       type: actionTypes.CENTER_ON_POINT,
       payload: {
         center: coordinates,
-        id: id, 
+        id: id,
         title: title,
         address: address,
       }
     }),
-    centerOnUser:() => dispatch({type: actionTypes.CENTER_ON_USER}) 
+    centerOnUser:() => dispatch({type: actionTypes.CENTER_ON_USER})
   }
 }
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, mapDispatchToProps), 
+  connect(mapStateToProps, mapDispatchToProps),
 )(MapboxComponent);

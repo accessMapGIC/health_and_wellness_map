@@ -1,9 +1,31 @@
 @import '../variables.scss';
 
-/* 
+/*
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops
 */
+
+//Scrollbar Styling
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #A9A9A9;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $rossy-teal;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+// ::-webkit-scrollbar-thumb:hover {
+//   background: blue;
+// }
 
 @media (min-width: 1281px) {
 
@@ -35,7 +57,9 @@
   }
 
   /* Color/shape of close button cross */
-  .menu-left .bm-cross {
+
+
+
     background: #000;
   }
 
@@ -121,7 +145,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     position: fixed;
     height: 93% !important;
     width: 400px !important;
-    
+
   }
 
   /* General sidebar styles */
@@ -276,16 +300,14 @@ Note: Beware of modifying this element as it can break the animations - you shou
     }
   }
 
-}
-
-/* 
+/*
   ##Device = Laptops, Desktops
   ##Screen = B/w 1025px to 1280px
 */
 
 @media (min-width: 1025px) and (max-width: 1280px) {
 
-  
+
   /* BEGIN-MENU-LEFT */
 
   /* Position and sizing of burger button */
@@ -316,6 +338,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   /* Color/shape of close button cross */
   .menu-left .bm-cross {
     background: #000;
+    right: 10px;
   }
 
   /*
@@ -555,14 +578,14 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 }
 
-/* 
+/*
   ##Device = Tablets, Ipads (portrait)
   ##Screen = B/w 768px to 1024px
 */
 
 @media (min-width: 768px) and (max-width: 1024px) {
 
-  
+
   /* BEGIN-MENU-LEFT */
 
   /* Position and sizing of burger button */
@@ -832,7 +855,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 }
 
-/* 
+/*
   ##Device = Tablets, Ipads (landscape)
   ##Screen = B/w 768px to 1024px
 */
@@ -1108,7 +1131,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 }
 
-/* 
+/*
   ##Device = Low Resolution Tablets, Mobiles (Landscape)
   ##Screen = B/w 481px to 767px
 */
@@ -1384,7 +1407,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 }
 
-/* 
+/*
   ##Device = Most of the Smartphones Mobiles (Portrait)
   ##Screen = B/w 320px to 479px
 */

@@ -61,7 +61,7 @@ class LanguageDropDownComponent extends React.Component {
             <MenuItem value={'French'}>French</MenuItem>
             <MenuItem value={'English'}>English</MenuItem>
           </Select>
-          <FormHelperText>Here is help text</FormHelperText>
+          <FormHelperText>Select to filter for services which offer services in the selected language</FormHelperText>
         </FormControl>
       </form>
     );

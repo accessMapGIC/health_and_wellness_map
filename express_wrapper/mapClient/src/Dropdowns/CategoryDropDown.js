@@ -65,7 +65,7 @@ class CategoryDropDownComponent extends React.Component {
             <MenuItem value={'Relaxation & Recreation'}>Relaxation & Recreation</MenuItem>
             <MenuItem value={'Wellness Resources'}>Wellness Resources</MenuItem>
           </Select>
-          <FormHelperText>Here is help text</FormHelperText>
+          <FormHelperText>Select a Primary Category that corresponds with a subcategory below</FormHelperText>
         </FormControl>
       </form>
     );
