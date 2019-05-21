@@ -34,6 +34,7 @@ class CardContainer extends React.Component{
                   x={card.x}
                   y={card.y}
                   service_id={card.service_id}
+                  notes={card.notes}
                   key={card.service_id}
                 />
               </Element>

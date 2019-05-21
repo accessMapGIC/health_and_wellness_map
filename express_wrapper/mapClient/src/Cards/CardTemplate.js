@@ -15,7 +15,7 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PinDropIcon from '@material-ui/icons/PinDrop';
 import PhoneIcon from '@material-ui/icons/Phone';
 import WebIcon from '@material-ui/icons/Web';
-// import DescriptionIcon from '@material-ui/icons/Description'
+import DescriptionIcon from '@material-ui/icons/Description'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
@@ -133,7 +133,8 @@ class CardTemplateComponent extends React.Component {
     super(props)
     this.state = { 
       expanded: false, //is the regular card expanded
-      hoursExpanded: false, //are the hours expanded
+      hoursExpanded: false, //are the hours expanded,
+      notesExpanded: false
     };
   }
 
@@ -153,6 +154,10 @@ class CardTemplateComponent extends React.Component {
   handleHourExpandClick = () => {
     this.setState(state => ({ hoursExpanded: !state.hoursExpanded }));
   };//hours expand onclick
+
+  handleNotesExpandClick = () => {
+    this.setState(state => ({ notesExpanded: !state.notesExpanded }));
+  };
 
   handleCurrentDay = (hrs) => {
     const format = 'hh:mm';
@@ -303,10 +308,30 @@ class CardTemplateComponent extends React.Component {
             <Typography paragraph>
               <WebIcon className={classes.materialIcons} /> - <a href={this.props.url} target="_blank" rel="noopener noreferrer" >Link to their website</a>
             </Typography>
-            {/* <Typography>
-              <DescriptionIcon className={classes.materialIcons} /> -
-              Conditional Description
-            </Typography> */}
+            {
+              this.props.notes ?  (
+                <Typography>
+                <DescriptionIcon className={classes.materialIcons} /> - Notes
+                <IconButton
+                  className={classnames(classes.hoursExpand, {
+                    [classes.hoursExpandOpen]: this.state.notesExpanded
+                  })}
+                  onClick={this.handleNotesExpandClick}
+                  aria-expanded={this.state.notesExpanded}
+                  aria-label="Show more"
+                >
+                  <ExpandMoreIcon />
+                </IconButton>
+                <Collapse
+                  in={this.state.notesExpanded}
+                  timeout="auto"
+                  unmountOnExit
+                >
+                  {this.props.notes}
+                </Collapse>
+              </Typography>
+              ) : null
+            }
           </CardContent>
         </Collapse>
       </Card>
