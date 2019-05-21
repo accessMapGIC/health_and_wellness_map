@@ -1,7 +1,7 @@
 import React from 'react';
 import CardTemplate from './CardTemplate';
 // import { compose } from 'redux';
-//import data from "../store/newOutput.json";
+// import data from "../store/newOutput.json";
 import { connect } from 'react-redux';
 // import * as actionTypes from '../store/actions';
 import {Element} from 'react-scroll';

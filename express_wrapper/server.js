@@ -48,26 +48,27 @@ app.post('/query', (req, res) => {
 })
 
 app.post('/category_query', (req, res) => { //this is the main category query
-
-    let baseQuery = `
-      SELECT
-        s.service_id,
-        pc.cat_name as primary_category,
-        sc.subcat_name as subcategory,
-        s.name,
-        s.address,
-        s.phone_num as phone,
-        s.lat as x,
-        s.lon as y,
-        s.website AS URL,
-        h.hours
-      FROM primary_category pc INNER JOIN subcategory sc
-      ON pc.cat_id = sc.pc_id
-      INNER JOIN services_master as s
-      ON s.sub_cat_id = sc.subcat_id
-      INNER JOIN business_hours as h
-      ON h.service_id = s.service_id
-    `;
+  let baseQuery = `
+    SELECT
+      s.service_id,
+      pc.cat_name as primary_category,
+      sc.subcat_name as subcategory,
+      s.name,
+      s.address,
+      s.phone_num as phone,
+      s.lat as x,
+      s.lon as y,
+      s.website AS URL,
+      h.hours
+    FROM health.primary_category pc INNER JOIN health.subcategory sc
+    ON pc.cat_id = sc.pc_id
+    INNER JOIN health.services_master as s
+    ON s.sub_cat_id = sc.subcat_id
+    INNER JOIN health.business_hours as h
+    ON h.service_id = s.service_id
+    INNER JOIN health.insurance as ins
+    ON ins.insur_id = s.insur_id
+  `;
   let params = [];
 
   if (req.body.cat) {
@@ -100,22 +101,45 @@ app.post('/category_query', (req, res) => { //this is the main category query
   .catch(error => {
       res.send('there has been an error, please contact Student Services to get this fixed.');
   })
+});
 
-  /* ----KEYWORD_QUERY----
-  `
-  SELECT
-    s.service_id,
-    s.services,
-    s.name,
-    s.address,
-    s.phone_num AS phone,
-    s.lat AS x,
-    s.lon AS y,
-    s.website AS URL,
-    s.languages_spoken as lang
-  FROM services_master as s
-  unnest(string_to_array(services, ',')) AS k(service)
-  WHERE service LIKE ANY (string_to_array(LOWER('%nurse%'),','))
-  GROUP BY service_id;
-  `*/
+app.post('/keywords_query', (req, res) => { //this is the main category query
+  let baseQuery = `
+    SELECT
+      s.service_id,
+      pc.cat_name as primary_category,
+      sc.subcat_name as subcategory,
+      s.name,
+      s.address,
+      s.phone_num as phone,
+      s.lat as x,
+      s.lon as y,
+      s.website AS URL,
+      h.hours
+    FROM health.primary_category pc INNER JOIN health.subcategory sc
+    ON pc.cat_id = sc.pc_id
+    INNER JOIN health.services_master as s
+    ON s.sub_cat_id = sc.subcat_id
+    INNER JOIN health.business_hours as h
+    ON h.service_id = s.service_id
+    INNER JOIN health.insurance as ins
+    ON ins.insur_id = s.insur_id
+    WHERE s.services LIKE ANY (string_to_array(LOWER($1),','))
+  `;
+  let params = [`%${req.body.keyword}%`];
+
+  if (req.body.insCat) {
+    baseQuery += " AND ins.insur_name=$2"
+    params.push(req.body.insCat);
+  }
+
+  db.any(baseQuery, params)
+  .then(data => {
+      console.log('DATA:', data); // prints data, use data[i] to print specific entry attributes
+      res.send(data);
+  })
+  .catch(error => {
+      //console.log('ERROR:', error); // print the error;
+      res.send('there has been an error, please contact Student Services to get this fixed.');
+  })
 });

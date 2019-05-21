@@ -9,7 +9,8 @@ const initialState = {
         langDrop: '',
         keyDrop: '',
         subCatDrop: '',
-        openNow: false
+        openNow: false,
+        tabIndex: 0
     },
     data: [],
 }
@@ -120,8 +121,6 @@ const leftSidebarReducer = (state = initialState, action ) => {//the leftSidebar
                 insCat: state.leftMenu.insDrop,
                 //langCat: state.leftMenu.langDrop,
             });
-            console.log(categoryQuery(testStr));
-            //console.log(categoryQuery(testStr)); resloved, undefined value...
             return {
                 ...state,
                 data: newData //---Resets data to [], instead of newdata...---
@@ -135,6 +134,14 @@ const leftSidebarReducer = (state = initialState, action ) => {//the leftSidebar
             return {
                 ...state,
                 data: data
+            }
+        case actionTypes.SET_TAB:
+            return {
+                ...state,
+                leftMenu: {
+                    ...state.leftMenu,
+                    tabIndex: action.index
+                },
             }
         default:
             return state;
