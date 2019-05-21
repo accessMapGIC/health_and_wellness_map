@@ -29,8 +29,8 @@ class TabComponent extends React.Component {
   }
 
   render () {
-    const { 
-      tabIndex, 
+    const {
+      tabIndex,
       setTabIndex
     } = this.props;
     return (

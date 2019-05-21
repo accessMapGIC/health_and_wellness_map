@@ -49,7 +49,7 @@ class InsuranceDropDownComponent extends React.Component {
             style={selectStyle}
           >
             <MenuItem value="">
-              Choose an insurance
+              Select your Insurance coverage (optional)
             </MenuItem>
             <MenuItem value={'International Health Insurance'}>International Health Insurance</MenuItem>
             <MenuItem value={'MCSS'}>MCSS</MenuItem>
@@ -58,7 +58,7 @@ class InsuranceDropDownComponent extends React.Component {
             <MenuItem value={'RAMQ'}>RAMQ</MenuItem>
             <MenuItem value={'SSMU'}>SSMU</MenuItem>
           </Select>
-          <FormHelperText>Here is help text</FormHelperText>
+          <FormHelperText>Reflects whether the service requires a fee to open a file based on your insurance plan**</FormHelperText>
         </FormControl>
       </form>
     );

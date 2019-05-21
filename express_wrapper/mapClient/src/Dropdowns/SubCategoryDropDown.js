@@ -76,7 +76,7 @@ class SubcategoryDropDownComponent extends React.Component {
             <MenuItem value={'Social'}>Social</MenuItem>
             <MenuItem value={'Super-Clinic'}>Super-Clinic</MenuItem>
           </Select>
-          <FormHelperText>Here is help text</FormHelperText>
+          <FormHelperText>Select a subcategory / service type</FormHelperText>
         </FormControl>
       </form>
     );
