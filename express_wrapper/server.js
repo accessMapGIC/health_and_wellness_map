@@ -59,6 +59,7 @@ app.post('/category_query', (req, res) => { //this is the main category query
       s.lat as x,
       s.lon as y,
       s.website AS URL,
+      s.notes,
       h.hours
     FROM health.primary_category pc INNER JOIN health.subcategory sc
     ON pc.cat_id = sc.pc_id
@@ -115,6 +116,7 @@ app.post('/keywords_query', (req, res) => { //this is the main category query
       s.lat as x,
       s.lon as y,
       s.website AS URL,
+      s.notes,
       h.hours
     FROM health.primary_category pc INNER JOIN health.subcategory sc
     ON pc.cat_id = sc.pc_id
