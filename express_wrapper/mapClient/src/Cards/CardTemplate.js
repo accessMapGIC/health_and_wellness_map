@@ -163,11 +163,16 @@ class CardTemplateComponent extends React.Component {
     const format = 'hh:mm';
     const time = moment();
     const curDay = new Array(0);
-    if(hrs[time.day()][0]==='NA'){
+
+    if(hrs[time.day()][0] === 'NA'){
       curDay[0] = 'Closed';
-    }else if(time.isBetween(moment(hrs[time.day()][0], format), moment(hrs[time.day()][1], format))){
-      curDay[0] = 'Open Now : ' + hrs[time.day()][0] + '-' + hrs[time.day()][1];
-    }else{
+    } else if(hrs[time.day()][0]) {
+      let range = hrs[time.day()][0].split("-");
+      curDay[0] = 'Closed';
+      if(time.isBetween(moment(range[0], format), moment(range[1], format))) {
+        curDay[0] = 'Open Now';
+      }
+    } else{
       curDay[0] = 'Closed';
     }
     return curDay;
@@ -202,16 +207,21 @@ class CardTemplateComponent extends React.Component {
       if(hours[curOrder[i][0]][0]==='NA'){
         newArr[i]=[curOrder[i][1], 'Closed'];
       }else{
-        newArr[i]=[curOrder[i][1], hours[curOrder[i][0]][0] + '-' + hours[curOrder[i][0]][1]];
+        newArr[i]=[curOrder[i][1], hours[curOrder[i][0]][0]];
+        // the line below seems to follow an older format
+        // newArr[i]=[curOrder[i][1], hours[curOrder[i][0]][0] + '-' + hours[curOrder[i][0]][1]];
       }
     }
     return newArr;
   }//adds the apropriate hours to the day order
 
   render() {
-    const { classes } = this.props;
+    const { classes, openNow } = this.props;
     const orderedHours = this.reOrderHours(this.props.hours);
     const curDay = this.handleCurrentDay(this.props.hours);
+    if (openNow && curDay && curDay[0] === "Closed") {
+      return null;
+    }
 
     return (
       <Card className={this.props.activeCard === this.props.service_id ? classes.activeCard : classes.card}>
@@ -347,6 +357,7 @@ const mapStateToProps = state => {
   return {
     activeCard: state.rtS.rightMenu.activeCard,
     cards: state.rtS.rightMenu.cards,
+    openNow: state.lfS.leftMenu.openNow
   }
 };
 
