@@ -113,7 +113,7 @@ const styles = theme => ({
     fontWeight: "bold",
     paddingLeft: '10px'
   },
-  dayRow: {//stlying for each row 
+  dayRow: {//stlying for each row
     display: 'inline-block',
     paddingTop: "3px",
     paddingBottom: "3px",
@@ -125,13 +125,14 @@ const styles = theme => ({
   dayColumn: {//styling for the day column
     display: 'inline-block',
     width: '77px',
+    // fontWeight: bold,
   }
 });
 
 class CardTemplateComponent extends React.Component {
   constructor(props){
     super(props)
-    this.state = { 
+    this.state = {
       expanded: false, //is the regular card expanded
       hoursExpanded: false, //are the hours expanded,
       notesExpanded: false
@@ -193,7 +194,7 @@ class CardTemplateComponent extends React.Component {
       default:
         return ['There was a Problem'];
     }
-  }//calculates which day of the week it is 
+  }//calculates which day of the week it is
 
   reOrderHours(hours){
     const curOrder = this.getDayOrder();
@@ -202,7 +203,8 @@ class CardTemplateComponent extends React.Component {
       if(hours[curOrder[i][0]][0]==='NA'){
         newArr[i]=[curOrder[i][1], 'Closed'];
       }else{
-        newArr[i]=[curOrder[i][1], hours[curOrder[i][0]][0] + '-' + hours[curOrder[i][0]][1]];
+        newArr[i]=[curOrder[i][1], hours[curOrder[i][0]][0]];
+        //Used to be ->, though would show 'undefined': newArr[i]=[curOrder[i][1], hours[curOrder[i][0]][0] + '-' + hours[curOrder[i][0]][1]]; 
       }
     }
     return newArr;
@@ -215,7 +217,7 @@ class CardTemplateComponent extends React.Component {
 
     return (
       <Card className={this.props.activeCard === this.props.service_id ? classes.activeCard : classes.card}>
-        <CardHeader 
+        <CardHeader
           className={classes.cardHeader}
           avatar={
             <IconButton
@@ -232,11 +234,11 @@ class CardTemplateComponent extends React.Component {
             onClick={this.handleExpandClick}
             aria-expanded={this.state.expanded}
             aria-label="Show more"
-          > 
+          >
             <ExpandMoreIcon className={classes.materialIcons} />
           </IconButton>
           }
-          
+
           title={this.props.title}
         />
         <CardActions className={classes.actions} disableActionSpacing>
@@ -353,12 +355,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addCard: (title, address, service_id, x, y, ref) => dispatch({
-      type: actionTypes.ADD_CARD, 
+      type: actionTypes.ADD_CARD,
       payload: {
-        title: title, 
-        address: address, 
-        service_id: service_id, 
-        x: x, 
+        title: title,
+        address: address,
+        service_id: service_id,
+        x: x,
         y: y,
       }
     }),

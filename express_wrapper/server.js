@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 const initOptions = {
   promiseLib: promise
 }//adds bluebird to the pg-promise
-//monitor.attach(initOptions)//PG-Monitor
+monitor.attach(initOptions)//PG-Monitor
 const pgp = require('pg-promise')(initOptions); //this creates pg-promise object
 
 //Middleware
@@ -67,7 +67,7 @@ app.post('/category_query', (req, res) => { //this is the main category query
     ON s.sub_cat_id = sc.subcat_id
     INNER JOIN health.business_hours as h
     ON h.service_id = s.service_id
-    INNER JOIN health.insurance as ins
+    LEFT JOIN health.insurance as ins
     ON ins.insur_id = s.insur_id
   `;
   let params = [];
@@ -124,7 +124,7 @@ app.post('/keywords_query', (req, res) => { //this is the main category query
     ON s.sub_cat_id = sc.subcat_id
     INNER JOIN health.business_hours as h
     ON h.service_id = s.service_id
-    INNER JOIN health.insurance as ins
+    LEFT JOIN health.insurance as ins
     ON ins.insur_id = s.insur_id
     WHERE s.services LIKE ANY (string_to_array(LOWER($1),','))
   `;
