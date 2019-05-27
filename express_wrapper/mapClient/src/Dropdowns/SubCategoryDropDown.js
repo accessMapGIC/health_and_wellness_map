@@ -63,8 +63,9 @@ class SubcategoryDropDownComponent extends React.Component {
             <MenuItem value={'Career'}>Career</MenuItem>
             <MenuItem value={'Clinic'}>Clinic</MenuItem>
             <MenuItem value={'CLSC'}>CLSC</MenuItem>
-            <MenuItem value={'Counselor'}>Counselor</MenuItem>
+            <MenuItem value={'Counsellor'}>Counselor</MenuItem>
             <MenuItem value={'Cultural'}>Cultural</MenuItem>
+            <MenuItem value={'Dentistry'}>Dentistry</MenuItem>
             <MenuItem value={'Emotional'}>Emotional</MenuItem>
             <MenuItem value={'Financial'}>Financial</MenuItem>
             <MenuItem value={'Hospital'}>Hospital</MenuItem>

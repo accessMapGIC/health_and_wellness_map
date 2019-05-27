@@ -18,7 +18,7 @@ const styles = {
   },
   checked: {},
   label: {
-      color: '#f3eae2',
+      color: '#00000',
       'font-weight': '600',
   }
 };//Styling for the checkbox in the leftsidebar

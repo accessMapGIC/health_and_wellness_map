@@ -13,6 +13,7 @@ const Mapbox = ReactMapboxGl({
   minZoom: 11,
   maxZoom: 19,
   accessToken: process.env.REACT_APP_MAPBOX_ACCESSTOKEN,
+  attributionControl: false
 });//instantiates the initial mapbox object
 
 const styles = theme => ({
@@ -64,7 +65,8 @@ class MapboxComponent extends React.Component {
       enableHighAccuracy: true
       },
       trackUserLocation: true
-      }),'bottom-right');
+    }),'bottom-right');
+    map.addControl(new mapboxgl.AttributionControl(), 'top-right');
   }//adds the geolocate control
 
   generateMarkers = (cards) => {

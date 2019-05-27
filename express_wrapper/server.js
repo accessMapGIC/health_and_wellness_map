@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 const initOptions = {
   promiseLib: promise
 }//adds bluebird to the pg-promise
-monitor.attach(initOptions)//PG-Monitor
+//monitor.attach(initOptions)//PG-Monitor
 const pgp = require('pg-promise')(initOptions); //this creates pg-promise object
 
 //Middleware
@@ -20,12 +20,11 @@ app.use(bodyParser.json());
 
 const cn = {
   host:'map.geog.mcgill.ca',
-  port: '49495',
-  database: 'map',
+  port: 49495,
+  database:'map',
   user: 'noe',
   password: process.env.PG_PASSWORD
 }//login credentials should be hidden in the .env imported as above from the .env file
-
 const db = pgp(cn); //create a db object from the pg-promise object with the above credentials
 
 app.listen(port, () => console.log(`Listening on port ${port}`)); //just prints in the console *this can be commented out once the project is running

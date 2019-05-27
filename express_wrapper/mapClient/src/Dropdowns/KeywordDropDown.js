@@ -195,7 +195,7 @@ class KeywordDropDownComponent extends React.Component {
           {...autosuggestProps}
           inputProps={{
             classes,
-            placeholder: 'Type the letter "a"',
+            placeholder: 'i.e. blood test',
             value: this.props.keyword,///this.state.single,
             onChange: this.props.onChange('single')//this.handleChange('single'),
           }}
