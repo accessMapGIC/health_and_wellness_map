@@ -103,15 +103,6 @@ const leftSidebarReducer = (state = initialState, action ) => {//the leftSidebar
                     leftHamButton: false,
                 }
             }
-
-        //NEED ASYNC ACTION LIKE THIS: START_***
-        // case actionTypes.START_QUERY_DATABASE:
-        //   const startQueryDatabase = () => {
-        //     return(dispatch) => {
-        //
-        //     }
-        //   }
-
         case actionTypes.QUERY_DATABASE:
             let newData = [];
 
@@ -130,7 +121,6 @@ const leftSidebarReducer = (state = initialState, action ) => {//the leftSidebar
             if (action.data) {
                 data = action.data
             }
-
             return {
                 ...state,
                 data: data
@@ -146,7 +136,6 @@ const leftSidebarReducer = (state = initialState, action ) => {//the leftSidebar
         default:
             return state;
     }
-
 }
 
 export default leftSidebarReducer;

@@ -15,8 +15,8 @@ import { connect } from 'react-redux';
 const suggestions = [ //this array needs to be populated with the different keywords, either statically or dynamically
   { label: 'Abortion services' },
   { label: 'Acupuncture' },
-  { label: 'Blood testing' },
-  { label: 'Counselling' },
+  { label: 'Blood test' },
+  { label: 'Counselling' }, //Not working...
   { label: 'Contraception' },
   { label: 'Consultation' },
   { label: 'Cardiology' },
