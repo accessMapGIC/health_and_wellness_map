@@ -60,6 +60,7 @@ const rightSidebarReducer = (state = initialState, action ) => {
                     ...state.rightMenu,
                     rightMenuOpen: false,
                     rightHamButton: false,
+                    cards: []
                 }
             }
         case actionTypes.CLOSE_RIGHT:

@@ -82,7 +82,7 @@ const leftSidebarReducer = (state = initialState, action ) => {//the leftSidebar
                 ...state,
                 leftMenu: {
                     ...state.leftMenu,
-                    leftMenuOpen: state.leftMenu.leftMenuOpen
+                    leftMenuOpen: action.isOpen
                 },
             }
         case actionTypes.CREATE_LEFT:

@@ -82,6 +82,12 @@ const mapboxReducer = (state = initialState, action ) => {
                 zoom: [14],
                 point: point,
             }
+        case actionTypes.DESTROY_RIGHT:
+            return {
+                ...state,
+                points: [],
+                point: null
+            }
         default: 
             return state;
     }

@@ -181,7 +181,12 @@ const mapDispatchToProps = dispatch => {//the different actions called by the si
     queryDatabaseKeywords: (params) => dispatch(actionTypes.keywordsQuery(params)),
     // QueryDatabaseReq: () => dispatch({type:actionTypes.QUERY_DATABASE_REQ}),
     // QueryDatabaseSuccess: () => dispatch({type:actionTypes.QUERY_DATABASE_SUCCESS}),
-    handleLeft: () => dispatch({type: actionTypes.HANDLE_LEFT}),
+    handleLeft: (state) => {
+      dispatch({
+        type: actionTypes.HANDLE_LEFT,
+        isOpen: state.isOpen
+      });
+    },
     createLeft: (state) => dispatch({type: actionTypes.CREATE_LEFT, payload: (!state.leftMenuOpen)}),
     destroyLeft: () => dispatch({type: actionTypes.DESTROY_LEFT}),
   }
