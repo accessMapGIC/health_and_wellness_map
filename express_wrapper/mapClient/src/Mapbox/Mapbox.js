@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/core';
 import { compose } from 'redux';
 import styled from 'styled-components';
 import { Link, scroller } from 'react-scroll';
+// import LocalizedStrings from 'react-localization';
 
 const Mapbox = ReactMapboxGl({
   minZoom: 11,
@@ -130,7 +131,7 @@ class MapboxComponent extends React.Component {
             <StyledPopup>
               <div>{this.props.point.title}</div>
               <div>
-                <a href={'https://www.google.ca/maps/?q=' + this.props.point.address} target="_blank" rel="noopener noreferrer">get directions</a>
+                <a href={'https://www.google.ca/maps/?q=' + this.props.point.address} target="_blank" rel="noopener noreferrer">get directions</a>//Translate
               </div>
             </StyledPopup>
           </Popup>

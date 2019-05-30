@@ -9,6 +9,7 @@ import Select from '@material-ui/core/Select';
 import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+// import LocalizedStrings from 'react-localization';
 
 const styles = theme => ({
   root: {
@@ -58,7 +59,7 @@ class InsuranceDropDownComponent extends React.Component {
             <MenuItem value={'RAMQ'}>RAMQ</MenuItem>
             <MenuItem value={'SSMU'}>SSMU</MenuItem>
           </Select>
-          <FormHelperText>Reflects whether the service requires a fee to open a file based on your insurance plan**</FormHelperText>
+          <FormHelperText>Reflects whether the service requires a fee to open a file based on your insurance plan</FormHelperText>
         </FormControl>
       </form>
     );

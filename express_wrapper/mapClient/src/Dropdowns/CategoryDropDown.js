@@ -9,6 +9,7 @@ import Select from '@material-ui/core/Select';
 import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+// import LocalizedStrings from 'react-localization';
 
 
 const styles = theme => ({

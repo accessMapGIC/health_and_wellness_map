@@ -52,7 +52,7 @@ class CheckboxComponent extends React.Component {
           classes={{
               label: classes.label,
           }}
-          label="Open Now"
+          label="Open Now" //Translate
         />
       </FormGroup>
     );

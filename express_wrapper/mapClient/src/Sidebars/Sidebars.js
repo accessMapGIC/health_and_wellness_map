@@ -144,7 +144,7 @@ class SidebarsComponent extends React.Component { //this is the component for bo
               noOverlay
               disableOverlayClick
               >
-                <MenuItem>Search</MenuItem>
+                <MenuItem>Results</MenuItem>
                 <CardContainer/>
                 <Container>
                   <Button variant="contained" color={"primary"} className={classes.button} href="" prefetch="true" onClick={(state) => this.newSearchButton(state)}>

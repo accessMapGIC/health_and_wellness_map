@@ -11,6 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+// import LocalizedStrings from 'react-localization';
 
 const suggestions = [ //this array needs to be populated with the different keywords, either statically or dynamically
   { label: 'Abortion services' },

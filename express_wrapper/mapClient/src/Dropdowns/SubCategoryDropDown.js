@@ -9,6 +9,7 @@ import Select from '@material-ui/core/Select';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as actionTypes from '../store/actions';
+// import LocalizedStrings from 'react-localization';
 
 const styles = theme => ({
   root: {
@@ -58,7 +59,7 @@ class SubcategoryDropDownComponent extends React.Component {
           >
             <MenuItem value="">
               Choose a Subcategory
-            </MenuItem>
+            </MenuItem> //Translate
             <MenuItem value={'Academic'}>Academic</MenuItem>
             <MenuItem value={'Career'}>Career</MenuItem>
             <MenuItem value={'Clinic'}>Clinic</MenuItem>

@@ -166,7 +166,7 @@ class CardTemplateComponent extends React.Component {
     const curDay = new Array(0);
 
     if(hrs[time.day()][0] === 'NA'){
-      curDay[0] = 'Closed';
+      curDay[0] = 'Closed'; //Translate
     } else if(hrs[time.day()][0]) {
       let range = hrs[time.day()][0].split("-");
       curDay[0] = 'Closed';
@@ -182,7 +182,7 @@ class CardTemplateComponent extends React.Component {
   getDayOrder(){
     const time = moment();
     switch(time.day()){
-      case 0:
+      case 0: //Translate
         return [[0,'Sunday'],[1,'Monday'],[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday']];
       case 1:
         return [[1,'Monday'],[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday'],[0,'Sunday']];
