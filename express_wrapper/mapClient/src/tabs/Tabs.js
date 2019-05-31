@@ -36,8 +36,8 @@ class TabComponent extends React.Component {
     return (
       <Tabs selectedIndex={tabIndex || 0} onSelect={tabIndex => setTabIndex(tabIndex)}>
         <TabList>
-          <Tab>By Category</Tab>//Translate
-          <Tab>By Keyword</Tab>//Translate
+          <Tab>By Category</Tab>
+          <Tab>By Keyword</Tab>
         </TabList>
         <TabPanel>
           <DropDownContainer className='dropdown_container'>
