@@ -22,9 +22,14 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as moment from 'moment';
 
-
-
-
+// localization
+import LocalizedStrings from 'react-localization';
+import english from '../Localization/En.js';
+import french from '../Localization/Fr.js';
+let strings = new LocalizedStrings({    
+  en: english.cardStrings,
+  fr: french.cardStrings
+});
 
 const styles = theme => ({
   card: {//styling for each card
@@ -139,8 +144,16 @@ class CardTemplateComponent extends React.Component {
     };
   }
 
-  componentDidMount() {//load the information for the card from the card container
+  componentDidMount() { //load the information for the card from the card container
     this.props.addCard(this.props.title, this.props.address, this.props.service_id, this.props.x, this.props.y);
+    strings.setLanguage(this.props.language);
+  }
+
+  componentDidUpdate(prevProp) {
+    if (this.props.language !== prevProp.language) {
+      strings.setLanguage(this.props.language);
+      this.forceUpdate();
+    }
   }
 
   handleActivation = () => {
@@ -166,15 +179,15 @@ class CardTemplateComponent extends React.Component {
     const curDay = new Array(0);
 
     if(hrs[time.day()][0] === 'NA'){
-      curDay[0] = 'Closed'; //Translate
+      curDay[0] = strings.closed; //Translate
     } else if(hrs[time.day()][0]) {
       let range = hrs[time.day()][0].split("-");
-      curDay[0] = 'Closed';
+      curDay[0] = strings.closed;
       if(time.isBetween(moment(range[0], format), moment(range[1], format))) {
-        curDay[0] = 'Open Now';
+        curDay[0] = strings.open;
       }
     } else{
-      curDay[0] = 'Closed';
+      curDay[0] = strings.closed;
     }
     return curDay;
   };//calculates if the service is opened or closed
@@ -183,19 +196,19 @@ class CardTemplateComponent extends React.Component {
     const time = moment();
     switch(time.day()){
       case 0: //Translate
-        return [[0,'Sunday'],[1,'Monday'],[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday']];
+        return [[0, strings.sun],[1,strings.mon],[2,strings.tue],[3, strings.wed],[4, strings.thu],[5, strings.fri],[6, strings.sat]];
       case 1:
-        return [[1,'Monday'],[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday'],[0,'Sunday']];
+        return [[1, strings.mon],[2, strings.tue],[3, strings.wed],[4, strings.thu],[5, strings.fri],[6, strings.sat],[0, strings.sun]];
       case 2:
-       return [[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday'],[0,'Sunday'],[1,'Monday']];
+       return [[2, strings.tue],[3, strings.wed],[4, strings.thu],[5, strings.fri],[6, strings.sat],[0, strings.sun],[1,strings.mon]];
       case 3:
-        return [[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday'],[0,'Sunday'],[1,'Monday'],[2,'Tuesday']];
+        return [[3,strings.wed],[4, strings.thu],[5, strings.fri],[6, strings.sat],[0, strings.sun],[1, strings.mon],[2, strings.tue]];
       case 4:
-        return [[4, 'Thursday'],[5, 'Friday'],[6, 'Saturday'],[0,'Sunday'],[1,'Monday'],[2,'Tuesday'],[3,'Wednesday']];
+        return [[4, strings.thu],[5, strings.fri],[6, strings.sat],[0, strings.sun],[1, strings.mon],[2, strings.tue],[3, strings.wed]];
       case 5:
-        return [[5, 'Friday'],[6, 'Saturday'],[0,'Sunday'],[1,'Monday'],[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday']];
+        return [[5, strings.fri],[6, strings.sat],[0, strings.sun],[1, strings.mon],[2, strings.tue],[3, strings.wed],[4, strings.thu]];
       case 6:
-        return [[6, 'Saturday'],[0,'Sunday'],[1,'Monday'],[2,'Tuesday'],[3,'Wednesday'],[4, 'Thursday'],[5, 'Friday']];
+        return [[6, strings.sat],[0, strings.sun],[1, strings.mon],[2, strings.tue],[3, strings.wed],[4, strings.thu],[5, strings.fri]];
       default:
         return ['There was a Problem'];
     }
@@ -206,7 +219,7 @@ class CardTemplateComponent extends React.Component {
     const newArr = new Array(7);
     for(var i = 0; i<curOrder.length; i++){
       if(hours[curOrder[i][0]][0]==='NA'){
-        newArr[i]=[curOrder[i][1], 'Closed'];
+        newArr[i]=[curOrder[i][1], strings.closed];
       }else{
         newArr[i]=[curOrder[i][1], hours[curOrder[i][0]][0]];
         // the line below seems to follow an older format
@@ -220,7 +233,7 @@ class CardTemplateComponent extends React.Component {
     const { classes, openNow } = this.props;
     const orderedHours = this.reOrderHours(this.props.hours);
     const curDay = this.handleCurrentDay(this.props.hours);
-    if (openNow && curDay && curDay[0] === "Closed") {
+    if (openNow && curDay && curDay[0] === strings.closed) {
       return null;
     }
 
@@ -358,7 +371,8 @@ const mapStateToProps = state => {
   return {
     activeCard: state.rtS.rightMenu.activeCard,
     cards: state.rtS.rightMenu.cards,
-    openNow: state.lfS.leftMenu.openNow
+    openNow: state.lfS.leftMenu.openNow,
+    language: state.lang.language
   }
 };
 

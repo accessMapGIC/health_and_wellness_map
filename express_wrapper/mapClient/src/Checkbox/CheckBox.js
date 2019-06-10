@@ -8,6 +8,13 @@ import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
+import LocalizedStrings from 'react-localization';
+import english from '../Localization/En.js';
+import french from '../Localization/Fr.js';
+let strings = new LocalizedStrings({    
+  en: english.cardStrings,
+  fr: french.cardStrings
+});
 
 const styles = {
   root: {
@@ -31,6 +38,16 @@ class CheckboxComponent extends React.Component {
   // handleChange = name => event => {
   //   this.setState({ [name]: event.target.checked });
   // };
+  componentDidMount() { //load the information for the card from the card container
+    strings.setLanguage(this.props.language);
+  }
+
+  componentDidUpdate(prevProp) {
+    if (this.props.language !== prevProp.language) {
+      strings.setLanguage(this.props.language);
+      this.forceUpdate();
+    }
+  }
 
   render() {
     const { classes } = this.props;
@@ -52,7 +69,7 @@ class CheckboxComponent extends React.Component {
           classes={{
               label: classes.label,
           }}
-          label="Open Now" //Translate
+          label={strings.open} //Translate
         />
       </FormGroup>
     );
@@ -66,6 +83,7 @@ CheckboxComponent.propTypes = {
 const mapStateToProps = state => {
   return {
     checkedA: state.lfS.leftMenu.openNow,
+    language: state.lang.language
   }
 };
 

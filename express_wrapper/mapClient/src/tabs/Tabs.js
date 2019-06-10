@@ -8,6 +8,15 @@ import { setTabIndex } from '../store/actions';
 import styled from 'styled-components';
 import "./Tabs.scss";
 
+// localization
+import LocalizedStrings from 'react-localization';
+import english from '../Localization/En.js';
+import french from '../Localization/Fr.js';
+let strings = new LocalizedStrings({    
+  en: english.tabStrings,
+  fr: french.tabStrings
+});
+
 const DropDownContainer = styled.div`
     width: 100%;
     height: 100%;
@@ -28,6 +37,17 @@ class TabComponent extends React.Component {
     super(props);
   }
 
+  componentDidMount() { //load the information for the card from the card container
+    strings.setLanguage(this.props.language);
+  }
+
+  componentDidUpdate(prevProp) {
+    if (this.props.language !== prevProp.language) {
+      strings.setLanguage(this.props.language);
+      this.forceUpdate();
+    }
+  }
+
   render () {
     const {
       tabIndex,
@@ -36,8 +56,8 @@ class TabComponent extends React.Component {
     return (
       <Tabs selectedIndex={tabIndex || 0} onSelect={tabIndex => setTabIndex(tabIndex)}>
         <TabList>
-          <Tab>By Category</Tab>
-          <Tab>By Keyword</Tab>
+          <Tab>{strings.cat}</Tab>
+          <Tab>{strings.key}</Tab>
         </TabList>
         <TabPanel>
           <DropDownContainer className='dropdown_container'>
@@ -65,7 +85,8 @@ class TabComponent extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    tabIndex: state.lfS.leftMenu.tabIndex
+    tabIndex: state.lfS.leftMenu.tabIndex,
+    language: state.lang.language
   }
 }
 

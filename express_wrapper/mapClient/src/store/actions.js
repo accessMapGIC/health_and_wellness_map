@@ -25,6 +25,7 @@ export const CENTER_ON_USER = 'CENTER_ON_USER';
 export const QUERY_DATABASE = 'QUERY_DATABASE'; //initial Ryan query
 export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
 export const SET_TAB = 'SET_TAB';
+export const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE';
 // export const START_QUERY_DATABASE = 'START_QUERY_DATABASE'; //Need Action like this for async action
 
 export function setTabIndex(index) {
@@ -122,5 +123,12 @@ export function categoryQuery(json) {
       });
     })
     .catch(err => console.log(err));
+  };
+}
+
+export function setLanguage(language) {
+  return {
+    type: CHANGE_LANGUAGE,
+    language
   };
 }

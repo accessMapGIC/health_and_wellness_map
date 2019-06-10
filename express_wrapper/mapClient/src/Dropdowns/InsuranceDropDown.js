@@ -9,7 +9,14 @@ import Select from '@material-ui/core/Select';
 import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-// import LocalizedStrings from 'react-localization';
+// localization
+import LocalizedStrings from 'react-localization';
+import english from '../Localization/En.js';
+import french from '../Localization/Fr.js';
+let strings = new LocalizedStrings({    
+  en: english.insStrings,
+  fr: french.insStrings
+})
 
 const styles = theme => ({
   root: {
@@ -29,6 +36,16 @@ const selectStyle = {
 }
 
 class InsuranceDropDownComponent extends React.Component {
+  componentDidMount() { //load the information for the card from the card container
+    strings.setLanguage(this.props.language);
+  }
+
+  componentDidUpdate(prevProp) {
+    if (this.props.language !== prevProp.language) {
+      strings.setLanguage(this.props.language);
+      this.forceUpdate();
+    }
+  }
 
   render() {
     const { classes } = this.props;
@@ -50,16 +67,16 @@ class InsuranceDropDownComponent extends React.Component {
             style={selectStyle}
           >
             <MenuItem value="">
-              Select your Insurance coverage (optional)
+              {strings.default}
             </MenuItem>
-            <MenuItem value={'International Health Insurance'}>International Health Insurance</MenuItem>
-            <MenuItem value={'MCSS'}>MCSS</MenuItem>
-            <MenuItem value={'Out of Province'}>Out of Province</MenuItem>
-            <MenuItem value={'PGSS'}>PGSS</MenuItem>
-            <MenuItem value={'RAMQ'}>RAMQ</MenuItem>
-            <MenuItem value={'SSMU'}>SSMU</MenuItem>
+            <MenuItem value={'International Health Insurance'}>{strings.intl}</MenuItem>
+            <MenuItem value={'MCSS'}>{strings.mcss}</MenuItem>
+            <MenuItem value={'Out of Province'}>{strings.oop}</MenuItem>
+            <MenuItem value={'PGSS'}>{strings.pgss}</MenuItem>
+            <MenuItem value={'RAMQ'}>{strings.ramq}</MenuItem>
+            <MenuItem value={'SSMU'}>{strings.ssmu}</MenuItem>
           </Select>
-          <FormHelperText>Reflects whether the service requires a fee to open a file based on your insurance plan</FormHelperText>
+          <FormHelperText>{strings.helpText}</FormHelperText>
         </FormControl>
       </form>
     );
@@ -73,6 +90,7 @@ InsuranceDropDownComponent.propTypes = {
 const mapStateToProps = state => {
   return {
     insurance: state.lfS.leftMenu.insDrop,
+    language: state.lang.language
   }
 };
 

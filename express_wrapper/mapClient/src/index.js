@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import leftSidebarReducer from './store/reducers/leftSidebarReducer';
 import rightSidebarReducer from './store/reducers/rightSidebarReducer';
 import mapboxReducer from './store/reducers/mapboxReducer';
+import languageReducer from './store/reducers/languageReducer';
 // import { devToolsEnhancer } from 'redux-devtools-extension';
 // import dbReducer from './store/reducers/dbReducer';
 
@@ -20,6 +21,7 @@ const store = createStore(
       lfS: leftSidebarReducer,
       rtS: rightSidebarReducer,
       mpB: mapboxReducer,
+      lang: languageReducer
   }),
   composeEnhancers(applyMiddleware(ReduxThunk))
 )

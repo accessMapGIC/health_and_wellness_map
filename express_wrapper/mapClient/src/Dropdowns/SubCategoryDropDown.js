@@ -9,7 +9,15 @@ import Select from '@material-ui/core/Select';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as actionTypes from '../store/actions';
-// import LocalizedStrings from 'react-localization';
+
+// localization
+import LocalizedStrings from 'react-localization';
+import english from '../Localization/En.js';
+import french from '../Localization/Fr.js';
+let strings = new LocalizedStrings({    
+  en: english.subCatStrings,
+  fr: french.subCatStrings
+});
 
 const styles = theme => ({
   root: {
@@ -37,6 +45,16 @@ class SubcategoryDropDownComponent extends React.Component {
   // handleChange = event => {
   //   this.setState({ [event.target.name]: event.target.value });
   // };
+  componentDidMount() { //load the information for the card from the card container
+    strings.setLanguage(this.props.language);
+  }
+
+  componentDidUpdate(prevProp) {
+    if (this.props.language !== prevProp.language) {
+      strings.setLanguage(this.props.language);
+      this.forceUpdate();
+    }
+  }
 
   render() {
     const { classes } = this.props;
@@ -58,27 +76,27 @@ class SubcategoryDropDownComponent extends React.Component {
             style={selectStyle}
           >
             <MenuItem value="">
-              Choose a Subcategory
+              {strings.default}
             </MenuItem> //Translate
-            <MenuItem value={'Academic'}>Academic</MenuItem>
-            <MenuItem value={'Career'}>Career</MenuItem>
-            <MenuItem value={'Clinic'}>Clinic</MenuItem>
-            <MenuItem value={'CLSC'}>CLSC</MenuItem>
-            <MenuItem value={'Counsellor'}>Counselor</MenuItem>
-            <MenuItem value={'Cultural'}>Cultural</MenuItem>
-            <MenuItem value={'Dentistry'}>Dentistry</MenuItem>
-            <MenuItem value={'Emotional'}>Emotional</MenuItem>
-            <MenuItem value={'Financial'}>Financial</MenuItem>
-            <MenuItem value={'Hospital'}>Hospital</MenuItem>
-            <MenuItem value={'Pharmacy'}>Pharmacy</MenuItem>
-            <MenuItem value={'Physical'}>Physical</MenuItem>
-            <MenuItem value={'Physiotherapy'}>Physiotherapy</MenuItem>
-            <MenuItem value={'Psychologist'}>Pyschologist</MenuItem>
-            <MenuItem value={'Spiritual'}>Spiritual</MenuItem>
-            <MenuItem value={'Social'}>Social</MenuItem>
-            <MenuItem value={'Super-Clinic'}>Super-Clinic</MenuItem>
+            <MenuItem value={'Academic'}>{strings.academic}</MenuItem>
+            <MenuItem value={'Career'}>{strings.career}</MenuItem>
+            <MenuItem value={'Clinic'}>{strings.clinic}</MenuItem>
+            <MenuItem value={'CLSC'}>{strings.clsc}</MenuItem>
+            <MenuItem value={'Counsellor'}>{strings.counsellor}</MenuItem>
+            <MenuItem value={'Cultural'}>{strings.cultural}</MenuItem>
+            <MenuItem value={'Dentistry'}>{strings.dentistry}</MenuItem>
+            <MenuItem value={'Emotional'}>{strings.emotional}</MenuItem>
+            <MenuItem value={'Financial'}>{strings.financial}</MenuItem>
+            <MenuItem value={'Hospital'}>{strings.hospital}</MenuItem>
+            <MenuItem value={'Pharmacy'}>{strings.pharmacy}</MenuItem>
+            <MenuItem value={'Physical'}>{strings.physical}</MenuItem>
+            <MenuItem value={'Physiotherapy'}>{strings.physiotherapy}</MenuItem>
+            <MenuItem value={'Psychologist'}>{strings.psychologist}</MenuItem>
+            <MenuItem value={'Spiritual'}>{strings.spiritual}</MenuItem>
+            <MenuItem value={'Social'}>{strings.social}</MenuItem>
+            <MenuItem value={'Super-Clinic'}>{strings.superClinic}</MenuItem>
           </Select>
-          <FormHelperText>Select a subcategory / service type</FormHelperText>
+          <FormHelperText>{strings.helperText}</FormHelperText>
         </FormControl>
       </form>
     );
@@ -92,6 +110,7 @@ SubcategoryDropDownComponent.propTypes = {
 const mapStateToProps = state => {
   return {
     subcategory: state.lfS.leftMenu.subCatDrop,
+    language: state.lang.language
   }
 };
 

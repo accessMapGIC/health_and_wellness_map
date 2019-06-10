@@ -13,6 +13,14 @@ import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
+// localization
+import LocalizedStrings from 'react-localization';
+import english from '../Localization/En.js';
+import french from '../Localization/Fr.js';
+let strings = new LocalizedStrings({    
+  en: english.sidebarStrings,
+  fr: french.sidebarStrings
+});
 
 const DropdownHeader = styled.h5`
   margin-bottom: 10px;
@@ -63,6 +71,17 @@ class SidebarsComponent extends React.Component { //this is the component for bo
     //   }
     // }
 
+    componentDidMount() { //load the information for the card from the card container
+      strings.setLanguage(this.props.language);
+    }
+  
+    componentDidUpdate(prevProp) {
+      if (this.props.language !== prevProp.language) {
+        strings.setLanguage(this.props.language);
+        this.forceUpdate();
+      }
+    }
+
     // This will be used to submit a search query via the menus
     submitButton (state) {
       const {
@@ -112,24 +131,24 @@ class SidebarsComponent extends React.Component { //this is the component for bo
               noOverlay
               disableOverlayClick
               >
-                <MenuItem>Search</MenuItem>
+                <MenuItem>{strings.lfStitle}</MenuItem>
                 <TabComponent/>
                 <Container>
                   <div className="DropDown_Container">
                     <div className="Flex_Container">
                       <div className="InsuranceDropDown_Container">
-                        <DropdownHeader>Insurance</DropdownHeader>
+                        <DropdownHeader>{strings.insHead}</DropdownHeader>
                         <InsuranceDropDownComponent/>
                       </div>
                       <div className="LanguageDropDown_Container">
-                      <DropdownHeader>Language</DropdownHeader>
+                      <DropdownHeader>{strings.langHead}</DropdownHeader>
                       <LanguageDropDownComponent/>
                       </div>
                       <CheckBoxComponent/>
                     </div>
                   </div>
                   <Button variant="contained" color={"primary"} className={classes.button} href="" prefetch="true" onClick={(state) => this.submitButton(state)}>
-                    Submit
+                    {strings.submit}
                   </Button>
                   {/* <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> */}
                 </Container>
@@ -144,11 +163,11 @@ class SidebarsComponent extends React.Component { //this is the component for bo
               noOverlay
               disableOverlayClick
               >
-                <MenuItem>Results</MenuItem>
+                <MenuItem>{strings.rtStitle}</MenuItem>
                 <CardContainer/>
                 <Container>
                   <Button variant="contained" color={"primary"} className={classes.button} href="" prefetch="true" onClick={(state) => this.newSearchButton(state)}>
-                    new Search Query
+                    {strings.rtSbutton}
                   </Button>
                 </Container>
               </Menu>
@@ -168,7 +187,8 @@ const mapStateToProps = state => {//info grabbed from the redux store
     cat: state.lfS.leftMenu.catDrop,
     subCat: state.lfS.leftMenu.subCatDrop,
     insCat: state.lfS.leftMenu.insDrop,
-    keyword: state.lfS.leftMenu.keyDrop
+    keyword: state.lfS.leftMenu.keyDrop,
+    language: state.lang.language
   }
 };
 

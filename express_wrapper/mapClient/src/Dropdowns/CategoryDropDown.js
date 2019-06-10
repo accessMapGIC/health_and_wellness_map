@@ -9,7 +9,14 @@ import Select from '@material-ui/core/Select';
 import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-// import LocalizedStrings from 'react-localization';
+// localization
+import LocalizedStrings from 'react-localization';
+import english from '../Localization/En.js';
+import french from '../Localization/Fr.js';
+let strings = new LocalizedStrings({    
+  en: english.catStrings,
+  fr: french.catStrings
+});
 
 
 const styles = theme => ({
@@ -38,6 +45,17 @@ class CategoryDropDownComponent extends React.Component {
   //   this.setState({ [event.target.name]: event.target.value });
   // };
 
+  componentDidMount() { //load the information for the card from the card container
+    strings.setLanguage(this.props.language);
+  }
+
+  componentDidUpdate(prevProp) {
+    if (this.props.language !== prevProp.language) {
+      strings.setLanguage(this.props.language);
+      this.forceUpdate();
+    }
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -58,15 +76,15 @@ class CategoryDropDownComponent extends React.Component {
             style={selectStyle}
           >
             <MenuItem value="">
-              Choose a Category
+              {strings.default}
             </MenuItem>
-            <MenuItem value={'Counseling & Mental Health'}>Counselling & Mental Health</MenuItem>
-            <MenuItem value={'Medical Care'}>Medical Care</MenuItem>
-            <MenuItem value={'Peer Support'}>Peer Support</MenuItem>
-            <MenuItem value={'Relaxation & Recreation'}>Relaxation & Recreation</MenuItem>
-            <MenuItem value={'Wellness Resources'}>Wellness Resources</MenuItem>
+            <MenuItem value={'Counseling & Mental Health'}>{strings.mentalHealth}</MenuItem>
+            <MenuItem value={'Medical Care'}>{strings.medCare}</MenuItem>
+            <MenuItem value={'Peer Support'}>{strings.peerSupp}</MenuItem>
+            <MenuItem value={'Relaxation & Recreation'}>{strings.relax}</MenuItem>
+            <MenuItem value={'Wellness Resources'}>{strings.wellness}</MenuItem>
           </Select>
-          <FormHelperText>Select a Primary Category that corresponds with a subcategory below</FormHelperText>
+          <FormHelperText>{strings.helperText}</FormHelperText>
         </FormControl>
       </form>
     );
@@ -80,6 +98,7 @@ CategoryDropDownComponent.propTypes = {
 const mapStateToProps = state => {
   return {
     category: state.lfS.leftMenu.catDrop,
+    language: state.lang.language
   }
 };
 
