@@ -120,7 +120,7 @@ class SidebarsComponent extends React.Component { //this is the component for bo
     }
 
     render () {
-        const { classes } = this.props;
+        const { classes, setEnglish, setFrench, language} = this.props;
         return (
           <div className='menu-sidebars'>
             <div className='menu-left'>
@@ -131,7 +131,15 @@ class SidebarsComponent extends React.Component { //this is the component for bo
               noOverlay
               disableOverlayClick
               >
-                <MenuItem>{strings.lfStitle}</MenuItem>
+                <MenuItem>
+                  <div style={{float: 'left'}}>
+                    {strings.lfStitle}
+                  </div>
+                  <div style={{float: 'right'}}>
+                    <a href="#" style={{fontWeight: language === "en" ? 'bold': 300}} onClick={setEnglish}>EN</a>/
+                    <a href="#" style={{fontWeight: language === "fr" ? 'bold': 300}} onClick={setFrench}>FR</a>
+                  </div>
+                </MenuItem>
                 <TabComponent/>
                 <Container>
                   <div className="DropDown_Container">
@@ -209,6 +217,8 @@ const mapDispatchToProps = dispatch => {//the different actions called by the si
     },
     createLeft: (state) => dispatch({type: actionTypes.CREATE_LEFT, payload: (!state.leftMenuOpen)}),
     destroyLeft: () => dispatch({type: actionTypes.DESTROY_LEFT}),
+    setEnglish: () => dispatch({type: actionTypes.CHANGE_LANGUAGE, language: 'en'}),
+    setFrench: () => dispatch({type: actionTypes.CHANGE_LANGUAGE, language: 'fr'}),
   }
 };
 
