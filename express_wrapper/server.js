@@ -23,7 +23,7 @@ const cn = {
   port: 49495,
   database:'map',
   user: 'noe',
-  password: process.env.PG_PASSWORD
+  password: process.env.PG_PASSWORD  
 }//login credentials should be hidden in the .env imported as above from the .env file
 const db = pgp(cn); //create a db object from the pg-promise object with the above credentials
 
@@ -59,6 +59,7 @@ app.post('/category_query', (req, res) => { //this is the main category query
       s.lon as y,
       s.website AS URL,
       s.notes,
+      s.notes_fr,
       h.hours
     FROM health.primary_category pc INNER JOIN health.subcategory sc
     ON pc.cat_id = sc.pc_id
@@ -116,6 +117,7 @@ app.post('/keywords_query', (req, res) => { //this is the main category query
       s.lon as y,
       s.website AS URL,
       s.notes,
+      s.notes_fr,
       h.hours
     FROM health.primary_category pc INNER JOIN health.subcategory sc
     ON pc.cat_id = sc.pc_id

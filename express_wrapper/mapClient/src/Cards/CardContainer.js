@@ -34,7 +34,7 @@ class CardContainer extends React.Component{
                   x={card.x}
                   y={card.y}
                   service_id={card.service_id}
-                  notes={card.notes}
+                  notes={this.props.language === 'fr' ? card.notes_fr : card.notes}
                   key={card.service_id}
                 />
               </Element>
@@ -48,6 +48,7 @@ const mapStateToProps = state => {
   return {
     activeCard: state.rtS.rightMenu.activeCard,
     data: state.lfS.data,
+    language: state.lang.language
   }
 }
 
