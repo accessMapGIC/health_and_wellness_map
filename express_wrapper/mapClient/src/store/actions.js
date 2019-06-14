@@ -1,5 +1,5 @@
 //the collection of actions for the redux store
-
+const base_url =  "http://gic.geog.mcgill.ca:5001";
 export const CATEGORY_CHANGE = 'CATEGORY_CHANGE';
 export const SUBCATEGORY_CHANGE = 'SUBCATEGORY_CHANGE';
 export const INSURANCE_CHANGE = 'INSURANCE_CHANGE';
@@ -45,26 +45,26 @@ export function fetchDataSuccess(data) {
 export function keywordsQuery(json) {
   // redux-thunk middleware
   return async dispatch => {
-    await fetch('/keywords_query', {
+    await fetch(`${base_url}/keywords_query`, {
       method: 'POST',
       headers: {
           "Content-Type": "application/json",
       },
       body: json ? JSON.stringify(json) : "{}"
     })
-    .then(function(response) { 
+    .then(function(response) {
       return response.json();
     })
     .then(data => {
       dispatch(fetchDataSuccess(data));
       data.forEach(card => {
         dispatch({
-          type: ADD_CARD, 
+          type: ADD_CARD,
           payload: {
-            title: card.title, 
-            address: card.address, 
-            service_id: card.service_id, 
-            x: card.x, 
+            title: card.title,
+            address: card.address,
+            service_id: card.service_id,
+            x: card.x,
             y: card.y,
           }
         });
@@ -87,26 +87,26 @@ export function keywordsQuery(json) {
 export function categoryQuery(json) {
   // redux-thunk middleware
   return async dispatch => {
-    await fetch('/category_query', {
+    await fetch(`${base_url}/category_query`, {
       method: 'POST',
       headers: {
           "Content-Type": "application/json",
       },
       body: json ? JSON.stringify(json) : "{}"
     })
-    .then(function(response) { 
+    .then(function(response) {
       return response.json();
     })
     .then(data => {
       dispatch(fetchDataSuccess(data));
       data.forEach(card => {
         dispatch({
-          type: ADD_CARD, 
+          type: ADD_CARD,
           payload: {
-            title: card.title, 
-            address: card.address, 
-            service_id: card.service_id, 
-            x: card.x, 
+            title: card.title,
+            address: card.address,
+            service_id: card.service_id,
+            x: card.x,
             y: card.y,
           }
         });
