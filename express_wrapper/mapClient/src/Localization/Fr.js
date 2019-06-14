@@ -30,6 +30,34 @@ let subCatStrings = {
     helperText: 'Choisissez une sous catégorie / type de service'
 }
 
+let keywordStrings = {
+  suggest: 'ex. Prise de sang',
+  abortion: "Services d'avortement",
+  acupuncture: 'Acupuncture',
+  bloodTest: 'Prise de sang',
+  counselling: 'Conseil', //Not working...
+  contraception: 'la Contraception',
+  consult: 'Consultation',
+  cardiology: 'Cardiologie',
+  dental: 'Dentisterie',
+  diabetes: 'Test de diabète',
+  diagnostic: 'Services diagnostic',
+  ecg: 'ECG',
+  emg: 'EMG',
+  family: 'Médecine familiale',
+  lab: 'Laboratoire',
+  masso: 'Massothérapie',
+  nurse: 'Consultation infirmière',
+  physio: 'Physiothérapie',
+  physician: 'Médecin',
+  psychologist: 'Psychologist',
+  pharmacy: 'Pharmacie',
+  streptest: 'Test de streptocoques',
+  travel: 'Consultation de santé de voyage',
+  urine: "Test d'urine",
+  vacc: 'Vaccination',
+}
+
 let insStrings = {
     default: "Choisissez votre couverture d'assurance",
     intl: 'Assurance Maladie Internationale',
@@ -75,7 +103,7 @@ open: 'Ouvert'
 let mapboxStrings = {
 dir: 'obtenir des directions'
 }
-  
+
 export default {
     catStrings,
     subCatStrings,

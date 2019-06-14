@@ -30,6 +30,34 @@ let subCatStrings = {
   helperText: 'Select a subcategory / service type'
 }
 
+let keywordStrings = {
+  suggest: 'i.e. blood test',
+  abortion: 'Abortion services',
+  acupuncture: 'Acupuncture',
+  bloodTest: 'Blood test',
+  counselling: 'Counselling', //Not working...
+  contraception: 'Contraception',
+  consult: 'Consultation',
+  cardiology: 'Cardiology',
+  dental: 'Dentistry',
+  diabetes: 'Diabetes testing',
+  diagnostic: 'Diagnostic services',
+  ecg: 'ECG',
+  emg: 'EMG',
+  family: 'Family medicine',
+  lab: 'Laboratory',
+  masso: 'Massotherapy',
+  nurse: 'Nurse consultation',
+  physio: 'Physiotherapy',
+  physician: 'Physician',
+  psychologist: 'Psychologist',
+  pharmacy: 'Pharmacy',
+  streptest: 'Streptest',
+  travel: 'Travel health consultation',
+  urine: 'Urine test',
+  vacc: 'Vaccination',
+}
+
 let insStrings = {
   default: 'Select your Insurance coverage',
   intl: 'International Health Insurance',

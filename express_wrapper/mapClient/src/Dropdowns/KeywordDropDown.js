@@ -39,6 +39,33 @@ const suggestions = [ //this array needs to be populated with the different keyw
   { label: 'Urine test' },
   { label: 'Vaccination' },
 ];
+// const suggestions = [ //this array needs to be populated with the different keywords, either statically or dynamically
+//
+//   { label: strings.abortion },
+//   { label: strings.acupuncture },
+//   { label: strings.bloodTest },
+//   { label: strings.counselling }, //Not working...
+//   { label: strings.contraception },
+//   { label: strings.consult },
+//   { label: strings.cardiology },
+//   { label: strings.dental },
+//   { label: strings.diabetes },
+//   { label: strings.diagnostic },
+//   { label: strings.ecg },
+//   { label: strings.emg },
+//   { label: strings.family },
+//   { label: strings.lab },
+//   { label: strings.masso },
+//   { label: strings.nurse },
+//   { label: strings.physio },
+//   { label: strings.physician },
+//   { label: strings.psychologist },
+//   { label: strings.pharmacy },
+//   { label: strings.streptest },
+//   { label: strings.urine },
+//   { label: strings.vacc },
+// ];
+
 
 function renderInputComponent(inputProps) {
   const { classes, inputRef = () => {}, ref, ...other } = inputProps;
@@ -217,6 +244,14 @@ const mapStateToProps = state => {
     keyword: state.lfS.leftMenu.keyDrop,
   }
 };
+
+/**
+Need French Keyword Option:
+
+i.e. if this.props.language === fr, dispatch KEYWORD_CHANGE_FR...?
+
+Also has localized strings to compare to the db column s.services_fr Versus s.services
+**/
 
 const mapDispatchToProps = dispatch => {
   return {

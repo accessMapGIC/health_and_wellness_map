@@ -8,7 +8,14 @@ import { withStyles } from '@material-ui/core';
 import { compose } from 'redux';
 import styled from 'styled-components';
 import { Link, scroller } from 'react-scroll';
-// import LocalizedStrings from 'react-localization';
+//Localization
+import LocalizedStrings from 'react-localization';
+import english from '../Localization/En.js';
+import french from '../Localization/Fr.js';
+let strings = new LocalizedStrings({
+  en: english.mapboxStrings,
+  fr: french.mapboxStrings
+});
 
 const Mapbox = ReactMapboxGl({
   minZoom: 11,
@@ -57,8 +64,16 @@ class MapboxComponent extends React.Component {
 
   componentDidMount() {
     this.generateMarkers(this.props.cards);
+    strings.setLanguage(this.props.language);
     // console.log(this.props.activeCard);
   };//generates the markers once they've been loaded
+
+  componentDidUpdate(prevProp) {
+    if (this.props.language !== prevProp.language) {
+      strings.setLanguage(this.props.language);
+      this.forceUpdate();
+    }
+  }
 
   mapDidLoad = (map) => {
     map.addControl(new mapboxgl.GeolocateControl({
@@ -131,7 +146,7 @@ class MapboxComponent extends React.Component {
             <StyledPopup>
               <div>{this.props.point.title}</div>
               <div>
-                <a href={'https://www.google.ca/maps/?q=' + this.props.point.address} target="_blank" rel="noopener noreferrer">get directions</a>//Translate
+                <a href={'https://www.google.ca/maps/?q=' + this.props.point.address} target="_blank" rel="noopener noreferrer">{strings.dir}</a>
               </div>
             </StyledPopup>
           </Popup>
@@ -154,6 +169,7 @@ const mapStateToProps = state => {
     center: state.mpB.center,
     bearing: state.mpB.bearing,
     userCoords: state.mpB.userCoords,
+    language: state.lang.language
   }
 };
 
