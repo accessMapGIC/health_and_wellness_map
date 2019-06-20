@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import LocalizedStrings from 'react-localization';
 import english from '../Localization/En.js';
 import french from '../Localization/Fr.js';
-let strings = new LocalizedStrings({    
+let strings = new LocalizedStrings({
   en: english.catStrings,
   fr: french.catStrings
 });
@@ -78,7 +78,7 @@ class CategoryDropDownComponent extends React.Component {
             <MenuItem value="">
               {strings.default}
             </MenuItem>
-            <MenuItem value={'Counseling & Mental Health'}>{strings.mentalHealth}</MenuItem>
+            <MenuItem value={'Counselling & Mental Health'}>{strings.mentalHealth}</MenuItem>
             <MenuItem value={'Medical Care'}>{strings.medCare}</MenuItem>
             <MenuItem value={'Peer Support'}>{strings.peerSupp}</MenuItem>
             <MenuItem value={'Relaxation & Recreation'}>{strings.relax}</MenuItem>
