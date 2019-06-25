@@ -79,6 +79,7 @@ rtSbutton: 'Nouvelle Recherche'
 }
 
 let cardStrings = {
+unknown: "Pas d'heurs d'ouverture",
 closed: 'Fermé',
 open: 'Ouverte',
 sun: 'Dimance',

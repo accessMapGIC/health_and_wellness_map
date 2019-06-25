@@ -79,6 +79,7 @@ let sidebarStrings = {
 }
 
 let cardStrings = {
+  unknown: 'No opening hours',
   closed: 'Closed',
   open: 'Open Now',
   sun: 'Sunday',

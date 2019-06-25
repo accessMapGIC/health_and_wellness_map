@@ -26,7 +26,7 @@ import * as moment from 'moment';
 import LocalizedStrings from 'react-localization';
 import english from '../Localization/En.js';
 import french from '../Localization/Fr.js';
-let strings = new LocalizedStrings({    
+let strings = new LocalizedStrings({
   en: english.cardStrings,
   fr: french.cardStrings
 });
@@ -179,7 +179,7 @@ class CardTemplateComponent extends React.Component {
     const curDay = new Array(0);
 
     if(hrs[time.day()][0] === 'NA'){
-      curDay[0] = strings.closed; //Translate
+      curDay[0] = strings.unknown;
     } else if(hrs[time.day()][0]) {
       let range = hrs[time.day()][0].split("-");
       curDay[0] = strings.closed;
@@ -187,7 +187,7 @@ class CardTemplateComponent extends React.Component {
         curDay[0] = strings.open;
       }
     } else{
-      curDay[0] = strings.closed;
+      curDay[0] = strings.unknown;
     }
     return curDay;
   };//calculates if the service is opened or closed
