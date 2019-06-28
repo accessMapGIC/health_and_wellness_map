@@ -70,10 +70,10 @@ let insStrings = {
 }
 
 let sidebarStrings = {
-  lfStitle: 'Search',
+  lfStitle: 'Health & Wellness Resource Map',
   insHead: 'Insurance',
   langHead: 'Language',
-  submit: 'Submit',
+  submit: 'Search',
   rtStitle: 'Results',
   rtSbutton: 'new Search Query'
 }

@@ -27,6 +27,28 @@
 //   background: blue;
 // }
 
+ .bm-menu .translateButton {
+  background-color:#4ec3c7;
+  border:1px solid #4ec3c7;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:17px;
+  padding:10px 15px;
+  text-decoration:none;
+  float: right;
+}
+.bm-menu .translateButton:hover {
+    background-color:lighten($rossy-teal, 10%);
+  }
+.bm-menu .translateButton:active {
+    position:absolute;
+    // top:1px;
+  }
+//end of translate button
+
+
 @media (min-width: 1281px) {
 
   /* BEGIN-MENU-LEFT */
@@ -58,8 +80,6 @@
 
   /* Color/shape of close button cross */
 
-
-
     background: #000;
   }
 
@@ -74,10 +94,10 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
   /* General sidebar styles */
   .menu-left .bm-menu {
-    background: $rossy-blue;
+    background: lightblue;
     padding: .1em 1.5em 0;
     font-size: 1.15em;
-    overflow-y: hidden !important;
+    overflow-y: scroll !important;
   }
 
   /* Morph shape necessary with bubble or elastic */
@@ -150,7 +170,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
   /* General sidebar styles */
   .menu-right .bm-menu {
-    background: $rossy-blue;
+    background: lightblue;
     padding: .1em 1.5em 0;
     font-size: 1.15em;
     overflow-y: hidden !important;
@@ -352,7 +372,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
   /* General sidebar styles */
   .menu-left .bm-menu {
-    background: $rossy-blue;
+    background: lightblue;
     padding: .1em 1.5em 0;
     font-size: 1.15em;
     overflow-y: scroll !important;
@@ -427,7 +447,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
   /* General sidebar styles */
   .menu-right .bm-menu {
-    background: $rossy-blue;
+    background: lightblue;
     padding: .1em 1em 0;
     font-size: 1.15em;
     overflow-y: scroll !important;
@@ -629,7 +649,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
   /* General sidebar styles */
   .menu-left .bm-menu {
-    background: $rossy-blue;
+    background: lightblue;
     padding: .1em 1.5em 0;
     font-size: 1.15em;
     overflow-y: scroll !important;
@@ -704,7 +724,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
   /* General sidebar styles */
   .menu-right .bm-menu {
-    background: $rossy-blue;
+    background: lightblue;
     padding: .1em 1em 0;
     font-size: 1.15em;
     overflow-y: scroll !important;
@@ -905,7 +925,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
   /* General sidebar styles */
   .menu-left .bm-menu {
-    background: $rossy-blue;
+    background: lightblue;
     padding: .1em 1.5em 0;
     font-size: 1.15em;
     overflow-y: scroll !important;
@@ -980,7 +1000,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
   /* General sidebar styles */
   .menu-right .bm-menu {
-    background: $rossy-blue;
+    background: lightblue;
     padding: .1em 1em 0;
     font-size: 1.15em;
     overflow-y: scroll !important;
@@ -1181,7 +1201,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
   /* General sidebar styles */
   .menu-left .bm-menu {
-    background: $rossy-blue;
+    background: lightblue;
     padding: .1em 1.5em 0;
     font-size: 1.15em;
     overflow-y: scroll !important;
@@ -1256,7 +1276,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
   /* General sidebar styles */
   .menu-right .bm-menu {
-    background: $rossy-blue;
+    background: lightblue;
     padding: .1em 1em 0;
     font-size: 1.15em;
     overflow-y: scroll !important;
@@ -1458,7 +1478,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
   /* General sidebar styles */
   .menu-left .bm-menu {
-    background: $rossy-blue;
+    background: lightblue;
     padding: .1em 1.5em 0;
     font-size: 1.15em;
     overflow-y: scroll !important;
@@ -1474,6 +1494,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     // color: $rossy-light;
     padding: 0.3em;
     height: 100% !important;
+    width: 100% !important;
   }
 
   /* Individual item */
@@ -1534,7 +1555,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
   /* General sidebar styles */
   .menu-right .bm-menu {
-    background: $rossy-blue;
+    background: lightblue;
     padding: .1em 1em 0;
     font-size: 1.15em;
     overflow-y: scroll !important;

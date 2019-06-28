@@ -10,7 +10,7 @@
         // border-bottom: 2px solid #aaa;
         margin: 0 0 10px;
         padding: 0;
-        background-color: $rossy-blue;
+        background-color: lightblue;
     }
 
     &__tab {
@@ -23,6 +23,9 @@
         padding: 3px 9.1px;
         border-radius: 5px 5px 0 0;
         cursor: pointer;
+        background-color: #f3e9e1;
+        font-weight: 300;
+        color: $rossy-blue;
         // for unselected styling with borders, etc.
         // color: black;
         // background-color: selectColor;
@@ -34,6 +37,8 @@
             border-color: #aaa;
             color: black;
             border-radius: 5px 5px 0 0;
+            font-weight: 400;
+            padding-left: 11px;
         }
 
         &--disabled {
@@ -60,14 +65,14 @@
 
     .react-tabs {
         -webkit-tap-highlight-color: transparent;
-        background-color: $rossy-light;
+        background-color: #fdfbf9;
         border-radius: 4px;
 
         &__tab-list {
             // border-bottom: 2px solid #aaa;
             margin: 0 0 10px;
             padding: 0;
-            background-color: $rossy-blue;
+            background-color: lightblue;
         }
 
         &__tab {
@@ -80,14 +85,19 @@
             padding: 3px 7.7px;
             border-radius: 5px 5px 0 0;
             cursor: pointer;
+            background-color: #f3e9e1;
+            font-weight: 300;
+            color: $rossy-blue;
 
 
 
             &--selected {
-                background-color: $rossy-light;
+                background-color: #fdfbf9;
                 border-color: #aaa;
-                color: black;
-                border-radius: 5px 5px 0 0;
+                color: $rossy-brown;
+                border-radius: 8px 8px 0 0;
+                font-weight: 400;
+                padding-left: 11px;
             }
 
             &--disabled {
@@ -116,14 +126,14 @@
 
     .react-tabs {
         -webkit-tap-highlight-color: transparent;
-        background-color: $rossy-light;
+        background-color: #fdfbf9;
         border-radius: 4px;
 
         &__tab-list {
             // border-bottom: 2px solid #aaa;
             margin: 0 0 10px;
             padding: 0;
-            background-color: $rossy-blue;
+            background-color: lightblue;
         }
 
         &__tab {
@@ -136,18 +146,24 @@
             padding: 3px 7.7px;
             border-radius: 5px 5px 0 0;
             cursor: pointer;
+            background-color: #f3e9e1;
+            font-weight: 300;
+            color: $rossy-blue;
 
 
 
             &--selected {
-                background-color: $rossy-light;
+                background-color: #fdfbf9;
                 border-color: #aaa;
-                color: black;
-                border-radius: 5px 5px 0 0;
+                color: $rossy-brown;
+                border-radius: 8px 8px 0 0;
+                font-weight: 400;
+                padding-left: 11px;
             }
 
             &--disabled {
                 color: $rossy-blue;
+                background-color: #aaa;
                 cursor: default;
             }
         }
@@ -172,14 +188,14 @@
 
     .react-tabs {
         -webkit-tap-highlight-color: transparent;
-        background-color: $rossy-light;
+        background-color: #fdfbf9;
         border-radius: 4px;
 
         &__tab-list {
             // border-bottom: 2px solid #aaa;
             margin: 0 0 10px;
             padding: 0;
-            background-color: $rossy-blue;
+            background-color: lightblue;
         }
 
         &__tab {
@@ -192,18 +208,24 @@
             padding: 3px 8.7px;
             border-radius: 5px 5px 0 0;
             cursor: pointer;
+            background-color: #f3e9e1;
+            font-weight: 300;
+            color: $rossy-blue;
 
 
 
             &--selected {
-                background-color: $rossy-light;
-                border-color: #aaa;
-                color: black;
-                border-radius: 5px 5px 0 0;
+              background-color: #fdfbf9;
+              border-color: #aaa;
+              color: $rossy-brown;
+              border-radius: 8px 8px 0 0;
+              font-weight: 400;
+              padding-left: 11px;
             }
 
             &--disabled {
                 color: $rossy-blue;
+                background-color: #aaa;
                 cursor: default;
             }
         }
@@ -228,14 +250,14 @@
 
     .react-tabs {
         -webkit-tap-highlight-color: transparent;
-        background-color: $rossy-light;
+        background-color: #fdfbf9;
         border-radius: 4px;
 
         &__tab-list {
             // border-bottom: 2px solid #aaa;
             margin: 0 0 10px;
             padding: 0;
-            background-color: $rossy-blue;
+            background-color: lightblue;
         }
 
         &__tab {
@@ -245,17 +267,21 @@
             bottom: 0px;
             position: relative;
             list-style: none;
-            padding: 3px 8.7px;
+            padding: 3px 7.7px;
             border-radius: 5px 5px 0 0;
             cursor: pointer;
+            background-color: #f3e9e1;
+            font-weight: 300;
+            color: $rossy-blue;
 
 
 
             &--selected {
-                background-color: $rossy-light;
+                background-color: #fdfbf9;
                 border-color: #aaa;
-                color: black;
-                border-radius: 5px 5px 0 0;
+                color: $rossy-brown;
+                border-radius: 8px 8px 0 0;
+                font-weight: 400;
             }
 
             &--disabled {
@@ -284,14 +310,14 @@
 
     .react-tabs {
         -webkit-tap-highlight-color: transparent;
-        background-color: $rossy-light;
+        background-color: #fdfbf9;
         border-radius: 4px;
 
         &__tab-list {
             // border-bottom: 2px solid #aaa;
             margin: 0 0 10px;
             padding: 0;
-            background-color: $rossy-blue;
+            background-color: lightblue;
         }
 
         &__tab {
@@ -304,14 +330,19 @@
             padding: 3px 7.7px;
             border-radius: 5px 5px 0 0;
             cursor: pointer;
+            background-color: #f3e9e1;
+            font-weight: 300;
+            color: $rossy-blue;
 
 
 
             &--selected {
-                background-color: $rossy-light;
+                background-color: #fdfbf9;
                 border-color: #aaa;
-                color: black;
-                border-radius: 5px 5px 0 0;
+                color: $rossy-brown;
+                border-radius: 8px 8px 0 0;
+                font-weight: 400;
+                padding-left: 11px;
             }
 
             &--disabled {
@@ -340,14 +371,14 @@
 
     .react-tabs {
         -webkit-tap-highlight-color: transparent;
-        background-color: $rossy-light;
+        background-color: #fdfbf9;
         border-radius: 4px;
 
         &__tab-list {
             // border-bottom: 2px solid #aaa;
             margin: 0 0 10px;
             padding: 0;
-            background-color: $rossy-blue;
+            background-color: lightblue;
         }
 
         &__tab {
@@ -360,14 +391,19 @@
             padding: 3px 8.45px;
             border-radius: 5px 5px 0 0;
             cursor: pointer;
+            background-color: #f3e9e1;
+            font-weight: 300;
+            color: $rossy-blue;
 
 
 
             &--selected {
-                background-color: $rossy-light;
+                background-color: #fdfbf9;
                 border-color: #aaa;
-                color: black;
-                border-radius: 5px 5px 0 0;
+                color: $rossy-brown;
+                border-radius: 8px 8px 0 0;
+                font-weight: 400;
+                padding-left: 11px;
             }
 
             &--disabled {

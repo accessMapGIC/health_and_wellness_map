@@ -12,25 +12,28 @@ import CardContainer from '../Cards/CardContainer';
 import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import Logo from '../images/SWH_allBlue_horizontal.png';
 
 // localization
 import LocalizedStrings from 'react-localization';
 import english from '../Localization/En.js';
 import french from '../Localization/Fr.js';
-let strings = new LocalizedStrings({    
+let strings = new LocalizedStrings({
   en: english.sidebarStrings,
   fr: french.sidebarStrings
 });
 
 const DropdownHeader = styled.h5`
   margin-bottom: 10px;
-  text-decoration: underline;
+  text-decoration: none;
+  color: #a18a6d;
 `;//styling for the dropDown menu in the leftSidebar
 
 const MenuItem = styled.h3`
-  text-decoration: underline;
+  text-decoration: none;
   padding-bottom: .2px;
   outline: none;
+  color: #a18a6d;
 `;//styling for the MenuItems within each Sidebar
 
 const styles = theme => ({
@@ -41,6 +44,9 @@ const styles = theme => ({
     '&:hover': {
       backgroundColor: '#4ec3c7',
     },
+    width: '100%',
+    color: 'white',
+    fontWeight: 'bold'
   }
 });//styling for the button
 
@@ -74,7 +80,7 @@ class SidebarsComponent extends React.Component { //this is the component for bo
     componentDidMount() { //load the information for the card from the card container
       strings.setLanguage(this.props.language);
     }
-  
+
     componentDidUpdate(prevProp) {
       if (this.props.language !== prevProp.language) {
         strings.setLanguage(this.props.language);
@@ -132,14 +138,23 @@ class SidebarsComponent extends React.Component { //this is the component for bo
               disableOverlayClick
               >
                 <MenuItem>
-                  <div style={{float: 'left'}}>
-                    {strings.lfStitle}
-                  </div>
-                  <div style={{float: 'right'}}>
-                    <a href="#" style={{fontWeight: language === "en" ? 'bold': 300}} onClick={setEnglish}>EN</a>/
-                    <a href="#" style={{fontWeight: language === "fr" ? 'bold': 300}} onClick={setFrench}>FR</a>
-                  </div>
+                  <img src={Logo} width='75%' float='left'></img>
+                    <a href="#"
+                       className="translateButton"
+                       style={{
+                         fontWeight: 'bold',
+                         textDecoration: 'none',
+                         color: 'white',
+                         float: 'right',
+                       }}
+                       onClick={language === 'en' ? setFrench : setEnglish}>{language === 'en' ? language.toUpperCase() : 'FR'}
+                    </a>
                 </MenuItem>
+
+                <MenuItem>
+                  <div style={{float: 'left', background: 'lightblue', marginBottom: '30px'}}> {strings.lfStitle}</div>
+                </MenuItem>
+
                 <TabComponent/>
                 <Container>
                   <div className="DropDown_Container">
@@ -174,7 +189,12 @@ class SidebarsComponent extends React.Component { //this is the component for bo
                 <MenuItem>{strings.rtStitle}</MenuItem>
                 <CardContainer/>
                 <Container>
-                  <Button variant="contained" color={"primary"} className={classes.button} href="" prefetch="true" onClick={(state) => this.newSearchButton(state)}>
+                  <Button
+                    variant="contained"
+                    color={"primary"}
+                    className={classes.button}
+                    href="" prefetch="true"
+                    onClick={(state) => this.newSearchButton(state)}>
                     {strings.rtSbutton}
                   </Button>
                 </Container>

@@ -11,21 +11,21 @@ import { connect } from 'react-redux';
 import LocalizedStrings from 'react-localization';
 import english from '../Localization/En.js';
 import french from '../Localization/Fr.js';
-let strings = new LocalizedStrings({    
+let strings = new LocalizedStrings({
   en: english.cardStrings,
   fr: french.cardStrings
 });
 
 const styles = {
   root: {
-    color: '#000',
+    color: '#4b9ad4',
     '&$checked': {
-      color: '#000',
+      color: '#4b9ad4',
     },
   },
   checked: {},
   label: {
-      color: '#00000',
+      color: '#4b9ad4',
       'font-weight': '600',
   }
 };//Styling for the checkbox in the leftsidebar

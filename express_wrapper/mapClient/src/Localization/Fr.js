@@ -70,10 +70,10 @@ let insStrings = {
 }
 
 let sidebarStrings = {
-lfStitle: 'Recherche',
+lfStitle: 'Carte des Resources de Santé et Bien-Être',
 insHead: 'Assurance',
 langHead: 'Langue',
-submit: 'Soumettre',
+submit: 'Recherche',
 rtStitle: 'Résultas',
 rtSbutton: 'Nouvelle Recherche'
 }
