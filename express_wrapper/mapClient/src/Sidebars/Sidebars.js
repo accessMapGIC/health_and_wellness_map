@@ -138,7 +138,7 @@ class SidebarsComponent extends React.Component { //this is the component for bo
               disableOverlayClick
               >
                 <MenuItem>
-                  <img src={Logo} width='75%' float='left'></img>
+                  <img src={Logo} width='75%' float='left' alt=""></img>
                     <a href="#"
                        className="translateButton"
                        style={{
@@ -147,7 +147,7 @@ class SidebarsComponent extends React.Component { //this is the component for bo
                          color: 'white',
                          float: 'right',
                        }}
-                       onClick={language === 'en' ? setFrench : setEnglish}>{language === 'en' ? language.toUpperCase() : 'FR'}
+                       onClick={language === 'en' ? setFrench : setEnglish}>{language === 'en' ? 'FR' : 'EN'}
                     </a>
                 </MenuItem>
 

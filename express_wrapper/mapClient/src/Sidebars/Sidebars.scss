@@ -38,12 +38,13 @@
   padding:10px 15px;
   text-decoration:none;
   float: right;
+  width: 10%;
 }
 .bm-menu .translateButton:hover {
     background-color:lighten($rossy-teal, 10%);
   }
 .bm-menu .translateButton:active {
-    position:absolute;
+    // position:absolute;
     // top:1px;
   }
 //end of translate button

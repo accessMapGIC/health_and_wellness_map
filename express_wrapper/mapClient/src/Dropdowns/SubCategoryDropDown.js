@@ -14,7 +14,7 @@ import * as actionTypes from '../store/actions';
 import LocalizedStrings from 'react-localization';
 import english from '../Localization/En.js';
 import french from '../Localization/Fr.js';
-let strings = new LocalizedStrings({    
+let strings = new LocalizedStrings({
   en: english.subCatStrings,
   fr: french.subCatStrings
 });
@@ -77,7 +77,7 @@ class SubcategoryDropDownComponent extends React.Component {
           >
             <MenuItem value="">
               {strings.default}
-            </MenuItem> //Translate
+            </MenuItem>
             <MenuItem value={'Academic'}>{strings.academic}</MenuItem>
             <MenuItem value={'Career'}>{strings.career}</MenuItem>
             <MenuItem value={'Clinic'}>{strings.clinic}</MenuItem>
