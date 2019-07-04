@@ -1,5 +1,6 @@
 //the collection of actions for the redux store
 const base_url =  "http://gic.geog.mcgill.ca:5001";
+// const base_url =  "http://localhost:5001";
 export const CATEGORY_CHANGE = 'CATEGORY_CHANGE';
 export const SUBCATEGORY_CHANGE = 'SUBCATEGORY_CHANGE';
 export const INSURANCE_CHANGE = 'INSURANCE_CHANGE';

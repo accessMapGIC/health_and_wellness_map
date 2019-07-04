@@ -12,7 +12,7 @@ import CardContainer from '../Cards/CardContainer';
 import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import Logo from '../images/SWH_allBlue_horizontal.png';
+import Logo from '../images/SWH_white_horizontal.png';
 
 // localization
 import LocalizedStrings from 'react-localization';

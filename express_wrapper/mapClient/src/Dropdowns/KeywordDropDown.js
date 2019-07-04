@@ -143,7 +143,7 @@ const styles = theme => ({
     'background-color': '#fff',
     'border-radius': '4px',
     'height': '34px',
-    'padding': '10px 20px',
+    'padding': '10px 15px',
     'font-weight': '300',
     'font-size': '16px',
     'border': '1px solid #aaa',

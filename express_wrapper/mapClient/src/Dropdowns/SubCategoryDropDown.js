@@ -58,7 +58,7 @@ class SubcategoryDropDownComponent extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    console.log(this.props)
     return (
       <form className={classes.root} autoComplete="off">
         <FormControl variant="outlined" className={classes.formControl} fullWidth={true}>

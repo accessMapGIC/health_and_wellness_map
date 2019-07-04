@@ -66,7 +66,16 @@ let insStrings = {
   pgss: 'PGSS',
   ramq: 'RAMQ',
   ssmu: 'SSMU',
-  helperText: 'Reflects whether the service requires a fee to open a file based on your insurance plan.'
+  helperText: 'We are currently updating this data. Coming soon!'
+}
+
+let langStrings = {
+  default: 'Select a Language',
+  en: 'English',
+  fr: 'French',
+  ch: 'Mandarin',
+  sp: 'Spanish',
+  helperText: 'We are currently updating this data. Coming soon!'
 }
 
 let sidebarStrings = {
@@ -102,13 +111,14 @@ let openStrings = {
 }
 
 let mapboxStrings = {
-  dir: 'get Directions'
+  dir: 'Get directions'
 }
 
 export default {
   catStrings,
   subCatStrings,
   insStrings,
+  langStrings,
   sidebarStrings,
   cardStrings,
   tabStrings,

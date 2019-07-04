@@ -66,7 +66,16 @@ let insStrings = {
     pgss: 'PGSS',
     ramq: 'RAMQ',
     ssmu: 'SSMU',
-    helperText: "Indique si le service nécessite des frais pour ouvrir un fichier en fonction de votre régime d'assurance."
+    helperText: "Nous mettons actuellement à jours ces donées. À venir bientôt!"
+}
+
+let langStrings = {
+  default: 'Choissisez une Lange',
+  en: 'Anglais',
+  fr: 'Français',
+  ch: 'Chinois',
+  sp: 'Espanol',
+  helperText: "Nous mettons actuellement à jours ces donées. À venir bientôt!"
 }
 
 let sidebarStrings = {
@@ -102,13 +111,14 @@ open: 'Ouvert'
 }
 
 let mapboxStrings = {
-dir: 'obtenir des directions'
+dir: 'Obtenir des directions'
 }
 
 export default {
     catStrings,
     subCatStrings,
     insStrings,
+    langStrings,
     sidebarStrings,
     cardStrings,
     tabStrings,

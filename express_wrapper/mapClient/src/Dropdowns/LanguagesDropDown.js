@@ -9,6 +9,14 @@ import Select from '@material-ui/core/Select';
 import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+// localization
+import LocalizedStrings from 'react-localization';
+import english from '../Localization/En.js';
+import french from '../Localization/Fr.js';
+let strings = new LocalizedStrings({
+  en: english.langStrings,
+  fr: french.langStrings
+})
 
 const styles = theme => ({
   root: {
@@ -28,13 +36,16 @@ const selectStyle = {
 }
 
 class LanguageDropDownComponent extends React.Component {
-  // state = {
-  //   language: '',
-  // };
+  componentDidMount() { //load the information for the card from the card container
+    strings.setLanguage(this.props.localLang);
+  }
 
-  // handleChange = event => {
-  //   this.setState({ [event.target.name]: event.target.value });
-  // };
+  componentDidUpdate(prevProp) {
+    if (this.props.localLang !== prevProp.localLang) {
+      strings.setLanguage(this.props.localLang);
+      this.forceUpdate();
+    }
+  }
 
   render() {
     const { classes } = this.props;
@@ -54,17 +65,17 @@ class LanguageDropDownComponent extends React.Component {
             }
             displayEmpty
             style={selectStyle}
+            disabled='true' /*{ Delete this line once data is updated }*/
           >
             <MenuItem value="">
-              Choose a language
+              {strings.default}
             </MenuItem>
-            <MenuItem value={'English'}>English</MenuItem>
-            <MenuItem value={'French'}>French</MenuItem>
-            <MenuItem value={'Spanish'}>Spanish</MenuItem>
-            <MenuItem value={'Arabic'}>Arabic</MenuItem>
-            <MenuItem value={'Russian'}>Russian</MenuItem>
+            <MenuItem value={'English'}>{strings.en}</MenuItem>
+            <MenuItem value={'French'}>{strings.fr}</MenuItem>
+            <MenuItem value={'Mandarin'}>{strings.ch}</MenuItem>
+            <MenuItem value={'Spanish'}>{strings.sp}</MenuItem>
           </Select>
-          <FormHelperText>Select to filter for services which offer services in the selected language</FormHelperText>
+          <FormHelperText>{strings.helperText}</FormHelperText>
         </FormControl>
       </form>
     );
@@ -77,7 +88,8 @@ LanguageDropDownComponent.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    language: state.lfS.leftMenu.langDrop
+    language: state.lfS.leftMenu.langDrop,
+    localLang: state.lang.language
   }
 };
 

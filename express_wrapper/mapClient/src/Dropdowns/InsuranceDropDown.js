@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import LocalizedStrings from 'react-localization';
 import english from '../Localization/En.js';
 import french from '../Localization/Fr.js';
-let strings = new LocalizedStrings({    
+let strings = new LocalizedStrings({
   en: english.insStrings,
   fr: french.insStrings
 })
@@ -65,6 +65,7 @@ class InsuranceDropDownComponent extends React.Component {
             }
             displayEmpty
             style={selectStyle}
+            disabled='true' /*{ Delete this line once data is updated }*/
           >
             <MenuItem value="">
               {strings.default}
@@ -76,7 +77,7 @@ class InsuranceDropDownComponent extends React.Component {
             <MenuItem value={'RAMQ'}>{strings.ramq}</MenuItem>
             <MenuItem value={'SSMU'}>{strings.ssmu}</MenuItem>
           </Select>
-          <FormHelperText>{strings.helpText}</FormHelperText>
+          <FormHelperText>{strings.helperText}</FormHelperText>
         </FormControl>
       </form>
     );

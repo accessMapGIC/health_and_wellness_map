@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import PinDropIcon from '@material-ui/icons/PinDrop';
+import PinDropIcon from '@material-ui/icons/MyLocation';
 import PhoneIcon from '@material-ui/icons/Phone';
 import WebIcon from '@material-ui/icons/Web';
 import DescriptionIcon from '@material-ui/icons/Description'
@@ -34,7 +34,7 @@ let strings = new LocalizedStrings({
 const styles = theme => ({
   card: {//styling for each card
     maxWidth: 400,
-    backgroundColor: "#d0ecf4",
+    backgroundColor: "#fdfbf9",
     marginLeft: '2px',
     marginRight: '2px',
     marginBottom: '10px',
@@ -43,14 +43,14 @@ const styles = theme => ({
   },//styling for the active card
   activeCard: {
     maxWidth: 400,
-    backgroundColor: "#d0ecf4",
+    backgroundColor: "#fdfbf9",
     marginLeft: '2px',
     marginRight: '2px',
     marginBottom: '10px',
     marginTop: '10px',
     borderStyle: 'solid',
     borderWidth: '3px',
-    borderColor: '#1d424a',
+    borderColor: '#a18a6d',
   },
   cardHeader: {//styling for the card headers
     paddingBottom: '0px !important',
@@ -100,7 +100,8 @@ const styles = theme => ({
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    verticalAlign: "-35%"
+    verticalAlign: "-35%",
+    color: '#4ec3c7'
   },
   hourContent: {//styling for the block of hours
     display: 'block',
@@ -245,7 +246,7 @@ class CardTemplateComponent extends React.Component {
             <IconButton
               onClick={this.handleActivation}
             >
-              <PinDropIcon/>
+              <PinDropIcon className={classes.materialIcons}/>
             </IconButton>
           }
           action={
@@ -330,12 +331,12 @@ class CardTemplateComponent extends React.Component {
               </Collapse>
             </Typography>
             <Typography paragraph>
-              <WebIcon className={classes.materialIcons} /> - <a href={this.props.url} target="_blank" rel="noopener noreferrer" >Link to their website</a>
+              <WebIcon className={classes.materialIcons} /> - <a href={this.props.url} target="_blank" rel="noopener noreferrer" >Visit website</a>
             </Typography>
             {
               this.props.notes ?  (
                 <Typography>
-                <DescriptionIcon className={classes.materialIcons} /> - Notes
+                <DescriptionIcon className={classes.materialIcons} /> - Notes & Insurance
                 <IconButton
                   className={classnames(classes.hoursExpand, {
                     [classes.hoursExpandOpen]: this.state.notesExpanded

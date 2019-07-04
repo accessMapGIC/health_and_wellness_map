@@ -96,7 +96,7 @@ app.post('/category_query', (req, res) => { //this is the main category query
 
   db.any(baseQuery, params.map(p => p.value))
   .then(data => {
-      console.log('DATA:', data); // prints data, use data[i] to print specific entry attributes
+      //console.log('DATA:', baseQuery); // prints data, use data[i] to print specific entry attributes
       res.send(data);
   })
   .catch(error => {
