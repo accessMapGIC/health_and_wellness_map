@@ -84,7 +84,8 @@ insHead: 'Assurance',
 langHead: 'Langue',
 submit: 'Recherche',
 rtStitle: 'Résultas',
-rtSbutton: 'Nouvelle Recherche'
+rtSbutton: 'Nouvelle Recherche',
+rossyCred: 'La Carte des Resources de Bien Être a été rendu possible grâce à un don génereux de la Fondation Rossy.'
 }
 
 let cardStrings = {

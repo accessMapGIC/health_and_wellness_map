@@ -84,7 +84,8 @@ let sidebarStrings = {
   langHead: 'Language',
   submit: 'Search',
   rtStitle: 'Results',
-  rtSbutton: 'new Search Query'
+  rtSbutton: 'new Search Query',
+  rossyCred: 'The Wellness Resource Map was made possible thanks to a generous gift by the Rossy Foundation.'
 }
 
 let cardStrings = {

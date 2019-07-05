@@ -13,6 +13,7 @@ import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Logo from '../images/SWH_white_horizontal.png';
+import RossyLogo from '../images/rossy_foundation_colour.png'
 
 // localization
 import LocalizedStrings from 'react-localization';
@@ -36,6 +37,14 @@ const MenuItem = styled.h3`
   color: #a18a6d;
 `;//styling for the MenuItems within each Sidebar
 
+const RossyCred = styled.h1`
+  color: #4b9ad4;
+  font-size: 10px;
+  width: 50%;
+  float: right;
+  font-weight: 500;
+`;//Styling for the Rossy accreditation text at the bottom of the leftSidebar
+
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
@@ -49,6 +58,8 @@ const styles = theme => ({
     fontWeight: 'bold'
   }
 });//styling for the button
+
+
 
 const Container = styled.div`
   text-align: left;
@@ -138,7 +149,9 @@ class SidebarsComponent extends React.Component { //this is the component for bo
               disableOverlayClick
               >
                 <MenuItem>
-                  <img src={Logo} width='75%' float='left' alt=""></img>
+                  <a href="https://www.mcgill.ca/wellness-hub/">
+                    <img src={Logo} width='75%' float='left' alt=""></img>
+                  </a>
                     <a href="#"
                        className="translateButton"
                        style={{
@@ -175,6 +188,20 @@ class SidebarsComponent extends React.Component { //this is the component for bo
                   </Button>
                   {/* <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> */}
                 </Container>
+
+                <div width='50%' float='left'>
+                  <img src={RossyLogo} height="50%" width="50%" float='left' marginRight="10px" alt=""></img>
+                <RossyCred>
+                  {strings.rossyCred}
+                </RossyCred>
+                {/*
+                  <img src={RossyLogo} height="50%" width="50%" float='left' marginRight="10px" alt=""></img>
+                  <p fontSize="10px" color="#4b9ad4" width='50%' float='right'>
+                  The Wellness Resource Map was made possible thanks to a generous gift by the Rossy Foundation.
+                  </p>
+                  */}
+                </div>
+
               </Menu>
             </div>
             <div className='menu-right'>

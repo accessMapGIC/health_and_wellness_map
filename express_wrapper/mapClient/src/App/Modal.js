@@ -1,6 +1,7 @@
 import React from "react";
 import Modal from "react-responsive-modal";
 import Logo from '../images/SWH_2blue_horizontal.png';
+import LocateIcon from '@material-ui/icons/MyLocation';
 
 const styles = {
   fontFamily: "dinreg",
@@ -23,10 +24,13 @@ class ModalComponent extends React.Component {
         <Modal open={open} onClose={this.onCloseModal} center>
           <img src={Logo} width='75%' alt=''></img>
           <p>
-            Welcome to version 0.9 of the Health & Wellness Map, brought to you by Student Services.
-            <br></br>To use the map, simply fill out the optional categories on the left sidebar, and view your results on the right sidebar that will pop-out.
-            <br></br>Alternatively you may search for a keyword in the "keyword" tab, where you can type such services as 'blood test', or 'consultation', and view your results on the right sidebar.
-            <br></br>Once you've found a service that interests you, click the map pin to pan to the service's location and view details about the service and visit their website.
+            Welcome to Health & Wellness Map, brought to you by Student Services.
+            <br />To use the map, simply fill out the optional categories on the left sidebar, and view your results on the right sidebar that will pop-out. You can click on the <LocateIcon /> icon to find all the services on the map.
+            <br />
+            <br />Alternatively you may search for a keyword in the "keyword" tab, where you can type such services as 'blood test', or 'consultation', and view your results on the right sidebar. All available services will be shown as autocomplete options once you start typing.
+            <br />
+            <br />Once you've found a service that interests you, click the map pin to pan to the service's location and view details about the service and visit their website.
+            <br />Should you have any questions or concerns about the map or any of the services on it please contact noe.schultz@mcgill.ca .
           </p>
         </Modal>
       </div>
