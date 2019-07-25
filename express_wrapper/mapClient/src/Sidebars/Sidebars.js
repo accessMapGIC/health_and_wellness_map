@@ -45,6 +45,13 @@ const RossyCred = styled.h1`
   font-weight: 500;
 `;//Styling for the Rossy accreditation text at the bottom of the leftSidebar
 
+const FormLinks = styled.h1`
+  color: #4b9ad4;
+  font-size: 10px;
+  text-align: center;
+  font-weight: 400;
+`;//Styling for feedback / suggestion form links
+
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
@@ -194,12 +201,13 @@ class SidebarsComponent extends React.Component { //this is the component for bo
                 <RossyCred>
                   {strings.rossyCred}
                 </RossyCred>
-                {/*
-                  <img src={RossyLogo} height="50%" width="50%" float='left' marginRight="10px" alt=""></img>
-                  <p fontSize="10px" color="#4b9ad4" width='50%' float='right'>
-                  The Wellness Resource Map was made possible thanks to a generous gift by the Rossy Foundation.
-                  </p>
-                  */}
+                </div>
+
+                <div>
+                  <FormLinks>
+                    <a href="https://mcgill.ca/wellness-hub/submit-resource-wellness-map" target="_blank">{strings.formSuggest}</a>
+                    <a href="https://mcgill.ca/wellness-hub/feedback-wellness-map" target="_blank">{strings.formFeedback}</a>
+                  </FormLinks>
                 </div>
 
               </Menu>

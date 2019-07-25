@@ -70,7 +70,7 @@ let insStrings = {
 }
 
 let langStrings = {
-  default: 'Choissisez une Lange',
+  default: 'Choissisez une Langue',
   en: 'Anglais',
   fr: 'Français',
   ch: 'Chinois',
@@ -85,7 +85,9 @@ langHead: 'Langue',
 submit: 'Recherche',
 rtStitle: 'Résultas',
 rtSbutton: 'Nouvelle Recherche',
-rossyCred: 'La Carte des Resources de Bien Être a été rendu possible grâce à un don génereux de la Fondation Rossy.'
+rossyCred: 'La Carte des Resources de Bien Être a été rendu possible grâce à un don génereux de la Fondation Rossy.',
+formSuggest: 'Proposer une Ressource - ',
+formFeedback: 'Commentaires '
 }
 
 let cardStrings = {

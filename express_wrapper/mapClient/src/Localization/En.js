@@ -85,7 +85,9 @@ let sidebarStrings = {
   submit: 'Search',
   rtStitle: 'Results',
   rtSbutton: 'new Search Query',
-  rossyCred: 'The Wellness Resource Map was made possible thanks to a generous gift by the Rossy Foundation.'
+  rossyCred: 'The Wellness Resource Map was made possible thanks to a generous gift by the Rossy Foundation.',
+  formSuggest: 'Suggest a Resource - ',
+  formFeedback: 'Feedback '
 }
 
 let cardStrings = {

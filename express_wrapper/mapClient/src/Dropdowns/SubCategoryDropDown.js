@@ -57,14 +57,48 @@ class SubcategoryDropDownComponent extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, cat } = this.props;
     console.log(this.props)
+    let menuOptions = [<MenuItem value=''> {strings.default} </MenuItem>]
+    if (cat  === 'Medical Care') {
+      menuOptions = [
+          <MenuItem value={'Clinic'}>{strings.clinic}</MenuItem>,
+          <MenuItem value={'CLSC'}>{strings.clsc}</MenuItem>,
+          <MenuItem value={'Dentistry'}>{strings.dentistry}</MenuItem>,
+          <MenuItem value={'Hospital'}>{strings.hospital}</MenuItem>,
+          <MenuItem value={'Pharmacy'}>{strings.pharmacy}</MenuItem>,
+          <MenuItem value={'Physiotherapy'}>{strings.physiotherapy}</MenuItem>,
+          <MenuItem value={'Super-Clinic'}>{strings.superClinic}</MenuItem>,
+      ]
+    } else if(cat  === 'Counselling & Mental Health') {
+      menuOptions = [
+          <MenuItem value={'Counsellor'}>{strings.counsellor}</MenuItem>,
+          <MenuItem value={'Psychologist'}>{strings.psychologist}</MenuItem>
+        ]
+    } else if(cat  === 'Peer Support') {
+      menuOptions = [
+          <MenuItem value={'Peer Support'}>{strings.peerSupp}</MenuItem>
+        ]
+    } else if(cat  === 'Wellness Resources') {
+      menuOptions = [
+          <MenuItem value={'Academic'}>{strings.academic}</MenuItem>,
+          <MenuItem value={'Career'}>{strings.career}</MenuItem>,
+          <MenuItem value={'Cultural'}>{strings.cultural}</MenuItem>,
+          <MenuItem value={'Emotional'}>{strings.emotional}</MenuItem>,
+          <MenuItem value={'Financial'}>{strings.financial}</MenuItem>,
+          <MenuItem value={'Physical'}>{strings.physical}</MenuItem>,
+          <MenuItem value={'Spiritual'}>{strings.spiritual}</MenuItem>,
+          <MenuItem value={'Social'}>{strings.social}</MenuItem>
+        ]
+    }
+
     return (
       <form className={classes.root} autoComplete="off">
         <FormControl variant="outlined" className={classes.formControl} fullWidth={true}>
           <Select
             value={this.props.subcategory}
             onChange={this.props.onChange}
+            disabled={menuOptions.length > 1 ? false : true}
             input={
               <OutlinedInput
                 name="subcategory"
@@ -75,26 +109,7 @@ class SubcategoryDropDownComponent extends React.Component {
             displayEmpty
             style={selectStyle}
           >
-            <MenuItem value="">
-              {strings.default}
-            </MenuItem>
-            <MenuItem value={'Academic'}>{strings.academic}</MenuItem>
-            <MenuItem value={'Career'}>{strings.career}</MenuItem>
-            <MenuItem value={'Clinic'}>{strings.clinic}</MenuItem>
-            <MenuItem value={'CLSC'}>{strings.clsc}</MenuItem>
-            <MenuItem value={'Counsellor'}>{strings.counsellor}</MenuItem>
-            <MenuItem value={'Cultural'}>{strings.cultural}</MenuItem>
-            <MenuItem value={'Dentistry'}>{strings.dentistry}</MenuItem>
-            <MenuItem value={'Emotional'}>{strings.emotional}</MenuItem>
-            <MenuItem value={'Financial'}>{strings.financial}</MenuItem>
-            <MenuItem value={'Hospital'}>{strings.hospital}</MenuItem>
-            <MenuItem value={'Pharmacy'}>{strings.pharmacy}</MenuItem>
-            <MenuItem value={'Physical'}>{strings.physical}</MenuItem>
-            <MenuItem value={'Physiotherapy'}>{strings.physiotherapy}</MenuItem>
-            <MenuItem value={'Psychologist'}>{strings.psychologist}</MenuItem>
-            <MenuItem value={'Spiritual'}>{strings.spiritual}</MenuItem>
-            <MenuItem value={'Social'}>{strings.social}</MenuItem>
-            <MenuItem value={'Super-Clinic'}>{strings.superClinic}</MenuItem>
+            {menuOptions}
           </Select>
           <FormHelperText>{strings.helperText}</FormHelperText>
         </FormControl>
@@ -110,6 +125,7 @@ SubcategoryDropDownComponent.propTypes = {
 const mapStateToProps = state => {
   return {
     subcategory: state.lfS.leftMenu.subCatDrop,
+    cat: state.lfS.leftMenu.catDrop,
     language: state.lang.language
   }
 };
