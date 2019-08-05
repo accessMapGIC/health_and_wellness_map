@@ -11,60 +11,41 @@ import { withStyles } from '@material-ui/core/styles';
 import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-// import LocalizedStrings from 'react-localization';
+
+import LocalizedStrings from 'react-localization';
+import english from '../Localization/En.js';
+import french from '../Localization/Fr.js';
+let strings = new LocalizedStrings({
+  en: english.keywordStrings,
+  fr: french.keywordStrings
+})
 
 const suggestions = [ //this array needs to be populated with the different keywords, either statically or dynamically
-  { label: 'Abortion services' },
-  { label: 'Acupuncture' },
-  { label: 'Blood test' },
-  { label: 'Counselling' }, //Not working...
-  { label: 'Contraception' },
-  { label: 'Consultation' },
-  { label: 'Cardiology' },
-  { label: 'Dentistry' },
-  { label: 'Diabetes testing' },
-  { label: 'Diagnostic services' },
-  { label: 'ECG' },
-  { label: 'EMG' },
-  { label: 'Family medicine' },
-  { label: 'Laboratory' },
-  { label: 'Massotherapy' },
-  { label: 'Nurse consultation' },
-  { label: 'Physiotherapy' },
-  { label: 'Physician' },
-  { label: 'Psychologist' },
-  { label: 'Pharmacy' },
-  { label: 'Streptest' },
-  { label: 'Travel health consultation' },
-  { label: 'Urine test' },
-  { label: 'Vaccination' },
+
+  { label: strings.abortion },
+  { label: strings.acupuncture },
+  { label: strings.bloodTest },
+  { label: strings.counselling }, //Not working...
+  { label: strings.contraception },
+  { label: strings.consult },
+  { label: strings.cardiology },
+  { label: strings.dental },
+  { label: strings.diabetes },
+  { label: strings.diagnostic },
+  { label: strings.ecg },
+  { label: strings.emg },
+  { label: strings.family },
+  { label: strings.lab },
+  { label: strings.masso },
+  { label: strings.nurse },
+  { label: strings.physio },
+  { label: strings.physician },
+  { label: strings.psychologist },
+  { label: strings.pharmacy },
+  { label: strings.streptest },
+  { label: strings.urine },
+  { label: strings.vacc },
 ];
-// const suggestions = [ //this array needs to be populated with the different keywords, either statically or dynamically
-//
-//   { label: strings.abortion },
-//   { label: strings.acupuncture },
-//   { label: strings.bloodTest },
-//   { label: strings.counselling }, //Not working...
-//   { label: strings.contraception },
-//   { label: strings.consult },
-//   { label: strings.cardiology },
-//   { label: strings.dental },
-//   { label: strings.diabetes },
-//   { label: strings.diagnostic },
-//   { label: strings.ecg },
-//   { label: strings.emg },
-//   { label: strings.family },
-//   { label: strings.lab },
-//   { label: strings.masso },
-//   { label: strings.nurse },
-//   { label: strings.physio },
-//   { label: strings.physician },
-//   { label: strings.psychologist },
-//   { label: strings.pharmacy },
-//   { label: strings.streptest },
-//   { label: strings.urine },
-//   { label: strings.vacc },
-// ];
 
 
 function renderInputComponent(inputProps) {
@@ -195,6 +176,17 @@ class KeywordDropDownComponent extends React.Component {
     });
   };
 
+  componentDidMount() { //load the information for the card from the card container
+    strings.setLanguage(this.props.language);
+  }
+
+  componentDidUpdate(prevProp) {
+    if (this.props.language !== prevProp.language) {
+      strings.setLanguage(this.props.language);
+      this.forceUpdate();
+    }
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -242,16 +234,9 @@ KeywordDropDownComponent.propTypes = {
 const mapStateToProps = state => {
   return {
     keyword: state.lfS.leftMenu.keyDrop,
+    language: state.lang.language
   }
 };
-
-/**
-Need French Keyword Option:
-
-i.e. if this.props.language === fr, dispatch KEYWORD_CHANGE_FR...?
-
-Also has localized strings to compare to the db column s.services_fr Versus s.services
-**/
 
 const mapDispatchToProps = dispatch => {
   return {

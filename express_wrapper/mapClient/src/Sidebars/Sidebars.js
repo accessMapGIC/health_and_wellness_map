@@ -55,7 +55,6 @@ const FormLinks = styled.h1`
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
-    color: theme.palette.getContrastText('#4ec3c7'),
     backgroundColor: '#4ec3c7',
     '&:hover': {
       backgroundColor: '#4ec3c7',

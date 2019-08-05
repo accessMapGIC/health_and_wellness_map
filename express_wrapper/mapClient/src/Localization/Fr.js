@@ -126,5 +126,6 @@ export default {
     cardStrings,
     tabStrings,
     openStrings,
-    mapboxStrings
+    mapboxStrings,
+    keywordStrings
 };
