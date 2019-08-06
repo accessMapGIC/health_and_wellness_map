@@ -2,7 +2,7 @@
   "name": "main-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://gic.geog.mcgill.ca/healthmap",
+  "homepage": "http://gic.geog.mcgill.ca/healthmap",
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
@@ -42,7 +42,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://localhost:5001",
+  "proxy": "http://localhost:5001",
   "eslintConfig": {
     "extends": "react-app"
   },
