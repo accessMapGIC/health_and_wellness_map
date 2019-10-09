@@ -30,7 +30,7 @@ class ModalComponent extends React.Component {
             <br />Alternatively you may search for a keyword in the "keyword" tab, where you can type such services as 'blood test', or 'consultation', and view your results on the right sidebar. All available services will be shown as autocomplete options once you start typing.
             <br />
             <br />Once you've found a service that interests you, click the map pin to pan to the service's location and view details about the service and visit their website.
-            <br />Should you have any questions or concerns about the map or any of the services on it please contact noe.schultz@mcgill.ca .
+            <br />Should you have any questions or concerns about the map or any of the services on it please contact communications.stuserv@mcgill.ca .
           </p>
         </Modal>
       </div>
