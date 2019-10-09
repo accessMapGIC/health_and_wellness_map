@@ -100,6 +100,7 @@ app.post('/category_query', (req, res) => { //this is the main category query
       res.send(data);
   })
   .catch(error => {
+    console.log(error);
       res.send('there has been an error, please contact Student Services to get this fixed.');
   })
 });
