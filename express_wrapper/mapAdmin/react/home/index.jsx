@@ -20,6 +20,7 @@ import en_US from 'antd/lib/locale-provider/en_US';
 
 // Components
 import Home from "./home.jsx";
+import NewService from "./newService.jsx";
 
 const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
@@ -40,11 +41,16 @@ class IndexClass extends React.Component {
 
     render() {
         return(
-            <Layout>
-                <Header></Header>
+            <Layout style={{minHeight: "100vh"}}>
+                <Header>
+                    <h1 style={{color:"white"}}>Health & Wellness Map Admin</h1>
+                </Header>
                 <Content>
                     <Switch>
                         <Route exact path="/" component={Home} />
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/newService" component={NewService} />
                     </Switch>
                 </Content>
             </Layout>
@@ -53,10 +59,7 @@ class IndexClass extends React.Component {
     }
 }
 const mapStateToProps = (state) => {
-    const { test } = state.testReducer;
-    return {
-        test
-    }
+    return {}
 }
 const Index = withRouter(connect(mapStateToProps)(IndexClass));
 export default Index;

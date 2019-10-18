@@ -1,3 +1,8 @@
-export const testInitialState = {
-    test: "hello"
+export const serviceInitialState = {
+    status: "",
+    error: "",
+    primary_category: [],
+    subcategory: [],
+    insurance: [],
+    service: {}
 }

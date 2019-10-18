@@ -2,9 +2,11 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 // Style
-import { Calendar } from 'antd';
+import './home.css';
+import { Button } from 'antd';
 
 class HomeClass extends React.Component {
     constructor(props) {
@@ -13,13 +15,18 @@ class HomeClass extends React.Component {
 
     render() {
         return (
-            <Calendar />
+            <div className="home-wrapper">   
+                <Link to="/newService">
+                    <Button>Create New Service</Button>
+                </Link>
+            </div>
+            
         )
         
     }
 }
 const mapStateToProps = (state) => {
-    return;
+    return {}
 }
 const Home = withRouter(connect(mapStateToProps)(HomeClass));
 export default Home;

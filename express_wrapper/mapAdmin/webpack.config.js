@@ -1,5 +1,6 @@
 var webpack = require("webpack");
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 var config = {
     mode: "development",
@@ -41,7 +42,8 @@ var config = {
             hash: true,
             filename: "index.html",
             template: "./public/index.html"
-        })
+        }),
+        new Dotenv()
     ],
     resolve: {
         alias: {moment: `moment/moment.js`}
