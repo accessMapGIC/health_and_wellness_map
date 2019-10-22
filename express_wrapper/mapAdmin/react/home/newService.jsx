@@ -113,14 +113,6 @@ class NewServiceClass extends React.Component {
                             />,
                         )}
                     </Form.Item>
-                    <Form.Item label="Geometry">
-                        {getFieldDecorator('geom', {})(
-                            <InputNumber
-                                style={{width: "100%"}}
-                                placeholder="eg. "
-                            />,
-                        )}
-                    </Form.Item>
                     <Form.Item label="Primary category">
                         {getFieldDecorator('primary_cat_id', {})(
                             <Select
