@@ -120,7 +120,7 @@ async function getInsurance(payload) {
     }
 }
 
-// Get insurance
+// Create service
 export function* watchCreateService() {
     yield takeLatest(actionConstants.CREATE_SERVICE_REQUEST, workerCreateService);
 }
@@ -144,6 +144,45 @@ async function createService(payload) {
             credentials: "same-origin",
             method: "post",
             body: JSON.stringify(payload),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Pragma': 'no-cache',
+                'Cache-Control': 'no-cache'
+            }
+        });
+        let status = resp.status;
+        let respBody = await resp.json()
+        return {message: respBody, status: status};
+    }
+    catch(err) {
+        return err;
+    }
+}
+
+// Get service
+export function* watchGetService() {
+    yield takeLatest(actionConstants.GET_SERVICE_REQUEST, workerGetService);
+}
+function* workerGetService(params) {
+    try {
+        const response = yield call(getService, params.payload);
+        if (response.status === 200) {
+            yield put(serviceActions.getServiceSuccess(response.message));
+        }
+        else {
+            yield put(serviceActions.getServiceFailure(response.message));
+        }
+    }
+    catch(err) {
+        yield put(serviceActions.getServiceFailure(err));
+    }
+}
+async function getService(payload) {
+    try {
+        let resp = await fetch(`${base_url}/services`, {
+            credentials: "same-origin",
+            method: "get",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',

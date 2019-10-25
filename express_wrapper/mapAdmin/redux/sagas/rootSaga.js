@@ -1,5 +1,5 @@
 import { all } from "redux-saga/effects";
-import { watchGetPrimaryCategory, watchGetSubcategory, watchGetInsurance, watchCreateService } from "../sagas/serviceSagas";
+import { watchGetPrimaryCategory, watchGetSubcategory, watchGetInsurance, watchCreateService, watchGetService } from "../sagas/serviceSagas";
 
 export default function* rootSaga() {
     yield all([
@@ -7,5 +7,6 @@ export default function* rootSaga() {
         watchGetSubcategory(), 
         watchGetInsurance(),
         watchCreateService(),
+        watchGetService(),
     ]);
 }

@@ -4,5 +4,6 @@ export const serviceInitialState = {
     primary_category: [],
     subcategory: [],
     insurance: [],
-    service: {}
+    service: {},
+    listing: {}
 }

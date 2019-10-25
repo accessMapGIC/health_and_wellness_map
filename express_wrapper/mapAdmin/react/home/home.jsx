@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import ListService from './listService.jsx';
 // Style
 import './home.css';
 import { Button } from 'antd';
@@ -14,13 +15,15 @@ class HomeClass extends React.Component {
     }
 
     render() {
-        return (
-            <div className="home-wrapper">   
-                <Link to="/newService">
-                    <Button>Create New Service</Button>
-                </Link>
+        return ( 
+            <div className="home-wrapper">
+                <div className="newService">
+                    <Link to="/newService">
+                        <Button>Create New Service</Button>
+                    </Link>
+                </div>
+                    <ListService />
             </div>
-            
         )
         
     }

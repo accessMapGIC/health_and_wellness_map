@@ -52,4 +52,5 @@ app.get('/subcategory', Service.getSubcategory);
 app.get('/insurance', Service.getInsurance);
 // Create a new service
 app.post('/service', Service.createService);
-
+// Get service
+app.get('/services', Service.getService);

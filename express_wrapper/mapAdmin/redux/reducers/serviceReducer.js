@@ -62,22 +62,41 @@ export default function test(state=serviceInitialState, action) {
 
         // create service
         case actionConstants.CREATE_SERVICE_REQUEST:
-                return {
-                    ...state,
-                    status: actionConstants.CREATE_SERVICE_REQUEST
-                }
-            case actionConstants.CREATE_SERVICE_SUCCESS:
-                return {
-                    ...state,
-                    status: actionConstants.CREATE_SERVICE_SUCCESS,
-                    service: action.payload
-                }
-            case actionConstants.CREATE_SERVICE_FAILURE:
-                return {
-                    ...state,
-                    status: actionConstants.CREATE_SERVICE_FAILURE,
-                    error: action.payload
-                }
+            return {
+                ...state,
+                status: actionConstants.CREATE_SERVICE_REQUEST
+            }
+        case actionConstants.CREATE_SERVICE_SUCCESS:
+            return {
+                ...state,
+                status: actionConstants.CREATE_SERVICE_SUCCESS,
+                service: action.payload
+            }
+        case actionConstants.CREATE_SERVICE_FAILURE:
+            return {
+                ...state,
+                status: actionConstants.CREATE_SERVICE_FAILURE,
+                error: action.payload
+            }
+        
+        // get service
+        case actionConstants.GET_SERVICE_REQUEST:
+            return {
+                ...state,
+                status: actionConstants.GET_SERVICE_REQUEST
+            }
+        case actionConstants.GET_SERVICE_SUCCESS:
+            return {
+                ...state,
+                status: actionConstants.GET_SERVICE_SUCCESS,
+                listing: action.payload
+            }
+        case actionConstants.GET_SERVICE_FAILURE:
+            return {
+                ...state,
+                status: actionConstants.GET_SERVICE_FAILURE,
+                error: action.payload
+            }
         default:
             return state;
     }
