@@ -5,6 +5,7 @@ export const serviceActions = {
     getSubcategoryRequest, getSubcategorySuccess, getSubcategoryFailure,
     getInsuranceRequest, getInsuranceSuccess, getInsuranceFailure,
     createServiceRequest, createServiceSuccess, createServiceFailure,
+    getServiceRequest, getServiceSuccess, getServiceFailure,
 };
 
 // Get primary category
@@ -91,6 +92,28 @@ function createServiceSuccess(payload) {
 function createServiceFailure(payload) {
     return {
         type: actionConstants.CREATE_SERVICE_FAILURE,
+        payload
+    }
+}
+
+// Get service
+function getServiceRequest(payload) {
+    return {
+        type: actionConstants.GET_SERVICE_REQUEST,
+        payload
+    }
+}
+
+function getServiceSuccess(payload) {
+    return {
+        type: actionConstants.GET_SERVICE_SUCCESS,
+        payload
+    }
+}
+
+function getServiceFailure(payload) {
+    return {
+        type: actionConstants.GET_SERVICE_FAILURE,
         payload
     }
 }

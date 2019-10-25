@@ -1,0 +1,14 @@
+td {
+    word-wrap: break-word;
+    padding: 5px;
+}
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+.light-row {
+    background-color: #cef;
+}
+.ant-card-body {
+    padding:0 !important;
+}

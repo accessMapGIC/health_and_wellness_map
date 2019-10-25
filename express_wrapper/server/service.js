@@ -211,5 +211,23 @@ module.exports = {
             console.log('ERROR SERVICE:', error); // print the error;
             res.status(500).json(error);
         })
+    },
+
+    getService: function(req, res, next) {
+        let baseQuery = `
+        SELECT * 
+        FROM health.services_master 
+        INNER JOIN health.business_hours as h
+        ON h.service_id = services_master.service_id
+        `;
+        req.db.any(baseQuery)
+        .then(data => {
+            console.log('DATA:', data);
+            res.status(200).json(data);
+        })
+        .catch(error => {
+            console.log(error)
+            res.status(500).json('there has been an error, please contact Student Services to get this fixed.');
+        })
     }
 }

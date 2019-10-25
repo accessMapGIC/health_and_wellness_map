@@ -1,6 +1,7 @@
 // React, routing
 import React from 'react';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { serviceActions } from '../../redux/actions/serviceActions';
 import actionConstants from '../../redux/actionConstants';
@@ -292,9 +293,11 @@ class NewServiceClass extends React.Component {
                     </InputGroup>
                     
                     <Form.Item>
-                        <Button type="primary" htmlType="submit">
-                            Create Service
-                        </Button>
+                        <Link to="/">
+                            <Button type="primary" htmlType="submit">
+                                Create Service
+                            </Button>
+                        </Link>
                     </Form.Item>
                 </Form>
             </div>
