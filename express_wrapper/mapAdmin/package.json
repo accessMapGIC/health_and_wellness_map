@@ -2,7 +2,7 @@
   "name": "map-admin",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://gic.geog.mcgill.ca/healthmap",
+  "homepage": "http://gic.geog.mcgill.ca/healthmapAdmin",
   "dependencies": {
     "antd": "3.23.6",
     "babel-core": "^6.26.3",
@@ -32,7 +32,8 @@
     "webpack-dev-server": "^3.8.2"
   },
   "scripts": {
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server --open",
+    "build": "webpack --config webpack.prod.config.js"
   },
   "proxy": "http://localhost:8080",
   "eslintConfig": {
