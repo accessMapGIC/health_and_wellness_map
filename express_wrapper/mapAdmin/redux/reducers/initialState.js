@@ -7,3 +7,13 @@ export const serviceInitialState = {
     service: {},
     listing: {}
 }
+
+export const authInitialState = {
+    loggedin: false,
+    authMessage: '',
+    authError: '',
+    loggedInUser: {},
+    loadingSignIn: false,
+    loadingSignUp: false,
+    loadingSignOut: false,
+};
