@@ -12,6 +12,8 @@ import {Provider, connect } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from '../../redux/sagas/rootSaga.js';
 import rootReducer from '../../redux/reducers/rootReducer.js';
+import { authActions } from '../../redux/actions/authActions';
+import  actionConstants from '../../redux/actionConstants';
 
 // Style
 import { Layout, ConfigProvider } from 'antd';
@@ -21,6 +23,7 @@ import en_US from 'antd/lib/locale-provider/en_US';
 // Components
 import Home from "./home.jsx";
 import NewService from "./newService.jsx";
+import Login from "./login.jsx";
 
 const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
@@ -37,8 +40,30 @@ const unsubscribe = store.subscribe(()=>console.log(store.getState()));
 class IndexClass extends React.Component {
     constructor(props) {
         super(props);
+
+        if(this.getCookie("token")){
+            const { dispatch } = this.props;
+            let payload = {token: this.getCookie("token")};
+            dispatch(authActions.getAuthRequest(payload));
+
+
+        };
+
     }
 
+    getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0){
+                return c.substring(nameEQ.length,c.length);
+            } 
+        }
+        return null;
+    }
+    
     render() {
         return(
             <Layout style={{minHeight: "100vh"}}>
@@ -47,7 +72,10 @@ class IndexClass extends React.Component {
                 </Header>
                 <Content>
                     <Switch>
-                        <Route exact path="/" component={Home} />
+                        <Route exact path="/" component={Login} />
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/home" component={Home} />
                     </Switch>
                     <Switch>
                         <Route exact path="/newService" component={NewService} />

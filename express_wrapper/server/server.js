@@ -6,6 +6,7 @@ const app = express();
 const dotenv = require('dotenv').config(); //Might need working on as currently values in .ENV don't work...
 const port = process.env.PORT || 8080; //<- this port number needs to match the proxy port written in mapClient's package.json file
 const bodyParser = require('body-parser');
+const {authMiddleware} = require("./middlewares");
 
 //Middleware
 app.use(cors());
@@ -40,6 +41,7 @@ app.get('/test', (req, res) => {
 // APIs
 const Search = require('./search');
 const Service = require('./service');
+const Auth = require('./auth');
 
 // Search query routes
 app.post('/query', Search.getServices);
@@ -51,6 +53,11 @@ app.get('/primary_category', Service.getPrimaryCategory);
 app.get('/subcategory', Service.getSubcategory);
 app.get('/insurance', Service.getInsurance);
 // Create a new service
-app.post('/service', Service.createService);
+app.post('/service',  Service.createService);
 // Get service
-app.get('/services', Service.getService);
+app.get('/services',  Service.getService);
+
+
+//Login user
+app.post('/signin', Auth.signin);
+app.post('/auth', Auth.auth); //Check if a user is logged in or not

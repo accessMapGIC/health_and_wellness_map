@@ -33,6 +33,7 @@ async function getPrimaryCategory(payload) {
                 'Cache-Control': 'no-cache'
             }
         });
+        console.log(resp);
         let status = resp.status;
         let respBody = await resp.json()
         return {message: respBody, status: status};
