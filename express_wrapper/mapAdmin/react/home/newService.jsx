@@ -8,13 +8,31 @@ import actionConstants from '../../redux/actionConstants';
 
 // Style
 import "./newService.css";
-import { Form, Input, InputNumber, Button, Select } from 'antd';
+import { Form, Input, InputNumber, Button, Select, Tag, Tooltip, Icon } from 'antd';
 const { Option } = Select;
+const { TextArea } = Input;
 const InputGroup = Input.Group;
 
 class NewServiceClass extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            tags: {
+                lang: [],
+                services: [],
+                servicesFr: []
+            },
+            inputVisible: {
+                lang: false,
+                services: false,
+                servicesFr: false
+            },
+            inputValue: {
+                lang: '',
+                services: '',
+                servicesFr: ''
+            },
+        }
     }
 
     componentDidMount() {
@@ -33,6 +51,46 @@ class NewServiceClass extends React.Component {
         }
     }
 
+    // TAG INPUT
+    handleClose = (removedTag, type) => {
+        const newTags = this.state.tags[type].filter(tag => tag !== removedTag);
+        let { tags } = this.state;
+        tags[type] = newTags;
+        this.setState({ tags });
+    };
+
+    showInput = (type) => {
+        let { inputVisible } = this.state;
+        inputVisible[type] = true
+        let input = "input" + type;
+        this.setState({ inputVisible }, () => this[input].focus());
+    };
+
+    handleInputChange = (e, type) => {
+        let { inputValue } = this.state;
+        inputValue[type] = e.target.value;
+        this.setState({ inputValue });
+    };
+
+    handleInputConfirm = (type) => {
+        let { tags, inputValue, inputVisible } = this.state;
+        if (inputValue[type] && tags[type].indexOf(inputValue[type]) === -1) {
+            tags[type] = [...tags[type], inputValue[type]];
+        }
+        inputVisible[type] = false;
+        inputValue[type] = '';
+        this.setState({
+            tags,
+            inputVisible,
+            inputValue,
+        });
+    };
+
+    saveInputRefLang = (input) => (this.inputlang = input);
+    saveInputRefServices = (input) => (this.inputservices = input);
+    saveInputRefServicesFr = (input) => (this.inputservicesFr = input);
+    
+    // SUBMIT FORM
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -85,6 +143,15 @@ class NewServiceClass extends React.Component {
             hours += "}";
             values.hours = hours;
 
+            // Build languages and services string
+            let lang = this.state.tags.lang.join(',');
+            let services = this.state.tags.services.join(',');
+            let servicesFr = this.state.tags.servicesFr.join(',');
+            
+            values.lang = lang;
+            values.services = services;
+            values.servicesFr = servicesFr;
+
             this.props.dispatch(serviceActions.createServiceRequest(values));
           }
         });
@@ -92,8 +159,9 @@ class NewServiceClass extends React.Component {
 
     render() {
         const { getFieldDecorator } = this.props.form;
+        const { tags, inputVisible, inputValue } = this.state;
 
-        if (this.props.loggedInUser && this.props.loggedInUser.type === "admin") {
+        if (true) {
             return (
                 <div className="service-form-wrapper">
                     <h1>Create a new service</h1>
@@ -155,11 +223,33 @@ class NewServiceClass extends React.Component {
                             )}
                         </Form.Item>
                         <Form.Item label="Languages Spoken">
-                            {getFieldDecorator('languages_spoken', {})(
-                                <Input
-                                    placeholder="eg. EN,FR,IT"
-                                />,
-                            )}
+                            <div>
+                                {tags["lang"].map((tag, index) => {
+                                    const tagElem = (
+                                        <Tag key={index} closable={true} onClose={() => this.handleClose(tag, "lang")}>
+                                            {tag}
+                                        </Tag>
+                                    );
+                                    return tagElem;
+                                })}
+                                {inputVisible["lang"] && (
+                                    <Input
+                                        ref={this.saveInputRefLang}
+                                        type="text"
+                                        size="small"
+                                        style={{ width: 78 }}
+                                        value={inputValue["lang"]}
+                                        onChange={e => this.handleInputChange(e, "lang")}
+                                        onBlur={() => this.handleInputConfirm("lang")}
+                                        onPressEnter={() => this.handleInputConfirm("lang")}
+                                    />
+                                    )}
+                                {!inputVisible["lang"] && (
+                                    <Tag onClick={() => this.showInput("lang")} style={{ background: '#fff', borderStyle: 'dashed' }}>
+                                        <Icon type="plus" /> Add Language
+                                    </Tag>
+                                )}
+                            </div>
                         </Form.Item>
                         <Form.Item label="Address">
                             {getFieldDecorator('address', {})(
@@ -220,29 +310,75 @@ class NewServiceClass extends React.Component {
                             )}
                         </Form.Item>
                         <Form.Item label="Services">
-                            {getFieldDecorator('services', {})(
-                                <Input
-                                    placeholder="eg. prenatal"
-                                />,
-                            )}
+                            <div>
+                                {tags["services"].map((tag, index) => {
+                                    const tagElem = (
+                                        <Tag key={index} closable={true} onClose={() => this.handleClose(tag, "services")}>
+                                            {tag}
+                                        </Tag>
+                                    );
+                                    return tagElem;
+                                })}
+                                {inputVisible["services"] && (
+                                    <Input
+                                        ref={this.saveInputRefServices}
+                                        type="text"
+                                        size="small"
+                                        style={{ width: 78 }}
+                                        value={inputValue["services"]}
+                                        onChange={e => this.handleInputChange(e, "services")}
+                                        onBlur={() => this.handleInputConfirm("services")}
+                                        onPressEnter={() => this.handleInputConfirm("services")}
+                                    />
+                                    )}
+                                {!inputVisible["services"] && (
+                                    <Tag onClick={() => this.showInput("services")} style={{ background: '#fff', borderStyle: 'dashed' }}>
+                                        <Icon type="plus" /> Add Service
+                                    </Tag>
+                                )}
+                            </div>
                         </Form.Item>
                         <Form.Item label="Services (FR)">
-                            {getFieldDecorator('services_fr', {})(
-                                <Input
-                                    placeholder="eg. prénatal"
-                                />,
-                            )}
+                            <div>
+                                {tags["servicesFr"].map((tag, index) => {
+                                    const tagElem = (
+                                        <Tag key={index} closable={true} onClose={() => this.handleClose(tag, "servicesFr")}>
+                                            {tag}
+                                        </Tag>
+                                    );
+                                    return tagElem;
+                                })}
+                                {inputVisible["servicesFr"] && (
+                                    <Input
+                                        ref={this.saveInputRefServicesFr}
+                                        type="text"
+                                        size="small"
+                                        style={{ width: 120 }}
+                                        value={inputValue["servicesFr"]}
+                                        onChange={e => this.handleInputChange(e, "servicesFr")}
+                                        onBlur={() => this.handleInputConfirm("servicesFr")}
+                                        onPressEnter={() => this.handleInputConfirm("servicesFr")}
+                                    />
+                                    )}
+                                {!inputVisible["servicesFr"] && (
+                                    <Tag onClick={() => this.showInput("servicesFr")} style={{ background: '#fff', borderStyle: 'dashed' }}>
+                                        <Icon type="plus" /> Add Service (FR)
+                                    </Tag>
+                                )}
+                            </div>
                         </Form.Item>
                         <Form.Item label="Notes">
                             {getFieldDecorator('notes', {})(
-                                <Input
+                                <TextArea
+                                    rows={10}
                                     placeholder=""
                                 />,
                             )}
                         </Form.Item>
                         <Form.Item label="Notes (FR)">
                             {getFieldDecorator('notes_fr', {})(
-                                <Input
+                                <TextArea
+                                    rows={10}
                                     placeholder=""
                                 />,
                             )}
