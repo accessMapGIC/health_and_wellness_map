@@ -1,7 +1,6 @@
 // React, routing
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { serviceActions } from '../../redux/actions/serviceActions';
 import actionConstants from '../../redux/actionConstants';
@@ -89,8 +88,52 @@ class NewServiceClass extends React.Component {
     saveInputRefLang = (input) => (this.inputlang = input);
     saveInputRefServices = (input) => (this.inputservices = input);
     saveInputRefServicesFr = (input) => (this.inputservicesFr = input);
-    
-    // SUBMIT FORM
+
+    parseTime(time) {
+        if (!time) {
+            return true;
+        }
+
+        let parsed = time.split('-');
+        if (parsed.length !== 2) {
+            return false;
+        }
+
+        let start = parsed[0].split(':');
+        if (start.length !== 2 || isNaN(start[0]) || isNaN(start[1])) {
+            return false;
+        }
+        let end = parsed[1].split(':');
+        if (end.length !== 2 || isNaN(end[0]) || isNaN(end[1])) {
+            return false;
+        }
+        return true;
+    }
+
+    getHours(time, last) {
+        if (time) {
+            if (this.parseTime(time)) {
+                if (last) {
+                    return `{${time}}`;
+                }
+                else {
+                    return `{${time}},`;
+                }
+            }
+            else {
+                return false
+            }
+        }
+        else {
+            if (last) {
+                return `{NA}`;
+            }
+            else {
+                return `{NA},`;
+            }
+        }
+    }
+
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -98,47 +141,17 @@ class NewServiceClass extends React.Component {
 
             // Build business hours string
             let hours = "{";
-            if (values.hours_sun) {
-                hours += `{${values.hours_sun}},`
+            if (this.getHours(values.hours_sun) && this.getHours(values.hours_mon) && this.getHours(values.hours_tue) && this.getHours(values.hours_wed) && this.getHours(values.hours_thu) && this.getHours(values.hours_fri) && this.getHours(values.hours_sat)) {
+                hours += this.getHours(values.hours_sun, false);
+                hours += this.getHours(values.hours_mon, false);
+                hours += this.getHours(values.hours_tue, false);
+                hours += this.getHours(values.hours_wed, false);
+                hours += this.getHours(values.hours_thu, false);
+                hours += this.getHours(values.hours_fri, false);
+                hours += this.getHours(values.hours_sat, true);
             }
             else {
-                hours += `{NA},`
-            }
-            if (values.hours_mon) {
-                hours += `{${values.hours_mon}},`
-            }
-            else {
-                hours += `{NA},`
-            }
-            if (values.hours_tue) {
-                hours += `{${values.hours_tue}},`
-            }
-            else {
-                hours += `{NA},`
-            }
-            if (values.hours_wed) {
-                hours += `{${values.hours_wed}},`
-            }
-            else {
-                hours += `{NA},`
-            }
-            if (values.hours_thu) {
-                hours += `{${values.hours_thu}},`
-            }
-            else {
-                hours += `{NA},`
-            }
-            if (values.hours_fri) {
-                hours += `{${values.hours_fri}},`
-            }
-            else {
-                hours += `{NA},`
-            }
-            if (values.hours_sat) {
-                hours += `{${values.hours_sat}}`
-            }
-            else {
-                hours += `{NA}`
+                return alert("Business hours must follow the format HH:mm-HH:mm");
             }
             hours += "}";
             values.hours = hours;
@@ -148,7 +161,7 @@ class NewServiceClass extends React.Component {
             let services = this.state.tags.services.join(',');
             let servicesFr = this.state.tags.servicesFr.join(',');
             
-            values.lang = lang;
+            values.languages_spoken = lang;
             values.services = services;
             values.servicesFr = servicesFr;
 
@@ -168,14 +181,6 @@ class NewServiceClass extends React.Component {
                     <Form 
                         onSubmit={this.handleSubmit} 
                     >
-                        <Form.Item label="Service ID">
-                            {getFieldDecorator('service_id', {})(
-                                <InputNumber
-                                    style={{width: "100%"}}
-                                    placeholder="eg. 123"
-                                />,
-                            )}
-                        </Form.Item>
                         <Form.Item label="Service Name">
                             {getFieldDecorator('name', {})(
                                 <Input
