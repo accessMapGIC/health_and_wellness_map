@@ -52,7 +52,7 @@ module.exports = {
             }  
             let service_id = parseInt(data[0].setval) + 1;
 
-            let today = moment().format('DD-MM-YYYY');
+            let today = moment().format('YYYY-MM-DDTHH:mm:ss.sssZ');
             let counter = 1;
             let values = [];
 
