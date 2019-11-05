@@ -17,3 +17,10 @@ export const authInitialState = {
     loadingSignUp: false,
     loadingSignOut: false,
 };
+
+export const categoryInitialState = {
+    status: "",
+    error: "",
+    primary_category: [],
+    subcategory: []
+}

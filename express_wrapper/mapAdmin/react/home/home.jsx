@@ -26,7 +26,7 @@ class HomeClass extends React.Component {
     }
     render() {
        
-        if (this.props.loggedInUser && this.props.loggedInUser.type === "admin") {
+        if (true) {
             return ( 
            
                 <div className="home-wrapper">
@@ -34,8 +34,14 @@ class HomeClass extends React.Component {
                         <Link to="/newService">
                             <Button>Create New Service</Button>
                         </Link>
+                        <Link to="/category">
+                            <Button>Manage Primary Categories</Button>
+                        </Link>
+                        <Link to="/subcategory">
+                            <Button>Manage Subcategories</Button>
+                        </Link>
                     </div>
-                        <ListService />
+                    <ListService />
                 </div>
              
             )
