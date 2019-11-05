@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { serviceActions } from '../../redux/actions/serviceActions';
+import { categoryActions } from '../../redux/actions/categoryActions';
 import actionConstants from '../../redux/actionConstants';
 import CardTemplate from './CardTemplate.jsx';
 //Style
@@ -15,8 +16,8 @@ class ListServiceClass extends React.Component {
 
     componentDidMount() {
         this.props.dispatch(serviceActions.getServiceRequest());
-        this.props.dispatch(serviceActions.getPrimaryCategoryRequest());
-        this.props.dispatch(serviceActions.getSubcategoryRequest());
+        this.props.dispatch(categoryActions.getPrimaryCategoryRequest());
+        this.props.dispatch(categoryActions.getSubcategoryRequest());
         this.props.dispatch(serviceActions.getInsuranceRequest());
     }
 

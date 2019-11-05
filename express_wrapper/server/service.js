@@ -1,34 +1,6 @@
 const moment = require('moment');
 
 module.exports = {
-    getPrimaryCategory: function(req, res, next) {
-        let baseQuery = `SELECT cat_id, cat_name FROM health.primary_category;`;
-        
-        req.db.any(baseQuery)
-        .then(data => {
-            //console.log('DATA:', data); // prints data, use data[i] to print specific entry attributes
-            res.status(200).json(data);
-        })
-        .catch(error => {
-            //console.log('ERROR:', error); // print the error;
-            res.status(500).json('there has been an error, please contact Student Services to get this fixed.');
-        })
-    },
-
-    getSubcategory: function(req, res, next) {
-        let baseQuery = `SELECT subcat_id, subcat_name FROM health.subcategory;`;
-
-        req.db.any(baseQuery)
-        .then(data => {
-            //console.log('DATA:', data); // prints data, use data[i] to print specific entry attributes
-            res.status(200).json(data);
-        })
-        .catch(error => {
-            //console.log('ERROR:', error); // print the error;
-            res.status(500).json('there has been an error, please contact Student Services to get this fixed.');
-        })
-    },
-
     getInsurance: function(req, res, next) {
         let baseQuery = `SELECT insur_id, insur_name FROM health.insurance;`;
 

@@ -24,6 +24,8 @@ import en_US from 'antd/lib/locale-provider/en_US';
 import Home from "./home.jsx";
 import NewService from "./newService.jsx";
 import Login from "./login.jsx";
+import Category from "./category.jsx";
+import Subcategory from "./subcategory.jsx";
 
 const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
@@ -79,6 +81,12 @@ class IndexClass extends React.Component {
                     </Switch>
                     <Switch>
                         <Route exact path="/newService" component={NewService} />
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/category" component={Category} />
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/subcategory" component={Subcategory} />
                     </Switch>
                 </Content>
             </Layout>

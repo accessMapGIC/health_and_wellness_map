@@ -42,6 +42,8 @@ app.get('/test', (req, res) => {
 const Search = require('./search');
 const Service = require('./service');
 const Auth = require('./auth');
+const Category = require('./category');
+const Subcategory = require('./subcategory');
 
 // Search query routes
 app.post('/query', Search.getServices);
@@ -49,13 +51,24 @@ app.post('/category_query', Search.getCategories);
 app.post('/keywords_query', Search.getKeywords);
 
 // Get list of categories and insurance
-app.get('/primary_category', Service.getPrimaryCategory);
-app.get('/subcategory', Service.getSubcategory);
 app.get('/insurance', Service.getInsurance);
 // Create a new service
 app.post('/service',  Service.createService);
 // Get service
 app.get('/services',  Service.getService);
+
+// Categories
+app.post('/primary_category', Category.createPrimaryCategory);
+app.get('/primary_category', Category.getPrimaryCategories);
+app.get('/primary_category/:categoryId', Category.getPrimaryCategory);
+app.put('/primary_category/:categoryId', Category.updatePrimaryCategory);
+app.delete('/primary_category/:categoryId', Category.deletePrimaryCategory);
+
+app.post('/subcategory', Subcategory.createSubcategory);
+app.get('/subcategory', Subcategory.getSubcategories);
+app.get('/subcategory/:subcategoryId', Subcategory.getSubcategory);
+app.put('/subcategory/:subcategoryId', Subcategory.updateSubcategory);
+app.delete('/subcategory/:subcategoryId', Subcategory.deleteSubcategory);
 
 
 //Login user
