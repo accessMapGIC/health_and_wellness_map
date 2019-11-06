@@ -56,6 +56,8 @@ app.get('/insurance', Service.getInsurance);
 app.post('/service',  Service.createService);
 // Get service
 app.get('/services',  Service.getService);
+// Edit service
+app.put('/service/:serviceId', Service.editService);
 
 // Categories
 app.post('/primary_category', Category.createPrimaryCategory);
@@ -74,3 +76,5 @@ app.delete('/subcategory/:subcategoryId', Subcategory.deleteSubcategory);
 //Login user
 app.post('/signin', Auth.signin);
 app.post('/auth', Auth.auth); //Check if a user is logged in or not
+
+
