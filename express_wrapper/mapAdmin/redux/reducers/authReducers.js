@@ -11,7 +11,10 @@ export default function auth(state = authInitialState, action) {
         authMessage: actionConstants.SIGN_OUT_REQUEST
       };
     case actionConstants.SIGN_OUT_SUCCESS:
-      return authInitialState;
+      return {
+        ...state,
+        authMessage: actionConstants.SIGN_OUT_SUCCESS
+      };
     case actionConstants.SIGN_OUT_FAILURE:
       return {
         ...state,

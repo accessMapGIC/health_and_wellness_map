@@ -175,7 +175,6 @@ class NewServiceClass extends React.Component {
         const { getFieldDecorator } = this.props.form;
         const { tags, inputVisible, inputValue } = this.state;
 
-        if (true) {
             return (
                 <div className="service-form-wrapper">
                     <h1>Create a new service</h1>
@@ -444,13 +443,6 @@ class NewServiceClass extends React.Component {
                 </div>
             )
         }
-        else {
-            return (
-                <div>You are not allowed to access this page</div>
-            );
-        }
-        
-    }
 }
 const mapStateToProps = (state) => {
     const {loggedInUser} = state.auth;

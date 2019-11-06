@@ -16,7 +16,7 @@ import { authActions } from '../../redux/actions/authActions';
 import  actionConstants from '../../redux/actionConstants';
 
 // Style
-import { Layout, ConfigProvider } from 'antd';
+import { Layout, ConfigProvider, Row, Col, Button } from 'antd';
 const { Header, Content, Sider } = Layout;
 import en_US from 'antd/lib/locale-provider/en_US';
 
@@ -43,35 +43,28 @@ const unsubscribe = store.subscribe(()=>console.log(store.getState()));
 class IndexClass extends React.Component {
     constructor(props) {
         super(props);
-
-        if(this.getCookie("token")){
-            const { dispatch } = this.props;
-            let payload = {token: this.getCookie("token")};
-            dispatch(authActions.getAuthRequest(payload));
-
-
-        };
-
-    }
-
-    getCookie(name) {
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';');
-        for(var i=0;i < ca.length;i++) {
-            var c = ca[i];
-            while (c.charAt(0)==' ') c = c.substring(1,c.length);
-            if (c.indexOf(nameEQ) == 0){
-                return c.substring(nameEQ.length,c.length);
-            } 
-        }
-        return null;
     }
     
+    signOut = () => {
+        const { dispatch } = this.props;
+        dispatch(authActions.signOutRequest());
+    }
+
     render() {
         return(
             <Layout style={{minHeight: "100vh"}}>
-                <Header>
-                    <h1 style={{color:"white"}}>Health & Wellness Map Admin</h1>
+                <Header
+                   align="middle"
+                >
+                    <h1 style={{color:"white"}}>Health & Wellness Map Admin
+                    <Button
+                        style={{float:"right", top:"18px"}}
+                        className="menu-option"
+                        onClick={this.signOut}
+                    >
+                        Logout
+                    </Button>
+                    </h1>
                 </Header>
                 <Content>
                     <Switch>

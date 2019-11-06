@@ -6,7 +6,10 @@ const app = express();
 const dotenv = require('dotenv').config(); //Might need working on as currently values in .ENV don't work...
 const port = process.env.PORT || 8080; //<- this port number needs to match the proxy port written in mapClient's package.json file
 const bodyParser = require('body-parser');
-const {authMiddleware} = require("./middlewares");
+var cookieParser = require('cookie-parser')
+
+//Get the cookie
+app.use(cookieParser())
 
 //Middleware
 app.use(cors());
@@ -45,36 +48,36 @@ const Auth = require('./auth');
 const Category = require('./category');
 const Subcategory = require('./subcategory');
 
+
+
 // Search query routes
-app.post('/query', Search.getServices);
-app.post('/category_query', Search.getCategories);
-app.post('/keywords_query', Search.getKeywords);
+app.post('/query', Auth.authMiddleware, Search.getServices);
+app.post('/category_query', Auth.authMiddleware, Search.getCategories);
+app.post('/keywords_query', Auth.authMiddleware, Search.getKeywords);
 
 // Get list of categories and insurance
-app.get('/insurance', Service.getInsurance);
+app.get('/insurance', Auth.authMiddleware, Service.getInsurance);
 // Create a new service
-app.post('/service',  Service.createService);
+app.post('/service', Auth.authMiddleware, Service.createService);
 // Get service
-app.get('/services',  Service.getService);
+app.get('/services', Auth.authMiddleware, Service.getService);
 // Edit service
-app.put('/service/:serviceId', Service.editService);
+app.put('/service/:serviceId', Auth.authMiddleware, Service.editService);
 
 // Categories
-app.post('/primary_category', Category.createPrimaryCategory);
-app.get('/primary_category', Category.getPrimaryCategories);
-app.get('/primary_category/:categoryId', Category.getPrimaryCategory);
-app.put('/primary_category/:categoryId', Category.updatePrimaryCategory);
-app.delete('/primary_category/:categoryId', Category.deletePrimaryCategory);
+app.post('/primary_category', Auth.authMiddleware, Category.createPrimaryCategory);
+app.get('/primary_category', Auth.authMiddleware, Category.getPrimaryCategories);
+app.get('/primary_category/:categoryId', Auth.authMiddleware, Category.getPrimaryCategory);
+app.put('/primary_category/:categoryId', Auth.authMiddleware, Category.updatePrimaryCategory);
+app.delete('/primary_category/:categoryId', Auth.authMiddleware, Category.deletePrimaryCategory);
 
-app.post('/subcategory', Subcategory.createSubcategory);
-app.get('/subcategory', Subcategory.getSubcategories);
-app.get('/subcategory/:subcategoryId', Subcategory.getSubcategory);
-app.put('/subcategory/:subcategoryId', Subcategory.updateSubcategory);
-app.delete('/subcategory/:subcategoryId', Subcategory.deleteSubcategory);
+app.post('/subcategory', Auth.authMiddleware, Subcategory.createSubcategory);
+app.get('/subcategory', Auth.authMiddleware, Subcategory.getSubcategories);
+app.get('/subcategory/:subcategoryId', Auth.authMiddleware, Subcategory.getSubcategory);
+app.put('/subcategory/:subcategoryId', Auth.authMiddleware, Subcategory.updateSubcategory);
+app.delete('/subcategory/:subcategoryId', Auth.authMiddleware, Subcategory.deleteSubcategory);
 
 
 //Login user
 app.post('/signin', Auth.signin);
-app.post('/auth', Auth.auth); //Check if a user is logged in or not
-
-
+app.get('/logout', Auth.logOut);
