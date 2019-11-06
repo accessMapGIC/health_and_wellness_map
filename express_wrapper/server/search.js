@@ -106,7 +106,7 @@ module.exports = {
 
         req.db.any(baseQuery, params)
         .then(data => {
-            console.log('DATA:', data); // prints data, use data[i] to print specific entry attributes
+            // console.log('DATA:', data); // prints data, use data[i] to print specific entry attributes
             res.send(data);
         })
         .catch(error => {

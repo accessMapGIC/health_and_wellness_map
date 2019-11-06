@@ -3,6 +3,105 @@ import actionConstants from "../actionConstants";
 import { serviceActions } from "../actions/serviceActions";
 const base_url =  process.env.REACT_APP_BASE_URL || "http://gic.geog.mcgill.ca:5001";
 
+function getCookie() {
+            var nameEQ = "token" + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0){
+                    return c.substring(nameEQ.length,c.length);
+                } 
+            }
+            return null;
+}
+
+// Get primary cat
+export function* watchGetPrimaryCategory() {
+    yield takeLatest(actionConstants.GET_PRIMARY_CATEGORY_REQUEST, workerGetPrimaryCategory);
+}
+function* workerGetPrimaryCategory(params) {
+    try {
+        const response = yield call(getPrimaryCategory, params.payload);
+        if (response.status === 200) {
+            yield put(serviceActions.getPrimaryCategorySuccess(response.message));
+        }
+        else if (response.status === 401) {
+            window.location.href="/"
+        }
+        else {
+            yield put(serviceActions.getPrimaryCategoryFailure(response.message));
+        }
+    }
+    catch(err) {
+        yield put(serviceActions.getPrimaryCategoryFailure(err));
+    }
+}
+async function getPrimaryCategory(payload) {
+    try {
+        let resp = await fetch(`${base_url}/primary_category`, {
+            credentials: "same-origin",
+            method: "get",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Pragma': 'no-cache',
+                'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
+            }
+        });
+        let status = resp.status;
+        let respBody = await resp.json()
+        return {message: respBody, status: status};
+    }
+    catch(err) {
+        return err;
+    }
+}
+
+// Get subcat
+export function* watchGetSubcategory() {
+    yield takeLatest(actionConstants.GET_SUBCATEGORY_REQUEST, workerGetSubcategory);
+}
+function* workerGetSubcategory(params) {
+    try {
+        const response = yield call(getSubcategory, params.payload);
+        if (response.status === 200) {
+            yield put(serviceActions.getSubcategorySuccess(response.message));
+        }
+        else if (response.status === 401) {
+            window.location.href="/"
+        }
+        else {
+            yield put(serviceActions.getSubcategoryFailure(response.message));
+        }
+    }
+    catch(err) {
+        yield put(serviceActions.getSubcategoryFailure(err));
+    }
+}
+async function getSubcategory(payload) {
+    try {
+        let resp = await fetch(`${base_url}/subcategory`, {
+            credentials: "same-origin",
+            method: "get",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Pragma': 'no-cache',
+                'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
+            }
+        });
+        let status = resp.status;
+        let respBody = await resp.json()
+        return {message: respBody, status: status};
+    }
+    catch(err) {
+        return err;
+    }
+}
+
 // Get insurance
 export function* watchGetInsurance() {
     yield takeLatest(actionConstants.GET_INSURANCE_REQUEST, workerGetInsurance);
@@ -12,6 +111,9 @@ function* workerGetInsurance(params) {
         const response = yield call(getInsurance, params.payload);
         if (response.status === 200) {
             yield put(serviceActions.getInsuranceSuccess(response.message));
+        }
+        else if (response.status === 401) {
+            window.location.href="/"
         }
         else {
             yield put(serviceActions.getInsuranceFailure(response.message));
@@ -30,7 +132,8 @@ async function getInsurance(payload) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Pragma': 'no-cache',
-                'Cache-Control': 'no-cache'
+                'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
             }
         });
         let status = resp.status;
@@ -52,6 +155,9 @@ function* workerCreateService(params) {
         if (response.status === 200) {
             yield put(serviceActions.createServiceSuccess(response.message));
         }
+        else if (response.status === 401) {
+            window.location.href="/"
+        }
         else {
             yield put(serviceActions.createServiceFailure(response.message));
         }
@@ -70,7 +176,8 @@ async function createService(payload) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Pragma': 'no-cache',
-                'Cache-Control': 'no-cache'
+                'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
             }
         });
         let status = resp.status;
@@ -92,6 +199,9 @@ function* workerGetService(params) {
         if (response.status === 200) {
             yield put(serviceActions.getServiceSuccess(response.message));
         }
+        else if (response.status === 401) {
+            window.location.href="/"
+        }
         else {
             yield put(serviceActions.getServiceFailure(response.message));
         }
@@ -109,7 +219,8 @@ async function getService(payload) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Pragma': 'no-cache',
-                'Cache-Control': 'no-cache'
+                'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
             }
         });
         let status = resp.status;
@@ -132,6 +243,9 @@ function* workerEditService(params) {
             console.log(params.payload)
             yield put(serviceActions.editServiceSuccess(response.message));
         }
+        else if (response.status === 401) {
+            window.location.href="/"
+        }
         else {
             console.log("error", params.payload)
             yield put(serviceActions.editServiceFailure(response.message));
@@ -151,7 +265,8 @@ async function editService(payload) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Pragma': 'no-cache',
-                'Cache-Control': 'no-cache'
+                'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
             }
         });
         let status = resp.status;

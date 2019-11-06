@@ -218,6 +218,7 @@ module.exports = {
         `;
         req.db.any(baseQuery)
         .then(data => {
+            // console.log('DATA:', data);
             res.status(200).json(data);
         })
         .catch(error => {

@@ -25,8 +25,6 @@ class HomeClass extends React.Component {
 
     }
     render() {
-       
-        if (true) {
             return ( 
            
                 <div className="home-wrapper">
@@ -46,13 +44,6 @@ class HomeClass extends React.Component {
              
             )
         }
-        else {
-            return (
-                <div>You are not allowed to access this page</div>
-            );
-        }
-        
-    }
 }
 const mapStateToProps = (state) => {
     const { loggedInUser } = state.auth

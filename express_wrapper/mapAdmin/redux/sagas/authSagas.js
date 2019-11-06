@@ -4,6 +4,19 @@ import  actionConstants from '../actionConstants';
 import { authActions } from '../actions/authActions';
 const base_url =  process.env.REACT_APP_BASE_URL || "http://gic.geog.mcgill.ca:5001";
 
+function getCookie() {
+    var nameEQ = "token" + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0){
+            return c.substring(nameEQ.length,c.length);
+        } 
+    }
+    return null;
+}
+
 // Sign in
 export function* watchSignIn() {
     yield takeLatest(actionConstants.SIGN_IN_REQUEST, workerSignIn);
@@ -11,7 +24,7 @@ export function* watchSignIn() {
 
 // Make signIn API request and check if email/password are correct
 async function signIn(payload) {
-    // const creds = window.btoa(payload.email + ":" + payload.password);
+     
     try {
         let resp = await fetch(`${base_url}/signin`, {
             credentials: "same-origin",
@@ -20,9 +33,9 @@ async function signIn(payload) {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                // 'Authorization': 'Basic ' + creds, This is for the cookie
                 'Pragma': 'no-cache',
-                'Cache-Control': 'no-cache'
+                'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
             }
         })
         let status = resp.status;
@@ -43,7 +56,7 @@ function setCookie(name,value,days) {
         date.setTime(date.getTime() + (days*24*60*60*1000));
         expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=http://localhost:8081/newService";
+    document.cookie = name + "=" + (value || "")  + expires + "; path=http://localhost:8081/";
 }
 
 // Make the api call when watcher saga sees the action
@@ -54,7 +67,7 @@ function* workerSignIn(params) {
 
         // dispatch a success action to the store 
         if (response.status == 200) {
-            setCookie('token', response.message.token, 1/100); //Set the cookie expire time
+            setCookie('token', response.message.token, 60); 
             yield put(authActions.signInSuccess(response.message));
         }
         else {
@@ -82,7 +95,8 @@ async function getAuth(payload) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Pragma': 'no-cache',
-                'Cache-Control': 'no-cache'
+                'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
             },
         });
         let resp1Body = await resp1.json();
@@ -114,18 +128,20 @@ export function* watchSignOut() {
 
 async function signOut() {
     try {
-        let resp = await fetch('/api-admin/logout', {
+        let resp = await fetch(`${base_url}/logout`, {
             credentials: "same-origin",
-            method: 'get',
+            method: 'get',  
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Pragma': 'no-cache',
                 'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
             }
         });
         if (resp.status == 200) {
-            window.location.href = '/login';
+            window.location.href = '/';
+            document.cookie =  `token=; expires=${new Date()}; path=/;`;
         }
         return resp;
     }
@@ -137,10 +153,10 @@ async function signOut() {
 // Make the api call when watcher saga sees the action
 function* workerSignOut() {
     const response = yield call(signOut);
-
+    
     try {
         if (response.status == 200) {
-            yield put(authActions.signOutSuccess(response.message));
+            yield put(authActions.signOutSuccess());
         } else {
             yield put(authActions.signOutFailure(response.message.error));
         }

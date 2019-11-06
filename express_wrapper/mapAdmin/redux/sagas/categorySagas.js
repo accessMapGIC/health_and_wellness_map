@@ -3,6 +3,19 @@ import actionConstants from "../actionConstants";
 import { categoryActions } from "../actions/categoryActions";
 const base_url =  process.env.REACT_APP_BASE_URL || "http://gic.geog.mcgill.ca:5001";
 
+function getCookie() {
+    var nameEQ = "token" + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0){
+            return c.substring(nameEQ.length,c.length);
+        } 
+    }
+    return null;
+}
+
 // Create primary cat
 export function* watchCreatePrimaryCategory() {
     yield takeLatest(actionConstants.CREATE_PRIMARY_CATEGORY_REQUEST, workerCreatePrimaryCategory);
@@ -12,6 +25,9 @@ function* workerCreatePrimaryCategory(params) {
         const response = yield call(createPrimaryCategory, params.payload);
         if (response.status === 200) {
             yield put(categoryActions.createPrimaryCategorySuccess(response.message));
+        }
+        else if (response.status === 401) {
+            window.location.href="/"
         }
         else {
             yield put(categoryActions.createPrimaryCategoryFailure(response.message));
@@ -31,7 +47,8 @@ async function createPrimaryCategory(payload) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Pragma': 'no-cache',
-                'Cache-Control': 'no-cache'
+                'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
             }
         });
         let status = resp.status;
@@ -53,6 +70,9 @@ function* workerGetPrimaryCategory(params) {
         if (response.status === 200) {
             yield put(categoryActions.getPrimaryCategorySuccess(response.message));
         }
+        else if (response.status === 401) {
+            window.location.href="/"
+        }
         else {
             yield put(categoryActions.getPrimaryCategoryFailure(response.message));
         }
@@ -70,7 +90,8 @@ async function getPrimaryCategory(payload) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Pragma': 'no-cache',
-                'Cache-Control': 'no-cache'
+                'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
             }
         });
         let status = resp.status;
@@ -92,6 +113,9 @@ function* workerUpdatePrimaryCategory(params) {
         if (response.status === 200) {
             yield put(categoryActions.updatePrimaryCategorySuccess(response.message));
         }
+        else if (response.status === 401) {
+            window.location.href="/"
+        }
         else {
             yield put(categoryActions.updatePrimaryCategoryFailure(response.message));
         }
@@ -110,7 +134,8 @@ async function updatePrimaryCategory(payload) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Pragma': 'no-cache',
-                'Cache-Control': 'no-cache'
+                'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
             }
         });
         let status = resp.status;
@@ -132,6 +157,9 @@ function* workerDeletePrimaryCategory(params) {
         if (response.status === 200) {
             yield put(categoryActions.deletePrimaryCategorySuccess(response.message));
         }
+        else if (response.status === 401) {
+            window.location.href="/"
+        }
         else {
             yield put(categoryActions.deletePrimaryCategoryFailure(response.message));
         }
@@ -149,7 +177,8 @@ async function deletePrimaryCategory(payload) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Pragma': 'no-cache',
-                'Cache-Control': 'no-cache'
+                'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
             }
         });
         let status = resp.status;
@@ -171,6 +200,9 @@ function* workerCreateSubcategory(params) {
         if (response.status === 200) {
             yield put(categoryActions.createSubcategorySuccess(response.message));
         }
+        else if (response.status === 401) {
+            window.location.href="/"
+        }
         else {
             yield put(categoryActions.createSubcategoryFailure(response.message));
         }
@@ -189,7 +221,8 @@ async function createSubcategory(payload) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Pragma': 'no-cache',
-                'Cache-Control': 'no-cache'
+                'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
             }
         });
         let status = resp.status;
@@ -211,6 +244,9 @@ function* workerGetSubcategory(params) {
         if (response.status === 200) {
             yield put(categoryActions.getSubcategorySuccess(response.message));
         }
+        else if (response.status === 401) {
+            window.location.href="/"
+        }
         else {
             yield put(categoryActions.getSubcategoryFailure(response.message));
         }
@@ -228,7 +264,8 @@ async function getSubcategory(payload) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Pragma': 'no-cache',
-                'Cache-Control': 'no-cache'
+                'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
             }
         });
         let status = resp.status;
@@ -250,6 +287,9 @@ function* workerUpdateSubcategory(params) {
         if (response.status === 200) {
             yield put(categoryActions.updateSubcategorySuccess(response.message));
         }
+        else if (response.status === 401) {
+            window.location.href="/"
+        }
         else {
             yield put(categoryActions.updateSubcategoryFailure(response.message));
         }
@@ -268,7 +308,8 @@ async function updateSubcategory(payload) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Pragma': 'no-cache',
-                'Cache-Control': 'no-cache'
+                'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
             }
         });
         let status = resp.status;
@@ -290,6 +331,9 @@ function* workerDeleteSubcategory(params) {
         if (response.status === 200) {
             yield put(categoryActions.deleteSubcategorySuccess(response.message));
         }
+        else if (response.status === 401) {
+            window.location.href="/"
+        }
         else {
             yield put(categoryActions.deleteSubcategoryFailure(response.message));
         }
@@ -307,7 +351,8 @@ async function deleteSubcategory(payload) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Pragma': 'no-cache',
-                'Cache-Control': 'no-cache'
+                'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
             }
         });
         let status = resp.status;
