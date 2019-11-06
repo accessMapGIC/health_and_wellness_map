@@ -8,10 +8,14 @@ import { categoryActions } from '../../redux/actions/categoryActions';
 import actionConstants from '../../redux/actionConstants';
 import CardTemplate from './CardTemplate.jsx';
 //Style
-import "./listService.css";
+import { Input } from 'antd';
+const { Search } = Input;
 class ListServiceClass extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            filter: ""
+        };
     }
 
     componentDidMount() {
@@ -24,12 +28,25 @@ class ListServiceClass extends React.Component {
     render() {
         return (
             <div className="Card_Container">
+                <Search
+                    placeholder="search service"
+                    onChange={event => {
+                        this.setState({filter: event.target.value})
+                        console.log(event.target.value)
+                    }}
+                    className="search-bar"
+                />
                 {this.props.listing.length > 0 && this.props.listing.map((service, i) => {
-                    return(
-                        <CardTemplate 
-                            listing={service}
-                        />
-                    )
+                    if (this.props.listing[i].name) {
+                        if ((this.props.listing[i].name).toLowerCase().indexOf(this.state.filter)>-1) {
+                            return(
+                                <CardTemplate 
+                                    listing={service}
+                                    key={i}
+                                />
+                            )
+                        }
+                    }
                 })
                 }
             </div>

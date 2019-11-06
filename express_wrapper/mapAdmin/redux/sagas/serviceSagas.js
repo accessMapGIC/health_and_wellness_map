@@ -120,3 +120,45 @@ async function getService(payload) {
         return err;
     }
 }
+
+// Edit service
+export function* watchEditService() {
+    yield takeLatest(actionConstants.EDIT_SERVICE_REQUEST, workerEditService);
+}
+function* workerEditService(params) {
+    try {
+        const response = yield call(editService, params.payload);
+        if (response.status === 200) {
+            console.log(params.payload)
+            yield put(serviceActions.editServiceSuccess(response.message));
+        }
+        else {
+            console.log("error", params.payload)
+            yield put(serviceActions.editServiceFailure(response.message));
+        }
+    }
+    catch(err) {
+        yield put(serviceActions.editServiceFailure(err));
+    }
+}
+async function editService(payload) {
+    try {
+        let resp = await fetch(`${base_url}/service/${payload.serviceId}`, {
+            credentials: "same-origin",
+            method: "put",
+            body: JSON.stringify(payload),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Pragma': 'no-cache',
+                'Cache-Control': 'no-cache'
+            }
+        });
+        let status = resp.status;
+        let respBody = await resp.json()
+        return {message: respBody, status: status};
+    }
+    catch(err) {
+        return err;
+    }
+}

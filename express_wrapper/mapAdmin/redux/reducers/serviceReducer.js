@@ -97,6 +97,25 @@ export default function test(state=serviceInitialState, action) {
                 status: actionConstants.GET_SERVICE_FAILURE,
                 error: action.payload
             }
+        
+        // edit service
+        case actionConstants.EDIT_SERVICE_REQUEST:
+            return {
+                ...state,
+                status: actionConstants.EDIT_SERVICE_REQUEST
+            }
+        case actionConstants.EDIT_SERVICE_SUCCESS:
+            return {
+                ...state,
+                status: actionConstants.EDIT_SERVICE_SUCCESS,
+                newEdit: action.payload
+            }
+        case actionConstants.EDIT_SERVICE_FAILURE:
+            return {
+                ...state,
+                status: actionConstants.EDIT_SERVICE_FAILURE,
+                error: action.payload
+            }
         default:
             return state;
     }

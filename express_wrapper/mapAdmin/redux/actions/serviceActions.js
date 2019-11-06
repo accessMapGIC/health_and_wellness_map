@@ -4,6 +4,7 @@ export const serviceActions = {
     getInsuranceRequest, getInsuranceSuccess, getInsuranceFailure,
     createServiceRequest, createServiceSuccess, createServiceFailure,
     getServiceRequest, getServiceSuccess, getServiceFailure,
+    editServiceRequest, editServiceSuccess, editServiceFailure
 };
 
 // Get insurance
@@ -68,6 +69,28 @@ function getServiceSuccess(payload) {
 function getServiceFailure(payload) {
     return {
         type: actionConstants.GET_SERVICE_FAILURE,
+        payload
+    }
+}
+
+//Edit service
+function editServiceRequest(payload) {
+    return {
+        type: actionConstants.EDIT_SERVICE_REQUEST,
+        payload
+    }
+}
+
+function editServiceSuccess(payload) {
+    return {
+        type: actionConstants.EDIT_SERVICE_SUCCESS,
+        payload
+    }
+}
+
+function editServiceFailure(payload) {
+    return {
+        type: actionConstants.EDIT_SERVICE_FAILURE,
         payload
     }
 }

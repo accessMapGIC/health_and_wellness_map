@@ -5,7 +5,8 @@ export const serviceInitialState = {
     subcategory: [],
     insurance: [],
     service: {},
-    listing: {}
+    listing: {},
+    newEdit: []
 }
 
 export const authInitialState = {

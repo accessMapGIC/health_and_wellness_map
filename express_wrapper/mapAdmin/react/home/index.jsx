@@ -24,6 +24,7 @@ import en_US from 'antd/lib/locale-provider/en_US';
 import Home from "./home.jsx";
 import NewService from "./newService.jsx";
 import Login from "./login.jsx";
+import EditService from "./editService.jsx";
 import Category from "./category.jsx";
 import Subcategory from "./subcategory.jsx";
 
@@ -87,6 +88,9 @@ class IndexClass extends React.Component {
                     </Switch>
                     <Switch>
                         <Route exact path="/subcategory" component={Subcategory} />
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/editService/:service_id" component={EditService} />
                     </Switch>
                 </Content>
             </Layout>

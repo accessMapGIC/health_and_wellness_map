@@ -6,6 +6,10 @@ table {
     width: 100%;
     table-layout: fixed;
 }
+.last_modified {
+    font-size: 1rem;
+    margin-top: 10px;
+}
 .light-row {
     background-color: #cef;
 }
