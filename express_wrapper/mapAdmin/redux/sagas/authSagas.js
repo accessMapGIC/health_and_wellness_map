@@ -35,7 +35,6 @@ async function signIn(payload) {
                 'Content-Type': 'application/json',
                 'Pragma': 'no-cache',
                 'Cache-Control': 'no-cache',
-                'Authorization': `${getCookie()}`
             }
         })
         let status = resp.status;
@@ -79,47 +78,6 @@ function* workerSignIn(params) {
         yield put(authActions.signInFailure(error));
     }
 }
-
-//Get authentication info
-export function* watchGetAuth() {
-        yield takeLatest(actionConstants.GET_AUTH_REQUEST, workerGetAuth);
-}
-
-async function getAuth(payload) {
-    try {
-        let resp1 = await fetch(`${base_url}/auth`, {
-            credentials: "same-origin",
-            method: 'post',
-            body: JSON.stringify(payload),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Pragma': 'no-cache',
-                'Cache-Control': 'no-cache',
-                'Authorization': `${getCookie()}`
-            },
-        });
-        let resp1Body = await resp1.json();
-        return resp1Body;
-    }
-    catch (err) {
-        return err;
-    }
-}
-
-// Make the api call when watcher saga sees the action
-function* workerGetAuth(params) {
-    try {
-        //Get auth status and username
-        const response = yield call(getAuth, params.payload);
-        yield put(authActions.getAuthSuccess( response));
-    } 
-    catch (error) {
-        // dispatch a failure action to the store with the error
-        yield put(authActions.getAuthFailure(error));
-    }
-}
-
 
 // Sign out
 export function* watchSignOut() {
