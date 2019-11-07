@@ -10,7 +10,6 @@ export default function* rootSaga() {
         watchGetService(),
         watchEditService(),
         watchSignIn(),
-        watchGetAuth(),
         watchSignOut(),
 
         watchCreatePrimaryCategory(),

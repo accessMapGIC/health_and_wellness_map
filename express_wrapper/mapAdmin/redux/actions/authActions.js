@@ -1,7 +1,6 @@
 export const authActions = {
     signInRequest, signInSuccess, signInFailure,
     signOutRequest, signOutSuccess, signOutFailure,
-    getAuthRequest, getAuthSuccess, getAuthFailure,
 };
 import actionConstants from "../actionConstants";
 
@@ -21,26 +20,6 @@ function signInSuccess(payload) {
 function signInFailure(error) {
     return { 
         type: actionConstants.SIGN_IN_FAILURE, 
-        error
-    } 
-}
-
-//Get auth
-function getAuthRequest(payload) {
-    return { 
-        type: actionConstants.GET_AUTH_REQUEST, 
-        payload,
-    }
-}
-function getAuthSuccess(payload) {
-    return { 
-        type: actionConstants.GET_AUTH_SUCCESS,
-        payload,
-    } 
-}
-function getAuthFailure(error) {
-    return { 
-        type: actionConstants.GET_AUTH_FAILURE, 
         error
     } 
 }

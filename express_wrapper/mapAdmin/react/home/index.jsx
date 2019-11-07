@@ -50,21 +50,58 @@ class IndexClass extends React.Component {
         dispatch(authActions.signOutRequest());
     }
 
+    backHome = () => {
+         window.location.href="http://localhost:8081/home"
+    }
+
+    getCookie() {
+        var nameEQ = "token" + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0){
+                return c.substring(nameEQ.length,c.length);
+            } 
+        }
+        return null;
+    }
+    
+    showButton(){
+        if (this.getCookie() && this.getCookie() != "null"){
+            return ( 
+                <div style={{ display: "inline-block", float:"right"}}>
+                    <Button
+
+                        style={{ marginRight:"50px"}}
+                        className="menu-option"
+                        onClick={this.backHome}
+                    >
+                        Home
+                    </Button>
+                    <Button
+                        style={{}}
+                        className="menu-option"
+                        onClick={this.signOut}
+                    >
+                        Logout
+                    </Button>
+                </div>
+            )  
+        }
+    }
+
     render() {
         return(
             <Layout style={{minHeight: "100vh"}}>
                 <Header
                    align="middle"
                 >
-                    <h1 style={{color:"white"}}>Health & Wellness Map Admin
-                    <Button
-                        style={{float:"right", top:"18px"}}
-                        className="menu-option"
-                        onClick={this.signOut}
-                    >
-                        Logout
-                    </Button>
-                    </h1>
+                    <div style={{color:"white"}}>
+                       <span  style={{float:"left", fontSize:"25px"}}>Health & Wellness Map Admin</span>
+                       {this.showButton()}
+                    </div>
+                   
                 </Header>
                 <Content>
                     <Switch>
