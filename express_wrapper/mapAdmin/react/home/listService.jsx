@@ -38,7 +38,8 @@ class ListServiceClass extends React.Component {
                 />
                 {this.props.listing.length > 0 && this.props.listing.map((service, i) => {
                     if (this.props.listing[i].name) {
-                        if ((this.props.listing[i].name).toLowerCase().indexOf(this.state.filter)>-1) {
+                        let lowerCaseFilter = this.state.filter.toLowerCase();
+                        if ((this.props.listing[i].name).toLowerCase().indexOf(lowerCaseFilter)>-1) {
                             return(
                                 <CardTemplate 
                                     listing={service}
