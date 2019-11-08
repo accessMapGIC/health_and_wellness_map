@@ -164,7 +164,7 @@ class NewServiceClass extends React.Component {
             
             values.languages_spoken = lang;
             values.services = services;
-            values.servicesFr = servicesFr;
+            values.services_fr = servicesFr;
 
             this.props.dispatch(serviceActions.createServiceRequest(values));
           }
@@ -231,7 +231,7 @@ class NewServiceClass extends React.Component {
                             <div>
                                 {tags["lang"].map((tag, index) => {
                                     const tagElem = (
-                                        <Tag key={index} closable={true} onClose={() => this.handleClose(tag, "lang")}>
+                                        <Tag key={tag} closable={true} onClose={() => this.handleClose(tag, "lang")}>
                                             {tag}
                                         </Tag>
                                     );
@@ -318,7 +318,7 @@ class NewServiceClass extends React.Component {
                             <div>
                                 {tags["services"].map((tag, index) => {
                                     const tagElem = (
-                                        <Tag key={index} closable={true} onClose={() => this.handleClose(tag, "services")}>
+                                        <Tag key={tag} closable={true} onClose={() => this.handleClose(tag, "services")}>
                                             {tag}
                                         </Tag>
                                     );
@@ -347,7 +347,7 @@ class NewServiceClass extends React.Component {
                             <div>
                                 {tags["servicesFr"].map((tag, index) => {
                                     const tagElem = (
-                                        <Tag key={index} closable={true} onClose={() => this.handleClose(tag, "servicesFr")}>
+                                        <Tag key={tag} closable={true} onClose={() => this.handleClose(tag, "servicesFr")}>
                                             {tag}
                                         </Tag>
                                     );
