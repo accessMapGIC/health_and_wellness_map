@@ -48,26 +48,6 @@ var config = {
     resolve: {
         alias: {moment: `moment/moment.js`}
     },
-    optimization: {
-        minimize: true,
-		splitChunks: {
-			cacheGroups: {
-				vendor: {
-					test: /[\\/]node_modules[\\/]/,
-					name: 'vendors',
-					chunks: 'all'
-                },
-                common: {
-                    name: 'common',
-                    minChunks: 2,
-                    chunks: 'async',
-                    priority: 10,
-                    reuseExistingChunk: true,
-                    enforce: true
-                }
-			}
-		}
-    },
     devServer: {
         historyApiFallback: true
     }
