@@ -51,9 +51,9 @@ const Subcategory = require('./subcategory');
 
 
 // Search query routes
-app.post('/query', Auth.authMiddleware, Search.getServices);
-app.post('/category_query', Auth.authMiddleware, Search.getCategories);
-app.post('/keywords_query', Auth.authMiddleware, Search.getKeywords);
+app.post('/query', Search.getServices);
+app.post('/category_query', Search.getCategories);
+app.post('/keywords_query', Search.getKeywords);
 
 // Get list of categories and insurance
 app.get('/insurance', Auth.authMiddleware, Service.getInsurance);
