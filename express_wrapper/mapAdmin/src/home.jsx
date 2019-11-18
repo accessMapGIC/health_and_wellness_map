@@ -38,6 +38,9 @@ class HomeClass extends React.Component {
                         <Link to="/subcategory">
                             <Button>Manage Subcategories</Button>
                         </Link>
+                        <Link to="/insurance">
+                            <Button>Manage Insurances</Button>
+                        </Link>
                     </div>
                     <ListService />
                 </div>

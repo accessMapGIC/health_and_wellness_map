@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { serviceActions } from './redux/actions/serviceActions';
 import { categoryActions } from './redux/actions/categoryActions';
+import { insuranceActions } from './redux/actions/insuranceActions';
 import actionConstants from './redux/actionConstants';
 
 // Style
@@ -38,7 +39,7 @@ class NewServiceClass extends React.Component {
     componentDidMount() {
         this.props.dispatch(categoryActions.getPrimaryCategoryRequest());
         this.props.dispatch(categoryActions.getSubcategoryRequest());
-        this.props.dispatch(serviceActions.getInsuranceRequest());
+        this.props.dispatch(insuranceActions.getInsuranceRequest());
     }
 
     componentDidUpdate(prevProps) {
