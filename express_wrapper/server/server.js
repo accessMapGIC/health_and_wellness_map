@@ -47,7 +47,7 @@ const Service = require('./service');
 const Auth = require('./auth');
 const Category = require('./category');
 const Subcategory = require('./subcategory');
-
+const Insurance = require('./insurance');
 
 
 // Search query routes
@@ -55,8 +55,6 @@ app.post('/query', Search.getServices);
 app.post('/category_query', Search.getCategories);
 app.post('/keywords_query', Search.getKeywords);
 
-// Get list of categories and insurance
-app.get('/insurance', Auth.authMiddleware, Service.getInsurance);
 // Create a new service
 app.post('/service', Auth.authMiddleware, Service.createService);
 // Get service
@@ -77,6 +75,11 @@ app.get('/subcategory/:subcategoryId', Auth.authMiddleware, Subcategory.getSubca
 app.put('/subcategory/:subcategoryId', Auth.authMiddleware, Subcategory.updateSubcategory);
 app.delete('/subcategory/:subcategoryId', Auth.authMiddleware, Subcategory.deleteSubcategory);
 
+app.post('/insurance', Auth.authMiddleware, Insurance.createInsurance);
+app.get('/insurance', Auth.authMiddleware, Insurance.getInsurances);
+app.get('/insurance/:insuranceId', Auth.authMiddleware, Insurance.getInsurance);
+app.put('/insurance/:insuranceId', Auth.authMiddleware, Insurance.updateInsurance);
+app.delete('/insurance/:insuranceId', Auth.authMiddleware, Insurance.deleteInsurance);
 
 //Login user
 app.post('/signin', Auth.signin);

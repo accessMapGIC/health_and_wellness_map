@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { serviceActions } from './redux/actions/serviceActions';
 import { categoryActions } from './redux/actions/categoryActions';
+import { insuranceActions } from './redux/actions/insuranceActions';
 import actionConstants from './redux/actionConstants';
 import CardTemplate from './CardTemplate.jsx';
 //Style
@@ -22,7 +23,7 @@ class ListServiceClass extends React.Component {
         this.props.dispatch(serviceActions.getServiceRequest());
         this.props.dispatch(categoryActions.getPrimaryCategoryRequest());
         this.props.dispatch(categoryActions.getSubcategoryRequest());
-        this.props.dispatch(serviceActions.getInsuranceRequest());
+        this.props.dispatch(insuranceActions.getInsuranceRequest());
     }
 
     render() {

@@ -1,33 +1,10 @@
 import actionConstants from "../actionConstants";
 
 export const serviceActions = {
-    getInsuranceRequest, getInsuranceSuccess, getInsuranceFailure,
     createServiceRequest, createServiceSuccess, createServiceFailure,
     getServiceRequest, getServiceSuccess, getServiceFailure,
     editServiceRequest, editServiceSuccess, editServiceFailure
 };
-
-// Get insurance
-function getInsuranceRequest(payload) {
-    return {
-        type: actionConstants.GET_INSURANCE_REQUEST,
-        payload
-    }
-}
-
-function getInsuranceSuccess(payload) {
-    return {
-        type: actionConstants.GET_INSURANCE_SUCCESS,
-        payload
-    }
-}
-
-function getInsuranceFailure(payload) {
-    return {
-        type: actionConstants.GET_INSURANCE_FAILURE,
-        payload
-    }
-}
 
 // Create service
 function createServiceRequest(payload) {

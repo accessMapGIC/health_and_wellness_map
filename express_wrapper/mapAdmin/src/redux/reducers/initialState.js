@@ -25,3 +25,9 @@ export const categoryInitialState = {
     primary_category: [],
     subcategory: []
 }
+
+export const insuranceInitialState = {
+    status: "",
+    error: "",
+    insurance: []
+}

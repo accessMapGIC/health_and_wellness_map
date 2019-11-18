@@ -26,6 +26,7 @@ import Login from "./login.jsx";
 import EditService from "./editService.jsx";
 import Category from "./category.jsx";
 import Subcategory from "./subcategory.jsx";
+import Insurance from "./insurance.jsx";
 
 const { Header, Content, Sider } = Layout;
 const history = createBrowserHistory();
@@ -93,39 +94,40 @@ class IndexClass extends React.Component {
 
     render() {
         return(
-                       
-
-                            <Layout style={{minHeight: "100vh"}}>
-                                <Header
-                                align="middle"
-                                >
-                                    <div style={{color:"white"}}>
-                                    <span  style={{float:"left", fontSize:"25px"}}>Health & Wellness Map Admin</span>
-                                    {this.showButton()}
-                                    </div>
-                                
-                                </Header>
-                                <Content>
-                                    <Switch>
-                                        <Route exact path="/" component={Login} />
-                                    </Switch>
-                                    <Switch>
-                                        <Route exact path="/home" component={Home} />
-                                    </Switch>
-                                    <Switch>
-                                        <Route exact path="/newService" component={NewService} />
-                                    </Switch>
-                                    <Switch>
-                                        <Route exact path="/category" component={Category} />
-                                    </Switch>
-                                    <Switch>
-                                        <Route exact path="/subcategory" component={Subcategory} />
-                                    </Switch>
-                                    <Switch>
-                                        <Route exact path="/editService/:service_id" component={EditService} />
-                                    </Switch>
-                                </Content>
-                            </Layout>
+            <Layout style={{minHeight: "100vh"}}>
+                <Header
+                align="middle"
+                >
+                    <div style={{color:"white"}}>
+                    <span  style={{float:"left", fontSize:"25px"}}>Health & Wellness Map Admin</span>
+                    {this.showButton()}
+                    </div>
+                
+                </Header>
+                <Content>
+                    <Switch>
+                        <Route exact path="/" component={Login} />
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/home" component={Home} />
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/newService" component={NewService} />
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/category" component={Category} />
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/subcategory" component={Subcategory} />
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/insurance" component={Insurance} />
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/editService/:service_id" component={EditService} />
+                    </Switch>
+                </Content>
+            </Layout>
                         
         )
         
