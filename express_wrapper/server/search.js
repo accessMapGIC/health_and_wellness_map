@@ -27,6 +27,7 @@ module.exports = {
             s.website AS URL,
             s.notes,
             s.notes_fr,
+            s.languages_spoken,
             h.hours
         FROM health.primary_category pc INNER JOIN health.subcategory sc
         ON pc.cat_id = sc.pc_id
@@ -40,25 +41,31 @@ module.exports = {
         let params = [];
 
         if (req.body.cat) {
-        params.push({key: "pc.cat_name", value: req.body.cat});
+            params.push({key: "pc.cat_name", value: req.body.cat});
+            params.push()
         }
 
         if (req.body.subCat) {
-        params.push({key: "sc.subcat_name", value: req.body.subCat});
+            params.push({key: "sc.subcat_name", value: req.body.subCat});
         }
 
         if (req.body.insCat) {
-        params.push({key: "ins.insur_name", value: req.body.insCat});
+            params.push({key: "ins.insur_name", value: req.body.insCat});
         }
 
         if (params.length) {
-        baseQuery += " WHERE ";
-        for (let i = 0; i < params.length; i++) {
-            if (i > 0) {
-            baseQuery += " AND ";
+            baseQuery += " WHERE ";
+            for (let i = 0; i < params.length; i++) {
+                if (i > 0) {
+                baseQuery += " AND ";
+                }
+                baseQuery += `${params[i].key} = $${i+1}`;
             }
-            baseQuery += `${params[i].key} = $${i+1}`;
         }
+
+        if (req.body.lang) { 
+            baseQuery += ` AND s.languages_spoken ILIKE $${params.length+1}`;
+            params.push({key: "s.languages_spoken", value: `%${req.body.lang}%`});
         }
 
         req.db.any(baseQuery, params.map(p => p.value))
@@ -86,6 +93,7 @@ module.exports = {
             s.website AS URL,
             s.notes,
             s.notes_fr,
+            s.languages_spoken,
             h.hours
             FROM health.primary_category pc INNER JOIN health.subcategory sc
             ON pc.cat_id = sc.pc_id
@@ -98,10 +106,18 @@ module.exports = {
             WHERE s.services LIKE ANY (string_to_array(LOWER($1),','))
         `;
         let params = [`%${req.body.keyword}%`];
+        let counter = 2;
 
         if (req.body.insCat) {
-            baseQuery += " AND ins.insur_name=$2"
+            baseQuery += ` AND ins.insur_name=$${counter}`
             params.push(req.body.insCat);
+            counter++;
+        }
+
+        if (req.body.lang) { 
+            baseQuery += ` AND s.languages_spoken ILIKE $${counter}`;
+            params.push(`%${req.body.lang}%`);
+            counter++;
         }
 
         req.db.any(baseQuery, params)
