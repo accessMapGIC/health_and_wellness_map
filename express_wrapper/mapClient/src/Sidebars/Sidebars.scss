@@ -451,7 +451,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     background: lightblue;
     padding: .1em 1em 0;
     font-size: 1.15em;
-    overflow-y: scroll !important;
+    overflow-y: hidden !important;
   }
 
   /* Morph shape necessary with bubble or elastic */
@@ -995,7 +995,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 */
   .menu-right .bm-menu-wrap {
     position: fixed;
-    height: 90% !important;
+    height: 85% !important;
     width: 300px !important;
   }
 
@@ -1004,7 +1004,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     background: lightblue;
     padding: .1em 1em 0;
     font-size: 1.15em;
-    overflow-y: scroll !important;
+    overflow-y: hidden !important;
   }
 
   /* Morph shape necessary with bubble or elastic */
@@ -1056,7 +1056,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   }
 
   .Card_Container {
-    max-height: 83%;
+    max-height: 60%;
     overflow-y: auto;
     border-radius: 5px;
   }
@@ -1280,7 +1280,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     background: lightblue;
     padding: .1em 1em 0;
     font-size: 1.15em;
-    overflow-y: scroll !important;
+    overflow-y: hidden !important;
   }
 
   /* Morph shape necessary with bubble or elastic */
@@ -1332,7 +1332,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   }
 
   .Card_Container {
-    max-height: 80%;
+    max-height: 55%;
     overflow-y: auto;
     border-radius: 5px;
   }
@@ -1550,7 +1550,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 */
   .menu-right .bm-menu-wrap {
     position: fixed;
-    height: 87% !important;
+    height: 40% !important;
     width: 100% !important;
   }
 
@@ -1559,7 +1559,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     background: lightblue;
     padding: .1em 1em 0;
     font-size: 1.15em;
-    overflow-y: scroll !important;
+    overflow-y: hidden !important;
   }
 
   /* Morph shape necessary with bubble or elastic */
@@ -1576,8 +1576,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
   /* Individual item */
   .menu-right .bm-item {
     display: inline-block;
-    margin-bottom: 8px;
-    margin-top: 10px;
   }
 
   /* Styling of overlay */
@@ -1611,7 +1609,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   }
 
   .Card_Container {
-    max-height: 69%;
+    max-height: 55%;
     overflow-y: auto;
     border-radius: 5px;
   }

@@ -54,7 +54,7 @@ const FormLinks = styled.h1`
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit,
+    //marginTop: theme.spacing.unit,
     backgroundColor: '#4ec3c7',
     '&:hover': {
       backgroundColor: '#4ec3c7',
