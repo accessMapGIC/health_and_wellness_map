@@ -51,7 +51,7 @@ class IndexClass extends React.Component {
     }
 
     backHome = () => {
-         window.location.href="http://localhost:8081/home"
+         window.location.href= "/home";
     }
 
     getCookie() {
