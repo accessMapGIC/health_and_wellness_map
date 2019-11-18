@@ -229,6 +229,7 @@ class NewServiceClass extends React.Component {
                             )}
                         </Form.Item>
                         <Form.Item label="Languages Spoken">
+                            <div>Please indicate the full language name (ex: "English", "French")</div>
                             <div>
                                 {tags["lang"].map((tag, index) => {
                                     const tagElem = (
