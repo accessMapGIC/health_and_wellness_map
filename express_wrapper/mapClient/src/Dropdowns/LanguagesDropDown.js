@@ -65,15 +65,14 @@ class LanguageDropDownComponent extends React.Component {
             }
             displayEmpty
             style={selectStyle}
-            disabled='true' /*{ Delete this line once data is updated }*/
           >
             <MenuItem value="">
               {strings.default}
             </MenuItem>
-            <MenuItem value={'English'}>{strings.en}</MenuItem>
-            <MenuItem value={'French'}>{strings.fr}</MenuItem>
-            <MenuItem value={'Mandarin'}>{strings.ch}</MenuItem>
-            <MenuItem value={'Spanish'}>{strings.sp}</MenuItem>
+            <MenuItem value={'en'}>{strings.en}</MenuItem>
+            <MenuItem value={'fr'}>{strings.fr}</MenuItem>
+            <MenuItem value={'mandarin'}>{strings.ch}</MenuItem>
+            <MenuItem value={'sp'}>{strings.sp}</MenuItem>
           </Select>
           <FormHelperText>{strings.helperText}</FormHelperText>
         </FormControl>
