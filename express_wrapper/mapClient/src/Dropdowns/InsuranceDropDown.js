@@ -48,8 +48,7 @@ class InsuranceDropDownComponent extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
-
+    const { classes, insurances } = this.props;
     return (
       <form className={classes.root} autoComplete="off">
         <FormControl variant="outlined" className={classes.formControl} fullWidth={true}>
@@ -65,17 +64,15 @@ class InsuranceDropDownComponent extends React.Component {
             }
             displayEmpty
             style={selectStyle}
-            disabled='true' /*{ Delete this line once data is updated }*/
           >
             <MenuItem value="">
               {strings.default}
             </MenuItem>
-            <MenuItem value={'International Health Insurance'}>{strings.intl}</MenuItem>
-            <MenuItem value={'MCSS'}>{strings.mcss}</MenuItem>
-            <MenuItem value={'Out of Province'}>{strings.oop}</MenuItem>
-            <MenuItem value={'PGSS'}>{strings.pgss}</MenuItem>
-            <MenuItem value={'RAMQ'}>{strings.ramq}</MenuItem>
-            <MenuItem value={'SSMU'}>{strings.ssmu}</MenuItem>
+            {insurances.map((ins, i) => {
+              return (
+                <MenuItem key={i} value={ins.insur_name}>{ins.insur_name}</MenuItem>
+              );
+            })}
           </Select>
           <FormHelperText>{strings.helperText}</FormHelperText>
         </FormControl>
@@ -91,7 +88,8 @@ InsuranceDropDownComponent.propTypes = {
 const mapStateToProps = state => {
   return {
     insurance: state.lfS.leftMenu.insDrop,
-    language: state.lang.language
+    language: state.lang.language,
+    insurances: state.lfS.leftMenu.insurances
   }
 };
 

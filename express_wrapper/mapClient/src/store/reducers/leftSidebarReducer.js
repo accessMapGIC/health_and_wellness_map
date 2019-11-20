@@ -2,6 +2,9 @@ import * as actionTypes from '../actions' //imports the different redux actions 
 
 const initialState = {
     leftMenu: {
+        categories: [],
+        subCategories: [],
+        insurances: [],
         leftMenuOpen: false,
         leftHamButton: null,
         catDrop: '',
@@ -33,6 +36,30 @@ async function categoryQuery(json){//this is an asycronous function for the cate
 const leftSidebarReducer = (state = initialState, action ) => {//the leftSidebarReducer for redux
 //Normally async await func inside reducer
     switch ( action.type ){
+        case actionTypes.GET_CATEGORY:
+            return {
+                ...state,
+                leftMenu: {
+                    ...state.leftMenu,
+                    categories: action.payload.categories
+                },
+            }
+        case actionTypes.GET_SUBCATEGORY:
+            return {
+                ...state,
+                leftMenu: {
+                    ...state.leftMenu,
+                    subCategories: action.payload.subCategories
+                },
+            }
+        case actionTypes.GET_INSURANCE:
+            return {
+                ...state,
+                leftMenu: {
+                    ...state.leftMenu,
+                    insurances: action.payload.insurances
+                },
+            }
         case actionTypes.CATEGORY_CHANGE:
             const newState = Object.assign({}, state);
             newState.leftMenu.catDrop = action.payload;
@@ -105,12 +132,11 @@ const leftSidebarReducer = (state = initialState, action ) => {//the leftSidebar
             }
         case actionTypes.QUERY_DATABASE:
             let newData = [];
-
-            let testStr = JSON.stringify({
+            newData = JSON.stringify({
                 cat: state.leftMenu.catDrop,
                 subCat: state.leftMenu.subCatDrop,
                 insCat: state.leftMenu.insDrop,
-                //langCat: state.leftMenu.langDrop,
+                lang: state.leftMenu.langDrop,
             });
             return {
                 ...state,

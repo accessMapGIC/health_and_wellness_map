@@ -96,6 +96,9 @@ class SidebarsComponent extends React.Component { //this is the component for bo
 
     componentDidMount() { //load the information for the card from the card container
       strings.setLanguage(this.props.language);
+      this.props.dropdownCategories();
+      this.props.dropdownSubcategories();
+      this.props.dropdownInsurances();
     }
 
     componentDidUpdate(prevProp) {
@@ -111,6 +114,7 @@ class SidebarsComponent extends React.Component { //this is the component for bo
         cat,
         subCat,
         insCat,
+        lang,
         keyword,
         tabIndex,
         queryDatabase,
@@ -121,12 +125,14 @@ class SidebarsComponent extends React.Component { //this is the component for bo
         queryDatabase({
           cat,
           subCat,
-          insCat
+          insCat,
+          lang
         });
       } else if (tabIndex === 1) {
         queryDatabaseKeywords({
           keyword,
-          insCat
+          insCat,
+          lang
         });
       }
       this.props.destroyLeft();
@@ -196,7 +202,7 @@ class SidebarsComponent extends React.Component { //this is the component for bo
                 </Container>
 
                 <div width='50%' float='left'>
-                  <img src={RossyLogo} height="50%" width="50%" float='left' marginRight="10px" alt=""></img>
+                  <img src={RossyLogo} height="50%" width="50%" float='left' alt=""></img>
                 <RossyCred>
                   {strings.rossyCred}
                 </RossyCred>
@@ -246,9 +252,13 @@ const mapStateToProps = state => {//info grabbed from the redux store
     lmo: state.lfS.leftMenu.leftMenuOpen,
     lhb: state.lfS.leftMenu.leftHamButton,
     tabIndex: state.lfS.leftMenu.tabIndex,
+    categories: state.lfS.leftMenu.categories,
+    subCategories: state.lfS.leftMenu.subCategories,
+    insurances: state.lfS.leftMenu.insurances,
     cat: state.lfS.leftMenu.catDrop,
     subCat: state.lfS.leftMenu.subCatDrop,
     insCat: state.lfS.leftMenu.insDrop,
+    lang: state.lfS.leftMenu.langDrop,
     keyword: state.lfS.leftMenu.keyDrop,
     language: state.lang.language
   }
@@ -259,6 +269,9 @@ const mapDispatchToProps = dispatch => {//the different actions called by the si
     handleRight: () => dispatch({type: actionTypes.HANDLE_RIGHT}),
     createRight: (state) => dispatch({type: actionTypes.CREATE_RIGHT, payload: (!state.rightMenuOpen)}),
     destroyRight: () => dispatch({type: actionTypes.DESTROY_RIGHT}),
+    dropdownCategories: (params) => dispatch(actionTypes.getPrimaryCategories(params)),
+    dropdownSubcategories: (params) => dispatch(actionTypes.getSubcategories(params)),
+    dropdownInsurances: (params) => dispatch(actionTypes.getInsurances(params)),
     queryDatabase: (params) => dispatch(actionTypes.categoryQuery(params)),
     queryDatabaseKeywords: (params) => dispatch(actionTypes.keywordsQuery(params)),
     // QueryDatabaseReq: () => dispatch({type:actionTypes.QUERY_DATABASE_REQ}),

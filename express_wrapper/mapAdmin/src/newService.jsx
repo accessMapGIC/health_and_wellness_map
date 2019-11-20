@@ -9,7 +9,7 @@ import actionConstants from './redux/actionConstants';
 
 // Style
 import "./newService.css";
-import { Form, Input, InputNumber, Button, Select, Tag, Tooltip, Icon } from 'antd';
+import { Form, Input, InputNumber, Button, Select, Tag, Icon } from 'antd';
 const { Option } = Select;
 const { TextArea } = Input;
 const InputGroup = Input.Group;
@@ -175,7 +175,6 @@ class NewServiceClass extends React.Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         const { tags, inputVisible, inputValue } = this.state;
-
             return (
                 <div className="service-form-wrapper">
                     <h1>Create a new service</h1>

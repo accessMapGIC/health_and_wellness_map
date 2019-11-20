@@ -57,8 +57,7 @@ class CategoryDropDownComponent extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
-
+    const { classes, categories } = this.props;
     return (
       <form className={classes.root} autoComplete="off">
         <FormControl variant="outlined" className={classes.formControl} fullWidth={true}>
@@ -78,11 +77,11 @@ class CategoryDropDownComponent extends React.Component {
             <MenuItem value="">
               {strings.default}
             </MenuItem>
-            <MenuItem value={'Counselling & Mental Health'}>{strings.mentalHealth}</MenuItem>
-            <MenuItem value={'Medical Care'}>{strings.medCare}</MenuItem>
-            <MenuItem value={'Peer Support'}>{strings.peerSupp}</MenuItem>
-            <MenuItem value={'Relaxation & Recreation'}>{strings.relax}</MenuItem>
-            <MenuItem value={'Wellness Resources'}>{strings.wellness}</MenuItem>
+            {categories.map((cat, i) => {
+              return (
+                <MenuItem key={i} value={cat.cat_name}>{cat.cat_name}</MenuItem>
+              );
+            })}
           </Select>
           <FormHelperText>{strings.helperText}</FormHelperText>
         </FormControl>
@@ -98,7 +97,8 @@ CategoryDropDownComponent.propTypes = {
 const mapStateToProps = state => {
   return {
     category: state.lfS.leftMenu.catDrop,
-    language: state.lang.language
+    language: state.lang.language,
+    categories: state.lfS.leftMenu.categories
   }
 };
 
