@@ -1,7 +1,7 @@
 // React, routing
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Switch} from 'react-router-dom';
+import { Route, Switch, HashRouter} from 'react-router-dom';
 import { createBrowserHistory } from "history";
 import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-react-router';
 import { withRouter, Router } from 'react-router';
@@ -29,7 +29,7 @@ import Subcategory from "./subcategory.jsx";
 import Insurance from "./insurance.jsx";
 
 const { Header, Content, Sider } = Layout;
-const history = createBrowserHistory();
+const history = createBrowserHistory({basename: process.env.REACT_APP_BASE_NAME || ""});
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
     rootReducer(history),
@@ -105,27 +105,29 @@ class IndexClass extends React.Component {
                 
                 </Header>
                 <Content>
-                    <Switch>
-                        <Route exact path="/" component={Login} />
-                    </Switch>
-                    <Switch>
-                        <Route exact path="/home" component={Home} />
-                    </Switch>
-                    <Switch>
-                        <Route exact path="/newService" component={NewService} />
-                    </Switch>
-                    <Switch>
-                        <Route exact path="/category" component={Category} />
-                    </Switch>
-                    <Switch>
-                        <Route exact path="/subcategory" component={Subcategory} />
-                    </Switch>
-                    <Switch>
-                        <Route exact path="/insurance" component={Insurance} />
-                    </Switch>
-                    <Switch>
-                        <Route exact path="/editService/:service_id" component={EditService} />
-                    </Switch>
+                    <HashRouter>
+                        <Switch>
+                            <Route exact path="/" component={Login} />
+                        </Switch>
+                        <Switch>
+                            <Route exact path="/home" component={Home} />
+                        </Switch>
+                        <Switch>
+                            <Route exact path="/newService" component={NewService} />
+                        </Switch>
+                        <Switch>
+                            <Route exact path="/category" component={Category} />
+                        </Switch>
+                        <Switch>
+                            <Route exact path="/subcategory" component={Subcategory} />
+                        </Switch>
+                        <Switch>
+                            <Route exact path="/insurance" component={Insurance} />
+                        </Switch>
+                        <Switch>
+                            <Route exact path="/editService/:service_id" component={EditService} />
+                        </Switch>
+                    </HashRouter>
                 </Content>
             </Layout>
                         

@@ -21,7 +21,7 @@ import { Layout, ConfigProvider, Row, Col, Button } from 'antd';
 import Index from './index.jsx';
 import './App.css';
 
-const history = createBrowserHistory();
+const history = createBrowserHistory({basename: process.env.REACT_APP_BASE_NAME || ""});
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
     rootReducer(history),
