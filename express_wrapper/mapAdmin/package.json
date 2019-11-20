@@ -2,6 +2,7 @@
   "name": "mapadmin2",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://gic.geog.mcgill.ca/healthmapadmin",
   "dependencies": {
     "antd": "3.23.6",
     "babel-core": "^6.26.3",
