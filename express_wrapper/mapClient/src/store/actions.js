@@ -1,7 +1,10 @@
 //the collection of actions for the redux store
 const base_url =  process.env.REACT_APP_BASE_URL || "http://gic.geog.mcgill.ca:5001";
+export const GET_CATEGORY = 'GET_CATEGORY';
 export const CATEGORY_CHANGE = 'CATEGORY_CHANGE';
+export const GET_SUBCATEGORY = 'GET_SUBCATEGORY';
 export const SUBCATEGORY_CHANGE = 'SUBCATEGORY_CHANGE';
+export const GET_INSURANCE = 'GET_INSURANCE';
 export const INSURANCE_CHANGE = 'INSURANCE_CHANGE';
 export const KEYWORD_CHANGE = 'KEYWORD_CHANGE';
 export const LANGUAGE_CHANGE = 'LANGUAGE_CHANGE';
@@ -123,6 +126,75 @@ export function categoryQuery(json) {
       });
     })
     .catch(err => console.log(err));
+  };
+}
+
+export function getPrimaryCategories(json) {
+  return async dispatch => {
+    await fetch (`${base_url}/primary_category`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(data => {
+        dispatch({
+          type: GET_CATEGORY,
+          payload: {
+            categories: data
+          }
+        })
+    })
+    .catch(err => console.log(err));  
+  };
+}
+
+export function getSubcategories(json) {
+  return async dispatch => {
+    await fetch (`${base_url}/subcategory`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(data => {
+      dispatch({
+        type: GET_SUBCATEGORY,
+        payload: {
+          subCategories: data
+        }
+      })
+    })
+    .catch(err => console.log(err));  
+  };
+}
+
+export function getInsurances(json) {
+  return async dispatch => {
+    await fetch (`${base_url}/insurance`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(data => {
+      dispatch({
+        type: GET_INSURANCE,
+        payload: {
+          insurances: data
+        }
+      })
+    })
+    .catch(err => console.log(err));  
   };
 }
 

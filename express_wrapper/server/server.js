@@ -64,20 +64,20 @@ app.put('/service/:serviceId', Auth.authMiddleware, Service.editService);
 
 // Categories
 app.post('/primary_category', Auth.authMiddleware, Category.createPrimaryCategory);
-app.get('/primary_category', Auth.authMiddleware, Category.getPrimaryCategories);
+app.get('/primary_category', Category.getPrimaryCategories);
 app.get('/primary_category/:categoryId', Auth.authMiddleware, Category.getPrimaryCategory);
 app.put('/primary_category/:categoryId', Auth.authMiddleware, Category.updatePrimaryCategory);
 app.delete('/primary_category/:categoryId', Auth.authMiddleware, Category.deletePrimaryCategory);
 
 app.post('/subcategory', Auth.authMiddleware, Subcategory.createSubcategory);
-app.get('/subcategory', Auth.authMiddleware, Subcategory.getSubcategories);
+app.get('/subcategory', Subcategory.getSubcategories);
 app.get('/subcategory/:subcategoryId', Auth.authMiddleware, Subcategory.getSubcategory);
 app.put('/subcategory/:subcategoryId', Auth.authMiddleware, Subcategory.updateSubcategory);
 app.delete('/subcategory/:subcategoryId', Auth.authMiddleware, Subcategory.deleteSubcategory);
 
 app.post('/insurance', Auth.authMiddleware, Insurance.createInsurance);
-app.get('/insurance', Auth.authMiddleware, Insurance.getInsurances);
-app.get('/insurance/:insuranceId', Auth.authMiddleware, Insurance.getInsurance);
+app.get('/insurance', Insurance.getInsurances);
+app.get('/insurance/:insuranceId', Insurance.getInsurance);
 app.put('/insurance/:insuranceId', Auth.authMiddleware, Insurance.updateInsurance);
 app.delete('/insurance/:insuranceId', Auth.authMiddleware, Insurance.deleteInsurance);
 
