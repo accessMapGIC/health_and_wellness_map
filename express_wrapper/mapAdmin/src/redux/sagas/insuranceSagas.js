@@ -27,7 +27,7 @@ function* workerCreateInsurance(params) {
             yield put(insuranceActions.createInsuranceSuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href=(process.env.REACT_APP_BASE_NAME || "") +"/";
         }
         else {
             yield put(insuranceActions.createInsuranceFailure(response.message));
@@ -71,7 +71,7 @@ function* workerGetInsurance(params) {
             yield put(insuranceActions.getInsuranceSuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href= (process.env.REACT_APP_BASE_NAME || "") + "/";
         }
         else {
             yield put(insuranceActions.getInsuranceFailure(response.message));
@@ -114,7 +114,7 @@ function* workerUpdateInsurance(params) {
             yield put(insuranceActions.updateInsuranceSuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href= (process.env.REACT_APP_BASE_NAME || "") + "/";
         }
         else {
             yield put(insuranceActions.updateInsuranceFailure(response.message));
@@ -158,7 +158,7 @@ function* workerDeleteInsurance(params) {
             yield put(insuranceActions.deleteInsuranceSuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href= (process.env.REACT_APP_BASE_NAME || "") + "/";
         }
         else {
             yield put(insuranceActions.deleteInsuranceFailure(response.message));

@@ -27,7 +27,7 @@ function* workerCreatePrimaryCategory(params) {
             yield put(categoryActions.createPrimaryCategorySuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href=(process.env.REACT_APP_BASE_NAME || "") + "/";
         }
         else {
             yield put(categoryActions.createPrimaryCategoryFailure(response.message));
@@ -71,7 +71,7 @@ function* workerGetPrimaryCategory(params) {
             yield put(categoryActions.getPrimaryCategorySuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href=(process.env.REACT_APP_BASE_NAME || "") + "/";
         }
         else {
             yield put(categoryActions.getPrimaryCategoryFailure(response.message));
@@ -114,7 +114,7 @@ function* workerUpdatePrimaryCategory(params) {
             yield put(categoryActions.updatePrimaryCategorySuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href=(process.env.REACT_APP_BASE_NAME || "") + "/";
         }
         else {
             yield put(categoryActions.updatePrimaryCategoryFailure(response.message));
@@ -158,7 +158,7 @@ function* workerDeletePrimaryCategory(params) {
             yield put(categoryActions.deletePrimaryCategorySuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href=(process.env.REACT_APP_BASE_NAME || "") +"/";
         }
         else {
             yield put(categoryActions.deletePrimaryCategoryFailure(response.message));
@@ -201,7 +201,7 @@ function* workerCreateSubcategory(params) {
             yield put(categoryActions.createSubcategorySuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href=(process.env.REACT_APP_BASE_NAME || "") +"/";
         }
         else {
             yield put(categoryActions.createSubcategoryFailure(response.message));
@@ -245,7 +245,7 @@ function* workerGetSubcategory(params) {
             yield put(categoryActions.getSubcategorySuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href=(process.env.REACT_APP_BASE_NAME || "") +"/";
         }
         else {
             yield put(categoryActions.getSubcategoryFailure(response.message));
@@ -288,7 +288,7 @@ function* workerUpdateSubcategory(params) {
             yield put(categoryActions.updateSubcategorySuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href=(process.env.REACT_APP_BASE_NAME || "") +"/";
         }
         else {
             yield put(categoryActions.updateSubcategoryFailure(response.message));
@@ -332,7 +332,7 @@ function* workerDeleteSubcategory(params) {
             yield put(categoryActions.deleteSubcategorySuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href=(process.env.REACT_APP_BASE_NAME || "") +"/";
         }
         else {
             yield put(categoryActions.deleteSubcategoryFailure(response.message));

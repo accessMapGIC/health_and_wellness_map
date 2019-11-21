@@ -48,7 +48,7 @@ class NewServiceClass extends React.Component {
         }
         if (prevProps.status !== this.props.status && this.props.status === actionConstants.CREATE_SERVICE_SUCCESS) {
             alert("Service created successfully");
-            window.location.href = "/home";
+            window.location.href = (process.env.REACT_APP_BASE_NAME || "") + "/#/home";
         }
     }
 

@@ -27,7 +27,7 @@ function* workerGetPrimaryCategory(params) {
             yield put(serviceActions.getPrimaryCategorySuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href = (process.env.REACT_APP_BASE_NAME || "") + "/";
         }
         else {
             yield put(serviceActions.getPrimaryCategoryFailure(response.message));
@@ -70,7 +70,7 @@ function* workerGetSubcategory(params) {
             yield put(serviceActions.getSubcategorySuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href= (process.env.REACT_APP_BASE_NAME || "") + "/";
         }
         else {
             yield put(serviceActions.getSubcategoryFailure(response.message));
@@ -113,7 +113,7 @@ function* workerGetInsurance(params) {
             yield put(serviceActions.getInsuranceSuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href= (process.env.REACT_APP_BASE_NAME || "") + "/";
         }
         else {
             yield put(serviceActions.getInsuranceFailure(response.message));
@@ -156,7 +156,7 @@ function* workerCreateService(params) {
             yield put(serviceActions.createServiceSuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href= (process.env.REACT_APP_BASE_NAME || "") + "/";
         }
         else {
             yield put(serviceActions.createServiceFailure(response.message));
@@ -200,7 +200,7 @@ function* workerGetService(params) {
             yield put(serviceActions.getServiceSuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href= (process.env.REACT_APP_BASE_NAME || "") + "/";
         }
         else {
             yield put(serviceActions.getServiceFailure(response.message));
@@ -244,7 +244,7 @@ function* workerEditService(params) {
             yield put(serviceActions.editServiceSuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href= (process.env.REACT_APP_BASE_NAME || "") + "/";
         }
         else {
             console.log("error", params.payload)

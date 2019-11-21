@@ -20,7 +20,7 @@ class HomeClass extends React.Component {
 
     componentDidUpdate(prevProps){
         if (this.props.loggedin != prevProps.loggedin && this.props.loggedin == true) {
-            window.location.href = '/home';
+            window.location.href = (process.env.REACT_APP_BASE_NAME || "") + '/#/home';
         }
 
     }

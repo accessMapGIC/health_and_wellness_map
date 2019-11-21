@@ -98,7 +98,7 @@ async function signOut() {
             }
         });
         if (resp.status == 200) {
-            window.location.href = '/';
+            window.location.href = (process.env.REACT_APP_BASE_NAME || "") + '/';
             document.cookie =  `token=; expires=${new Date()}; path=/;`;
         }
         return resp;

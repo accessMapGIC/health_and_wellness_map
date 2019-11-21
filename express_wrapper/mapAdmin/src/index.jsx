@@ -52,7 +52,7 @@ class IndexClass extends React.Component {
     }
 
     backHome = () => {
-         window.location.href= "/home";
+         window.location.href= (process.env.REACT_APP_BASE_NAME || "") + "/#/home";
     }
 
     getCookie() {
