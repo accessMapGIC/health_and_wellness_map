@@ -2,6 +2,10 @@
   "name": "main-app",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "10.16.0",
+    "npm": "6.9.0"
+  },
   "homepage": "http://gic.geog.mcgill.ca/healthmap",
   "dependencies": {
     "@material-ui/core": "^3.9.2",
