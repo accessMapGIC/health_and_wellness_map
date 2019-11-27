@@ -10,19 +10,37 @@ import { Link } from 'react-router-dom';
 import ListService from './listService.jsx';
 // Style
 import './home.css';
-import { Button, Input } from 'antd';
+import { Button, Input, Badge, Icon  } from 'antd';
 
 class HomeClass extends React.Component {
     constructor(props) {
         super(props);
-       
+       this.state = {
+            SuggestionService: 0
+       }
     }
+
+    countSuggestionService = (listing) =>{
+        let suggestionServiceNumber = 0
+        if (listing.length > 0) {
+            listing.map((service, i) => {
+                if ( !listing[i].verified_by && listing[i].name) {
+                    suggestionServiceNumber++
+                }
+            })
+        }
+        return suggestionServiceNumber
+                
+        }
 
     componentDidUpdate(prevProps){
         if (this.props.loggedin != prevProps.loggedin && this.props.loggedin == true) {
             window.location.href = (process.env.REACT_APP_BASE_NAME || "") + '/#/home';
         }
+    }
 
+    componentDidMount(){
+        this.setState({SuggestionService : this.countSuggestionService(this.props.listing)})
     }
     render() {
             return ( 
@@ -41,6 +59,10 @@ class HomeClass extends React.Component {
                         <Link to="/insurance">
                             <Button>Manage Insurances</Button>
                         </Link>
+                        <Badge count={this.countSuggestionService(this.props.listing)}>
+                            <a href="/#/ListServiceSuggestion"> <Icon type="notification" style={{fontSize: '24px', marginLeft:'10px'}}/> </a>
+                        </Badge>
+                      
                     </div>
                     <ListService />
                 </div>
@@ -50,8 +72,9 @@ class HomeClass extends React.Component {
 }
 const mapStateToProps = (state) => {
     const { loggedInUser } = state.auth
+    const { listing} = state.serviceReducer;
     return {
-        loggedInUser
+        loggedInUser, listing
     }
 }
 const Home = withRouter(connect(mapStateToProps)(HomeClass));

@@ -124,3 +124,48 @@ function* workerSignOut() {
     }
 }
 
+//Get authentication info
+export function* watchGetAuth() {
+    yield takeLatest(actionConstants.GET_AUTH_REQUEST, workerGetAuth);
+}
+
+async function getAuth() {
+    try {
+        let resp = await fetch(`${base_url}/auth`, {
+            credentials: "same-origin",
+            method: 'post',
+            body: JSON.stringify({type: "getUserInfo"}),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Pragma': 'no-cache',
+                'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
+            },
+        });
+        let respBody = await resp.json();
+        return respBody.email;
+    }
+    catch (err) {
+        return err;
+    }
+}
+
+// Make the api call when watcher saga sees the action
+function* workerGetAuth() {
+    try {
+        //Get auth status and username
+        const response = yield call(getAuth);
+        if(response){
+            yield put(authActions.getAuthSuccess(response));
+        }
+        else {
+            yield put(authActions.getAuthFailure("Error in Authentication"));
+        }
+       
+    } 
+    catch (error) {
+        // dispatch a failure action to the store with the error
+        yield put(authActions.getAuthFailure(error));
+    }
+}

@@ -6,7 +6,6 @@ module.exports = {
 
         req.db.any(baseQuery)
         .then(data => {
-            //console.log('DATA:', data); // prints data, use data[i] to print specific entry attributes
             res.status(200).json(data);
         })
         .catch(error => {
@@ -185,7 +184,6 @@ module.exports = {
                     let hoursValues = [service_id, req.body.hours];
                     req.db.any(addBusinessHours, hoursValues)
                     .then(hoursData => {
-                        //console.log('HOURS DATA:', hoursData)
                         res.status(200).json("Created service");
                     })
                     .catch(error => {
@@ -218,7 +216,6 @@ module.exports = {
         `;
         req.db.any(baseQuery)
         .then(data => {
-            // console.log('DATA:', data);
             res.status(200).json(data);
         })
         .catch(error => {
@@ -327,7 +324,7 @@ module.exports = {
             }
 
             if (req.body.values.services_fr) {
-                updateServiceSet += `, services = $${counter}`;
+                updateServiceSet += `, services_fr = $${counter}`;
                 values.push(`${req.body.values.services_fr}`);
                 counter++;
             }
@@ -370,11 +367,9 @@ module.exports = {
                     let hoursValues = [req.params.serviceId, req.body.values.hours];
                     req.db.any(updateBusinessHours)
                     .then(hoursData => {
-                        //console.log(hoursData)
                         res.status(200).json(hoursData);
                     })
                     .catch(error => {
-                        console.log('ERROR HOURS:', error); // print the error;
                         res.status(500).json(error);
                     })
                 }
@@ -390,6 +385,35 @@ module.exports = {
         .catch(error => {
             console.log('ERROR SERVICE ID:', error); // print the error;
             res.status(500).json(error);
+        })
+    },
+
+    deleteService: function(req, res, next) {
+        let baseQuery = `DELETE FROM health.business_hours WHERE service_id = ${req.params.serviceId} RETURNING *;`;
+
+        req.db.any(baseQuery)
+        .then(data => {
+
+            if (data.length === 0) {
+                return res.status(404).json("Category not found");
+            }
+            
+            req.db.any(`DELETE FROM health.services_master WHERE service_id = ${req.params.serviceId} RETURNING *;`)
+            .then(data => {
+                if (data.length === 0) {
+                    return res.status(404).json("Category not found");
+                }
+                return res.status(200).json(data[0]);
+            })
+            .catch(error => {
+                console.log('ERROR:', error); // print the error;
+                res.status(500).json('there has been an error, please contact Student Services to get this fixed.');
+            })
+
+        })
+        .catch(error => {
+            console.log('ERROR:', error); // print the error;
+            res.status(500).json('there has been an error, please contact Student Services to get this fixed.');
         })
     }
 }

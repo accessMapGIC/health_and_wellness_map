@@ -29,6 +29,18 @@ export const QUERY_DATABASE = 'QUERY_DATABASE'; //initial Ryan query
 export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
 export const SET_TAB = 'SET_TAB';
 export const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE';
+export const CREATE_SERVICE_REQUEST = "CREATE_SERVICE_REQUEST";
+export const CREATE_SERVICE_SUCCESS =  "CREATE_SERVICE_SUCCESS";
+export const CREATE_SERVICE_FAILURE = "CREATE_SERVICE_FAILURE";
+export const GET_INSURANCE_REQUEST = "GET_INSURANCE_REQUEST";
+export const GET_INSURANCE_SUCCESS = "GET_INSURANCE_SUCCESS";
+export const GET_INSURANCE_FAILURE = "GET_INSURANCE_FAILURE";
+export const GET_PRIMARY_CATEGORY_REQUEST = "GET_PRIMARY_CATEGORY_REQUEST";
+export const GET_PRIMARY_CATEGORY_SUCCESS = "GET_PRIMARY_CATEGORY_SUCCESS";
+export const GET_PRIMARY_CATEGORY_FAILURE = "GET_PRIMARY_CATEGORY_FAILURE";
+export const GET_SUBCATEGORY_REQUEST = "GET_SUBCATEGORY_REQUEST";
+export const GET_SUBCATEGORY_SUCCESS = "GET_SUBCATEGORY_SUCCESS";
+export const GET_SUBCATEGORY_FAILURE = "GET_SUBCATEGORY_FAILURE";
 // export const START_QUERY_DATABASE = 'START_QUERY_DATABASE'; //Need Action like this for async action
 
 export function setTabIndex(index) {
@@ -202,5 +214,108 @@ export function setLanguage(language) {
   return {
     type: CHANGE_LANGUAGE,
     language
+  };
+}
+
+export function getInsuranceRequest() {
+  // redux-thunk middleware
+  return async dispatch => {
+    await fetch(`${base_url}/insurance_client`, {
+      method: 'GET',
+      headers: {
+          "Content-Type": "application/json",
+      },
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(data => {
+      dispatch({
+        type: GET_INSURANCE_REQUEST,
+        payload: data
+      });
+       
+     
+    })
+    .catch(err => console.log(err));
+  };
+}
+
+export function createServiceRequest(payload) {
+  // redux-thunk middleware
+  return async dispatch => {
+    await fetch(`${base_url}/service_suggestion`, {
+      credentials: "same-origin",
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Pragma': 'no-cache',
+        'Cache-Control': 'no-cache',
+      },
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(data => {
+      dispatch({
+        type: CREATE_SERVICE_REQUEST,
+        payload: data
+      });
+       
+     
+    })
+    .catch(err => console.log(err));
+  };
+}
+
+// Get primary category
+export function getPrimaryCategoryRequest() {
+  // redux-thunk middleware
+  return async dispatch => {
+    await fetch(`${base_url}/primary_category_client`, {
+      method: 'GET',
+      headers: {
+          "Content-Type": "application/json",
+      },
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(data => {
+      dispatch({
+        type: GET_PRIMARY_CATEGORY_REQUEST,
+        payload: data
+      });
+       
+     
+    })
+    .catch(err => console.log(err));
+  };
+}
+
+// Get subcategory
+export function getSubcategoryRequest() {
+  // redux-thunk middleware
+  return async dispatch => {
+    await fetch(`${base_url}/subcategory_client`, {
+      method: 'GET',
+      headers: {
+          "Content-Type": "application/json",
+      },
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(data => {
+      dispatch({
+        type: GET_SUBCATEGORY_REQUEST,
+        payload: data
+      });
+       
+     
+    })
+    .catch(err => console.log(err));
   };
 }

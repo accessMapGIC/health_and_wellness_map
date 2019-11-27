@@ -60,7 +60,12 @@ class EditServiceClass extends React.Component {
         }
         if (prevProps.status !== this.props.status && this.props.status === actionConstants.EDIT_SERVICE_SUCCESS) {
             alert("Service modified successfully");
-            window.location.href = (process.env.REACT_APP_BASE_NAME || "") + "/#/home";
+            if (window.location.href.indexOf("ServiceSuggestion") > 0) {
+                window.location.href = (process.env.REACT_APP_BASE_NAME || "") + "/#/ListServiceSuggestion";
+            } else {
+                window.location.href = (process.env.REACT_APP_BASE_NAME || "") + "/#/home";
+            }
+           
         }
     }
 

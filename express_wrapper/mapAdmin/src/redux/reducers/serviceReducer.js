@@ -67,6 +67,7 @@ export default function test(state=serviceInitialState, action) {
                 status: actionConstants.CREATE_SERVICE_REQUEST
             }
         case actionConstants.CREATE_SERVICE_SUCCESS:
+            
             return {
                 ...state,
                 status: actionConstants.CREATE_SERVICE_SUCCESS,
@@ -79,6 +80,7 @@ export default function test(state=serviceInitialState, action) {
                 error: action.payload
             }
         
+
         // get service
         case actionConstants.GET_SERVICE_REQUEST:
             return {
@@ -116,6 +118,27 @@ export default function test(state=serviceInitialState, action) {
                 status: actionConstants.EDIT_SERVICE_FAILURE,
                 error: action.payload
             }
+
+        //Delete service
+        case actionConstants.DELETE_SERVICE_REQUEST:
+            return {
+                ...state,
+                status: actionConstants.DELETE_SERVICE_REQUEST,
+        }
+        case actionConstants.DELETE_SERVICE_SUCCESS:
+            let newService = state.listing.filter(item => item.service_id !== action.payload.service_id)
+            return {
+                ...state,
+                status: actionConstants.DELETE_SERVICE_SUCCESS,
+                listing: newService
+            }
+        case actionConstants.DELETE_SERVICE_FAILURE:
+            return {
+                ...state,
+                status: actionConstants.DELETE_SERVICE_FAILURE,
+                error: action.payload
+            }
+
         default:
             return state;
     }

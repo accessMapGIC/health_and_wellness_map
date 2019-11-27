@@ -51,36 +51,43 @@ const Insurance = require('./insurance');
 
 
 // Search query routes
-app.post('/query', Search.getServices);
-app.post('/category_query', Search.getCategories);
-app.post('/keywords_query', Search.getKeywords);
+app.post('/query',  Search.getServices);
+app.post('/category_query',  Search.getCategories);
+app.post('/keywords_query',  Search.getKeywords);
+app.get('/primary_category_client', Category.getPrimaryCategories);
+app.get('/subcategory_client',  Subcategory.getSubcategories);
+app.get('/insurance_client',  Service.getInsurance);
+app.post('/service_suggestion', Service.createService);
 
 // Create a new service
-app.post('/service', Auth.authMiddleware, Service.createService);
+app.post('/service', Auth.auth, Service.createService);
 // Get service
-app.get('/services', Auth.authMiddleware, Service.getService);
+app.get('/services', Auth.auth, Service.getService);
 // Edit service
-app.put('/service/:serviceId', Auth.authMiddleware, Service.editService);
+app.put('/service/:serviceId', Auth.auth, Service.editService);
+app.delete('/service/:serviceId', Auth.auth,  Service.deleteService);
+
 
 // Categories
-app.post('/primary_category', Auth.authMiddleware, Category.createPrimaryCategory);
+app.post('/primary_category', Auth.auth, Category.createPrimaryCategory);
 app.get('/primary_category', Category.getPrimaryCategories);
-app.get('/primary_category/:categoryId', Auth.authMiddleware, Category.getPrimaryCategory);
-app.put('/primary_category/:categoryId', Auth.authMiddleware, Category.updatePrimaryCategory);
-app.delete('/primary_category/:categoryId', Auth.authMiddleware, Category.deletePrimaryCategory);
+app.get('/primary_category/:categoryId', Auth.auth, Category.getPrimaryCategory);
+app.put('/primary_category/:categoryId', Auth.auth, Category.updatePrimaryCategory);
+app.delete('/primary_category/:categoryId', Auth.auth, Category.deletePrimaryCategory);
 
-app.post('/subcategory', Auth.authMiddleware, Subcategory.createSubcategory);
+app.post('/subcategory', Auth.auth, Subcategory.createSubcategory);
 app.get('/subcategory', Subcategory.getSubcategories);
-app.get('/subcategory/:subcategoryId', Auth.authMiddleware, Subcategory.getSubcategory);
-app.put('/subcategory/:subcategoryId', Auth.authMiddleware, Subcategory.updateSubcategory);
-app.delete('/subcategory/:subcategoryId', Auth.authMiddleware, Subcategory.deleteSubcategory);
+app.get('/subcategory/:subcategoryId', Auth.auth, Subcategory.getSubcategory);
+app.put('/subcategory/:subcategoryId', Auth.auth, Subcategory.updateSubcategory);
+app.delete('/subcategory/:subcategoryId', Auth.auth, Subcategory.deleteSubcategory);
 
-app.post('/insurance', Auth.authMiddleware, Insurance.createInsurance);
+app.post('/insurance', Auth.auth, Insurance.createInsurance);
 app.get('/insurance', Insurance.getInsurances);
 app.get('/insurance/:insuranceId', Insurance.getInsurance);
-app.put('/insurance/:insuranceId', Auth.authMiddleware, Insurance.updateInsurance);
-app.delete('/insurance/:insuranceId', Auth.authMiddleware, Insurance.deleteInsurance);
+app.put('/insurance/:insuranceId', Auth.auth, Insurance.updateInsurance);
+app.delete('/insurance/:insuranceId', Auth.auth, Insurance.deleteInsurance);
 
 //Login user
 app.post('/signin', Auth.signin);
 app.get('/logout', Auth.logOut);
+app.post('/auth', Auth.auth);

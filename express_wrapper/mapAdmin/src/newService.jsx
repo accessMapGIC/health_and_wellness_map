@@ -166,7 +166,6 @@ class NewServiceClass extends React.Component {
             values.languages_spoken = lang;
             values.services = services;
             values.services_fr = servicesFr;
-
             this.props.dispatch(serviceActions.createServiceRequest(values));
           }
         });

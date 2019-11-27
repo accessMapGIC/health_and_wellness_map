@@ -4,6 +4,7 @@ import MapboxComponent from '../Mapbox/Mapbox';
 import SidebarsComponent from '../Sidebars/Sidebars';
 import ModalComponent from '../App/Modal';
 
+
 class App extends Component {
   render() {
     return (

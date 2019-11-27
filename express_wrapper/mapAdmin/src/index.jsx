@@ -27,6 +27,8 @@ import EditService from "./editService.jsx";
 import Category from "./category.jsx";
 import Subcategory from "./subcategory.jsx";
 import Insurance from "./insurance.jsx";
+import ListServiceSuggestion from './listServiceSuggestion';
+import { stat } from 'fs';
 
 const { Header, Content, Sider } = Layout;
 const history = createBrowserHistory({basename: process.env.REACT_APP_BASE_NAME || ""});
@@ -69,7 +71,7 @@ class IndexClass extends React.Component {
     }
     
     showButton(){
-        if (this.getCookie() && this.getCookie() != "null"){
+        if (this.props.loggedin){
             return ( 
                 <div style={{ display: "inline-block", float:"right"}}>
                     <Button
@@ -92,7 +94,12 @@ class IndexClass extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.props.dispatch(authActions.getAuthRequest()); 
+    }
+
     render() {
+        
         return(
             <Layout style={{minHeight: "100vh"}}>
                 <Header
@@ -116,6 +123,9 @@ class IndexClass extends React.Component {
                             <Route exact path="/newService" component={NewService} />
                         </Switch>
                         <Switch>
+                            <Route exact path="/ListServiceSuggestion" component={ListServiceSuggestion} />
+                        </Switch>
+                        <Switch>
                             <Route exact path="/category" component={Category} />
                         </Switch>
                         <Switch>
@@ -136,7 +146,8 @@ class IndexClass extends React.Component {
     }
 }
 const mapStateToProps = (state) => {
-    return {}
+    const loggedin = state.auth.loggedin
+    return {loggedin}
 }
 const Index = connect(mapStateToProps)(IndexClass);
 export default Index;

@@ -3,7 +3,8 @@ import actionConstants from "../actionConstants";
 export const serviceActions = {
     createServiceRequest, createServiceSuccess, createServiceFailure,
     getServiceRequest, getServiceSuccess, getServiceFailure,
-    editServiceRequest, editServiceSuccess, editServiceFailure
+    editServiceRequest, editServiceSuccess, editServiceFailure,
+    deleteServiceRequest, deleteServiceSuccess, deleteServiceFailure
 };
 
 // Create service
@@ -68,6 +69,27 @@ function editServiceSuccess(payload) {
 function editServiceFailure(payload) {
     return {
         type: actionConstants.EDIT_SERVICE_FAILURE,
+        payload
+    }
+}
+
+function deleteServiceRequest(payload) {
+    return {
+        type: actionConstants.DELETE_SERVICE_REQUEST,
+        payload
+    }
+}
+
+function deleteServiceSuccess(payload) {
+    return {
+        type: actionConstants.DELETE_SERVICE_SUCCESS,
+        payload
+    }
+}
+
+function deleteServiceFailure(payload) {
+    return {
+        type: actionConstants.DELETE_SERVICE_FAILURE,
         payload
     }
 }

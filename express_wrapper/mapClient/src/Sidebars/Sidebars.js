@@ -14,6 +14,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Logo from '../images/SWH_white_horizontal.png';
 import RossyLogo from '../images/rossy_foundation_colour.png'
+import NewService from '../Service/newService'
 
 // localization
 import LocalizedStrings from 'react-localization';
@@ -153,6 +154,7 @@ class SidebarsComponent extends React.Component { //this is the component for bo
         return (
           <div className='menu-sidebars'>
             <div className='menu-left'>
+            
               <Menu
               isOpen={this.props.lmo}
               onStateChange={this.props.handleLeft}
@@ -198,6 +200,7 @@ class SidebarsComponent extends React.Component { //this is the component for bo
                   <Button variant="contained" color={"primary"} className={classes.button} href="" prefetch="true" onClick={(state) => this.submitButton(state)}>
                     {strings.submit}
                   </Button>
+                  <NewService />
                   {/* <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> */}
                 </Container>
 
