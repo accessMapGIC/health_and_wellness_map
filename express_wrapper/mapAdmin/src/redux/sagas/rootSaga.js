@@ -1,5 +1,5 @@
 import { all } from "redux-saga/effects";
-import { watchCreateService, watchGetService, watchEditService } from "../sagas/serviceSagas";
+import { watchCreateService, watchGetService, watchEditService, watchDeleteService } from "../sagas/serviceSagas";
 import { watchSignIn, watchGetAuth, watchSignOut } from "./authSagas"
 import { watchCreatePrimaryCategory, watchGetPrimaryCategory, watchUpdatePrimaryCategory, watchDeletePrimaryCategory, watchCreateSubcategory, watchGetSubcategory, watchUpdateSubcategory, watchDeleteSubcategory } from './categorySagas';
 import { watchCreateInsurance, watchGetInsurance, watchUpdateInsurance, watchDeleteInsurance } from "./insuranceSagas";
@@ -9,8 +9,10 @@ export default function* rootSaga() {
         watchCreateService(),
         watchGetService(),
         watchEditService(),
+        watchDeleteService(),
         watchSignIn(),
         watchSignOut(),
+        watchGetAuth(),
 
         watchCreatePrimaryCategory(),
         watchGetPrimaryCategory(),

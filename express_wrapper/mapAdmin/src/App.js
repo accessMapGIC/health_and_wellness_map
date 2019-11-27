@@ -31,7 +31,7 @@ const store = createStore(
 sagaMiddleware.run(rootSaga);
 
 // (na) console log the state
-const unsubscribe = store.subscribe(()=>console.log(store.getState()));
+// const unsubscribe = store.subscribe(()=>console.log(store.getState()));
 
 function App() {
   return (

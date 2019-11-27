@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
+import { serviceActions } from './redux/actions/serviceActions';
+import actionConstants from './redux/actionConstants';
 
 //Global
 import moment from 'moment';
@@ -14,13 +16,8 @@ class CardTemplateComponent extends React.Component {
       super(props)
     }
 
-    componentDidMount() {
-       
-    }
-    
     render() {
-        const { listing, primary_category, subcategory, insurance } = this.props;
-        
+        const { listing, primary_category, subcategory, insurance, pageBelonging } = this.props;
         let insuranceName =  insurance.find(
             i => i.insur_id === listing.insur_id
         );
@@ -36,14 +33,46 @@ class CardTemplateComponent extends React.Component {
                     <Collapse
                         bordered={false}
                     >
-                        <Panel header={listing.name} style={{border:0}}>
-                            <Row>
-                                <Link to={`/editService/${listing.service_id}`}>
-                                    <Button>
-                                        Modify Service
-                                    </Button>
-                                </Link>
-                            </Row>
+                        <Panel header={listing.name} style={{border:0}}>                         
+                            {    pageBelonging ?
+                                        <Row>
+                                            <Button 
+                                                onClick = {() => {
+                                                    listing.verified_by = this.props.loggedInUser
+                                                    this.props.dispatch(serviceActions.editServiceRequest({values:{verified_by: this.props.loggedInUser}, serviceId:listing.service_id}));
+                                                }}
+                                            >
+                                                Approve Service
+                                            </Button>
+                                        
+                                            <Link to={`/editService/${listing.service_id}?list=ServiceSuggestion`}>
+                                                <Button>
+                                                    Modify Service
+                                                </Button>
+                                            </Link>
+                        
+                                            <Button 
+                                                onClick = {() => {
+                                                        this.props.dispatch(serviceActions.deleteServiceRequest({serviceId:listing.service_id}));
+
+                                                    }}
+                                            >
+                                                Delete Service
+                                            </Button>
+                                        </Row>
+                                   
+                                :
+                                   
+                                        <Row>
+                                            <Link to={`/editService/${listing.service_id}`}>
+                                                <Button>
+                                                    Modify Service
+                                                </Button>
+                                            </Link>
+                                        </Row>
+                                    
+                            
+                            }
                             <Row className="last_modified">
                                 Last Modified Date: {moment(listing.last_verified, "YYYY-MM-DDTHH:mm:ss.sssZ").format('LLLL')}
                             </Row>
@@ -164,8 +193,9 @@ class CardTemplateComponent extends React.Component {
 }
 const mapStateToProps = state => {
     const { primary_category, subcategory, insurance } = state.serviceReducer;
+    const  {loggedInUser} = state.auth;
     return {
-        primary_category, subcategory, insurance
+        primary_category, subcategory, insurance, loggedInUser
     }
 };
 

@@ -63,11 +63,11 @@ module.exports = {
     },                                    
 
 
-    authMiddleware: function(req, res, next) {  
+    auth: function(req, res, next) {  
         
         let token = req.headers.authorization;
 
-        const findUser = function (token){
+        const findUser = function ( ){
             if(!token || token === 'null'){
                 throw "User not found"
             }
@@ -84,13 +84,18 @@ module.exports = {
         Promise.resolve(token)
         .then(token => findUser(token))
         .then(foundUser => {
-            next()
+            if(req.body.type ===  "getUserInfo"){
+                res.status(200).json(foundUser)
+            } else {
+                next()
+            }
         })
         .catch((error) =>{
             res.status(401).json("Not auth")
         })
 
     },
+
 
      logOut: function (req, res, next) {
         let token = req.headers.authorization;

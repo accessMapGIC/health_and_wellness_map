@@ -7,7 +7,8 @@ import actionConstants from './redux/actionConstants';
 
 //Style
 import './login.css'
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button } from 'antd';
+import { stat } from 'fs';
 
 class LogInClass extends React.Component{
     constructor(props) {

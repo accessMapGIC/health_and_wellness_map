@@ -240,14 +240,12 @@ function* workerEditService(params) {
     try {
         const response = yield call(editService, params.payload);
         if (response.status === 200) {
-            console.log(params.payload)
             yield put(serviceActions.editServiceSuccess(response.message));
         }
         else if (response.status === 401) {
             window.location.href= (process.env.REACT_APP_BASE_NAME || "") + "/";
         }
         else {
-            console.log("error", params.payload)
             yield put(serviceActions.editServiceFailure(response.message));
         }
     }
@@ -260,6 +258,50 @@ async function editService(payload) {
         let resp = await fetch(`${base_url}/service/${payload.serviceId}`, {
             credentials: "same-origin",
             method: "put",
+            body: JSON.stringify(payload),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Pragma': 'no-cache',
+                'Cache-Control': 'no-cache',
+                'Authorization': `${getCookie()}`
+            }
+        });
+        let status = resp.status;
+        let respBody = await resp.json()
+        return {message: respBody, status: status};
+    }
+    catch(err) {
+        return err;
+    }
+}
+
+// Delete service
+export function* watchDeleteService() {
+    yield takeLatest(actionConstants.DELETE_SERVICE_REQUEST, workerDeleteService);
+}
+function* workerDeleteService(params) {
+    try {
+        const response = yield call(deleteService, params.payload);
+        if (response.status === 200) {
+            yield put(serviceActions.deleteServiceSuccess(response.message));
+        }
+        else if (response.status === 401) {
+            window.location.href="/"
+        }
+        else {
+            yield put(serviceActions.deleteServiceFailure(response.message));
+        }
+    }
+    catch(err) {
+        yield put(serviceActions.deleteServiceFailure(err));
+    }
+}
+async function deleteService(payload) {
+    try {
+        let resp = await fetch(`${base_url}/service/${payload.serviceId}`, {
+            credentials: "same-origin",
+            method: "delete",
             body: JSON.stringify(payload),
             headers: {
                 'Accept': 'application/json',

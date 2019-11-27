@@ -33,17 +33,42 @@ export default function auth(state = authInitialState, action) {
       return {
           ...state,
           loggedin: true,
+          authError:'',
           authMessage: actionConstants.SIGN_IN_SUCCESS,
           loadingSignIn: false,
-          loggedInUser: action.payload,
+          loggedInUser: action.payload.email,
       }
     case actionConstants.SIGN_IN_FAILURE:
       return {
           ...state,
           authError: action.error,
           authMessage: actionConstants.SIGN_IN_FAILURE,
-          loadingSignIn: false
+          loadingSignIn: false,
+          loggedin: false
+
       }
+
+      //Get authentication state
+    case actionConstants.GET_AUTH_REQUEST:
+      return {
+        ...state,
+        authMessage: actionConstants.GET_AUTH_REQUEST
+    }
+    case actionConstants.GET_AUTH_SUCCESS:
+      return {
+        ...state,
+        authError:'',
+        authMessage: actionConstants.GET_AUTH_SUCCESS,
+        loggedInUser: action.payload,
+        loggedin: true
+    }
+    case actionConstants.GET_AUTH_FAILURE:
+      return {
+        ...state,
+        authMessage: actionConstants.GET_AUTH_FAILURE,
+        authError: action.error
+    }
+
     default:
       return state;
   }
