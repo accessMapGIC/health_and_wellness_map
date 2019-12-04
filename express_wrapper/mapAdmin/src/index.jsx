@@ -28,6 +28,7 @@ import Category from "./category.jsx";
 import Subcategory from "./subcategory.jsx";
 import Insurance from "./insurance.jsx";
 import ListServiceSuggestion from './listServiceSuggestion';
+import ListReportedError from './listReportedError';
 import { stat } from 'fs';
 
 const { Header, Content, Sider } = Layout;
@@ -124,6 +125,9 @@ class IndexClass extends React.Component {
                         </Switch>
                         <Switch>
                             <Route exact path="/ListServiceSuggestion" component={ListServiceSuggestion} />
+                        </Switch>
+                        <Switch>
+                            <Route exact path="/ListReportedError" component={ListReportedError} />
                         </Switch>
                         <Switch>
                             <Route exact path="/category" component={Category} />

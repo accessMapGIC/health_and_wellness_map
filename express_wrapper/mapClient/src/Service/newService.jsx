@@ -4,7 +4,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 //This one import the constant and actions
 import { 
-        CREATE_SERVICE_SUCCESS, CREATE_SERVICE_FAILURE, 
         getInsuranceRequest, createServiceRequest,
         getPrimaryCategoryRequest, getSubcategoryRequest
     } from '../store/actions';
@@ -30,6 +29,15 @@ import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
 
 import './newService.scss';
+
+// localization
+import LocalizedStrings from 'react-localization';
+import english from '../Localization/En';
+import french from '../Localization/Fr';
+let strings = new LocalizedStrings({
+  en: english.serviceSuggestionStrings,
+  fr: french.serviceSuggestionStrings
+});
 
 class NewServiceClass extends React.Component {
     constructor(props) {
@@ -65,19 +73,21 @@ class NewServiceClass extends React.Component {
     }
 
     componentDidMount() {
+        strings.setLanguage(this.props.language);
         this.props.dispatch(getPrimaryCategoryRequest());
         this.props.dispatch(getSubcategoryRequest());
         this.props.dispatch(getInsuranceRequest());
     }
 
     componentDidUpdate(prevProps) {
-        // if (prevProps.status !== this.props.status && this.props.status === CREATE_SERVICE_FAILURE) {
-        //     alert(this.props.error.detail ? this.props.error.detail : this.props.error);
-        // }
-        if (prevProps.status !== this.props.status && this.props.status === CREATE_SERVICE_SUCCESS) {
-            alert("Service created successfully");
+        if (this.props.language !== prevProps.language) {
+            strings.setLanguage(this.props.language);
+            this.forceUpdate();
+          }
+        if (prevProps.suggestServiceStatus !== this.props.suggestServiceStatus && this.props.suggestServiceStatus) {
+            alert(strings.suggestSuccessful);
             window.location.href = "/home";
-        }
+        } 
     }
 
     handleClickOpen = () => {
@@ -149,16 +159,15 @@ class NewServiceClass extends React.Component {
   handleSubmit = e => {
         e.preventDefault();
         if(!this.state.serviceName.replace(/ /g,'')){
-            alert("Please fill out the service name")
+            alert(strings.requireName)
             return;
         }
         if(!this.state.address.replace(/ /g,'')){
-            alert("Please fill out the address")
+            alert(strings.requireAddress)
             return;
         }
 
         let formInfo = {};
-
     
         // Build business hours string
         let hours = "{";
@@ -172,7 +181,7 @@ class NewServiceClass extends React.Component {
             hours += this.getHours(this.state.saturdayBusinessHour, true);
         }
         else {
-            return alert("Business hours must follow the format HH:mm-HH:mm");
+            return alert(strings.hourFormat);
         }
         hours += "}";
 
@@ -196,16 +205,12 @@ class NewServiceClass extends React.Component {
         formInfo.notes_fr = this.state.note_fr;
         formInfo.hours = hours;
         formInfo.verified_by = null;
-        console.log("formInfo", formInfo)
        
         this.props.dispatch(createServiceRequest(formInfo));
-        alert("Service created successfully");
-        window.location.href="/"
 };
 
 
   render(){
-      console.log("props", this.props)
     return (
         <div>
             <Button 
@@ -223,7 +228,7 @@ class NewServiceClass extends React.Component {
                     }}
                 onClick= {this.handleClickOpen}
             >
-                Have a suggestion?
+                 {strings.haveSuggestion}
             </Button>
        
             <Dialog fullScreen open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
@@ -234,13 +239,13 @@ class NewServiceClass extends React.Component {
                         </IconButton>
                         
                         <Typography variant="h5" >
-                            Suggest a New Service
+                            {strings.haveSuggestion}
                         </Typography>
                     </Toolbar>
                 </AppBar>
                         
                 <DialogTitle >
-                    Edit your suggestion
+                    {strings.editSuggestion}
                 </DialogTitle>
 
                 <DialogContent>
@@ -248,7 +253,7 @@ class NewServiceClass extends React.Component {
                         required
                         margin="dense"
                         id="Service Name"
-                        label="Service Name"
+                        label= {strings.serviceName}
                         placeholder="eg. CLSC du parc"
                         type="text"
                         fullWidth
@@ -259,7 +264,7 @@ class NewServiceClass extends React.Component {
                     <br />
 
                     <FormControl className="selectControl">
-                        <InputLabel >Primary Category:</InputLabel>
+                        <InputLabel > {strings.primCategory} </InputLabel>
                         <Select
                             id="primaryCategory"
                             value={this.state.primaryCategory}
@@ -283,7 +288,7 @@ class NewServiceClass extends React.Component {
                     <Divider />
 
                     <FormControl className="selectControl">
-                        <InputLabel>Subcategory</InputLabel>
+                        <InputLabel> {strings.subcat} </InputLabel>
                         <Select
                             id="Subcategory"
                             value={this.state.Subcategory}
@@ -306,7 +311,7 @@ class NewServiceClass extends React.Component {
                     <br />
 
                     <FormControl className="selectControl">
-                        <InputLabel >Insurance</InputLabel>
+                        <InputLabel > {strings.insurance} </InputLabel>
                         <Select
                             id="Insurance"
                             value={this.state.Insurance}
@@ -330,7 +335,7 @@ class NewServiceClass extends React.Component {
                     <TextField
                         margin="dense"
                         id="lang_spoken"
-                        label="Langs spoken"
+                        label= {strings.lang}
                         type="text"
                         onKeyPress= {(e) => {
                             if (e.key === 'Enter') {
@@ -363,7 +368,7 @@ class NewServiceClass extends React.Component {
                         required
                         margin="dense"
                         id="Address"
-                        label="Address"
+                        label= {strings.address}
                         placeholder="e.g. 123 Avenue du Parc"
                         fullWidth
                         onChange={event => {
@@ -375,7 +380,7 @@ class NewServiceClass extends React.Component {
                     <TextField
                         margin="dense"
                         id="Latitude"
-                        label="Latitude"
+                        label= {strings.lat}
                         placeholder="e.g. 45.23424"
                         fullWidth
                         onChange={event => {
@@ -387,7 +392,7 @@ class NewServiceClass extends React.Component {
                     <TextField
                         margin="dense"
                         id="Longitude"
-                        label="Longitude"
+                        label= {strings.lon}
                         placeholder="e.g. -75.23424"
                         fullWidth
                         onChange={event => {
@@ -399,7 +404,7 @@ class NewServiceClass extends React.Component {
                     <TextField
                         margin="dense"
                         id="Transit"
-                        label="Transit"
+                        label= {strings.transit}
                         placeholder="e.g. Yes, near Place des Arts"
                         fullWidth
                         onChange={event => {
@@ -411,7 +416,7 @@ class NewServiceClass extends React.Component {
                     <TextField
                         margin="dense"
                         id="Website"
-                        label="Website"
+                        label= {strings.website}
                         placeholder="e.g. www.example.com"
                         fullWidth
                         onChange={event => {
@@ -423,7 +428,7 @@ class NewServiceClass extends React.Component {
                     <TextField
                         margin="dense"
                         id="Phone number"
-                        label="Phone number"
+                        label= {strings.phoneNumber}
                         placeholder="e.g. 514-555-4444"
                         fullWidth
                         onChange={event => {
@@ -435,7 +440,7 @@ class NewServiceClass extends React.Component {
                     <TextField
                         margin="dense"
                         id="Emergency Number"
-                        label="Emergency Number"
+                        label= {strings.emergencyNumber}
                         placeholder="e.g. 514-555-4444"
                         fullWidth
                         onChange={event => {
@@ -448,7 +453,7 @@ class NewServiceClass extends React.Component {
                         
                         margin="dense"
                         id="Drop In"
-                        label="Drop In"
+                        label= {strings.dropIn}
                         placeholder="e.g. Yes"
                         fullWidth
                         onChange={event => {
@@ -460,7 +465,7 @@ class NewServiceClass extends React.Component {
                     <TextField
                         margin="dense"
                         id="Name_Of_Suggestion_Service"
-                        label="Enter the services:"
+                        label= {strings.service}
                         type="text"
                         onKeyPress= {(e) => {
                             if (e.key === 'Enter') {
@@ -493,7 +498,7 @@ class NewServiceClass extends React.Component {
                     <TextField
                             margin="dense"
                             id="Name_Of_Suggestion_Service_Fr"
-                            label="Enter the services(FR):"
+                            label= {strings.service_fr}
                             type="text"
                             onKeyPress= {(e) => {
                                 if (e.key === 'Enter') {
@@ -524,7 +529,7 @@ class NewServiceClass extends React.Component {
 
                     <TextField
                         id="standard-multiline-flexible"
-                        label="Notes"
+                        label= {strings.note}
                         multiline
                         fullWidth
                         rows="4"
@@ -537,7 +542,7 @@ class NewServiceClass extends React.Component {
 
                     <TextField
                         id="standard-multiline-flexible"
-                        label="Notes(FR)"
+                        label= {strings.note_fr}
                         multiline
                         fullWidth
                         rows="4"
@@ -551,53 +556,53 @@ class NewServiceClass extends React.Component {
                     
                     <form  noValidate >
                         <Typography variant="h6" gutterBottom>
-                            Enter the Business Hours:
+                            {strings.enterBusinessHour}
                         </Typography>
                         <TextField
                             id="sundayTime"
-                            label="Sun"
+                            label= {strings.sunTime}
                             onChange={event => {
                                 this.setState({ sundayBusinessHour : event.target.value })
                             }}
                         /> 
                           <TextField
                             id="mondayTime"
-                            label="Mon"
+                            label= {strings.monTime}
                             onChange={event => {
                                 this.setState({ mondayBusinessHour : event.target.value })
                             }}
                         />
                         <TextField
                             id="tuesdayTime"
-                            label="Tue"
+                            label= {strings.tueTime}
                             onChange={event => {
                                 this.setState({ tuesdayBusinessHour : event.target.value })
                             }}
                         />
                         <TextField
                             id="wednesdayTime"
-                            label="Wed"
+                            label= {strings.wedTime}
                             onChange={event => {
                                 this.setState({ wednesdayBusinessHour : event.target.value })
                             }}
                         />
                         <TextField
                             id="thursdayTime"
-                            label="Thu"
+                            label= {strings.thuTime}
                             onChange={event => {
                                 this.setState({ thursdayBusinessHour : event.target.value })
                             }}
                         />
                         <TextField
                             id="fridayTime"
-                            label="Fri"
+                            label= {strings.friTime}
                             onChange={event => {
                                 this.setState({ fridayBusinessHour : event.target.value })
                             }}
                         />
                         <TextField
                             id="saturdayTime"
-                            label="Sat"
+                            label= {strings.satTime}
                             onChange={event => {
                                 this.setState({ saturdayBusinessHour : event.target.value })
                             }}
@@ -608,10 +613,10 @@ class NewServiceClass extends React.Component {
 
                 <DialogActions>
                     <Button onClick={this.handleClose} color="primary">
-                        Cancel
+                        {strings.cancel}
                     </Button>
                     <Button onClick={this.handleSubmit} color="primary">
-                        Submit
+                        {strings.submit}
                     </Button>
                 </DialogActions>
             </Dialog>
@@ -621,12 +626,12 @@ class NewServiceClass extends React.Component {
 }
 
 const mapStateToProps = state => {//the different actions called by the sidebar component
-    console.log("state,", state);
     return {
+        language : state.lang.language,
         PrimaryCategoryData : state.loadPrimaryCategory,
         SubCategoryData : state.loadSubCategory, 
-        InsuranceData : state.loadInsurance  
-      
+        InsuranceData : state.loadInsurance, 
+        suggestServiceStatus: state.suggestService
   };
 }
 

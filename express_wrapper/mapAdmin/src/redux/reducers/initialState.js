@@ -31,3 +31,9 @@ export const insuranceInitialState = {
     error: "",
     insurance: []
 }
+
+export const feedbackInitialState = {
+    status: "",
+    error: "",
+    feedback: {}
+}

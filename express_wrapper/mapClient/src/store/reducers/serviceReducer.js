@@ -1,4 +1,4 @@
-import {GET_INSURANCE_REQUEST, GET_PRIMARY_CATEGORY_REQUEST, GET_SUBCATEGORY_REQUEST} from '../actions' //imports the different redux actions described in the actions.js file
+import {GET_INSURANCE_REQUEST, GET_PRIMARY_CATEGORY_REQUEST, GET_SUBCATEGORY_REQUEST, CREATE_SERVICE} from '../actions' //imports the different redux actions described in the actions.js file
 
 
 const loadPrimaryCategory = (state = null, action ) => {//the leftSidebarReducer for redux
@@ -28,5 +28,14 @@ const loadInsurance = (state = null, action ) => {//the leftSidebarReducer for r
     }
 }
 
-export {loadPrimaryCategory, loadSubCategory, loadInsurance} ;
+const suggestService = (state = null, action ) => {//the leftSidebarReducer for redux
+    switch ( action.type ){
+        case  CREATE_SERVICE:
+            return  true
+        default:
+            return state;
+    }
+}
+
+export {loadPrimaryCategory, loadSubCategory, loadInsurance, suggestService} ;
     

@@ -13,14 +13,16 @@ import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Logo from '../images/SWH_white_horizontal.png';
-import RossyLogo from '../images/rossy_foundation_colour.png'
-import NewService from '../Service/newService'
+import RossyLogo from '../images/rossy_foundation_colour.png';
+import NewService from '../Service/newService';
+import ReportError from '../reportError/reportError';
 
 // localization
 import LocalizedStrings from 'react-localization';
 import english from '../Localization/En.js';
 import french from '../Localization/Fr.js';
-let strings = new LocalizedStrings({
+let 
+strings = new LocalizedStrings({
   en: english.sidebarStrings,
   fr: french.sidebarStrings
 });
@@ -201,6 +203,7 @@ class SidebarsComponent extends React.Component { //this is the component for bo
                     {strings.submit}
                   </Button>
                   <NewService />
+                  <ReportError />
                   {/* <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> */}
                 </Container>
 

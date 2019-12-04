@@ -48,6 +48,7 @@ const Auth = require('./auth');
 const Category = require('./category');
 const Subcategory = require('./subcategory');
 const Insurance = require('./insurance');
+const feedback = require('./feedback');
 
 
 // Search query routes
@@ -91,3 +92,9 @@ app.delete('/insurance/:insuranceId', Auth.auth, Insurance.deleteInsurance);
 app.post('/signin', Auth.signin);
 app.get('/logout', Auth.logOut);
 app.post('/auth', Auth.auth);
+
+//Feedback
+app.get('/reportedError', feedback.getReportedError);
+app.delete('/reportedError/:id', feedback.deleteReportedError);
+// Report a error
+app.post('/reportedError', feedback.createReportedError);

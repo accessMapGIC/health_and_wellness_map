@@ -5,6 +5,7 @@ import { serviceActions } from './redux/actions/serviceActions';
 import { categoryActions } from './redux/actions/categoryActions';
 import { insuranceActions } from './redux/actions/insuranceActions';
 import CardTemplate from './CardTemplate.jsx';
+
 //Style
 import { Input } from 'antd';
 const { Search } = Input;
