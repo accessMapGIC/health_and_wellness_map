@@ -117,6 +117,53 @@ let mapboxStrings = {
   dir: 'Get directions'
 }
 
+let serviceSuggestionStrings = {
+  haveSuggestion: 'Have a suggestion?',
+  editSuggestion: 'Edit your suggestion',
+  serviceName: 'Service Name',
+  primCategory: 'Primary Category',
+  subcat: 'Subcategory',
+  insurance: 'Insurance',
+  lang: 'Langs spoken',
+  address: 'Address',
+  lat: 'Latitude',
+  lon: 'Longitude',
+  transit: 'Transit',
+  website: 'Website',
+  phoneNumber : 'Phone Number',
+  emergencyNumber: 'Emergency Number',
+  dropIn: 'Drop In',
+  service: 'Enter the services:',
+  service_fr: 'Enter the services(FR):',
+  note: 'Notes',
+  note_fr: 'Notes(FR)',
+  enterBusinessHour: 'Enter the Business Hours:',
+  sunTime: 'Sun',
+  monTime: 'Mon',
+  tueTime: 'Tue',
+  wedTime: 'Wed',
+  thuTime: 'Thu',
+  friTime: 'Fri',
+  satTime: 'Sat',
+  cancel: 'CANCEL',
+  submit: 'SUBMIT',
+  suggestSuccessful : "Suggest Service successfully",
+  requireName: "Please fill out the service name",
+  requireAddress : "Please fill out the address",
+  hourFormat: "Business hours must follow the format HH:mm-HH:mm"
+}
+
+let reportErrorStrings = {
+  reportError:'Report an error',
+  email: 'Your email',
+  content: 'Content',
+  cancel: 'CANCEL',
+  submit: 'SUBMIT',
+  reportSuccessful: "Report Successfully",
+  requireEmail:"Email cannot be blank",
+  requireContent: "Content cannot be blank"
+}
+
 export default {
   catStrings,
   subCatStrings,
@@ -127,5 +174,7 @@ export default {
   tabStrings,
   openStrings,
   mapboxStrings,
-  keywordStrings
+  keywordStrings,
+  serviceSuggestionStrings,
+  reportErrorStrings
 };

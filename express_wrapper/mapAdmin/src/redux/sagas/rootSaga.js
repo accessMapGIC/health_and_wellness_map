@@ -3,6 +3,7 @@ import { watchCreateService, watchGetService, watchEditService, watchDeleteServi
 import { watchSignIn, watchGetAuth, watchSignOut } from "./authSagas"
 import { watchCreatePrimaryCategory, watchGetPrimaryCategory, watchUpdatePrimaryCategory, watchDeletePrimaryCategory, watchCreateSubcategory, watchGetSubcategory, watchUpdateSubcategory, watchDeleteSubcategory } from './categorySagas';
 import { watchCreateInsurance, watchGetInsurance, watchUpdateInsurance, watchDeleteInsurance } from "./insuranceSagas";
+import { watchGetReportedError, watchDeleteReportedError } from "./feedbackSagas";
 
 export default function* rootSaga() {
     yield all([
@@ -26,6 +27,9 @@ export default function* rootSaga() {
         watchCreateInsurance(),
         watchGetInsurance(),
         watchUpdateInsurance(),
-        watchDeleteInsurance()
+        watchDeleteInsurance(),
+
+        watchGetReportedError(),
+        watchDeleteReportedError()
     ]);
 }

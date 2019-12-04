@@ -287,7 +287,7 @@ function* workerDeleteService(params) {
             yield put(serviceActions.deleteServiceSuccess(response.message));
         }
         else if (response.status === 401) {
-            window.location.href="/"
+            window.location.href = (process.env.REACT_APP_BASE_NAME || "") + "/";
         }
         else {
             yield put(serviceActions.deleteServiceFailure(response.message));

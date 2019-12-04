@@ -73,6 +73,7 @@ function editServiceFailure(payload) {
     }
 }
 
+//Delete Service
 function deleteServiceRequest(payload) {
     return {
         type: actionConstants.DELETE_SERVICE_REQUEST,

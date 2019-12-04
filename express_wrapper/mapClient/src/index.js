@@ -10,7 +10,9 @@ import leftSidebarReducer from './store/reducers/leftSidebarReducer';
 import rightSidebarReducer from './store/reducers/rightSidebarReducer';
 import mapboxReducer from './store/reducers/mapboxReducer';
 import languageReducer from './store/reducers/languageReducer';
-import {loadPrimaryCategory, loadSubCategory, loadInsurance} from './store/reducers/serviceReducer';
+import {loadPrimaryCategory, loadSubCategory, loadInsurance, suggestService} from './store/reducers/serviceReducer';
+import {reportError} from './store/reducers/reportErrorReducer';
+
 // import { devToolsEnhancer } from 'redux-devtools-extension';
 // import dbReducer from './store/reducers/dbReducer';
 
@@ -25,7 +27,9 @@ const store = createStore(
       lang: languageReducer,
       loadPrimaryCategory, 
       loadSubCategory, 
-      loadInsurance
+      loadInsurance,
+      suggestService,
+      reportError
   }),
   composeEnhancers(applyMiddleware(ReduxThunk))
 )
