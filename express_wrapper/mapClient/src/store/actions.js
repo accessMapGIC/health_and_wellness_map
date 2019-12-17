@@ -70,7 +70,7 @@ export function keywordsQuery(json) {
         dispatch({
           type: ADD_CARD,
           payload: {
-            title: card.title,
+            title: card.name,
             address: card.address,
             service_id: card.service_id,
             x: card.x,
@@ -83,7 +83,7 @@ export function keywordsQuery(json) {
             lng: card.y,
             lat: card.x,
             id: card.service_id,
-            title: card.title,
+            title: card.name,
             address: card.address,
           }
         });
@@ -112,7 +112,7 @@ export function categoryQuery(json) {
         dispatch({
           type: ADD_CARD,
           payload: {
-            title: card.title,
+            title: card.name,
             address: card.address,
             service_id: card.service_id,
             x: card.x,
@@ -125,7 +125,7 @@ export function categoryQuery(json) {
             lng: card.y,
             lat: card.x,
             id: card.service_id,
-            title: card.title,
+            title: card.name,
             address: card.address,
           }
         });
