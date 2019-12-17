@@ -13,10 +13,11 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from './redux/sagas/rootSaga.js';
 import rootReducer from './redux/reducers/rootReducer.js';
 import { authActions } from './redux/actions/authActions';
+import { searchTermActions } from './redux/actions/searchTermActions';
 import  actionConstants from './redux/actionConstants';
 
 // Style
-import { Layout, ConfigProvider, Row, Col, Button } from 'antd';
+import { Layout, ConfigProvider, Row, Col, Button, Badge } from 'antd';
 import en_US from 'antd/lib/locale-provider/en_US';
 
 // Components
@@ -29,6 +30,7 @@ import Subcategory from "./subcategory.jsx";
 import Insurance from "./insurance.jsx";
 import ListServiceSuggestion from './listServiceSuggestion';
 import ListReportedError from './listReportedError';
+import ListSearchTerm from './listSearchTerm';
 import { stat } from 'fs';
 
 const { Header, Content, Sider } = Layout;
@@ -71,20 +73,30 @@ class IndexClass extends React.Component {
         return null;
     }
     
+    countSearchTerm = (listing) =>{
+        let suggestionServiceNumber = 0;
+        if (listing){
+            suggestionServiceNumber = listing.length;
+        }
+        return suggestionServiceNumber;
+    }
+
     showButton(){
         if (this.props.loggedin){
             return ( 
                 <div style={{ display: "inline-block", float:"right"}}>
                     <Button
-
-                        style={{ marginRight:"50px"}}
+                        style={{ marginRight:"20px"}}
                         className="menu-option"
                         onClick={this.backHome}
                     >
                         Home
                     </Button>
+                    <Badge count={this.countSearchTerm(this.props.searchTerm)}>
+                        <a href="/#/ListSearchTerm"> <Button >Review Search Term</Button> </a>
+                    </Badge>
                     <Button
-                        style={{}}
+                        style={{ marginLeft:"20px"}}
                         className="menu-option"
                         onClick={this.signOut}
                     >
@@ -97,6 +109,7 @@ class IndexClass extends React.Component {
 
     componentDidMount() {
         this.props.dispatch(authActions.getAuthRequest()); 
+        this.props.dispatch(searchTermActions.getSearchTermRequest());
     }
 
     render() {
@@ -130,6 +143,9 @@ class IndexClass extends React.Component {
                             <Route exact path="/ListReportedError" component={ListReportedError} />
                         </Switch>
                         <Switch>
+                            <Route exact path="/ListSearchTerm" component={ListSearchTerm} />
+                        </Switch>
+                        <Switch>
                             <Route exact path="/category" component={Category} />
                         </Switch>
                         <Switch>
@@ -150,8 +166,9 @@ class IndexClass extends React.Component {
     }
 }
 const mapStateToProps = (state) => {
-    const loggedin = state.auth.loggedin
-    return {loggedin}
+    const loggedin = state.auth.loggedin;
+    const searchTerm = state.searchTermReducers.Search_Term;
+    return {loggedin, searchTerm};
 }
 const Index = connect(mapStateToProps)(IndexClass);
 export default Index;

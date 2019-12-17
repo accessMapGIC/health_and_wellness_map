@@ -1,9 +1,9 @@
 import { feedbackInitialState } from "./initialState";
 import actionConstants from "../actionConstants";
 
-export default function test(state=feedbackInitialState, action) {
+export default function feedback(state=feedbackInitialState, action) {
     switch (action.type) {
-        // get primary category
+        // get feedback
         case actionConstants.GET_REPORTED_ERROR_REQUEST:
             return {
                 ...state,
@@ -22,7 +22,7 @@ export default function test(state=feedbackInitialState, action) {
                 error: action.payload
             }
        
-        //Delete service
+        //Delete feedback
         case actionConstants.DELETE_REPORTED_ERROR_REQUEST:
             return {
                 ...state,

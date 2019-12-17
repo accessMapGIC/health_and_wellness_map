@@ -12,6 +12,70 @@ module.exports = {
           .catch(err => res.status(400).send(err))
     },
 
+    collectionSearchTerm: function(req, search, callingFunction){
+        let keys = Object.keys(search);
+        let getQuery = "SELECT frequency FROM health.search_term ";
+
+        let restingQuery = "WHERE ";
+        let values =  [];
+
+        let firstEnter = false;
+        keys.forEach((key, i) =>{
+            if(firstEnter){
+                restingQuery += ' AND ';
+            }
+            if(search[key]){
+                restingQuery += `"${key}" = $${++i}`;
+                if (key === "keyword") {
+                    values.push(search[key].toLowerCase());
+                } else {
+                    values.push(search[key]);
+                }
+            } else {
+                restingQuery += `"${key}" is Null`;
+                values.push(null);
+            }
+            firstEnter= true;
+        })
+
+        restingQuery += ' ;';
+
+        getQuery += restingQuery;
+            
+        req.db.any(getQuery, values)
+        .then((data) => {
+            if (data && data.length !== 0) {
+                req.db.any(`UPDATE health.search_term SET frequency = '${data[0].frequency + 1}' ${restingQuery}`, values);
+            } else {
+                req.db.any(`SELECT id FROM health.search_term ORDER BY id DESC LIMIT 1`)
+                .then((data) => {
+                    let index = 1 ;
+                    if (data && data.length !== 0 ) {
+                        index  = data[0].id + 1 ;
+                    }
+                    let baseQuery = null;
+                    if(callingFunction === "getCategories"){
+                        baseQuery = `INSERT INTO health.search_term ("id", "cat", "subCat", "insCat", "lang", "frequency") VALUES (${index}, $1, $2, $3, $4, 1)`;
+                    } else {
+                        baseQuery = `INSERT INTO health.search_term ("id", "keyword", "insCat", "lang", "frequency") VALUES (${index}, $1, $2, $3, 1)`;
+                    }
+
+                    req.db.any(baseQuery, values)
+                    .then(data => {
+                        console.log('DATA:', data); // prints data, use data[i] to print specific entry attributes
+                    })
+                    .catch(error => {
+                        console.log('ERROR:', error); // print the error;
+                    })
+                })
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        })
+
+    },
+
     getCategories: function(req, res, next) {
         //this is the main category query
         let baseQuery = `
@@ -69,13 +133,24 @@ module.exports = {
             params.push({key: "s.languages_spoken", value: `%${req.body.lang}%`});
         }
 
+        let search = req.body;
+        let contents = Object.values(search);
+        let searchIsEmpty = true;
+        contents.forEach(content => {
+            if( content) {
+                searchIsEmpty = false ;
+            } 
+        })
+        if(!searchIsEmpty) {
+            module.exports.collectionSearchTerm(req, search, "getCategories");
+        } 
+
         req.db.any(baseQuery, params.map(p => p.value))
         .then(data => {
-            //console.log('DATA:', baseQuery); // prints data, use data[i] to print specific entry attributes
             res.send(data);
         })
         .catch(error => {
-        console.log(error);
+            console.log(error);
             res.send('there has been an error, please contact Student Services to get this fixed.');
         })
     },
@@ -111,7 +186,7 @@ module.exports = {
         let counter = 2;
 
         if (req.body.insCat) {
-            baseQuery += ` AND ins.insur_name=$${counter}`
+            baseQuery += ` AND ins.insur_name=$${counter}`;
             params.push(req.body.insCat);
             counter++;
         }
@@ -124,12 +199,23 @@ module.exports = {
 
         req.db.any(baseQuery, params)
         .then(data => {
-            // console.log('DATA:', data); // prints data, use data[i] to print specific entry attributes
             res.send(data);
         })
         .catch(error => {
-            //console.log('ERROR:', error); // print the error;
+            console.log('ERROR:', error); // print the error;
             res.send('there has been an error, please contact Student Services to get this fixed.');
         })
+
+        let search = req.body;
+        let contents = Object.values(search);
+        let searchIsEmpty = true;
+        contents.forEach(content => {
+            if( content) {
+                searchIsEmpty = false ;
+            } 
+        })
+        if(!searchIsEmpty) {
+            module.exports.collectionSearchTerm(req, search, "getKeywords") ;
+        }
     }
 }
