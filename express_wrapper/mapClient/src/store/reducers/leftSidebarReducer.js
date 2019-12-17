@@ -5,7 +5,7 @@ const initialState = {
         categories: [],
         subCategories: [],
         insurances: [],
-        leftMenuOpen: false,
+        leftMenuOpen: true,
         leftHamButton: null,
         catDrop: '',
         insDrop: '',

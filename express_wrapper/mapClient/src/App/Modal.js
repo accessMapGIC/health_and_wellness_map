@@ -1,3 +1,5 @@
+// Deprecated Component: please see https://gitlab.com/shaohanghe91/health_and_wellness_map/merge_requests/35 and https://trello.com/c/6DYWZIgj/39-skip-dialog-box-and-hamburger-menu for details"
+
 import React from "react";
 import Modal from "react-responsive-modal";
 import Logo from '../images/SWH_2blue_horizontal.png';
