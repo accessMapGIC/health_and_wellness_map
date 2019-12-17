@@ -144,9 +144,9 @@ class MapboxComponent extends React.Component {
         {this.props.point && (
           <Popup key={this.props.point.id} coordinates={[this.props.point.lng, this.props.point.lat]}>
             <StyledPopup>
-              <div>{this.props.point.title}</div>
               <div>
-                <a href={'https://www.google.ca/maps/dir/' + this.props.point.address} target="_blank" rel="noopener noreferrer">{strings.dir}</a>
+                  <h3>{this.props.point.title}</h3>
+                  <a href={'https://www.google.ca/maps/dir/' + this.props.point.address} target="_blank" rel="noopener noreferrer">{strings.dir}</a>
               </div>
             </StyledPopup>
           </Popup>

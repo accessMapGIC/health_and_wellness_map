@@ -72,7 +72,7 @@ const mapboxReducer = (state = initialState, action ) => {
                         id: state.points[i].id,
                         title: state.points[i].title,
                         address: state.points[i].address,
-                        ref: state.points[i].ref,
+                        ref: state.points[i].ref
                     }
                 }
             }
