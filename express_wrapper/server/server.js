@@ -49,11 +49,12 @@ const Category = require('./category');
 const Subcategory = require('./subcategory');
 const Insurance = require('./insurance');
 const feedback = require('./feedback');
+const searchTerm = require('./searchTerm');
 
 
 // Search query routes
 app.post('/query',  Search.getServices);
-app.post('/category_query',  Search.getCategories);
+app.post('/category_query', Search.getCategories);
 app.post('/keywords_query',  Search.getKeywords);
 app.get('/primary_category_client', Category.getPrimaryCategories);
 app.get('/subcategory_client',  Subcategory.getSubcategories);
@@ -98,3 +99,7 @@ app.get('/reportedError', feedback.getReportedError);
 app.delete('/reportedError/:id', feedback.deleteReportedError);
 // Report a error
 app.post('/reportedError', feedback.createReportedError);
+
+//Search Term
+app.get('/searchTerm', searchTerm.getSearchTerm);
+

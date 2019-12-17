@@ -6,6 +6,7 @@ import auth from "./authReducers"
 import categoryReducer from "./categoryReducer";
 import insuranceReducer from "./insuranceReducer";
 import feedbackReducer from "./feedbackReducers";
+import searchTermReducers from "./searchTermReducers";
 
 export default (history) => combineReducers({
     router: connectRouter(history),
@@ -13,5 +14,6 @@ export default (history) => combineReducers({
     auth,
     categoryReducer,
     insuranceReducer,
-    feedbackReducer
+    feedbackReducer,
+    searchTermReducers
 })

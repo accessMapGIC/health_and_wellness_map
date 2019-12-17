@@ -1,7 +1,7 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 import actionConstants from "../actionConstants";
 import { feedbackActions } from "../actions/feedbackActions";
-import { stat } from "fs";
+
 const base_url =  process.env.REACT_APP_BASE_URL || "http://gic.geog.mcgill.ca:5001";
 
 function getCookie() {

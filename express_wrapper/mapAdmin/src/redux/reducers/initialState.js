@@ -35,5 +35,9 @@ export const insuranceInitialState = {
 export const feedbackInitialState = {
     status: "",
     error: "",
-    feedback: {}
+}
+
+export const searchTermInitialState = {
+    status: "",
+    error: "",
 }
