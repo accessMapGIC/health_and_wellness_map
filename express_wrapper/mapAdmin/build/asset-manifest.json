@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/healthmapadmin/static/css/main.fbd73987.chunk.css",
-    "main.js": "/healthmapadmin/static/js/main.352c8dec.chunk.js",
-    "main.js.map": "/healthmapadmin/static/js/main.352c8dec.chunk.js.map",
+    "main.css": "/healthmapadmin/static/css/main.0bd30431.chunk.css",
+    "main.js": "/healthmapadmin/static/js/main.53858ec3.chunk.js",
+    "main.js.map": "/healthmapadmin/static/js/main.53858ec3.chunk.js.map",
     "runtime-main.js": "/healthmapadmin/static/js/runtime-main.8db38744.js",
     "runtime-main.js.map": "/healthmapadmin/static/js/runtime-main.8db38744.js.map",
     "static/css/2.802837ff.chunk.css": "/healthmapadmin/static/css/2.802837ff.chunk.css",
-    "static/js/2.bcb04fe6.chunk.js": "/healthmapadmin/static/js/2.bcb04fe6.chunk.js",
-    "static/js/2.bcb04fe6.chunk.js.map": "/healthmapadmin/static/js/2.bcb04fe6.chunk.js.map",
+    "static/js/2.62225517.chunk.js": "/healthmapadmin/static/js/2.62225517.chunk.js",
+    "static/js/2.62225517.chunk.js.map": "/healthmapadmin/static/js/2.62225517.chunk.js.map",
     "index.html": "/healthmapadmin/index.html",
-    "precache-manifest.4837101297de9f4dc819dd1cc349ffb3.js": "/healthmapadmin/precache-manifest.4837101297de9f4dc819dd1cc349ffb3.js",
+    "precache-manifest.7516b0761b0bad3342e22482bc86a6b8.js": "/healthmapadmin/precache-manifest.7516b0761b0bad3342e22482bc86a6b8.js",
     "service-worker.js": "/healthmapadmin/service-worker.js",
     "static/css/2.802837ff.chunk.css.map": "/healthmapadmin/static/css/2.802837ff.chunk.css.map",
-    "static/css/main.fbd73987.chunk.css.map": "/healthmapadmin/static/css/main.fbd73987.chunk.css.map"
+    "static/css/main.0bd30431.chunk.css.map": "/healthmapadmin/static/css/main.0bd30431.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.8db38744.js",
     "static/css/2.802837ff.chunk.css",
-    "static/js/2.bcb04fe6.chunk.js",
-    "static/css/main.fbd73987.chunk.css",
-    "static/js/main.352c8dec.chunk.js"
+    "static/js/2.62225517.chunk.js",
+    "static/css/main.0bd30431.chunk.css",
+    "static/js/main.53858ec3.chunk.js"
   ]
 }
