@@ -109,7 +109,12 @@ class IndexClass extends React.Component {
 
     componentDidMount() {
         this.props.dispatch(authActions.getAuthRequest()); 
-        this.props.dispatch(searchTermActions.getSearchTermRequest());
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.authMessage !== this.props.authMessage && this.props.loggedin) {
+                this.props.dispatch(searchTermActions.getSearchTermRequest());       
+        };
     }
 
     render() {
@@ -166,9 +171,9 @@ class IndexClass extends React.Component {
     }
 }
 const mapStateToProps = (state) => {
-    const loggedin = state.auth.loggedin;
+    const {loggedin, authMessage} = state.auth;
     const searchTerm = state.searchTermReducers.Search_Term;
-    return {loggedin, searchTerm};
+    return {loggedin, searchTerm, authMessage};
 }
 const Index = connect(mapStateToProps)(IndexClass);
 export default Index;

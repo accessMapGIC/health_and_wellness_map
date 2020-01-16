@@ -44,7 +44,7 @@ class ListServiceClass extends React.Component {
                                     listing={service}
                                     key={i}
                                 />
-                            )
+                            );
                         }
                     }
                 })

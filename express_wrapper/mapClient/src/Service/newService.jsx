@@ -4,8 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 //This one import the constant and actions
 import { 
-        getInsuranceRequest, createServiceRequest,
-        getPrimaryCategoryRequest, getSubcategoryRequest
+         createServiceRequest
     } from '../store/actions';
 
 //Style
@@ -27,6 +26,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Divider from '@material-ui/core/Divider';
 import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
+import ListItemText from '@material-ui/core/ListItemText';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import './newService.scss';
 
@@ -45,9 +46,9 @@ class NewServiceClass extends React.Component {
         this.state = {
             open: false,
             serviceName:'',
-            primaryCategory: '',
-            Subcategory:'',
-            Insurance:'',
+            primaryCategory: [],
+            Subcategory:[],
+            Insurance:[],
             langs:[],
             address: '',
             latitude: '',
@@ -74,9 +75,6 @@ class NewServiceClass extends React.Component {
 
     componentDidMount() {
         strings.setLanguage(this.props.language);
-        this.props.dispatch(getPrimaryCategoryRequest());
-        this.props.dispatch(getSubcategoryRequest());
-        this.props.dispatch(getInsuranceRequest());
     }
 
     componentDidUpdate(prevProps) {
@@ -187,9 +185,9 @@ class NewServiceClass extends React.Component {
 
         //Array changes to object and subcategory use number
         formInfo.name = this.state.serviceName;
-        formInfo.primary_cat_id = this.state.primaryCategory;
-        formInfo.sub_cat_id = this.state.Subcategory;
-        formInfo.insur_id = this.state.Insurance;
+        formInfo.primary_cat_id = this.state.primaryCategory.map(item => item.cat_id);
+        formInfo.sub_cat_id = this.state.Subcategory.map(item => item.subcat_id);
+        formInfo.insur_id = this.state.Insurance.map(item => item.insur_id);
         formInfo.languages_spoken = this.extractInfo(this.state.langs);
         formInfo.address = this.state.address;
         formInfo.lat = this.state.latitude;
@@ -205,7 +203,6 @@ class NewServiceClass extends React.Component {
         formInfo.notes_fr = this.state.note_fr;
         formInfo.hours = hours;
         formInfo.verified_by = null;
-       
         this.props.dispatch(createServiceRequest(formInfo));
 };
 
@@ -227,6 +224,7 @@ class NewServiceClass extends React.Component {
                         fontWeight: 'bold'
                     }}
                 onClick= {this.handleClickOpen}
+                key="haveSuggestion"
             >
                  {strings.haveSuggestion}
             </Button>
@@ -260,79 +258,108 @@ class NewServiceClass extends React.Component {
                         onChange={event => {
                             this.setState({ serviceName: event.target.value })
                         }}
+                        key="serviceName"
                     />
+
                     <br />
 
                     <FormControl className="selectControl">
                         <InputLabel > {strings.primCategory} </InputLabel>
                         <Select
+                            key="primCategory"
                             id="primaryCategory"
+                            multiple
                             value={this.state.primaryCategory}
                             onChange={event => {
                                 this.setState({ primaryCategory: event.target.value })
                           }}
-                            displayEmpty
+                            renderValue={selected => {
+                                if(selected && selected.length !== 0) {
+                                    return selected.map(item => item.cat_name).join(', ');
+                                };
+                            }}
                         >
                             {this.props.PrimaryCategoryData
                             ?
-                            this.props.PrimaryCategoryData.map(data => (
-                            <MenuItem  value={data.cat_id}>
-                                {data.cat_name}
-                            </MenuItem>
-                            ))
+                                this.props.PrimaryCategoryData.map((data, index) => (
+                                <MenuItem key={index} value={data}>
+                                    <Checkbox checked={this.state.primaryCategory.indexOf(data) > -1} />
+                                    <ListItemText primary={data.cat_name} />
+                                </MenuItem>
+                                ))
                             : null
                             }
                         </Select>
                     </FormControl>
+
                     <br />
+
                     <Divider />
 
                     <FormControl className="selectControl">
                         <InputLabel> {strings.subcat} </InputLabel>
                         <Select
+                            key="Subcategory"
                             id="Subcategory"
+                            multiple
                             value={this.state.Subcategory}
                             onChange={event => {
                                 this.setState({ Subcategory: event.target.value })
                             }}
-                          
+                            renderValue={selected => {
+                                if(selected && selected.length !== 0) {
+                                    return selected.map(item => item.subcat_name).join(', ');
+                                };
+                            }}
                         >
                             {this.props.SubCategoryData
                             ?
-                                this.props.SubCategoryData.map(data => (
-                                <MenuItem  value={data.subcat_id}>
-                                    {data.subcat_name}
+                                this.props.SubCategoryData.map((data, index) => (
+                                <MenuItem  value={data} key={index}>
+                                    <Checkbox checked={this.state.Subcategory.indexOf(data) > -1} />
+                                    <ListItemText primary={data.subcat_name} />
                                 </MenuItem>
                                 ))
                             :   null
                             }
                         </Select>
                     </FormControl>
+
                     <br />
 
                     <FormControl className="selectControl">
                         <InputLabel > {strings.insurance} </InputLabel>
                         <Select
+                            key="Insurance"
                             id="Insurance"
+                            multiple
                             value={this.state.Insurance}
                             onChange={event => {
                                 this.setState({ Insurance: event.target.value })
                           }}
+                          renderValue={selected => {
+                            if(selected && selected.length !== 0) {
+                                return selected.map(item => item.insur_name).join(', ');
+                            };
+                        }}
                         >
                              {this.props.InsuranceData
                             ?
-                                this.props.InsuranceData.map(data => (
-                                <MenuItem  value={data.insur_id}>
-                                    {data.insur_name}
+                                this.props.InsuranceData.map((data, index) => (
+                                <MenuItem  value={data} key={index}>
+                                    <Checkbox checked={this.state.Insurance.indexOf(data) > -1} />
+                                    <ListItemText primary={data.insur_name} />
                                 </MenuItem>
                                 ))
                             :   null
                             }
                         </Select>
                     </FormControl>
+
                     <br />
 
                     <TextField
+                        key="lang"
                         margin="dense"
                         id="lang_spoken"
                         label= {strings.lang}
@@ -365,6 +392,7 @@ class NewServiceClass extends React.Component {
                     </Paper>
                     
                     <TextField
+                        key="Address"
                         required
                         margin="dense"
                         id="Address"
@@ -378,6 +406,7 @@ class NewServiceClass extends React.Component {
                     <br />
 
                     <TextField
+                        key="Latitude"
                         margin="dense"
                         id="Latitude"
                         label= {strings.lat}
@@ -390,6 +419,7 @@ class NewServiceClass extends React.Component {
                     <br />
 
                     <TextField
+                        key="Longitude"
                         margin="dense"
                         id="Longitude"
                         label= {strings.lon}
@@ -402,6 +432,7 @@ class NewServiceClass extends React.Component {
                     <br />
 
                     <TextField
+                        key="Transit"
                         margin="dense"
                         id="Transit"
                         label= {strings.transit}
@@ -414,6 +445,7 @@ class NewServiceClass extends React.Component {
                     <br />
 
                     <TextField
+                        key="Website"
                         margin="dense"
                         id="Website"
                         label= {strings.website}
@@ -426,6 +458,7 @@ class NewServiceClass extends React.Component {
                     <br />
 
                     <TextField
+                        key="Phone"
                         margin="dense"
                         id="Phone number"
                         label= {strings.phoneNumber}
@@ -438,6 +471,7 @@ class NewServiceClass extends React.Component {
                     <br />
 
                     <TextField
+                        key="emergencyNumber"
                         margin="dense"
                         id="Emergency Number"
                         label= {strings.emergencyNumber}
@@ -450,7 +484,7 @@ class NewServiceClass extends React.Component {
                     <br />
 
                     <TextField
-                        
+                        key="dropIn"
                         margin="dense"
                         id="Drop In"
                         label= {strings.dropIn}
@@ -463,6 +497,7 @@ class NewServiceClass extends React.Component {
                     <br />
 
                     <TextField
+                        key="Name_Of_Suggestion_Service"
                         margin="dense"
                         id="Name_Of_Suggestion_Service"
                         label= {strings.service}
@@ -496,6 +531,7 @@ class NewServiceClass extends React.Component {
                     <br />
 
                     <TextField
+                            key="Name_Of_Suggestion_Service_Fr"
                             margin="dense"
                             id="Name_Of_Suggestion_Service_Fr"
                             label= {strings.service_fr}
@@ -537,6 +573,7 @@ class NewServiceClass extends React.Component {
                         onChange={event => {
                             this.setState({ note: event.target.value })
                         }}
+                        key="note"
                     />
                     <br />
 
@@ -550,6 +587,7 @@ class NewServiceClass extends React.Component {
                         onChange={event => {
                             this.setState({ note_fr: event.target.value })
                         }}
+                        key="note_fr"
                     />
                     <br />
 
@@ -564,6 +602,7 @@ class NewServiceClass extends React.Component {
                             onChange={event => {
                                 this.setState({ sundayBusinessHour : event.target.value })
                             }}
+                            key="sundayTime"
                         /> 
                           <TextField
                             id="mondayTime"
@@ -571,6 +610,7 @@ class NewServiceClass extends React.Component {
                             onChange={event => {
                                 this.setState({ mondayBusinessHour : event.target.value })
                             }}
+                            key="mondayTime"
                         />
                         <TextField
                             id="tuesdayTime"
@@ -578,6 +618,7 @@ class NewServiceClass extends React.Component {
                             onChange={event => {
                                 this.setState({ tuesdayBusinessHour : event.target.value })
                             }}
+                            key="tuesdayTime"
                         />
                         <TextField
                             id="wednesdayTime"
@@ -585,6 +626,7 @@ class NewServiceClass extends React.Component {
                             onChange={event => {
                                 this.setState({ wednesdayBusinessHour : event.target.value })
                             }}
+                            key="wednesdayTime"
                         />
                         <TextField
                             id="thursdayTime"
@@ -592,6 +634,7 @@ class NewServiceClass extends React.Component {
                             onChange={event => {
                                 this.setState({ thursdayBusinessHour : event.target.value })
                             }}
+                            key="thursdayTime"
                         />
                         <TextField
                             id="fridayTime"
@@ -599,6 +642,7 @@ class NewServiceClass extends React.Component {
                             onChange={event => {
                                 this.setState({ fridayBusinessHour : event.target.value })
                             }}
+                            key="fridayTime"
                         />
                         <TextField
                             id="saturdayTime"
@@ -606,16 +650,17 @@ class NewServiceClass extends React.Component {
                             onChange={event => {
                                 this.setState({ saturdayBusinessHour : event.target.value })
                             }}
+                            key="saturdayTime"
                         />
                     </form>
                     
                 </DialogContent>
 
                 <DialogActions>
-                    <Button onClick={this.handleClose} color="primary">
+                    <Button onClick={this.handleClose} color="primary" key="cancel">
                         {strings.cancel}
                     </Button>
-                    <Button onClick={this.handleSubmit} color="primary">
+                    <Button onClick={this.handleSubmit} color="primary" key="submit">
                         {strings.submit}
                     </Button>
                 </DialogActions>
@@ -628,9 +673,9 @@ class NewServiceClass extends React.Component {
 const mapStateToProps = state => {//the different actions called by the sidebar component
     return {
         language : state.lang.language,
-        PrimaryCategoryData : state.loadPrimaryCategory,
-        SubCategoryData : state.loadSubCategory, 
-        InsuranceData : state.loadInsurance, 
+        PrimaryCategoryData : state.lfS.leftMenu.categories,
+        SubCategoryData : state.lfS.leftMenu.subCategories, 
+        InsuranceData : state.lfS.leftMenu.insurances, 
         suggestServiceStatus: state.suggestService
   };
 }

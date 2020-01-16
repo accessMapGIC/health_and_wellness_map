@@ -22,7 +22,6 @@ module.exports = {
 
             req.db.any(baseQuery, values)
             .then(data => {
-                //console.log('DATA:', data); // prints data, use data[i] to print specific entry attributes
                 res.status(200).json(data);
             })
             .catch(error => {
@@ -41,7 +40,6 @@ module.exports = {
 
         req.db.any(baseQuery)
         .then(data => {
-            //console.log('DATA:', data); // prints data, use data[i] to print specific entry attributes
             res.status(200).json(data);
         })
         .catch(error => {
@@ -75,7 +73,6 @@ module.exports = {
         if (!req.body.pc_id) {
             return res.status(400).json("Primary category required")
         }
-
         let baseQuery = `UPDATE health.subcategory SET subcat_name = $1, pc_id = $2 WHERE subcat_id = $3 RETURNING *;`;
         let values = [`${req.body.subcat_name}`, `${req.body.pc_id}`, `${req.params.subcategoryId}`];
 
@@ -94,31 +91,27 @@ module.exports = {
     },
 
     deleteSubcategory: function(req, res, next) {
-        let updateQuery = `UPDATE health.services_master SET sub_cat_id = null WHERE sub_cat_id = $1;`;
-        let values = [`${req.params.subcategoryId}`];
 
-        req.db.any(updateQuery, values)
-        .then(data => {
+        req.db.any(`DELETE FROM health.services_subcat WHERE subcat_id = ${req.params.subcategoryId} RETURNING *;`)
+        .then(() => {
             let baseQuery = `DELETE FROM health.subcategory WHERE subcat_id = $1 RETURNING *;`;
             let values = [`${req.params.subcategoryId}`];
 
             req.db.any(baseQuery, values)
             .then(data => {
-                //console.log('DATA:', data); // prints data, use data[i] to print specific entry attributes
                 if (data.length === 0) {
                     return res.status(404).json("Category not found");
                 }
-                return res.status(200).json(data[0]);
             })
             .catch(error => {
-                //console.log('ERROR:', error); // print the error;
+                console.log('ERROR:', error); // print the error;
                 res.status(500).json('there has been an error, please contact Student Services to get this fixed.');
             })
         })
         .catch(error => {
-            //console.log('ERROR:', error); // print the error;
+            console.log('ERROR:', error); // print the error;
             res.status(500).json('there has been an error, please contact Student Services to get this fixed.');
-        })
+        })   
     }
 
 }

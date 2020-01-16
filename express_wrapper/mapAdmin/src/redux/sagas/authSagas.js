@@ -55,7 +55,7 @@ function setCookie(name,value,days) {
         date.setTime(date.getTime() + (days*24*60*60*1000));
         expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=http://localhost:8081/";
+    document.cookie = name + "=" + (value || "")  + expires + "; path=" + process.env.REACT_APP_BASE_URL + (process.env.REACT_APP_BASE_NAME || "");
 }
 
 // Make the api call when watcher saga sees the action
@@ -99,7 +99,7 @@ async function signOut() {
         });
         if (resp.status == 200) {
             window.location.href = (process.env.REACT_APP_BASE_NAME || "") + '/';
-            document.cookie =  `token=; expires=${new Date()}; path=/;`;
+            document.cookie =  `token=; expires=${new Date()}; path=${process.env.REACT_APP_BASE_NAME || "/"};`;
         }
         return resp;
     }

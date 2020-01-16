@@ -10,7 +10,7 @@ import leftSidebarReducer from './store/reducers/leftSidebarReducer';
 import rightSidebarReducer from './store/reducers/rightSidebarReducer';
 import mapboxReducer from './store/reducers/mapboxReducer';
 import languageReducer from './store/reducers/languageReducer';
-import {loadPrimaryCategory, loadSubCategory, loadInsurance, suggestService} from './store/reducers/serviceReducer';
+import { suggestService} from './store/reducers/serviceReducer';
 import {reportError} from './store/reducers/reportErrorReducer';
 
 // import { devToolsEnhancer } from 'redux-devtools-extension';
@@ -25,9 +25,6 @@ const store = createStore(
       rtS: rightSidebarReducer,
       mpB: mapboxReducer,
       lang: languageReducer,
-      loadPrimaryCategory, 
-      loadSubCategory, 
-      loadInsurance,
       suggestService,
       reportError
   }),
