@@ -191,6 +191,7 @@ class NewServiceClass extends React.Component {
                             {getFieldDecorator('primary_cat_id', {})(
                                 <Select
                                     placeholder="Select"
+                                    mode="multiple"
                                 >
                                     {this.props.primary_category.map((cat, i) => {
                                         return (
@@ -204,6 +205,7 @@ class NewServiceClass extends React.Component {
                             {getFieldDecorator('sub_cat_id', {})(
                                 <Select
                                     placeholder="Select"
+                                    mode="multiple"
                                 >
                                     {this.props.subcategory.map((cat, i) => {
                                         return (
@@ -217,6 +219,7 @@ class NewServiceClass extends React.Component {
                             {getFieldDecorator('insur_id', {})(
                                 <Select
                                     placeholder="Select"
+                                    mode="multiple"
                                 >
                                     {this.props.insurance.map((insur, i) => {
                                         return (

@@ -58,7 +58,9 @@ app.post('/category_query', Search.getCategories);
 app.post('/keywords_query',  Search.getKeywords);
 app.get('/primary_category_client', Category.getPrimaryCategories);
 app.get('/subcategory_client',  Subcategory.getSubcategories);
-app.get('/insurance_client',  Service.getInsurance);
+app.get('/insurance_client',  Insurance.getInsurances);
+
+//Suggest a new Service
 app.post('/service_suggestion', Service.createService);
 
 // Create a new service
@@ -72,20 +74,20 @@ app.delete('/service/:serviceId', Auth.auth,  Service.deleteService);
 
 // Categories
 app.post('/primary_category', Auth.auth, Category.createPrimaryCategory);
-app.get('/primary_category', Category.getPrimaryCategories);
+app.get('/primary_category', Auth.auth, Category.getPrimaryCategories);
 app.get('/primary_category/:categoryId', Auth.auth, Category.getPrimaryCategory);
 app.put('/primary_category/:categoryId', Auth.auth, Category.updatePrimaryCategory);
 app.delete('/primary_category/:categoryId', Auth.auth, Category.deletePrimaryCategory);
 
 app.post('/subcategory', Auth.auth, Subcategory.createSubcategory);
-app.get('/subcategory', Subcategory.getSubcategories);
+app.get('/subcategory', Auth.auth, Subcategory.getSubcategories);
 app.get('/subcategory/:subcategoryId', Auth.auth, Subcategory.getSubcategory);
 app.put('/subcategory/:subcategoryId', Auth.auth, Subcategory.updateSubcategory);
 app.delete('/subcategory/:subcategoryId', Auth.auth, Subcategory.deleteSubcategory);
 
 app.post('/insurance', Auth.auth, Insurance.createInsurance);
-app.get('/insurance', Insurance.getInsurances);
-app.get('/insurance/:insuranceId', Insurance.getInsurance);
+app.get('/insurance', Auth.auth, Insurance.getInsurances);
+app.get('/insurance/:insuranceId', Auth.auth, Insurance.getInsurance);
 app.put('/insurance/:insuranceId', Auth.auth, Insurance.updateInsurance);
 app.delete('/insurance/:insuranceId', Auth.auth, Insurance.deleteInsurance);
 
@@ -95,11 +97,10 @@ app.get('/logout', Auth.logOut);
 app.post('/auth', Auth.auth);
 
 //Feedback
-app.get('/reportedError', feedback.getReportedError);
-app.delete('/reportedError/:id', feedback.deleteReportedError);
+app.get('/reportedError', Auth.auth, feedback.getReportedError); 
+app.delete('/reportedError/:id', Auth.auth, feedback.deleteReportedError);
 // Report a error
 app.post('/reportedError', feedback.createReportedError);
 
 //Search Term
-app.get('/searchTerm', searchTerm.getSearchTerm);
-
+app.get('/searchTerm', Auth.auth, searchTerm.getSearchTerm);

@@ -69,9 +69,8 @@ module.exports = {
         if (!req.body.insur_name) {
             return res.status(400).json("Category name required")
         }
-
         let baseQuery = `UPDATE health.insurance SET insur_name = $1 WHERE insur_id = $2 RETURNING *;`;
-        let values = [`${req.body.insur_name}`,`${req.params.categoryId}`];
+        let values = [`${req.body.insur_name}`,`${req.body.insur_id}`];
 
         req.db.any(baseQuery, values)
         .then(data => {
@@ -88,11 +87,8 @@ module.exports = {
     },
 
     deleteInsurance: function(req, res, next) {
-        let updateQuery = `UPDATE health.services_master SET insur_id = null WHERE insur_id = $1;`;
-        let values = [`${req.params.insuranceId}`];
-
-        req.db.any(updateQuery, values)
-        .then(data => {
+        req.db.any(`DELETE FROM health.services_insur WHERE insur_id = ${req.params.insuranceId} RETURNING *;`)
+        .then(() => {
             let baseQuery = `DELETE FROM health.insurance WHERE insur_id = $1 RETURNING *;`;
             let values = [`${req.params.insuranceId}`];
 
@@ -100,19 +96,17 @@ module.exports = {
             .then(data => {
                 //console.log('DATA:', data); // prints data, use data[i] to print specific entry attributes
                 if (data.length === 0) {
-                    return res.status(404).json("Category not found");
+                    return res.status(404).json("Insurance not found");
                 }
-                return res.status(200).json(data[0]);
             })
             .catch(error => {
-                //console.log('ERROR:', error); // print the error;
+                console.log('ERROR:', error); // print the error;
                 res.status(500).json('there has been an error, please contact Student Services to get this fixed.');
             })
         })
         .catch(error => {
-            //console.log('ERROR:', error); // print the error;
+            console.log('ERROR:', error); // print the error;
             res.status(500).json('there has been an error, please contact Student Services to get this fixed.');
-        })
+        })   
     }
-
 }

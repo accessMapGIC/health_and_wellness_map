@@ -77,31 +77,28 @@ module.exports = {
     },
 
     getCategories: function(req, res, next) {
-        //this is the main category query
         let baseQuery = `
-        SELECT
-            s.service_id,
-            pc.cat_name as primary_category,
-            sc.subcat_name as subcategory,
-            ins.insur_name as insur_name,
-            s.name,
-            s.address,
-            s.phone_num as phone,
-            s.lat as x,
-            s.lon as y,
-            s.website AS URL,
-            s.notes,
-            s.notes_fr,
-            s.languages_spoken,
-            h.hours
-        FROM health.primary_category pc INNER JOIN health.subcategory sc
-        ON pc.cat_id = sc.pc_id
-        INNER JOIN health.services_master as s
-        ON s.sub_cat_id = sc.subcat_id
-        INNER JOIN health.business_hours as h
-        ON h.service_id = s.service_id
-        LEFT JOIN health.insurance as ins
-        ON ins.insur_id = s.insur_id
+            SELECT  	
+                s.service_id,
+                s.name,
+                s.address,
+                s.phone_num as phone,
+                s.lat as x,
+                s.lon as y,
+                s.website AS URL,
+                s.notes,
+                s.notes_fr,
+                s.languages_spoken,
+                MAX(hours) hours
+            FROM health.services_master s
+            LEFT JOIN health.services_cat USING (service_id)
+            LEFT JOIN health.primary_category pc USING (cat_id)
+            LEFT JOIN health.services_subcat USING (service_id)
+            LEFT JOIN health.subcategory sc USING (subcat_id)
+            LEFT JOIN health.services_insur USING (service_id)
+            LEFT JOIN health.insurance ins USING (insur_id)
+            INNER JOIN health.business_hours h USING(service_id)
+           
         `;
         let params = [];
 
@@ -133,6 +130,9 @@ module.exports = {
             params.push({key: "s.languages_spoken", value: `%${req.body.lang}%`});
         }
 
+        baseQuery += ` GROUP BY s.service_id
+                        ORDER BY s.service_id`;
+
         let search = req.body;
         let contents = Object.values(search);
         let searchIsEmpty = true;
@@ -144,7 +144,6 @@ module.exports = {
         if(!searchIsEmpty) {
             module.exports.collectionSearchTerm(req, search, "getCategories");
         } 
-
         req.db.any(baseQuery, params.map(p => p.value))
         .then(data => {
             res.send(data);
@@ -159,9 +158,6 @@ module.exports = {
         let baseQuery = `
             SELECT
             s.service_id,
-            pc.cat_name as primary_category,
-            sc.subcat_name as subcategory,
-            ins.insur_name as insur_name,
             s.name,
             s.address,
             s.phone_num as phone,
@@ -171,15 +167,15 @@ module.exports = {
             s.notes,
             s.notes_fr,
             s.languages_spoken,
-            h.hours
-            FROM health.primary_category pc INNER JOIN health.subcategory sc
-            ON pc.cat_id = sc.pc_id
-            INNER JOIN health.services_master as s
-            ON s.sub_cat_id = sc.subcat_id
-            INNER JOIN health.business_hours as h
-            ON h.service_id = s.service_id
-            LEFT JOIN health.insurance as ins
-            ON ins.insur_id = s.insur_id
+            MAX(hours) hours
+            FROM health.services_master s
+            LEFT JOIN health.services_cat USING (service_id)
+            LEFT JOIN health.primary_category pc USING (cat_id)
+            LEFT JOIN health.services_subcat USING (service_id)
+            LEFT JOIN health.subcategory sc USING (subcat_id)
+            LEFT JOIN health.services_insur USING (service_id)
+            LEFT JOIN health.insurance ins USING (insur_id)
+            INNER JOIN health.business_hours h USING(service_id)
             WHERE s.services LIKE ANY (string_to_array(LOWER($1),','))
         `;
         let params = [`%${req.body.keyword}%`];
@@ -196,6 +192,9 @@ module.exports = {
             params.push(`%${req.body.lang}%`);
             counter++;
         }
+
+        baseQuery += ` GROUP BY s.service_id
+                        ORDER BY s.service_id`;
 
         req.db.any(baseQuery, params)
         .then(data => {

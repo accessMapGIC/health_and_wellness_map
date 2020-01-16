@@ -1,19 +1,6 @@
 const moment = require('moment');
 
 module.exports = {
-    getInsurance: function(req, res, next) {
-        let baseQuery = `SELECT insur_id, insur_name FROM health.insurance;`;
-
-        req.db.any(baseQuery)
-        .then(data => {
-            res.status(200).json(data);
-        })
-        .catch(error => {
-            //console.log('ERROR:', error); // print the error;
-            res.status(500).json('there has been an error, please contact Student Services to get this fixed.');
-        })
-    },
-
     createService: function(req, res, next) {
         let idQuery = `SELECT pg_catalog.setval(pg_get_serial_sequence('health.services_master', 'service_id'), MAX(service_id)) FROM health.services_master;`;
         req.db.any(idQuery)
@@ -38,34 +25,52 @@ module.exports = {
             createServiceValues += `,$${counter}`;
             values.push(`${service_id}`);
             counter++;
+           
+            let baseQueryForCat = "INSERT INTO health.services_cat VALUES";
+            if (req.body.primary_cat_id && req.body.primary_cat_id.length !== 0) {
+                let scopeCounter = 0;
+                req.body.primary_cat_id.forEach(cat => {
+                    if (isNaN(cat)) {
+                        return res.status(400).json("Category ID must be an integer");
+                    } else {
+                        if(scopeCounter++ !== 0) {
+                            baseQueryForCat += ", ";
+                        } 
+                        baseQueryForCat += `(${service_id}, ${cat})`;
+                    }
+                });
+            }
 
-            if (req.body.primary_cat_id) {
-                if (isNaN(req.body.primary_cat_id)) {
-                    return res.status(400).json("Category ID must be an integer");
-                }
-                createServiceInsert += `,"primary_cat_id"`;
-                createServiceValues += `,$${counter}`;
-                values.push(`${req.body.primary_cat_id}`);
-                counter++;
+            let baseQueryForSubCat = "INSERT INTO health.services_subcat VALUES";
+            if (req.body.sub_cat_id && req.body.sub_cat_id.length !== 0) {
+                let scopeCounter = 0;
+                req.body.sub_cat_id.forEach(subCat => {
+                    if (isNaN(subCat)) {
+                        return res.status(400).json("Subcategory ID must be an integer");
+                    } else {
+                        if(scopeCounter++ !== 0) {
+                            baseQueryForSubCat += ", ";
+                        } 
+                        baseQueryForSubCat += `(${service_id}, ${subCat})`;
+                    }
+                });
             }
-            if (req.body.sub_cat_id) {
-                if (isNaN(req.body.sub_cat_id)) {
-                    return res.status(400).json("Subcategory ID must be an integer");
-                }
-                createServiceInsert += `,"sub_cat_id"`;
-                createServiceValues += `,$${counter}`;
-                values.push(`${req.body.sub_cat_id}`);
-                counter++;
+
+            let baseQueryForInsur = "INSERT INTO health.services_insur VALUES";
+            if (req.body.insur_id && req.body.insur_id.length !== 0) {
+                let scopeCounter = 0;
+                req.body.insur_id.forEach(insur => {
+                    if (isNaN(insur)) {
+                        return res.status(400).json("Insurance ID must be an integer");
+                    } else {
+                        if(scopeCounter++ !== 0) {
+                            baseQueryForInsur += ", "
+                        } 
+                        baseQueryForInsur += `(${service_id}, ${insur})`;
+                    }
+                });
             }
-            if (req.body.insur_id) {
-                if (isNaN(req.body.insur_id)) {
-                    return res.status(400).json("Insurance ID must be an integer");
-                }
-                createServiceInsert += `,"insur_id"`;
-                createServiceValues += `,$${counter}`;
-                values.push(`${req.body.insur_id}`);
-                counter++;
-            }
+                
             if (req.body.languages_spoken) {
                 createServiceInsert += `,"languages_spoken"`;
                 createServiceValues += `,$${counter}`;
@@ -163,7 +168,24 @@ module.exports = {
             
             req.db.any(createService, values)
             .then(serviceData => {
-                //console.log('SERVICE DATA:', serviceData); // prints data, use data[i] to print specific entry attributes
+                req.db.any(baseQueryForCat)
+                .catch(error => {
+                    console.log('ERROR IN QUERYING CAT:', error); // print the error;
+                    res.status(500).json(error);
+                })
+
+                req.db.any(baseQueryForSubCat)
+                .catch(error => {
+                    console.log('ERROR IN QUERYING SUBCAT:', error); // print the error;
+                    res.status(500).json(error);
+                });
+
+                req.db.any(baseQueryForInsur)
+                .catch(error => {
+                    console.log('ERROR IN QUERYING INSUR:', error); // print the error;
+                    res.status(500).json(error);
+                });
+
                 // Add business hours
                 if (req.body.hours) {
                     if (req.body.hours.split(',').length !== 7) {
@@ -209,10 +231,21 @@ module.exports = {
 
     getService: function(req, res, next) {
         let baseQuery = `
-        SELECT * 
-        FROM health.services_master 
-        INNER JOIN health.business_hours as h
-        ON h.service_id = services_master.service_id
+            SELECT  MAX(hours) hours, array_agg(DISTINCT cat_id) cat_id, array_agg(DISTINCT cat_name) cat_name, 
+            array_agg(DISTINCT subcat_id) subcat_id, array_agg(DISTINCT subcat_name) subcat_name, array_agg(DISTINCT pc_id) pc_id, 
+            array_agg(DISTINCT insur_id) insur_id, array_agg(DISTINCT insur_name) insur_name,
+            services_master.*
+            FROM health.services_master 
+            LEFT JOIN health.services_cat USING (service_id)
+            LEFT JOIN health.primary_category USING (cat_id)
+            LEFT JOIN health.services_subcat USING (service_id)
+            LEFT JOIN health.subcategory USING (subcat_id)
+            LEFT JOIN health.services_insur USING (service_id)
+            LEFT JOIN health.insurance USING (insur_id)
+            INNER JOIN health.business_hours USING(service_id)
+            GROUP BY services_master.service_id
+            ORDER BY health.services_master.service_id
+            ;
         `;
         req.db.any(baseQuery)
         .then(data => {
@@ -236,32 +269,90 @@ module.exports = {
             let updateServiceId = `WHERE service_id = ${req.params.serviceId};`;
             values.push(`${today}`);
             counter++;
-            if (req.body.values.primary_cat_id) {
-                if (isNaN(req.body.values.primary_cat_id)) {
-                    return res.status(400).json("Category ID must be an interger la");
-                }
-                updateServiceSet += `, primary_cat_id = $${counter}`;
-                values.push(`${req.body.values.primary_cat_id}`);
-                counter++;
+
+            let baseQuery = null;
+            if (req.body.values.primary_cat_id.length !== 0 && !req.body.values.primary_cat_id.every(element => element === null)) {
+                let insertQuery = "INSERT INTO health.services_cat VALUES ";
+                let scopeCounter = 0;
+                req.body.values.primary_cat_id.forEach(cat => {
+                    if (isNaN(cat)) {
+                        return res.status(400).json("Category ID must be an interger la");
+                    } else if (cat !== null){
+                        if(scopeCounter++ !== 0) {
+                            insertQuery += ", ";
+                        } 
+                        insertQuery += `(${req.params.serviceId}, ${cat})`;
+                    }
+                });
+                baseQuery = `BEGIN;
+                            DELETE FROM health.services_cat WHERE service_id = ${req.params.serviceId};
+                            ${insertQuery};
+                            COMMIT;`;
+               
+            } else {
+                baseQuery = `DELETE FROM health.services_cat WHERE service_id = ${req.params.serviceId};`;
             }
 
-            if (req.body.values.sub_cat_id) {
-                if (isNaN(req.body.values.sub_cat_id)) {
-                    return res.status(400).json("Subcategory ID must be an integer");
-                }
-                updateServiceSet += `, sub_cat_id = $${counter}`;
-                values.push(`${req.body.values.sub_cat_id}`);
-                counter++;
+            
+            req.db.any(baseQuery)
+                .catch(error => {
+                console.log('ERROR SERVICE:', error); // print the error;
+                res.status(500).json(error);
+            })
+        
+            if (req.body.values.sub_cat_id.length !== 0 && !req.body.values.sub_cat_id.every(element => element === null)) {
+                let insertQuery = "INSERT INTO health.services_subcat VALUES ";
+                let scopeCounter = 0;
+                req.body.values.sub_cat_id.forEach(subCat => {
+                    if (isNaN(subCat)) {
+                        return res.status(400).json("Subcategory ID must be an integer");
+                    } else if (subCat !== null) {
+                        if(scopeCounter++ !== 0) {
+                            insertQuery += ", ";
+                        } 
+                        insertQuery += `(${req.params.serviceId}, ${subCat})`;
+                   }
+                });
+                baseQuery = `BEGIN;
+                            DELETE FROM health.services_subcat WHERE service_id = ${req.params.serviceId};
+                            ${insertQuery};
+                            COMMIT;`;
+            } else {
+                baseQuery = `DELETE FROM health.services_subcat WHERE service_id = ${req.params.serviceId};`;
             }
 
-            if (req.body.values.insur_id) {
-                if (isNaN(req.body.values.insur_id)) {
-                    return res.status(400).json("Insurance ID must be an integer");
-                }
-                updateServiceSet += `, insur_id = $${counter}`;
-                values.push(`${req.body.values.insur_id}`);
-                counter++;
+            req.db.any(baseQuery)
+                .catch(error => {
+                console.log('ERROR SERVICE:', error); // print the error;
+                res.status(500).json(error);
+            })
+        
+            if (req.body.values.insur_id.length !== 0 && !req.body.values.insur_id.every(element => element === null)) {
+                let insertQuery = "INSERT INTO health.services_insur VALUES ";
+                let scopeCounter = 0;
+                req.body.values.insur_id.forEach(insur => {
+                    if (isNaN(insur)) {
+                        return res.status(400).json("Insurance ID must be an integer");
+                    } else if (insur !== null) {
+                        if(scopeCounter++ !== 0) {
+                            insertQuery += ", ";
+                        } 
+                        insertQuery += `(${req.params.serviceId}, ${insur})`;
+                    }
+                });
+                baseQuery = `BEGIN;
+                            DELETE FROM health.services_insur WHERE service_id = ${req.params.serviceId};
+                            ${insertQuery};
+                            COMMIT;`;
+            } else {
+                baseQuery = `DELETE FROM health.services_insur WHERE service_id = ${req.params.serviceId};`;
             }
+
+            req.db.any(baseQuery)
+                .catch(error => {
+                console.log('ERROR SERVICE:', error); // print the error;
+                res.status(500).json(error);
+            })
 
             if (req.body.values.languages_spoken) {
                 updateServiceSet += `, languages_spoken = $${counter}`;

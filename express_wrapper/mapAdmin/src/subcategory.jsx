@@ -210,14 +210,12 @@ class EditableTable extends React.Component {
     };
 
     handleSubmit = row => {
-        row.pc_id = this.state.pc_id;
-
-        if (this.state.adding) {
-            this.props.dispatch(categoryActions.createSubcategoryRequest(row));
-        }
-        else {
-            this.props.dispatch(categoryActions.updateSubcategoryRequest(row));
-        }
+    if(this.state.pc_id !== 0) row.pc_id = this.state.pc_id;
+    if (this.state.adding) {
+          this.props.dispatch(categoryActions.createSubcategoryRequest(row));
+    } else {
+      this.props.dispatch(categoryActions.updateSubcategoryRequest(row));
+      }
     }
   
     render() {

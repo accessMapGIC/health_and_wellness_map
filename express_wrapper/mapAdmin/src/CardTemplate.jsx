@@ -9,7 +9,7 @@ import actionConstants from './redux/actionConstants';
 import moment from 'moment';
 //style
 import "./CardTemplate.css"
-import { Row, Collapse, Card, Button } from 'antd';
+import { Row, Collapse, Card, Button, Tag } from 'antd';
 const { Panel } = Collapse;
 class CardTemplateComponent extends React.Component {
     constructor(props){
@@ -18,15 +18,7 @@ class CardTemplateComponent extends React.Component {
 
     render() {
         const { listing, primary_category, subcategory, insurance, pageBelonging } = this.props;
-        let insuranceName =  insurance.find(
-            i => i.insur_id === listing.insur_id
-        );
-        let primaryCategory = primary_category.find(
-            i => i.cat_id === listing.primary_cat_id
-        );
-        let subCategory = subcategory.find(
-            i => i.subcat_id === listing.sub_cat_id
-        );
+
         return (
             <Row>
                 <Card>
@@ -69,6 +61,14 @@ class CardTemplateComponent extends React.Component {
                                                     Modify Service
                                                 </Button>
                                             </Link>
+                                            <Button 
+                                                onClick = {() => {
+                                                        this.props.dispatch(serviceActions.deleteServiceRequest({serviceId:listing.service_id}));
+
+                                                    }}
+                                            >
+                                                Delete Service
+                                            </Button>
                                         </Row>
                                     
                             
@@ -88,15 +88,33 @@ class CardTemplateComponent extends React.Component {
                                     </tr>
                                     <tr className="light-row">
                                         <td>Primary Category:</td>
-                                        <td>{primaryCategory ? primaryCategory.cat_name : ""}</td>
+                                        <td>{listing.cat_name ? listing.cat_name.map(cat_name => {
+                                            return(
+                                                <Tag key={cat_name}>
+                                                    {cat_name}
+                                                </Tag>
+                                            )
+                                        }) : ""}</td>
                                     </tr>
                                     <tr>
                                         <td>Subcategory:</td>
-                                        <td>{subCategory ? subCategory.subcat_name : ""}</td>
+                                        <td>{listing.subcat_name ? listing.subcat_name.map(subcat_name => {
+                                            return(
+                                                <Tag key={subcat_name}>
+                                                    {subcat_name}
+                                                </Tag>
+                                            )
+                                        }) : ""}</td>
                                     </tr>
                                     <tr className="light-row">
                                         <td>Insurance:</td>
-                                        <td>{insuranceName ? insuranceName.insur_name : "" }</td>
+                                        <td>{listing.insur_name ? listing.insur_name.map(insur_name => {
+                                            return(
+                                                <Tag key={insur_name}>
+                                                    {insur_name}
+                                                </Tag>
+                                            )
+                                        }) : ""}</td>
                                     </tr>
                                     <tr>
                                         <td>Languages Spoken:</td>
