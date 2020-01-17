@@ -36,7 +36,7 @@ class ListServiceClass extends React.Component {
                     className="search-bar"
                 />
                 {this.props.listing.length > 0 && this.props.listing.map((service, i) => {
-                    if (this.props.listing[i].name) {
+                    if (this.props.listing[i].verified_by && this.props.listing[i].name) {
                         let lowerCaseFilter = this.state.filter.toLowerCase();
                         if ((this.props.listing[i].name).toLowerCase().indexOf(lowerCaseFilter)>-1) {
                             return(

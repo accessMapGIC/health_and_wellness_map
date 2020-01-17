@@ -32,6 +32,7 @@ class ListServiceClass extends React.Component {
         }
         if (prevProps.status !== this.props.status && this.props.status === actionConstants.EDIT_SERVICE_SUCCESS ) {
             alert("Service verifying successfully");
+            window.location.reload(true); 
         }
         if (prevProps.status !== this.props.status && this.props.status === actionConstants.DELETE_SERVICE_SUCCESS ) {
             alert("Service delelting successfully");

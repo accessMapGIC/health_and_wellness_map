@@ -168,24 +168,29 @@ module.exports = {
             
             req.db.any(createService, values)
             .then(serviceData => {
-                req.db.any(baseQueryForCat)
-                .catch(error => {
-                    console.log('ERROR IN QUERYING CAT:', error); // print the error;
-                    res.status(500).json(error);
-                })
-
-                req.db.any(baseQueryForSubCat)
-                .catch(error => {
-                    console.log('ERROR IN QUERYING SUBCAT:', error); // print the error;
-                    res.status(500).json(error);
-                });
-
-                req.db.any(baseQueryForInsur)
-                .catch(error => {
-                    console.log('ERROR IN QUERYING INSUR:', error); // print the error;
-                    res.status(500).json(error);
-                });
-
+                
+                if (req.body.primary_cat_id && req.body.primary_cat_id.length !== 0) {
+                    req.db.any(baseQueryForCat)
+                    .catch(error => {
+                        console.log('ERROR IN QUERYING CAT:', error); // print the error;
+                        res.status(500).json(error);
+                    })
+                }
+                if (req.body.sub_cat_id && req.body.sub_cat_id.length !== 0) {
+                    req.db.any(baseQueryForSubCat)
+                    .catch(error => {
+                        console.log('ERROR IN QUERYING SUBCAT:', error); // print the error;
+                        res.status(500).json(error);
+                    });
+                }
+                if (req.body.insur_id && req.body.insur_id.length !== 0) {
+                    req.db.any(baseQueryForInsur)
+                    .catch(error => {
+                        console.log('ERROR IN QUERYING INSUR:', error); // print the error;
+                        res.status(500).json(error);
+                    });
+                }
+           
                 // Add business hours
                 if (req.body.hours) {
                     if (req.body.hours.split(',').length !== 7) {
@@ -258,225 +263,236 @@ module.exports = {
     },
 
     editService: function(req, res, next) {
-        let idQuery = `SELECT pg_catalog.setval(pg_get_serial_sequence('health.services_master', 'service_id'), MAX(service_id)) FROM health.services_master;`;
-        req.db.any(idQuery)
-        .then(data => {
-            let today = moment().format('YYYY-MM-DDTHH:mm:ss.sssZ');
-            let counter = 1;
-            let values = [];
-
-            let updateServiceSet = `UPDATE health.services_master SET last_verified = $${counter}`;
-            let updateServiceId = `WHERE service_id = ${req.params.serviceId};`;
-            values.push(`${today}`);
-            counter++;
-
-            let baseQuery = null;
-            if (req.body.values.primary_cat_id.length !== 0 && !req.body.values.primary_cat_id.every(element => element === null)) {
-                let insertQuery = "INSERT INTO health.services_cat VALUES ";
-                let scopeCounter = 0;
-                req.body.values.primary_cat_id.forEach(cat => {
-                    if (isNaN(cat)) {
-                        return res.status(400).json("Category ID must be an interger la");
-                    } else if (cat !== null){
-                        if(scopeCounter++ !== 0) {
-                            insertQuery += ", ";
-                        } 
-                        insertQuery += `(${req.params.serviceId}, ${cat})`;
-                    }
-                });
-                baseQuery = `BEGIN;
-                            DELETE FROM health.services_cat WHERE service_id = ${req.params.serviceId};
-                            ${insertQuery};
-                            COMMIT;`;
-               
-            } else {
-                baseQuery = `DELETE FROM health.services_cat WHERE service_id = ${req.params.serviceId};`;
-            }
-
-            
-            req.db.any(baseQuery)
-                .catch(error => {
-                console.log('ERROR SERVICE:', error); // print the error;
-                res.status(500).json(error);
-            })
-        
-            if (req.body.values.sub_cat_id.length !== 0 && !req.body.values.sub_cat_id.every(element => element === null)) {
-                let insertQuery = "INSERT INTO health.services_subcat VALUES ";
-                let scopeCounter = 0;
-                req.body.values.sub_cat_id.forEach(subCat => {
-                    if (isNaN(subCat)) {
-                        return res.status(400).json("Subcategory ID must be an integer");
-                    } else if (subCat !== null) {
-                        if(scopeCounter++ !== 0) {
-                            insertQuery += ", ";
-                        } 
-                        insertQuery += `(${req.params.serviceId}, ${subCat})`;
-                   }
-                });
-                baseQuery = `BEGIN;
-                            DELETE FROM health.services_subcat WHERE service_id = ${req.params.serviceId};
-                            ${insertQuery};
-                            COMMIT;`;
-            } else {
-                baseQuery = `DELETE FROM health.services_subcat WHERE service_id = ${req.params.serviceId};`;
-            }
-
-            req.db.any(baseQuery)
-                .catch(error => {
-                console.log('ERROR SERVICE:', error); // print the error;
-                res.status(500).json(error);
-            })
-        
-            if (req.body.values.insur_id.length !== 0 && !req.body.values.insur_id.every(element => element === null)) {
-                let insertQuery = "INSERT INTO health.services_insur VALUES ";
-                let scopeCounter = 0;
-                req.body.values.insur_id.forEach(insur => {
-                    if (isNaN(insur)) {
-                        return res.status(400).json("Insurance ID must be an integer");
-                    } else if (insur !== null) {
-                        if(scopeCounter++ !== 0) {
-                            insertQuery += ", ";
-                        } 
-                        insertQuery += `(${req.params.serviceId}, ${insur})`;
-                    }
-                });
-                baseQuery = `BEGIN;
-                            DELETE FROM health.services_insur WHERE service_id = ${req.params.serviceId};
-                            ${insertQuery};
-                            COMMIT;`;
-            } else {
-                baseQuery = `DELETE FROM health.services_insur WHERE service_id = ${req.params.serviceId};`;
-            }
-
-            req.db.any(baseQuery)
-                .catch(error => {
-                console.log('ERROR SERVICE:', error); // print the error;
-                res.status(500).json(error);
-            })
-
-            if (req.body.values.languages_spoken) {
-                updateServiceSet += `, languages_spoken = $${counter}`;
-                values.push(`${req.body.values.languages_spoken}`);
-                counter++;
-            }
-
-            if (req.body.values.name) {
-                updateServiceSet += `, name = $${counter}`;
-                values.push(`${req.body.values.name}`);
-                counter++;
-            }
-
-            if (req.body.values.address) {
-                updateServiceSet += `, address = $${counter}`;
-                values.push(`${req.body.values.address}`);
-                counter++;
-            }
-
-            if (req.body.values.lat) {
-                updateServiceSet += `, lat = $${counter}`;
-                values.push(`${req.body.values.lat}`);
-                counter++;
-            }
-
-            if (req.body.values.lon) {
-                updateServiceSet += `, lon = $${counter}`;
-                values.push(`${req.body.values.lon}`);
-                counter++;
-            }
-
-            if (req.body.values.transit) {
-                updateServiceSet += `, transit = $${counter}`;
-                values.push(`${req.body.values.transit}`);
-                counter++;
-            }
-            
-            if (req.body.values.website) {
-                updateServiceSet += `, website = $${counter}`;
-                values.push(`${req.body.values.website}`);
-                counter++;
-            }
-
-            if (req.body.values.phone_num) {
-                updateServiceSet += `, phone_num = $${counter}`;
-                values.push(`${req.body.values.phone_num}`);
-                counter++;
-            }
-
-            if (req.body.values.emergency_num) {
-                updateServiceSet += `, emergency_num = $${counter}`;
-                values.push(`${req.body.values.emergency_num}`);
-                counter++;
-            }
-
-            if (req.body.values.services) {
-                updateServiceSet += `, services = $${counter}`;
-                values.push(`${req.body.values.services}`);
-                counter++;
-            }
-
-            if (req.body.values.services_fr) {
-                updateServiceSet += `, services_fr = $${counter}`;
-                values.push(`${req.body.values.services_fr}`);
-                counter++;
-            }
-
-            if (req.body.values.drop_in) {
-                updateServiceSet += `, drop_in = $${counter}`;
-                values.push(`${req.body.values.drop_in}`);
-                counter++;
-            }
-
-            if (req.body.values.notes) {
-                updateServiceSet += `, notes = $${counter}`;
-                values.push(`${req.body.values.notes}`);
-                counter++;
-            }
-
-            if (req.body.values.notes_fr) {
-                updateServiceSet += `, notes_fr = $${counter}`;
-                values.push(`${req.body.values.notes_fr}`);
-                counter++;
-            }
-
-            if (req.body.values.verified_by) {
-                updateServiceSet += `, verified_by = $${counter}`;
-                values.push(`${req.body.values.verified_by}`);
-                counter++;
-            }
-            let updateService = `${updateServiceSet} ${updateServiceId}`;
-            req.db.any(updateService, values)
-            .then(serviceData => {
-                if (req.body.values.hours) {
-                    if (req.body.values.hours.split(',').length !== 7) {
-                        return res.status(400).json("Incorrect business hours format");
-                    }
-                    let updateBusinessHours = `
-                    UPDATE health.business_hours 
-                    SET hours = '${req.body.values.hours}'
-                    WHERE service_id = ${req.params.serviceId} 
-                    `;
-                    let hoursValues = [req.params.serviceId, req.body.values.hours];
-                    req.db.any(updateBusinessHours)
-                    .then(hoursData => {
-                        res.status(200).json(hoursData);
-                    })
-                    .catch(error => {
-                        res.status(500).json(error);
-                    })
-                }
-                else {
-                    res.status(200).json(serviceData);
-                }
+        if(req.body.approveBy) {
+            req.db.any(`UPDATE health.services_master SET verified_by = '${req.body.approveBy}', last_verified = '${moment().format('YYYY-MM-DDTHH:mm:ss.sssZ')}' WHERE service_id = ${req.body.serviceId} RETURNING*;`)
+            .then(data => {
+                res.status(200).json(data);
             })
             .catch(error => {
-                console.log('ERROR SERVICE:', error); // print the error;
+                // console.log('ERROR SERVICE:', error); // print the error;
                 res.status(500).json(error);
             })
-        })
-        .catch(error => {
-            console.log('ERROR SERVICE ID:', error); // print the error;
-            res.status(500).json(error);
-        })
+        } else {
+                let idQuery = `SELECT pg_catalog.setval(pg_get_serial_sequence('health.services_master', 'service_id'), MAX(service_id)) FROM health.services_master;`;
+            req.db.any(idQuery)
+            .then(data => {
+                let today = moment().format('YYYY-MM-DDTHH:mm:ss.sssZ');
+                let counter = 1;
+                let values = [];
+
+                let updateServiceSet = `UPDATE health.services_master SET last_verified = $${counter}`;
+                let updateServiceId = `WHERE service_id = ${req.params.serviceId};`;
+                values.push(`${today}`);
+                counter++;
+
+                let baseQuery = null;
+                if (req.body.values.primary_cat_id.length !== 0 && !req.body.values.primary_cat_id.every(element => element === null)) {
+                    let insertQuery = "INSERT INTO health.services_cat VALUES ";
+                    let scopeCounter = 0;
+                    req.body.values.primary_cat_id.forEach(cat => {
+                        if (isNaN(cat)) {
+                            return res.status(400).json("Category ID must be an interger la");
+                        } else if (cat !== null){
+                            if(scopeCounter++ !== 0) {
+                                insertQuery += ", ";
+                            } 
+                            insertQuery += `(${req.params.serviceId}, ${cat})`;
+                        }
+                    });
+                    baseQuery = `BEGIN;
+                                DELETE FROM health.services_cat WHERE service_id = ${req.params.serviceId};
+                                ${insertQuery};
+                                COMMIT;`;
+                
+                } else {
+                    baseQuery = `DELETE FROM health.services_cat WHERE service_id = ${req.params.serviceId};`;
+                }
+
+                
+                req.db.any(baseQuery)
+                    .catch(error => {
+                    console.log('ERROR SERVICE:', error); // print the error;
+                    res.status(500).json(error);
+                })
+            
+                if (req.body.values.sub_cat_id.length !== 0 && !req.body.values.sub_cat_id.every(element => element === null)) {
+                    let insertQuery = "INSERT INTO health.services_subcat VALUES ";
+                    let scopeCounter = 0;
+                    req.body.values.sub_cat_id.forEach(subCat => {
+                        if (isNaN(subCat)) {
+                            return res.status(400).json("Subcategory ID must be an integer");
+                        } else if (subCat !== null) {
+                            if(scopeCounter++ !== 0) {
+                                insertQuery += ", ";
+                            } 
+                            insertQuery += `(${req.params.serviceId}, ${subCat})`;
+                    }
+                    });
+                    baseQuery = `BEGIN;
+                                DELETE FROM health.services_subcat WHERE service_id = ${req.params.serviceId};
+                                ${insertQuery};
+                                COMMIT;`;
+                } else {
+                    baseQuery = `DELETE FROM health.services_subcat WHERE service_id = ${req.params.serviceId};`;
+                }
+
+                req.db.any(baseQuery)
+                    .catch(error => {
+                    console.log('ERROR SERVICE:', error); // print the error;
+                    res.status(500).json(error);
+                })
+            
+                if (req.body.values.insur_id.length !== 0 && !req.body.values.insur_id.every(element => element === null)) {
+                    let insertQuery = "INSERT INTO health.services_insur VALUES ";
+                    let scopeCounter = 0;
+                    req.body.values.insur_id.forEach(insur => {
+                        if (isNaN(insur)) {
+                            return res.status(400).json("Insurance ID must be an integer");
+                        } else if (insur !== null) {
+                            if(scopeCounter++ !== 0) {
+                                insertQuery += ", ";
+                            } 
+                            insertQuery += `(${req.params.serviceId}, ${insur})`;
+                        }
+                    });
+                    baseQuery = `BEGIN;
+                                DELETE FROM health.services_insur WHERE service_id = ${req.params.serviceId};
+                                ${insertQuery};
+                                COMMIT;`;
+                } else {
+                    baseQuery = `DELETE FROM health.services_insur WHERE service_id = ${req.params.serviceId};`;
+                }
+
+                req.db.any(baseQuery)
+                    .catch(error => {
+                    console.log('ERROR SERVICE:', error); // print the error;
+                    res.status(500).json(error);
+                })
+
+                if (req.body.values.languages_spoken) {
+                    updateServiceSet += `, languages_spoken = $${counter}`;
+                    values.push(`${req.body.values.languages_spoken}`);
+                    counter++;
+                }
+
+                if (req.body.values.name) {
+                    updateServiceSet += `, name = $${counter}`;
+                    values.push(`${req.body.values.name}`);
+                    counter++;
+                }
+
+                if (req.body.values.address) {
+                    updateServiceSet += `, address = $${counter}`;
+                    values.push(`${req.body.values.address}`);
+                    counter++;
+                }
+
+                if (req.body.values.lat) {
+                    updateServiceSet += `, lat = $${counter}`;
+                    values.push(`${req.body.values.lat}`);
+                    counter++;
+                }
+
+                if (req.body.values.lon) {
+                    updateServiceSet += `, lon = $${counter}`;
+                    values.push(`${req.body.values.lon}`);
+                    counter++;
+                }
+
+                if (req.body.values.transit) {
+                    updateServiceSet += `, transit = $${counter}`;
+                    values.push(`${req.body.values.transit}`);
+                    counter++;
+                }
+                
+                if (req.body.values.website) {
+                    updateServiceSet += `, website = $${counter}`;
+                    values.push(`${req.body.values.website}`);
+                    counter++;
+                }
+
+                if (req.body.values.phone_num) {
+                    updateServiceSet += `, phone_num = $${counter}`;
+                    values.push(`${req.body.values.phone_num}`);
+                    counter++;
+                }
+
+                if (req.body.values.emergency_num) {
+                    updateServiceSet += `, emergency_num = $${counter}`;
+                    values.push(`${req.body.values.emergency_num}`);
+                    counter++;
+                }
+
+                if (req.body.values.services) {
+                    updateServiceSet += `, services = $${counter}`;
+                    values.push(`${req.body.values.services}`);
+                    counter++;
+                }
+
+                if (req.body.values.services_fr) {
+                    updateServiceSet += `, services_fr = $${counter}`;
+                    values.push(`${req.body.values.services_fr}`);
+                    counter++;
+                }
+
+                if (req.body.values.drop_in) {
+                    updateServiceSet += `, drop_in = $${counter}`;
+                    values.push(`${req.body.values.drop_in}`);
+                    counter++;
+                }
+
+                if (req.body.values.notes) {
+                    updateServiceSet += `, notes = $${counter}`;
+                    values.push(`${req.body.values.notes}`);
+                    counter++;
+                }
+
+                if (req.body.values.notes_fr) {
+                    updateServiceSet += `, notes_fr = $${counter}`;
+                    values.push(`${req.body.values.notes_fr}`);
+                    counter++;
+                }
+
+                if (req.body.values.verified_by) {
+                    updateServiceSet += `, verified_by = $${counter}`;
+                    values.push(`${req.body.values.verified_by}`);
+                    counter++;
+                }
+                let updateService = `${updateServiceSet} ${updateServiceId}`;
+                req.db.any(updateService, values)
+                .then(serviceData => {
+                    if (req.body.values.hours) {
+                        if (req.body.values.hours.split(',').length !== 7) {
+                            return res.status(400).json("Incorrect business hours format");
+                        }
+                        let updateBusinessHours = `
+                        UPDATE health.business_hours 
+                        SET hours = '${req.body.values.hours}'
+                        WHERE service_id = ${req.params.serviceId} 
+                        `;
+                        let hoursValues = [req.params.serviceId, req.body.values.hours];
+                        req.db.any(updateBusinessHours)
+                        .then(hoursData => {
+                            res.status(200).json(hoursData);
+                        })
+                        .catch(error => {
+                            res.status(500).json(error);
+                        })
+                    }
+                    else {
+                        res.status(200).json(serviceData);
+                    }
+                })
+                .catch(error => {
+                    console.log('ERROR SERVICE:', error); // print the error;
+                    res.status(500).json(error);
+                })
+            })
+            .catch(error => {
+                console.log('ERROR SERVICE ID:', error); // print the error;
+                res.status(500).json(error);
+            })
+        }
     },
 
     deleteService: function(req, res, next) {

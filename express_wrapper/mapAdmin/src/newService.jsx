@@ -392,7 +392,7 @@ class NewServiceClass extends React.Component {
                             )}
                         </Form.Item>
                         <Form.Item label="Verified by">
-                            {getFieldDecorator('verified_by', {})(
+                            {getFieldDecorator('verified_by', {initialValue: this.props.loggedInUser})(
                                 <Input
                                     placeholder=""
                                 />,
