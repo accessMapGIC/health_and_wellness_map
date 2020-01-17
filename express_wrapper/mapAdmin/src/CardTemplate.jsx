@@ -30,8 +30,7 @@ class CardTemplateComponent extends React.Component {
                                         <Row>
                                             <Button 
                                                 onClick = {() => {
-                                                    listing.verified_by = this.props.loggedInUser
-                                                    this.props.dispatch(serviceActions.editServiceRequest({values:{verified_by: this.props.loggedInUser}, serviceId:listing.service_id}));
+                                                    this.props.dispatch(serviceActions.editServiceRequest({approveBy: this.props.loggedInUser, serviceId:listing.service_id}));
                                                 }}
                                             >
                                                 Approve Service
