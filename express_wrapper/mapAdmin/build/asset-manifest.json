@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/healthmapadmin/static/css/main.6a7249cd.chunk.css",
-    "main.js": "/healthmapadmin/static/js/main.c81910b9.chunk.js",
-    "main.js.map": "/healthmapadmin/static/js/main.c81910b9.chunk.js.map",
+    "main.js": "/healthmapadmin/static/js/main.c0d3a711.chunk.js",
+    "main.js.map": "/healthmapadmin/static/js/main.c0d3a711.chunk.js.map",
     "runtime-main.js": "/healthmapadmin/static/js/runtime-main.8db38744.js",
     "runtime-main.js.map": "/healthmapadmin/static/js/runtime-main.8db38744.js.map",
     "static/css/2.802837ff.chunk.css": "/healthmapadmin/static/css/2.802837ff.chunk.css",
     "static/js/2.92739b64.chunk.js": "/healthmapadmin/static/js/2.92739b64.chunk.js",
     "static/js/2.92739b64.chunk.js.map": "/healthmapadmin/static/js/2.92739b64.chunk.js.map",
     "index.html": "/healthmapadmin/index.html",
-    "precache-manifest.3f3189b788ddf26e9f51bdb59ce0985c.js": "/healthmapadmin/precache-manifest.3f3189b788ddf26e9f51bdb59ce0985c.js",
+    "precache-manifest.f7daab0058d61c265bb49de2d2c6b84e.js": "/healthmapadmin/precache-manifest.f7daab0058d61c265bb49de2d2c6b84e.js",
     "service-worker.js": "/healthmapadmin/service-worker.js",
     "static/css/2.802837ff.chunk.css.map": "/healthmapadmin/static/css/2.802837ff.chunk.css.map",
     "static/css/main.6a7249cd.chunk.css.map": "/healthmapadmin/static/css/main.6a7249cd.chunk.css.map"
@@ -19,6 +19,6 @@
     "static/css/2.802837ff.chunk.css",
     "static/js/2.92739b64.chunk.js",
     "static/css/main.6a7249cd.chunk.css",
-    "static/js/main.c81910b9.chunk.js"
+    "static/js/main.c0d3a711.chunk.js"
   ]
 }
