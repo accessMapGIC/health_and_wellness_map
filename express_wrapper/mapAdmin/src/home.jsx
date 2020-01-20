@@ -71,10 +71,10 @@ class HomeClass extends React.Component {
                             <Button>Manage Insurances</Button>
                         </Link>
                         <Badge count={this.countSuggestionService(this.props.listing)}>
-                            <a href="/#/ListServiceSuggestion"> <Button>Review Service Suggestion</Button> </a>
+                            <a href={(process.env.REACT_APP_BASE_NAME || "") + "/#/ListServiceSuggestion"}> <Button>Review Service Suggestion</Button> </a>
                         </Badge>
                        <Badge count={this.countReportedError(this.props.reported_Error)}>
-                            <a href="/#/ListReportedError"> <Button>Review Reported Error</Button> </a>
+                            <a href={(process.env.REACT_APP_BASE_NAME || "") + "/#/ListReportedError"}> <Button>Review Reported Error</Button> </a>
                         </Badge>
                     </div>
                     <ListService />

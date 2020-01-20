@@ -93,7 +93,7 @@ class IndexClass extends React.Component {
                         Home
                     </Button>
                     <Badge count={this.countSearchTerm(this.props.searchTerm)}>
-                        <a href="/#/ListSearchTerm"> <Button >Review Search Term</Button> </a>
+                        <a href={(process.env.REACT_APP_BASE_NAME || "") + "/#/ListSearchTerm"}> <Button >Review Search Term</Button> </a>
                     </Badge>
                     <Button
                         style={{ marginLeft:"20px"}}
