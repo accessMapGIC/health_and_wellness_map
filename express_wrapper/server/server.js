@@ -57,7 +57,7 @@ app.post('/query',  Search.getServices);
 app.post('/category_query', Search.getCategories);
 app.post('/keywords_query',  Search.getKeywords);
 app.get('/primary_category_client', Category.getPrimaryCategories);
-app.get('/subcategory_client',  Subcategory.getSubcategories);
+app.post('/subcategory_client',  Subcategory.getSubcategories);
 app.get('/insurance_client',  Insurance.getInsurances);
 
 //Suggest a new Service

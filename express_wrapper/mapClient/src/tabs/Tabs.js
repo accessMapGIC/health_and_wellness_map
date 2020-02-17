@@ -61,12 +61,12 @@ class TabComponent extends React.Component {
         </TabList>
         <TabPanel>
           <DropDownContainer className='dropdown_container'>
-                  <div className='category_container'>
-                      <CategoryDropDownComponent/>
-                  </div>
-                  <div className='subcategory_container'>
-                      <SubcategoryDropDownComponent/>
-                  </div>
+            <div className='category_container'>
+                <CategoryDropDownComponent/>
+            </div>
+            <div className='subcategory_container'>
+                <SubcategoryDropDownComponent/>
+            </div>
           </DropDownContainer>
         </TabPanel>
         <TabPanel>
