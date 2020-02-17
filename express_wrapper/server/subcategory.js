@@ -36,7 +36,19 @@ module.exports = {
     }, 
 
     getSubcategories: function(req, res, next) {
-        let baseQuery = `SELECT * FROM health.subcategory ORDER BY subcat_id;`;
+        let baseQuery = `SELECT * FROM health.primary_category pc 
+                        INNER JOIN health.subcategory sub ON pc.cat_id = sub.pc_id
+                        `;
+
+        if (req.body.payload) {
+            let cat = req.body.payload;
+            if (cat.includes('\'')) {
+                //Finally we have to change the \' to '' in order to query out the items
+                let index = cat.indexOf('\'')
+                cat = cat.slice(0, index) + "'" + cat.slice(index)  
+            }
+            baseQuery += `WHERE pc.cat_name = '${cat}'`         
+        }
 
         req.db.any(baseQuery)
         .then(data => {

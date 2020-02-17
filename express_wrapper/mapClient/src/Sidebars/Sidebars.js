@@ -185,6 +185,7 @@ class SidebarsComponent extends React.Component { //this is the component for bo
                 </MenuItem>
 
                 <TabComponent/>
+
                 <Container>
                   <div className="DropDown_Container">
                     <div className="Flex_Container">

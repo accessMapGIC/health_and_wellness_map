@@ -155,13 +155,14 @@ export function getPrimaryCategories(json) {
   };
 }
 
-export function getSubcategories(json) {
+export function getSubcategories(payload) {
   return async dispatch => {
-    await fetch (`${base_url}/subcategory_client`, {
-      method: 'GET',
+    await fetch (`${base_url}/subcategory_client`, {  //Change back to localhost url
+      method: 'POST',
       headers: {
         "Content-Type": "application/json",
-      }
+      },
+      body: JSON.stringify({payload})
     })
     .then(function(response) {
       return response.json();

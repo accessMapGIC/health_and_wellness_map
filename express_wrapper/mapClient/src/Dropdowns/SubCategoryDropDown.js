@@ -53,6 +53,9 @@ class SubcategoryDropDownComponent extends React.Component {
     if (this.props.language !== prevProp.language) {
       strings.setLanguage(this.props.language);
       this.forceUpdate();
+    };
+    if (this.props.cat !== prevProp.cat) {
+      this.props.dropdownSubcategories(this.props.cat);
     }
   }
 
@@ -104,7 +107,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onChange: (event) => dispatch({type: actionTypes.SUBCATEGORY_CHANGE, payload: (event.target.value)})
+    onChange: (event) => dispatch({type: actionTypes.SUBCATEGORY_CHANGE, payload: (event.target.value)}),
+    dropdownSubcategories: (params) => dispatch(actionTypes.getSubcategories(params))
   }
 }
 
