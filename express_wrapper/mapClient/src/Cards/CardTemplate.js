@@ -239,7 +239,9 @@ class CardTemplateComponent extends React.Component {
     }
 
     return (
-      <Card className={this.props.activeCard === this.props.service_id ? classes.activeCard : classes.card}>
+      <Card className={this.props.activeCard === this.props.service_id ? classes.activeCard : classes.card}
+            onClick={this.handleActivation}
+      >
         <CardHeader
           className={classes.cardHeader}
           avatar={
@@ -267,7 +269,7 @@ class CardTemplateComponent extends React.Component {
         <CardActions className={classes.actions} disableActionSpacing>
           {/* <IconButton aria-label="Share">
             <ShareIcon />
-    </IconButton> */}
+            </IconButton> */}
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
