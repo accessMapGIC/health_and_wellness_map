@@ -272,7 +272,7 @@ class NewServiceClass extends React.Component {
                             value={this.state.primaryCategory}
                             onChange={event => {
                                 this.setState({ primaryCategory: event.target.value })
-                          }}
+                            }}
                             renderValue={selected => {
                                 if(selected && selected.length !== 0) {
                                     return selected.map(item => item.cat_name).join(', ');

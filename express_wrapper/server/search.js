@@ -28,6 +28,8 @@ module.exports = {
                 restingQuery += `"${key}" = $${++i}`;
                 if (key === "keyword") {
                     values.push(search[key].toLowerCase());
+                } else if (key === 'lang'){
+                    values.push(search[key].join(", "));
                 } else {
                     values.push(search[key]);
                 }
@@ -41,7 +43,6 @@ module.exports = {
         restingQuery += ' ;';
 
         getQuery += restingQuery;
-            
         req.db.any(getQuery, values)
         .then((data) => {
             if (data && data.length !== 0) {
@@ -98,7 +99,6 @@ module.exports = {
             LEFT JOIN health.services_insur USING (service_id)
             LEFT JOIN health.insurance ins USING (insur_id)
             INNER JOIN health.business_hours h USING(service_id)
-           
         `;
         let params = [];
 
@@ -125,14 +125,24 @@ module.exports = {
             }
         }
 
-        if (req.body.lang) { 
-            baseQuery += ` AND s.languages_spoken ILIKE $${params.length+1}`;
-            params.push({key: "s.languages_spoken", value: `%${req.body.lang}%`});
+        if (req.body.lang && req.body.lang.length > 0) {
+            if( params.length > 0 ) {
+                baseQuery += " AND ( ";
+            } else {
+                baseQuery += " WHERE ( ";
+            };
+            req.body.lang.forEach((lang, index) => {
+                if (index > 0) {
+                    baseQuery += " OR ";
+                };
+                baseQuery += `s.languages_spoken ILIKE $${params.length+1}`;
+                params.push({key: "s.languages_spoken", value: `%${lang}%`});
+            })
+            baseQuery += " ) ";
         }
 
         baseQuery += ` GROUP BY s.service_id
                         ORDER BY s.service_id`;
-
         let search = req.body;
         let contents = Object.values(search);
         let searchIsEmpty = true;
@@ -140,10 +150,11 @@ module.exports = {
             if( content) {
                 searchIsEmpty = false ;
             } 
-        })
+        });
         if(!searchIsEmpty) {
             module.exports.collectionSearchTerm(req, search, "getCategories");
-        } 
+        };
+
         req.db.any(baseQuery, params.map(p => p.value))
         .then(data => {
             res.send(data);
@@ -185,16 +196,24 @@ module.exports = {
             baseQuery += ` AND ins.insur_name=$${counter}`;
             params.push(req.body.insCat);
             counter++;
-        }
+        };
 
-        if (req.body.lang) { 
-            baseQuery += ` AND s.languages_spoken ILIKE $${counter}`;
-            params.push(`%${req.body.lang}%`);
-            counter++;
-        }
+        if (req.body.lang && req.body.lang.length > 0) {
+            baseQuery += " AND ( ";
+            req.body.lang.forEach((lang, index) => {
+                if (index > 0) {
+                    baseQuery += " OR ";
+                };
+                baseQuery += `s.languages_spoken ILIKE $${counter}`;
+                params.push(`%${lang}%`);
+                counter++;
+            })
+            baseQuery += " ) "; 
+        };
 
         baseQuery += ` GROUP BY s.service_id
                         ORDER BY s.service_id`;
+
 
         req.db.any(baseQuery, params)
         .then(data => {
@@ -212,9 +231,9 @@ module.exports = {
             if( content) {
                 searchIsEmpty = false ;
             } 
-        })
+        });
         if(!searchIsEmpty) {
             module.exports.collectionSearchTerm(req, search, "getKeywords") ;
-        }
+        };
     }
 }
