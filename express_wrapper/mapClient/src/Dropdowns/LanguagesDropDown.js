@@ -6,6 +6,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import ListItemText from '@material-ui/core/ListItemText';
+import Checkbox from '@material-ui/core/Checkbox';
 import * as actionTypes from '../store/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -36,6 +38,19 @@ const selectStyle = {
 }
 
 class LanguageDropDownComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      langSelected : [],
+      language : [
+                    {name: 'English', value : 'EN'}, 
+                    {name: 'French', value : 'FR'}, 
+                    {name: 'Mandarin', value : 'mandarin'}, 
+                    {name: 'Spanish', value : 'Spanish'}
+                  ]
+    }
+  }
+
   componentDidMount() { //load the information for the card from the card container
     strings.setLanguage(this.props.localLang);
   }
@@ -49,13 +64,16 @@ class LanguageDropDownComponent extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    
     return (
       <form className={classes.root} autoComplete="off">
         <FormControl variant="outlined" className={classes.formControl} fullWidth={true}>
           <Select
-            value={this.props.language}
-            onChange={this.props.onChange}
+            value={this.state.langSelected}
+            onChange={event => {
+              this.setState({ langSelected: event.target.value });
+              this.props.onChange(event);
+            }}
             input={
               <OutlinedInput
                 name="language"
@@ -63,16 +81,31 @@ class LanguageDropDownComponent extends React.Component {
                 labelWidth={0}
               />
             }
+            renderValue={selected => {
+              let renderLang = [];
+              this.state.language.forEach(lang => {
+                if (selected.includes(lang.value)) renderLang.push(lang.name);
+              })
+              if(renderLang && renderLang.length !== 0) {
+                  return renderLang.join(', ');
+              } else {
+                return strings.default;
+              };
+            }}
             displayEmpty
             style={selectStyle}
+            multiple
           >
-            <MenuItem value="">
+            <MenuItem value="" disabled={true}>
               {strings.default}
             </MenuItem>
-            <MenuItem value={'en'}>{strings.en}</MenuItem>
-            <MenuItem value={'fr'}>{strings.fr}</MenuItem>
-            <MenuItem value={'mandarin'}>{strings.ch}</MenuItem>
-            <MenuItem value={'sp'}>{strings.sp}</MenuItem>
+            {this.state.language.map((data, index) => (
+              <MenuItem  value={data.value} key={index}>
+                  <Checkbox checked={this.state.langSelected.indexOf(data.value) > -1} />
+                  <ListItemText primary={data.name} />
+              </MenuItem>
+              ))
+            }
           </Select>
           <FormHelperText>{strings.helperText}</FormHelperText>
         </FormControl>
