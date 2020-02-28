@@ -8,6 +8,11 @@ import { withStyles } from '@material-ui/core';
 import { compose } from 'redux';
 import styled from 'styled-components';
 import { Link, scroller } from 'react-scroll';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 //Localization
 import LocalizedStrings from 'react-localization';
 import english from '../Localization/En.js';
@@ -58,6 +63,7 @@ class MapboxComponent extends React.Component {
       center: [-73.5731, 45.501],//[-73.578520, 45.505642],
       bearing: [-55],
       userCoords: [],
+      dialogOpen: true
     };
   }
 
@@ -107,53 +113,84 @@ class MapboxComponent extends React.Component {
     })
   }//the method that occurs when a marker is clicked
 
+  handleClose = () => {
+    this.setState({ dialogOpen: false });
+  };
+
   render() {
     const image = new Image(30, 30);
     image.src = Icon;
     const images = ["SWH-Icon", image];
     return (
-      <Mapbox
-        // eslint-disable-next-line
-        style='mapbox://styles/mapbox/streets-v10'
-        center={this.props.center}
-        zoom={this.props.zoom}
-        onStyleLoad={this.mapDidLoad}
-        bearing={this.props.bearing}
-        // fitBounds={onlyPtCoords}
-        localIdeographFontFamily={'dinreg'}
-        containerStyle={{
-          height: '100vh',
-          width: '100vw',
-      }}>
-        <Layer
-          type="symbol"
-          id="points"
-          layout={{ "icon-image": "SWH-Icon", "icon-allow-overlap": true }}
-          images={images}
+      <div>
+        <Dialog
+          open={this.state.dialogOpen}
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
         >
-          {(this.props.points).map(({lng, lat, id, title, address}) => (
-            <Feature
-              id={id}
-              key={id}
-              coordinates={[lng,lat]}
-              onClick={this.markerClick.bind(this, lng, lat, id, title, address)}
-            >
-            <Link activeClass="active" to={"" + id} spy={true} smooth={true} offset={50} duration={500}/>
-            </Feature>))}
-        </Layer>
-        {this.props.point && (
-          <Popup key={this.props.point.id} coordinates={[this.props.point.lng, this.props.point.lat]}>
-            <StyledPopup>
-              <div>
-                  <h3>{this.props.point.title}</h3>
-                  <a href={'https://www.google.ca/maps/dir/' + this.props.point.address} target="_blank" rel="noopener noreferrer">{strings.dir}</a>
-              </div>
-            </StyledPopup>
-          </Popup>
-        )}
-        {/* <Fab className={classes.myLocalButton} title="center on your location" prefetch="true"><geo/></Fab><MyLocationIcon/>} */}
-      </Mapbox>
+        <DialogTitle id="alert-dialog-title">{"Do you allow Wellness Map access to your location."}</DialogTitle>
+        <DialogActions>
+          <Button onClick={this.handleClose} color="primary">
+            Disagree
+          </Button>
+          <Button 
+            onClick= {() => {
+              this.handleClose()
+              window.navigator.geolocation.getCurrentPosition(
+                (position)=> {
+                  this.props.centerOnUser([position.coords.longitude, position.coords.latitude]);
+                },
+                ()=> {alert("There is an error in retrieving your location")})
+            }}
+            color="primary" autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
 
+        <Mapbox
+          // eslint-disable-next-line
+          style='mapbox://styles/mapbox/streets-v10'
+          center={this.props.center}
+          zoom={this.props.zoom}
+          onStyleLoad={this.mapDidLoad}
+          bearing={this.props.bearing}
+          // fitBounds={onlyPtCoords}
+          localIdeographFontFamily={'dinreg'}
+          containerStyle={{
+            height: '100vh',
+            width: '100vw',
+        }}>
+          <Layer
+            type="symbol"
+            id="points"
+            layout={{ "icon-image": "SWH-Icon", "icon-allow-overlap": true }}
+            images={images}
+          >
+            {(this.props.points).map(({lng, lat, id, title, address}) => (
+              <Feature
+                id={id}
+                key={id}
+                coordinates={[lng,lat]}
+                onClick={this.markerClick.bind(this, lng, lat, id, title, address)}
+              >
+              <Link activeClass="active" to={"" + id} spy={true} smooth={true} offset={50} duration={500}/>
+              </Feature>))}
+          </Layer>
+          {this.props.point && (
+            <Popup key={this.props.point.id} coordinates={[this.props.point.lng, this.props.point.lat]}>
+              <StyledPopup>
+                <div>
+                    <h3>{this.props.point.title}</h3>
+                    <a href={'https://www.google.ca/maps/dir/' + this.props.point.address} target="_blank" rel="noopener noreferrer">{strings.dir}</a>
+                </div>
+              </StyledPopup>
+            </Popup>
+          )}
+          {/* <Fab className={classes.myLocalButton} title="center on your location" prefetch="true"><geo/></Fab><MyLocationIcon/>} */}
+        </Mapbox>
+      </div>
     );
   }
 }
@@ -200,7 +237,12 @@ const mapDispatchToProps = dispatch => {
         address: address,
       }
     }),
-    centerOnUser:() => dispatch({type: actionTypes.CENTER_ON_USER})
+    centerOnUser:(coordinates) => dispatch({
+      type: actionTypes.CENTER_ON_USER,
+      payload: {
+        userCoords: coordinates,
+      }
+    })
   }
 }
 
