@@ -6,7 +6,7 @@ const initialState = {
     zoom: [16],
     center: [-73.578520, 45.505642],//[-73.5731, 45.501],
     bearing: [-55],
-    userCoords: [],
+    userCoords: [-73.578520, 45.505642],//[-73.5731, 45.501],
 }
 
 // function startGeoLocation() {
@@ -87,6 +87,12 @@ const mapboxReducer = (state = initialState, action ) => {
                 ...state,
                 points: [],
                 point: null
+            }
+        case actionTypes.CENTER_ON_USER:
+            return {
+                ...state,
+                center: action.payload.userCoords,
+                userCoords: action.payload.userCoords
             }
         default: 
             return state;
