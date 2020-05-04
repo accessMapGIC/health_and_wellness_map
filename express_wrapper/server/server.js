@@ -35,6 +35,8 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(express.static(process.env.STATIC_DIR));
+
 // Test route
 app.get('/test', (req, res) => {
   res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT :D' }); //sample test *this can be commented out once the app is working
