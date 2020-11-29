@@ -66,7 +66,7 @@ let insStrings = {
   pgss: 'PGSS',
   ramq: 'RAMQ',
   ssmu: 'SSMU',
-  helperText: 'We are currently updating this data. Coming soon!'
+  helperText: 'Many services in Quebec do not bill directly to insurance. <a href="https://www.mcgill.ca/wellness-hub/access-care/insurance" target="_blank">Click here</a> to learn more about McGill insurance options.'
 }
 
 let langStrings = {

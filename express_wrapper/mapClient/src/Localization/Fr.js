@@ -66,7 +66,7 @@ let insStrings = {
     pgss: 'PGSS',
     ramq: 'RAMQ',
     ssmu: 'SSMU',
-    helperText: "Nous mettons actuellement à jours ces donées. À venir bientôt!"
+    helperText: "De nombreux services au Québec ne sont pas facturés directement à l'assurance. <a href='https://www.mcgill.ca/wellness-hub/access-care/insurance' target='_blank'>Cliquez ici</a> pour en savoir plus sur les options d'assurance de McGill."
 }
 
 let langStrings = {
