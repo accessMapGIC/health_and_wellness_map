@@ -35,6 +35,10 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.get('/', (req, res) => {
+  res.redirect('/healthmap');
+});
+
 app.use(express.static(process.env.STATIC_DIR));
 
 // Test route
