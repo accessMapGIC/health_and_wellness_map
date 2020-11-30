@@ -12,15 +12,15 @@ self.__precacheManifest = [
     "url": "/healthmap/static/js/runtime~main.bff0bb26.js"
   },
   {
-    "revision": "446d28b43e0794269f29",
-    "url": "/healthmap/static/js/main.8a29c434.chunk.js"
+    "revision": "66979661aa497b992107",
+    "url": "/healthmap/static/js/main.f7a377d5.chunk.js"
   },
   {
     "revision": "876c489c8a82a1dc03e9",
     "url": "/healthmap/static/js/2.15a04b41.chunk.js"
   },
   {
-    "revision": "446d28b43e0794269f29",
+    "revision": "66979661aa497b992107",
     "url": "/healthmap/static/css/main.e87e2b54.chunk.css"
   },
   {
@@ -28,7 +28,7 @@ self.__precacheManifest = [
     "url": "/healthmap/static/css/2.bc56ea18.chunk.css"
   },
   {
-    "revision": "1ad3e4b2857cb9f73b5ce8a86aefe8f7",
+    "revision": "dc875e2a255627df8c0160d392d44578",
     "url": "/healthmap/index.html"
   }
 ];
