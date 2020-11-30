@@ -74,7 +74,7 @@ class InsuranceDropDownComponent extends React.Component {
               );
             })}
           </Select>
-          <FormHelperText><div dangerouslySetInnerHTML={strings.helperText} /></FormHelperText>
+          <FormHelperText><div dangerouslySetInnerHTML={{__html: strings.helperText}}/></FormHelperText>
         </FormControl>
       </form>
     );
